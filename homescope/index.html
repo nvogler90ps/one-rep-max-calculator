@@ -110,19 +110,29 @@
       <!-- Summary cards -->
       <div id="panel-summary" class="panel-summary hidden">
         <div class="summary-row">
+          <div class="summary-card" id="card-income">
+            <div class="summary-label">Median Income</div>
+            <div class="summary-value" id="val-income">--</div>
+          </div>
+          <div class="summary-card" id="card-poverty">
+            <div class="summary-label">Poverty Rate</div>
+            <div class="summary-value" id="val-poverty">--</div>
+          </div>
+        </div>
+        <div class="summary-row">
           <div class="summary-card" id="card-flood">
             <div class="summary-label">Flood Zone</div>
             <div class="summary-value" id="val-flood">--</div>
           </div>
-          <div class="summary-card" id="card-elevation">
-            <div class="summary-label">Elevation</div>
-            <div class="summary-value" id="val-elevation">--</div>
-          </div>
-        </div>
-        <div class="summary-row">
           <div class="summary-card" id="card-evac">
             <div class="summary-label">Evac Zone</div>
             <div class="summary-value" id="val-evac">--</div>
+          </div>
+        </div>
+        <div class="summary-row">
+          <div class="summary-card" id="card-elevation">
+            <div class="summary-label">Elevation</div>
+            <div class="summary-value" id="val-elevation">--</div>
           </div>
           <div class="summary-card" id="card-insurance">
             <div class="summary-label">Flood Insurance</div>
@@ -133,6 +143,24 @@
 
       <!-- Detail sections -->
       <div id="panel-details" class="panel-details hidden">
+
+        <!-- Neighborhood / Socioeconomic -->
+        <div class="detail-section" id="detail-neighborhood">
+          <h3>Neighborhood Profile</h3>
+          <div class="detail-grid" id="neighborhood-details"></div>
+        </div>
+
+        <!-- Sex Offenders -->
+        <div class="detail-section" id="detail-offenders">
+          <h3>Sex Offenders Nearby</h3>
+          <div class="detail-grid" id="offender-details"></div>
+        </div>
+
+        <!-- Section 8 / Public Housing -->
+        <div class="detail-section" id="detail-housing">
+          <h3>Subsidized Housing Nearby</h3>
+          <div class="detail-grid" id="housing-details"></div>
+        </div>
 
         <!-- Flood detail -->
         <div class="detail-section" id="detail-flood">
@@ -150,12 +178,6 @@
         <div class="detail-section" id="detail-hurricane">
           <h3>Hurricane Risk</h3>
           <div class="detail-grid" id="hurricane-details"></div>
-        </div>
-
-        <!-- Broadband detail -->
-        <div class="detail-section" id="detail-broadband">
-          <h3>Internet Availability</h3>
-          <div id="broadband-details"></div>
         </div>
       </div>
 
