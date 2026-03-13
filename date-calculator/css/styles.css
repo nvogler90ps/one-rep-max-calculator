@@ -285,6 +285,215 @@ select {
 }
 
 /* -------------------------------------------------------
+   At a Glance - marker cards
+   ------------------------------------------------------- */
+
+.glance-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.glance-header h2 {
+  margin-bottom: 0;
+}
+
+.glance-start {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.glance-start label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.glance-start input[type="date"] {
+  width: auto;
+  min-width: 140px;
+  padding: 0.4rem 0.6rem;
+  font-size: 0.85rem;
+  min-height: 36px;
+}
+
+/* 90-day card accent styling */
+.card-90 {
+  border-color: var(--green);
+  border-width: 2px;
+}
+
+.card-90 h2 {
+  color: var(--green);
+}
+
+.card-90 .glance-card.glance-today {
+  border-color: var(--green);
+  background: rgba(52, 211, 153, 0.1);
+}
+
+.card-90 .glance-today .glance-date {
+  color: var(--green);
+}
+
+.card-90 .cal-endpoint,
+.card-90 .cal-marked {
+  background: var(--green);
+  color: #0f1117;
+}
+
+.card-90 .cal-in-range {
+  background: rgba(52, 211, 153, 0.12);
+}
+
+.card-90 .cal-today {
+  outline-color: var(--green);
+}
+
+.card-90 .glance-start input[type="date"]:focus {
+  border-color: var(--green);
+  box-shadow: 0 0 0 2px rgba(52, 211, 153, 0.25);
+}
+
+.glance-markers {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.glance-card {
+  flex: 0 0 auto;
+  min-width: 90px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.6rem 0.75rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.glance-card.glance-today {
+  border-color: var(--accent);
+  background: rgba(108, 99, 255, 0.1);
+}
+
+.glance-label {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+}
+
+.glance-date {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.glance-today .glance-date {
+  color: var(--accent);
+}
+
+.glance-dow {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* -------------------------------------------------------
+   Calendar grid (shared by all sections)
+   ------------------------------------------------------- */
+
+.calendar-wrap,
+.timeline-wrap {
+  display: flex;
+  gap: 0.75rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 0.75rem 0 0.25rem;
+}
+
+.cal-month {
+  flex: 0 0 auto;
+  min-width: 180px;
+}
+
+.cal-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-align: center;
+  margin-bottom: 0.35rem;
+}
+
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+}
+
+.cal-hdr {
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 0.15rem 0;
+  font-weight: 600;
+}
+
+.cal-day {
+  font-size: 0.7rem;
+  text-align: center;
+  padding: 0.25rem 0.1rem;
+  border-radius: 3px;
+  color: var(--text-muted);
+}
+
+.cal-blank {
+  visibility: hidden;
+}
+
+.cal-in-range {
+  background: rgba(108, 99, 255, 0.12);
+  color: var(--text);
+}
+
+.cal-endpoint {
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+}
+
+.cal-marked {
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+  position: relative;
+}
+
+.cal-today {
+  outline: 1px solid var(--accent);
+  outline-offset: -1px;
+}
+
+.cal-ellipsis {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  font-size: 1.2rem;
+  min-width: 30px;
+}
+
+/* -------------------------------------------------------
    Ad Slots
    ------------------------------------------------------- */
 
@@ -392,6 +601,19 @@ footer p {
   nav .container {
     justify-content: flex-start;
     padding: 0 1rem;
+  }
+
+  .glance-card {
+    min-width: 80px;
+    padding: 0.5rem 0.6rem;
+  }
+
+  .glance-date {
+    font-size: 0.9rem;
+  }
+
+  .cal-month {
+    min-width: 170px;
   }
 }
 

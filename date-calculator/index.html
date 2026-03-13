@@ -7,13 +7,13 @@
   <meta name="description" content="Free date calculator. Add or subtract days, weeks, months, or years from any date. Find days between two dates, business days count, and day of the week.">
   <meta name="keywords" content="date calculator, add days to date, days between dates, business days calculator, what day of the week, date difference calculator">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://date-calculator-2yn.pages.dev/">
+  <link rel="canonical" href="https://automated-insights.com/date-calculator/">
 
   <!-- Open Graph -->
   <meta property="og:title" content="Date Calculator - Add Days, Weeks, Months to Any Date">
   <meta property="og:description" content="Free date calculator. Add or subtract days, weeks, months, or years. Find days between dates and business days count.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://date-calculator-2yn.pages.dev/">
+  <meta property="og:url" content="https://automated-insights.com/date-calculator/">
 
   <!-- Structured Data -->
   <script type="application/ld+json">
@@ -22,7 +22,7 @@
     "@type": "WebApplication",
     "name": "Date Calculator",
     "description": "Add or subtract days, weeks, months, or years from any date. Calculate days between dates, business days, and day of the week.",
-    "url": "https://date-calculator-2yn.pages.dev/",
+    "url": "https://automated-insights.com/date-calculator/",
     "applicationCategory": "UtilityApplication",
     "operatingSystem": "Any",
     "offers": {
@@ -61,18 +61,42 @@
   <main>
     <div class="container">
 
+      <!-- 28-Day Chain -->
+      <section class="card" id="at-a-glance">
+        <div class="glance-header">
+          <h2>28-Day Intervals</h2>
+          <div class="glance-start">
+            <label for="glance-date">From</label>
+            <input type="date" id="glance-date">
+          </div>
+        </div>
+        <div id="glance-markers" class="glance-markers"></div>
+        <div id="glance-calendar" class="timeline-wrap"></div>
+      </section>
+
+      <!-- 90-Day Count -->
+      <section class="card card-90" id="ninety-day">
+        <div class="glance-header">
+          <h2>90-Day Count</h2>
+          <div class="glance-start">
+            <label for="ninety-date">From</label>
+            <input type="date" id="ninety-date">
+          </div>
+        </div>
+        <div id="ninety-markers" class="glance-markers"></div>
+        <div id="ninety-calendar" class="timeline-wrap"></div>
+      </section>
+
       <!-- Quick Shortcuts -->
       <section class="card" id="shortcuts">
         <h2>Quick Shortcuts</h2>
         <div class="shortcuts-grid">
-          <button class="pill" data-days="30">30 days from now</button>
-          <button class="pill" data-days="60">60 days from now</button>
-          <button class="pill" data-days="90">90 days from now</button>
-          <button class="pill" data-days="180">180 days from now</button>
-          <button class="pill" data-days="365">1 year from now</button>
-          <button class="pill" data-days="-30">30 days ago</button>
-          <button class="pill" data-days="-60">60 days ago</button>
-          <button class="pill" data-days="-90">90 days ago</button>
+          <button class="pill" data-days="30">30 days</button>
+          <button class="pill" data-days="60">60 days</button>
+          <button class="pill" data-days="180">180 days</button>
+          <button class="pill" data-days="365">1 year</button>
+          <button class="pill" data-days="-28">28 ago</button>
+          <button class="pill" data-days="-90">90 ago</button>
         </div>
         <div id="shortcut-result" class="result-box hidden">
           <div class="result-date" id="shortcut-date"></div>
@@ -115,6 +139,7 @@
             <span class="result-detail" id="add-result-dow"></span>
             <span class="result-detail" id="add-result-business"></span>
           </div>
+          <div id="add-calendar" class="calendar-wrap"></div>
         </div>
       </section>
 
@@ -142,6 +167,7 @@
             <span class="result-detail" id="between-result-business"></span>
             <span class="result-detail" id="between-result-breakdown"></span>
           </div>
+          <div id="between-calendar" class="calendar-wrap"></div>
         </div>
       </section>
 
