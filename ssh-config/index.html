@@ -34,6 +34,38 @@
     }
   }
   </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I create an SSH config file?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Create the file at ~/.ssh/config using a text editor. First ensure the .ssh directory exists with 'mkdir -p ~/.ssh && chmod 700 ~/.ssh', then create the config file with 'touch ~/.ssh/config && chmod 600 ~/.ssh/config'. Add Host blocks with your connection details, or use our interactive generator to build the config visually."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where is the SSH config file located?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The user-level SSH config file is located at ~/.ssh/config on Linux and macOS. On Windows with OpenSSH, it is at C:\\Users\\YourName\\.ssh\\config. The system-wide SSH config is at /etc/ssh/ssh_config. User settings override system settings. The file must have 600 permissions (read/write for owner only)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I use SSH config for multiple servers?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Add a separate Host block for each server in your ~/.ssh/config file. Each block specifies a short alias, the hostname or IP, username, port, and identity file. You can then connect with just 'ssh alias' instead of typing the full command. Use a 'Host *' block at the end to set defaults like ServerAliveInterval for all connections."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
   <header class="site-header">
@@ -349,6 +381,16 @@ Host github-work
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
   </div>
+
+  <section style="padding: 2rem 1rem; border-top: 1px solid #2e3345; max-width: 800px; margin: 2rem auto 0;">
+    <p style="font-size: 0.82rem; color: #9aa0b0; margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em;">More Free Tools</p>
+    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+      <a href="/" style="display: inline-block; padding: 0.4rem 0.85rem; background: #1a1d27; border: 1px solid #2e3345; border-radius: 6px; color: #e8eaed; font-size: 0.82rem; text-decoration: none; transition: border-color 0.2s;">All Tools</a>
+      <a href="/gitignore-gen/" style="display: inline-block; padding: 0.4rem 0.85rem; background: #1a1d27; border: 1px solid #2e3345; border-radius: 6px; color: #e8eaed; font-size: 0.82rem; text-decoration: none; transition: border-color 0.2s;">.gitignore Generator</a>
+      <a href="/docker-compose-gen/" style="display: inline-block; padding: 0.4rem 0.85rem; background: #1a1d27; border: 1px solid #2e3345; border-radius: 6px; color: #e8eaed; font-size: 0.82rem; text-decoration: none; transition: border-color 0.2s;">Docker Compose Generator</a>
+      <a href="/config-converter/" style="display: inline-block; padding: 0.4rem 0.85rem; background: #1a1d27; border: 1px solid #2e3345; border-radius: 6px; color: #e8eaed; font-size: 0.82rem; text-decoration: none; transition: border-color 0.2s;">Config Converter</a>
+    </div>
+  </section>
 
   <footer class="site-footer">
     <div class="container">

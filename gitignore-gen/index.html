@@ -34,6 +34,38 @@
     }
   }
   </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is a .gitignore file?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A .gitignore file tells Git which files and directories to exclude from version control. It prevents build artifacts, dependency folders (like node_modules), environment files with secrets, and IDE configuration from being committed to your repository. Place it in your project root and Git will automatically skip matching files."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I create a .gitignore for Node.js?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A Node.js .gitignore should include node_modules/, dist/, .env, .env.local, npm-debug.log*, coverage/, and .DS_Store. Use our generator to select Node.js from the checklist and get a comprehensive .gitignore with comments explaining each pattern. You can also add frameworks like React or Next.js for additional ignore rules."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What files should I add to .gitignore?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You should ignore dependency directories (node_modules, vendor, venv), build outputs (dist, build, *.o), environment files (.env, .env.local), IDE settings (.vscode, .idea), OS files (.DS_Store, Thumbs.db), and log files. Never ignore package manifests (package.json, requirements.txt) or configuration files your team shares."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
   <header class="site-header">
@@ -145,6 +177,16 @@
       <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
   </main>
+
+  <section style="padding: 2rem 1rem; border-top: 1px solid #2e3345; max-width: 800px; margin: 2rem auto 0;">
+    <p style="font-size: 0.82rem; color: #9aa0b0; margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em;">More Free Tools</p>
+    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+      <a href="/" style="display: inline-block; padding: 0.4rem 0.85rem; background: #1a1d27; border: 1px solid #2e3345; border-radius: 6px; color: #e8eaed; font-size: 0.82rem; text-decoration: none; transition: border-color 0.2s;">All Tools</a>
+      <a href="/docker-compose-gen/" style="display: inline-block; padding: 0.4rem 0.85rem; background: #1a1d27; border: 1px solid #2e3345; border-radius: 6px; color: #e8eaed; font-size: 0.82rem; text-decoration: none; transition: border-color 0.2s;">Docker Compose Generator</a>
+      <a href="/ssh-config/" style="display: inline-block; padding: 0.4rem 0.85rem; background: #1a1d27; border: 1px solid #2e3345; border-radius: 6px; color: #e8eaed; font-size: 0.82rem; text-decoration: none; transition: border-color 0.2s;">SSH Config Generator</a>
+      <a href="/json-tools/" style="display: inline-block; padding: 0.4rem 0.85rem; background: #1a1d27; border: 1px solid #2e3345; border-radius: 6px; color: #e8eaed; font-size: 0.82rem; text-decoration: none; transition: border-color 0.2s;">JSON Tools</a>
+    </div>
+  </section>
 
   <footer class="site-footer">
     <div class="container">

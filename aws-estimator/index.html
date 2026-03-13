@@ -38,6 +38,38 @@
         }
     }
     </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "How much does AWS cost per month?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "AWS costs vary widely depending on your architecture. A static website on S3 and CloudFront can cost under $5/month, a serverless API backend typically runs $10-50/month at moderate traffic, and a traditional EC2-based web app starts around $30-100/month. Use our calculator to estimate costs for your specific architecture and traffic levels."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What is the cheapest AWS instance?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The cheapest AWS EC2 instance is the t4g.nano at roughly $3/month (on-demand) in US East. For even lower costs, consider serverless options like AWS Lambda, which is free for the first 1 million requests per month. The AWS Free Tier also includes 750 hours of t2.micro or t3.micro usage for the first 12 months."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How do I estimate my AWS bill?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "To estimate your AWS bill, identify which services your architecture uses (compute, storage, database, networking), estimate your monthly usage for each, and multiply by the per-unit price. Our AWS Cost Calculator simplifies this by letting you choose a common architecture pattern and adjust sliders for traffic and storage to get an instant estimate with a full cost breakdown."
+                }
+            }
+        ]
+    }
+    </script>
 </head>
 <body>
     <header>
@@ -213,6 +245,16 @@
             </ul>
         </section>
     </main>
+
+    <section style="padding: 2rem 1rem; border-top: 1px solid #2e3345; max-width: 800px; margin: 2rem auto 0;">
+        <p style="font-size: 0.82rem; color: #9aa0b0; margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em;">More Free Tools</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+            <a href="/" style="display: inline-block; padding: 0.4rem 0.85rem; background: #1a1d27; border: 1px solid #2e3345; border-radius: 6px; color: #e8eaed; font-size: 0.82rem; text-decoration: none; transition: border-color 0.2s;">All Tools</a>
+            <a href="/docker-compose-gen/" style="display: inline-block; padding: 0.4rem 0.85rem; background: #1a1d27; border: 1px solid #2e3345; border-radius: 6px; color: #e8eaed; font-size: 0.82rem; text-decoration: none; transition: border-color 0.2s;">Docker Compose Generator</a>
+            <a href="/config-converter/" style="display: inline-block; padding: 0.4rem 0.85rem; background: #1a1d27; border: 1px solid #2e3345; border-radius: 6px; color: #e8eaed; font-size: 0.82rem; text-decoration: none; transition: border-color 0.2s;">Config Converter</a>
+            <a href="/llm-pricing/" style="display: inline-block; padding: 0.4rem 0.85rem; background: #1a1d27; border: 1px solid #2e3345; border-radius: 6px; color: #e8eaed; font-size: 0.82rem; text-decoration: none; transition: border-color 0.2s;">LLM Pricing</a>
+        </div>
+    </section>
 
     <footer>
         <div class="container">

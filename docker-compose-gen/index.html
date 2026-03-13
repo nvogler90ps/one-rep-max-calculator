@@ -39,6 +39,38 @@
     }
   }
   </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I create a Docker Compose file?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Create a file named docker-compose.yml in your project root. Define your services with their Docker images, ports, volumes, and environment variables. You can use our Docker Compose Generator to select services from a checklist and get a working file with health checks, networking, and sensible defaults -- no manual YAML writing required."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between docker-compose and Docker Compose v2?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The original docker-compose was a standalone Python tool invoked with a hyphen (docker-compose up). Docker Compose v2 is a Go-based plugin integrated into the Docker CLI, invoked with a space (docker compose up). V2 is faster, supports the same docker-compose.yml format, and is now the default in Docker Desktop. The YAML file format is the same for both."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I add a database to Docker Compose?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Add a service block with the database image (e.g., postgres:16-alpine, mysql:8, or mongo:7), set environment variables for credentials, map the port, and define a named volume for persistent data. Our generator handles all of this automatically -- just check the database you want and it generates the correct configuration with health checks and volume mounts."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 
@@ -222,6 +254,16 @@
       </ul>
     </section>
   </div>
+
+  <section style="padding: 2rem 1rem; border-top: 1px solid #2e3345; max-width: 800px; margin: 2rem auto 0;">
+    <p style="font-size: 0.82rem; color: #9aa0b0; margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em;">More Free Tools</p>
+    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+      <a href="/" style="display: inline-block; padding: 0.4rem 0.85rem; background: #1a1d27; border: 1px solid #2e3345; border-radius: 6px; color: #e8eaed; font-size: 0.82rem; text-decoration: none; transition: border-color 0.2s;">All Tools</a>
+      <a href="/aws-estimator/" style="display: inline-block; padding: 0.4rem 0.85rem; background: #1a1d27; border: 1px solid #2e3345; border-radius: 6px; color: #e8eaed; font-size: 0.82rem; text-decoration: none; transition: border-color 0.2s;">AWS Cost Calculator</a>
+      <a href="/config-converter/" style="display: inline-block; padding: 0.4rem 0.85rem; background: #1a1d27; border: 1px solid #2e3345; border-radius: 6px; color: #e8eaed; font-size: 0.82rem; text-decoration: none; transition: border-color 0.2s;">Config Converter</a>
+      <a href="/gitignore-gen/" style="display: inline-block; padding: 0.4rem 0.85rem; background: #1a1d27; border: 1px solid #2e3345; border-radius: 6px; color: #e8eaed; font-size: 0.82rem; text-decoration: none; transition: border-color 0.2s;">.gitignore Generator</a>
+    </div>
+  </section>
 
   <!-- Footer -->
   <footer>
