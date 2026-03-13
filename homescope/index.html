@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HomeScope - Tampa Bay Real Estate Intelligence</title>
+  <meta name="description" content="See what Zillow won't show you. Flood zones, elevation, hurricane risk, insurance estimates, and broadband data for any address in Tampa Bay.">
+  <meta name="keywords" content="Tampa Bay real estate, flood zone map, hurricane evacuation zone, home insurance estimate Florida, FEMA flood map Tampa, elevation map Florida">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="canonical" href="https://automated-insights.com/homescope/">
+  <meta property="og:title" content="HomeScope - Tampa Bay Real Estate Intelligence">
+  <meta property="og:description" content="Flood zones, elevation, hurricane risk, insurance estimates, and broadband data for any address in Tampa Bay.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://automated-insights.com/homescope/">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "HomeScope",
+    "description": "Tampa Bay real estate intelligence. See flood zones, elevation, hurricane risk, insurance cost estimates, and broadband availability for any address.",
+    "url": "https://automated-insights.com/homescope/",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What flood zone is my property in Tampa Bay?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You can look up your FEMA flood zone by entering your address in HomeScope. It queries the National Flood Hazard Layer in real time to show your exact flood zone designation (A, AE, V, VE, X, etc.) and whether flood insurance is required."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What hurricane evacuation zone am I in?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Florida assigns evacuation zones A through E based on storm surge vulnerability. Zone A evacuates first for the weakest hurricanes, while Zone E only evacuates for the strongest. HomeScope shows your evacuation zone for any Tampa Bay address."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does flood insurance cost in Tampa Bay?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Flood insurance costs in Tampa Bay range from $400 to $10,000+ per year depending on your FEMA flood zone, elevation, and property details. Homes in high-risk zones (A, AE, V, VE) with mortgages are required to carry flood insurance. HomeScope estimates your flood insurance tier based on zone and elevation."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3434609691579834" crossorigin="anonymous"></script>
+
+  <!-- MapLibre GL JS -->
+  <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet">
+  <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header id="header">
+    <div class="header-left">
+      <div class="logo">Home<span>Scope</span></div>
+      <div class="tagline">Tampa Bay Real Estate Intelligence</div>
+    </div>
+    <div class="header-right">
+      <a href="/" class="back-link">Automated Insights</a>
+    </div>
+  </header>
+
+  <!-- Search bar -->
+  <div id="search-bar">
+    <div class="search-wrap">
+      <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9aa0b0" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      <input type="text" id="address-input" placeholder="Enter an address in Tampa Bay..." autocomplete="off">
+      <button id="search-btn" type="button">Search</button>
+    </div>
+    <div id="search-results" class="search-results hidden"></div>
+  </div>
+
+  <!-- Main layout -->
+  <div id="app">
+    <!-- Map -->
+    <div id="map"></div>
+
+    <!-- Info panel -->
+    <div id="panel" class="panel hidden">
+      <button id="panel-close" class="panel-close" type="button">&times;</button>
+
+      <div id="panel-address" class="panel-address">Select an address or click the map</div>
+
+      <!-- Summary cards -->
+      <div id="panel-summary" class="panel-summary hidden">
+        <div class="summary-row">
+          <div class="summary-card" id="card-flood">
+            <div class="summary-label">Flood Zone</div>
+            <div class="summary-value" id="val-flood">--</div>
+          </div>
+          <div class="summary-card" id="card-elevation">
+            <div class="summary-label">Elevation</div>
+            <div class="summary-value" id="val-elevation">--</div>
+          </div>
+        </div>
+        <div class="summary-row">
+          <div class="summary-card" id="card-evac">
+            <div class="summary-label">Evac Zone</div>
+            <div class="summary-value" id="val-evac">--</div>
+          </div>
+          <div class="summary-card" id="card-insurance">
+            <div class="summary-label">Flood Insurance</div>
+            <div class="summary-value" id="val-insurance">--</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Detail sections -->
+      <div id="panel-details" class="panel-details hidden">
+
+        <!-- Flood detail -->
+        <div class="detail-section" id="detail-flood">
+          <h3>Flood Risk</h3>
+          <div class="detail-grid" id="flood-details"></div>
+        </div>
+
+        <!-- Elevation detail -->
+        <div class="detail-section" id="detail-elevation">
+          <h3>Elevation</h3>
+          <div class="detail-grid" id="elevation-details"></div>
+        </div>
+
+        <!-- Hurricane detail -->
+        <div class="detail-section" id="detail-hurricane">
+          <h3>Hurricane Risk</h3>
+          <div class="detail-grid" id="hurricane-details"></div>
+        </div>
+
+        <!-- Broadband detail -->
+        <div class="detail-section" id="detail-broadband">
+          <h3>Internet Availability</h3>
+          <div id="broadband-details"></div>
+        </div>
+      </div>
+
+      <!-- Loading state -->
+      <div id="panel-loading" class="panel-loading hidden">
+        <div class="spinner"></div>
+        <div>Querying data sources...</div>
+      </div>
+    </div>
+
+    <!-- Layer controls -->
+    <div id="layer-controls" class="layer-controls">
+      <button class="layer-btn active" data-layer="flood" title="Flood Zones">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z"/></svg>
+      </button>
+      <button class="layer-btn" data-layer="evac" title="Evacuation Zones">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </button>
+      <button class="layer-btn" data-layer="surge" title="Storm Surge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h2m4 0h2m4 0h2m4 0h2"/><path d="M3 7c1.5 0 2.5 1 4 1s2.5-1 4-1 2.5 1 4 1 2.5-1 4-1"/><path d="M3 17c1.5 0 2.5 1 4 1s2.5-1 4-1 2.5 1 4 1 2.5-1 4-1"/></svg>
+      </button>
+    </div>
+
+    <!-- Map legend -->
+    <div id="legend" class="legend hidden">
+      <div class="legend-title" id="legend-title">Flood Zones</div>
+      <div id="legend-items" class="legend-items"></div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      Data sources: FEMA, USGS, NOAA, FCC, Florida Division of Emergency Management. Not a substitute for professional assessment.
+      <br>&copy; 2026 Automated Insights LLC
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

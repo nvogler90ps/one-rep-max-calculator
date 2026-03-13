@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Password Generator - Strong Random Passwords & Passphrases</title>
+  <meta name="description" content="Generate strong, cryptographically secure passwords and passphrases. Check password strength, create WiFi passwords, and build unbreakable credentials instantly.">
+  <meta name="keywords" content="password generator, strong password, random password, passphrase generator, password strength checker, secure password, WiFi password">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="canonical" href="https://automated-insights.com/password-gen/">
+  <meta property="og:title" content="Password Generator - Strong Random Passwords & Passphrases">
+  <meta property="og:description" content="Generate strong, cryptographically secure passwords and passphrases. Check password strength and create WiFi passwords instantly.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://automated-insights.com/password-gen/">
+  <link rel="stylesheet" href="css/styles.css">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3434609691579834" crossorigin="anonymous"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Password Generator",
+    "url": "https://automated-insights.com/password-gen/",
+    "description": "Generate strong, cryptographically secure passwords and passphrases with customizable options.",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How long should my password be?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A strong password should be at least 12-16 characters long. Longer passwords are exponentially harder to crack -- each additional character multiplies the number of possible combinations. For high-security accounts, consider 20+ characters or use a passphrase of 4-6 random words."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What makes a strong password?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A strong password combines length, randomness, and character variety. It should include uppercase letters, lowercase letters, numbers, and symbols. Most importantly, it must be randomly generated -- not based on personal information, dictionary words, or common patterns. Passwords created by humans tend to follow predictable patterns that attackers exploit."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are password generators safe to use?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, reputable password generators that use cryptographically secure random number generators (like window.crypto.getRandomValues) are safe. This tool runs entirely in your browser -- no passwords are sent to any server. Generated passwords exist only in your browser's memory and are never stored or transmitted."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Password Generator</h1>
+      <p>Generate strong, cryptographically secure passwords and passphrases. Everything runs locally in your browser.</p>
+    </header>
+
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="random">Random Password</button>
+      <button class="tab-btn" data-tab="passphrase">Passphrase</button>
+      <button class="tab-btn" data-tab="strength">Strength Check</button>
+      <button class="tab-btn" data-tab="wifi">WiFi Password</button>
+    </div>
+
+    <!-- Random Password Tab -->
+    <div id="tab-random" class="tab-panel active">
+      <div class="card">
+        <div id="pw-display" class="password-display">Click Generate to create a password</div>
+        <div class="btn-row">
+          <button class="btn btn-primary" id="btn-generate">Generate</button>
+          <button class="btn btn-secondary" id="btn-regenerate">Regenerate</button>
+        </div>
+        <button class="btn btn-copy" id="btn-copy-pw" data-target="pw-display">Copy to Clipboard</button>
+      </div>
+      <div class="card">
+        <div class="control-group">
+          <label>Password Length</label>
+          <div class="slider-row">
+            <input type="range" id="pw-length" min="8" max="128" value="16">
+            <span class="slider-value" id="pw-length-val">16</span>
+          </div>
+        </div>
+        <div class="control-group">
+          <label>Character Types</label>
+          <div class="toggle-grid">
+            <label class="toggle-item"><input type="checkbox" id="opt-upper" checked> Uppercase (A-Z)</label>
+            <label class="toggle-item"><input type="checkbox" id="opt-lower" checked> Lowercase (a-z)</label>
+            <label class="toggle-item"><input type="checkbox" id="opt-numbers" checked> Numbers (0-9)</label>
+            <label class="toggle-item"><input type="checkbox" id="opt-symbols" checked> Symbols (!@#...)</label>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="toggle-item"><input type="checkbox" id="opt-ambiguous"> Exclude ambiguous (0, O, 1, l, I)</label>
+        </div>
+        <div class="control-group">
+          <label for="custom-symbols">Custom Symbols</label>
+          <input type="text" id="custom-symbols" placeholder="Leave blank for default: !@#$%^&*()_+-=[]{}|;:,.<>?">
+        </div>
+        <div class="control-group">
+          <label>Number of Passwords</label>
+          <div class="slider-row">
+            <input type="range" id="pw-count" min="1" max="10" value="1">
+            <span class="slider-value" id="pw-count-val">1</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Passphrase Tab -->
+    <div id="tab-passphrase" class="tab-panel">
+      <div class="card">
+        <div id="pp-display" class="password-display">Click Generate to create a passphrase</div>
+        <div class="btn-row">
+          <button class="btn btn-primary" id="btn-gen-pp">Generate Passphrase</button>
+        </div>
+        <button class="btn btn-copy" id="btn-copy-pp" data-target="pp-display">Copy to Clipboard</button>
+      </div>
+      <div class="card">
+        <div class="control-group">
+          <label>Word Count</label>
+          <div class="slider-row">
+            <input type="range" id="pp-words" min="3" max="10" value="4">
+            <span class="slider-value" id="pp-words-val">4</span>
+          </div>
+        </div>
+        <div class="control-group">
+          <label>Separator</label>
+          <div class="separator-options">
+            <button class="sep-btn active" data-sep="-">Hyphen (-)</button>
+            <button class="sep-btn" data-sep=" ">Space</button>
+            <button class="sep-btn" data-sep=".">Period (.)</button>
+            <button class="sep-btn" data-sep="number">Number</button>
+          </div>
+        </div>
+        <div class="control-group">
+          <div class="toggle-grid">
+            <label class="toggle-item"><input type="checkbox" id="pp-capitalize" checked> Capitalize Words</label>
+            <label class="toggle-item"><input type="checkbox" id="pp-number"> Include Number</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Strength Checker Tab -->
+    <div id="tab-strength" class="tab-panel">
+      <div class="card">
+        <div class="control-group">
+          <label for="strength-input">Enter or paste a password</label>
+          <input type="text" id="strength-input" placeholder="Type or paste a password to check...">
+        </div>
+        <div class="strength-meter">
+          <div class="strength-bar-bg">
+            <div class="strength-bar" id="strength-bar"></div>
+          </div>
+          <div class="strength-label" id="strength-label"></div>
+        </div>
+        <div class="strength-details" id="strength-details"></div>
+        <div class="strength-warning" id="strength-warning" style="display:none;"></div>
+      </div>
+    </div>
+
+    <!-- WiFi Password Tab -->
+    <div id="tab-wifi" class="tab-panel">
+      <div class="card">
+        <h2>WiFi Password Generator</h2>
+        <p style="color:var(--muted);font-size:0.9rem;margin-bottom:16px;">Generate WPA2-friendly passwords using printable ASCII characters (max 63 characters).</p>
+        <div id="wifi-display" class="password-display">Click Generate to create a WiFi password</div>
+        <div class="btn-row">
+          <button class="btn btn-primary" id="btn-gen-wifi">Generate WiFi Password</button>
+        </div>
+        <button class="btn btn-copy" id="btn-copy-wifi" data-target="wifi-display">Copy to Clipboard</button>
+      </div>
+      <div class="card">
+        <div class="control-group">
+          <label>Password Length</label>
+          <div class="slider-row">
+            <input type="range" id="wifi-length" min="8" max="63" value="20">
+            <span class="slider-value" id="wifi-length-val">20</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="faq-section">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-item">
+        <h3>How long should my password be?</h3>
+        <p>A strong password should be at least 12-16 characters long. Longer passwords are exponentially harder to crack -- each additional character multiplies the number of possible combinations. For high-security accounts, consider 20+ characters or use a passphrase of 4-6 random words.</p>
+      </div>
+      <div class="faq-item">
+        <h3>What makes a strong password?</h3>
+        <p>A strong password combines length, randomness, and character variety. It should include uppercase letters, lowercase letters, numbers, and symbols. Most importantly, it must be randomly generated -- not based on personal information, dictionary words, or common patterns.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Are password generators safe to use?</h3>
+        <p>Yes, reputable password generators that use cryptographically secure random number generators are safe. This tool runs entirely in your browser -- no passwords are sent to any server. Generated passwords exist only in your browser's memory and are never stored or transmitted.</p>
+      </div>
+    </div>
+
+    <!-- Internal Links -->
+    <div class="internal-links">
+      <h3>More Tools</h3>
+      <div class="internal-links-grid">
+        <a href="/">All Tools</a>
+        <a href="/json-tools/">JSON Tools</a>
+        <a href="/ssh-config/">SSH Config</a>
+        <a href="/gitignore-gen/">.gitignore Gen</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      &copy; 2026 Automated Insights LLC
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

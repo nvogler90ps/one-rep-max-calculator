@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Percentage Calculator - Free Online Percent Calculator</title>
+  <meta name="description" content="Free online percentage calculator. Calculate percentages, percent change, percentage difference, fraction to percent, and more. Instant results as you type.">
+  <meta name="keywords" content="percentage calculator, percent calculator, percentage change, percent difference, fraction to percentage, calculate percentage">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="canonical" href="https://automated-insights.com/percentage-calc/">
+  <meta property="og:title" content="Percentage Calculator - Free Online Percent Calculator">
+  <meta property="og:description" content="Calculate percentages, percent change, percentage difference, and more. Instant results as you type.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://automated-insights.com/percentage-calc/">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Percentage Calculator",
+    "url": "https://automated-insights.com/percentage-calc/",
+    "description": "Free online percentage calculator with multiple modes: percent of a number, percent change, percentage difference, fraction to percent, and more.",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How to calculate percentage?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "To calculate what percentage one number is of another, divide the part by the whole and multiply by 100. For example, to find what percentage 25 is of 200: (25 / 200) x 100 = 12.5%. You can also use our calculator above to get instant results."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is percent change?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Percent change measures how much a value has increased or decreased relative to its original value. The formula is: ((New Value - Old Value) / Old Value) x 100. A positive result means an increase, while a negative result means a decrease. For example, if a price goes from $50 to $65, the percent change is ((65 - 50) / 50) x 100 = 30% increase."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How to find percentage of a number?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "To find a percentage of a number, convert the percentage to a decimal by dividing by 100, then multiply by the number. For example, to find 15% of 200: (15 / 100) x 200 = 30. This works for any percentage and any number."
+        }
+      }
+    ]
+  }
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3434609691579834" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Percentage Calculator</h1>
+      <p class="subtitle">Calculate percentages instantly -- results update as you type</p>
+    </header>
+
+    <nav class="tabs" role="tablist">
+      <button class="tab active" role="tab" data-tab="pct-of" aria-selected="true">% of Number</button>
+      <button class="tab" role="tab" data-tab="what-pct" aria-selected="false">What %?</button>
+      <button class="tab" role="tab" data-tab="pct-change" aria-selected="false">% Change</button>
+      <button class="tab" role="tab" data-tab="pct-diff" aria-selected="false">% Difference</button>
+      <button class="tab" role="tab" data-tab="add-sub" aria-selected="false">Add/Subtract %</button>
+      <button class="tab" role="tab" data-tab="frac-pct" aria-selected="false">Fraction to %</button>
+    </nav>
+
+    <main>
+      <!-- What is X% of Y? -->
+      <section class="calc-panel active" id="panel-pct-of" role="tabpanel">
+        <h2>What is X% of Y?</h2>
+        <div class="input-row">
+          <label>
+            <span>Percentage (%)</span>
+            <input type="number" id="pctof-pct" placeholder="e.g. 15" step="any">
+          </label>
+          <span class="input-separator">of</span>
+          <label>
+            <span>Number</span>
+            <input type="number" id="pctof-num" placeholder="e.g. 200" step="any">
+          </label>
+        </div>
+        <div class="result-box" id="pctof-result">
+          <span class="result-label">Result</span>
+          <span class="result-value">--</span>
+        </div>
+        <div class="formula-box" id="pctof-formula"></div>
+      </section>
+
+      <!-- X is what % of Y? -->
+      <section class="calc-panel" id="panel-what-pct" role="tabpanel">
+        <h2>X is what % of Y?</h2>
+        <div class="input-row">
+          <label>
+            <span>Part (X)</span>
+            <input type="number" id="whatpct-part" placeholder="e.g. 25" step="any">
+          </label>
+          <span class="input-separator">of</span>
+          <label>
+            <span>Whole (Y)</span>
+            <input type="number" id="whatpct-whole" placeholder="e.g. 200" step="any">
+          </label>
+        </div>
+        <div class="result-box" id="whatpct-result">
+          <span class="result-label">Result</span>
+          <span class="result-value">--</span>
+        </div>
+        <div class="formula-box" id="whatpct-formula"></div>
+      </section>
+
+      <!-- Percentage Change -->
+      <section class="calc-panel" id="panel-pct-change" role="tabpanel">
+        <h2>Percentage Change</h2>
+        <div class="input-row">
+          <label>
+            <span>Old Value</span>
+            <input type="number" id="pctchg-old" placeholder="e.g. 50" step="any">
+          </label>
+          <span class="input-separator">to</span>
+          <label>
+            <span>New Value</span>
+            <input type="number" id="pctchg-new" placeholder="e.g. 65" step="any">
+          </label>
+        </div>
+        <div class="result-box" id="pctchg-result">
+          <span class="result-label">Result</span>
+          <span class="result-value">--</span>
+        </div>
+        <div class="formula-box" id="pctchg-formula"></div>
+      </section>
+
+      <!-- Percentage Difference -->
+      <section class="calc-panel" id="panel-pct-diff" role="tabpanel">
+        <h2>Percentage Difference</h2>
+        <div class="input-row">
+          <label>
+            <span>Value 1</span>
+            <input type="number" id="pctdiff-a" placeholder="e.g. 30" step="any">
+          </label>
+          <span class="input-separator">and</span>
+          <label>
+            <span>Value 2</span>
+            <input type="number" id="pctdiff-b" placeholder="e.g. 50" step="any">
+          </label>
+        </div>
+        <div class="result-box" id="pctdiff-result">
+          <span class="result-label">Result</span>
+          <span class="result-value">--</span>
+        </div>
+        <div class="formula-box" id="pctdiff-formula"></div>
+      </section>
+
+      <!-- Add/Subtract Percentage -->
+      <section class="calc-panel" id="panel-add-sub" role="tabpanel">
+        <h2>Add or Subtract a Percentage</h2>
+        <div class="input-row three-col">
+          <label>
+            <span>Number</span>
+            <input type="number" id="addsub-num" placeholder="e.g. 100" step="any">
+          </label>
+          <label class="select-label">
+            <span>Operation</span>
+            <select id="addsub-op">
+              <option value="add">+ Add</option>
+              <option value="sub">- Subtract</option>
+            </select>
+          </label>
+          <label>
+            <span>Percentage (%)</span>
+            <input type="number" id="addsub-pct" placeholder="e.g. 20" step="any">
+          </label>
+        </div>
+        <div class="result-box" id="addsub-result">
+          <span class="result-label">Result</span>
+          <span class="result-value">--</span>
+        </div>
+        <div class="formula-box" id="addsub-formula"></div>
+      </section>
+
+      <!-- Fraction to Percentage -->
+      <section class="calc-panel" id="panel-frac-pct" role="tabpanel">
+        <h2>Fraction to Percentage</h2>
+        <div class="input-row">
+          <label>
+            <span>Numerator</span>
+            <input type="number" id="fracpct-num" placeholder="e.g. 3" step="any">
+          </label>
+          <span class="input-separator">/</span>
+          <label>
+            <span>Denominator</span>
+            <input type="number" id="fracpct-den" placeholder="e.g. 8" step="any">
+          </label>
+        </div>
+        <div class="result-box" id="fracpct-result">
+          <span class="result-label">Result</span>
+          <span class="result-value">--</span>
+        </div>
+        <div class="formula-box" id="fracpct-formula"></div>
+      </section>
+    </main>
+
+    <section style="padding: 2rem 1rem; border-top: 1px solid #2e3345; max-width: 800px; margin: 2rem auto 0;">
+      <p style="font-size: 0.82rem; color: #9aa0b0; margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em;">More Free Tools</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+        <a href="/" style="display: inline-block; padding: 0.4rem 0.85rem; background: #1a1d27; border: 1px solid #2e3345; border-radius: 6px; color: #e8eaed; font-size: 0.82rem; text-decoration: none;">All Tools</a>
+        <a href="/date-calculator/" style="display: inline-block; padding: 0.4rem 0.85rem; background: #1a1d27; border: 1px solid #2e3345; border-radius: 6px; color: #e8eaed; font-size: 0.82rem; text-decoration: none;">Date Calculator</a>
+        <a href="/fuel-calculator/" style="display: inline-block; padding: 0.4rem 0.85rem; background: #1a1d27; border: 1px solid #2e3345; border-radius: 6px; color: #e8eaed; font-size: 0.82rem; text-decoration: none;">Fuel Calculator</a>
+        <a href="/one-rep-max/" style="display: inline-block; padding: 0.4rem 0.85rem; background: #1a1d27; border: 1px solid #2e3345; border-radius: 6px; color: #e8eaed; font-size: 0.82rem; text-decoration: none;">One Rep Max</a>
+      </div>
+    </section>
+
+    <footer>
+      <p>&copy; 2026 Automated Insights LLC</p>
+    </footer>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

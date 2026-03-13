@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free QR Code Generator - URL, WiFi, vCard, Email, SMS</title>
+  <meta name="description" content="Generate QR codes for free. Create QR codes for URLs, WiFi networks, vCards, email, SMS, and plain text. Customize colors, size, and error correction. Download as PNG or SVG.">
+  <meta name="keywords" content="QR code generator, free QR code, WiFi QR code, vCard QR code, URL QR code, email QR code, SMS QR code, QR code maker">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="canonical" href="https://automated-insights.com/qr-generator/">
+  <meta property="og:title" content="Free QR Code Generator">
+  <meta property="og:description" content="Generate QR codes for URLs, WiFi, vCards, email, SMS, and text. Customize and download for free.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://automated-insights.com/qr-generator/">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "QR Code Generator",
+    "url": "https://automated-insights.com/qr-generator/",
+    "description": "Generate QR codes for URLs, WiFi networks, vCards, email, SMS, and plain text. Customize colors and size. Download as PNG or SVG.",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How to create a QR code for free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Use our free QR code generator by selecting a content type (URL, WiFi, vCard, Email, SMS, or Text), entering your information, and the QR code is generated instantly. You can customize the colors and size, then download it as PNG or SVG -- no account or payment required."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is a QR code?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A QR code (Quick Response code) is a two-dimensional barcode that can store information such as URLs, text, WiFi credentials, and contact details. It can be scanned by smartphone cameras and QR reader apps to quickly access the encoded information."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How to make a WiFi QR code?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Select the WiFi tab in our QR code generator, enter your network name (SSID), password, and encryption type (WPA/WPA2, WEP, or None). The tool generates a QR code that, when scanned, automatically connects the device to your WiFi network without manually typing the password."
+        }
+      }
+    ]
+  }
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3434609691579834" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>QR Code Generator</h1>
+      <p>Create free QR codes for URLs, WiFi, contacts, email, SMS, and more. Customize and download instantly.</p>
+    </header>
+
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="url">URL</button>
+      <button class="tab-btn" data-tab="wifi">WiFi</button>
+      <button class="tab-btn" data-tab="vcard">vCard</button>
+      <button class="tab-btn" data-tab="email">Email</button>
+      <button class="tab-btn" data-tab="sms">SMS</button>
+      <button class="tab-btn" data-tab="text">Text</button>
+    </div>
+
+    <div class="main-grid">
+      <!-- Left: Input -->
+      <div class="card">
+        <h2>Content</h2>
+
+        <!-- URL -->
+        <div id="panel-url" class="tab-panel active">
+          <div class="field">
+            <label for="input-url">URL or Text</label>
+            <input type="text" id="input-url" placeholder="https://example.com" autocomplete="off">
+          </div>
+        </div>
+
+        <!-- WiFi -->
+        <div id="panel-wifi" class="tab-panel">
+          <div class="field">
+            <label for="wifi-ssid">Network Name (SSID)</label>
+            <input type="text" id="wifi-ssid" placeholder="MyNetwork" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="wifi-pass">Password</label>
+            <div class="password-wrap">
+              <input type="password" id="wifi-pass" placeholder="Password" autocomplete="off">
+              <button type="button" class="password-toggle" id="wifi-pass-toggle">Show</button>
+            </div>
+          </div>
+          <div class="field">
+            <label for="wifi-enc">Encryption</label>
+            <select id="wifi-enc">
+              <option value="WPA">WPA/WPA2</option>
+              <option value="WEP">WEP</option>
+              <option value="nopass">None</option>
+            </select>
+          </div>
+          <div class="toggle-field">
+            <label for="wifi-hidden">Hidden Network</label>
+            <div class="toggle">
+              <input type="checkbox" id="wifi-hidden">
+              <span class="toggle-slider"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- vCard -->
+        <div id="panel-vcard" class="tab-panel">
+          <div class="field">
+            <label for="vcard-name">Full Name</label>
+            <input type="text" id="vcard-name" placeholder="John Doe" autocomplete="off">
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="vcard-phone">Phone</label>
+              <input type="tel" id="vcard-phone" placeholder="+1 555 123 4567" autocomplete="off">
+            </div>
+            <div class="field">
+              <label for="vcard-email">Email</label>
+              <input type="email" id="vcard-email" placeholder="john@example.com" autocomplete="off">
+            </div>
+          </div>
+          <div class="field">
+            <label for="vcard-company">Company</label>
+            <input type="text" id="vcard-company" placeholder="Acme Inc." autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="vcard-website">Website</label>
+            <input type="url" id="vcard-website" placeholder="https://example.com" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="vcard-address">Address</label>
+            <input type="text" id="vcard-address" placeholder="123 Main St, City, State" autocomplete="off">
+          </div>
+        </div>
+
+        <!-- Email -->
+        <div id="panel-email" class="tab-panel">
+          <div class="field">
+            <label for="email-to">To</label>
+            <input type="email" id="email-to" placeholder="recipient@example.com" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="email-subject">Subject</label>
+            <input type="text" id="email-subject" placeholder="Subject line" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="email-body">Body</label>
+            <textarea id="email-body" placeholder="Email body text..."></textarea>
+          </div>
+        </div>
+
+        <!-- SMS -->
+        <div id="panel-sms" class="tab-panel">
+          <div class="field">
+            <label for="sms-number">Phone Number</label>
+            <input type="tel" id="sms-number" placeholder="+1 555 123 4567" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="sms-message">Message</label>
+            <textarea id="sms-message" placeholder="Your message..."></textarea>
+          </div>
+        </div>
+
+        <!-- Text -->
+        <div id="panel-text" class="tab-panel">
+          <div class="field">
+            <label for="input-text">Plain Text</label>
+            <textarea id="input-text" rows="5" placeholder="Enter any text..."></textarea>
+          </div>
+        </div>
+
+        <!-- Customization -->
+        <h2 style="margin-top: 20px;">Customize</h2>
+        <div class="field">
+          <label for="qr-size">Size</label>
+          <div class="range-wrap">
+            <input type="range" id="qr-size" min="200" max="600" value="300" step="10">
+            <span class="range-value" id="qr-size-value">300px</span>
+          </div>
+        </div>
+        <div class="field">
+          <label for="ec-level">Error Correction</label>
+          <select id="ec-level">
+            <option value="L">L - Low (7% recovery)</option>
+            <option value="M" selected>M - Medium (15% recovery)</option>
+            <option value="Q">Q - Quartile (25% recovery)</option>
+            <option value="H">H - High (30% recovery)</option>
+          </select>
+          <div class="field-hint">Higher levels make the QR code more resistant to damage but increase density.</div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="fg-color">Foreground</label>
+            <input type="color" id="fg-color" value="#e8eaed">
+          </div>
+          <div class="field">
+            <label for="bg-color">Background</label>
+            <input type="color" id="bg-color" value="#1a1d27">
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Preview -->
+      <div class="card qr-preview">
+        <h2>Preview</h2>
+        <div class="qr-display" id="qr-display">
+          <div class="qr-placeholder">Enter content to generate a QR code</div>
+        </div>
+        <div class="btn-group">
+          <button class="btn btn-primary" id="btn-png">Download PNG</button>
+          <button class="btn btn-secondary" id="btn-svg">Download SVG</button>
+          <button class="btn btn-secondary" id="btn-copy">Copy Image</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <section class="faq-section">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-item">
+        <h3>How do I create a QR code for free?</h3>
+        <p>Select a content type above (URL, WiFi, vCard, Email, SMS, or Text), enter your information, and the QR code generates instantly. Customize colors and size, then download as PNG or SVG. No account or payment required.</p>
+      </div>
+      <div class="faq-item">
+        <h3>What is a QR code?</h3>
+        <p>A QR code (Quick Response code) is a two-dimensional barcode that stores information like URLs, text, WiFi credentials, and contact details. Smartphone cameras and QR reader apps can scan them to quickly access the encoded data.</p>
+      </div>
+      <div class="faq-item">
+        <h3>How do I make a WiFi QR code?</h3>
+        <p>Click the "WiFi" tab, enter your network name (SSID), password, and encryption type. The generated QR code, when scanned, automatically connects a device to your WiFi network without manually typing the password.</p>
+      </div>
+    </section>
+
+    <!-- Internal links -->
+    <nav class="internal-links">
+      <h2>More Tools</h2>
+      <ul class="internal-links-list">
+        <li><a href="/">All Tools</a></li>
+        <li><a href="/json-tools/">JSON Tools</a></li>
+        <li><a href="/password-gen/">Password Generator</a></li>
+        <li><a href="/config-converter/">Config Converter</a></li>
+      </ul>
+    </nav>
+
+    <footer>
+      &copy; 2026 Automated Insights LLC
+    </footer>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

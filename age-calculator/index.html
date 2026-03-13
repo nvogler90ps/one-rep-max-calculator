@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Age Calculator - Exact Age in Years, Months, Days, Hours & Minutes</title>
+  <meta name="description" content="Calculate your exact age in years, months, days, hours, minutes, and seconds. Find your age on other planets, generation label, zodiac sign, and more.">
+  <meta name="keywords" content="age calculator, how old am I, exact age, age in days, age in seconds, planet age, zodiac sign, generation calculator">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="canonical" href="https://automated-insights.com/age-calculator/">
+  <meta property="og:title" content="Age Calculator - Exact Age in Years, Months, Days & More">
+  <meta property="og:description" content="Calculate your exact age in years, months, days, hours, minutes, and seconds. Find your age on other planets, generation label, and zodiac sign.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://automated-insights.com/age-calculator/">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Age Calculator",
+    "url": "https://automated-insights.com/age-calculator/",
+    "description": "Calculate your exact age in years, months, days, hours, minutes, and seconds. Find your age on other planets, generation label, and zodiac sign.",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How old am I in days?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Enter your birthdate into the Age Calculator and check the 'Age in Different Units' section. It instantly shows your total age in days, weeks, hours, minutes, and seconds -- with a live ticking counter."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do you calculate exact age?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Exact age is calculated by finding the difference between your birthdate and the current date (or any target date). The calculator accounts for varying month lengths and leap years to give you precise years, months, days, hours, and minutes."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is my age on another planet?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Your age on another planet is calculated by dividing your Earth age in days by that planet's orbital period. For example, one year on Mercury is about 88 Earth days, so you would be much older in Mercury years. The Age Calculator shows your age on all eight planets from Mercury through Neptune."
+        }
+      }
+    ]
+  }
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3434609691579834" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Age Calculator</h1>
+      <p class="subtitle">Find your exact age, planet age, zodiac sign, and more</p>
+    </header>
+
+    <main>
+      <!-- Primary Input -->
+      <section class="card input-card">
+        <h2>Enter Your Birthdate</h2>
+        <div class="input-group">
+          <label for="birthdate">Date of Birth</label>
+          <input type="date" id="birthdate">
+        </div>
+        <button id="calcBtn" class="btn-primary">Calculate My Age</button>
+      </section>
+
+      <!-- Exact Age Result -->
+      <section id="exactAgeSection" class="card result-card hidden">
+        <h2>Your Exact Age</h2>
+        <div class="age-display">
+          <div class="age-big" id="ageSummary"></div>
+        </div>
+        <div class="age-grid">
+          <div class="age-unit"><span class="unit-val" id="ageYears">--</span><span class="unit-label">Years</span></div>
+          <div class="age-unit"><span class="unit-val" id="ageMonths">--</span><span class="unit-label">Months</span></div>
+          <div class="age-unit"><span class="unit-val" id="ageDays">--</span><span class="unit-label">Days</span></div>
+          <div class="age-unit"><span class="unit-val" id="ageHours">--</span><span class="unit-label">Hours</span></div>
+          <div class="age-unit"><span class="unit-val" id="ageMinutes">--</span><span class="unit-label">Minutes</span></div>
+        </div>
+      </section>
+
+      <!-- Live Ticking Counter & Units -->
+      <section id="unitsSection" class="card result-card hidden">
+        <h2>Age in Different Units</h2>
+        <div class="live-counter">
+          <span class="counter-label">Seconds alive:</span>
+          <span class="counter-val" id="secondsAlive">--</span>
+        </div>
+        <div class="units-grid">
+          <div class="unit-item"><span class="unit-val" id="totalDays">--</span><span class="unit-label">Total Days</span></div>
+          <div class="unit-item"><span class="unit-val" id="totalWeeks">--</span><span class="unit-label">Total Weeks</span></div>
+          <div class="unit-item"><span class="unit-val" id="totalHours">--</span><span class="unit-label">Total Hours</span></div>
+          <div class="unit-item"><span class="unit-val" id="totalMinutes">--</span><span class="unit-label">Total Minutes</span></div>
+        </div>
+      </section>
+
+      <!-- Birthday & Generation & Zodiac -->
+      <section id="funFactsSection" class="card result-card hidden">
+        <h2>Fun Facts</h2>
+        <div class="facts-grid">
+          <div class="fact-item">
+            <span class="fact-label">Day of Week Born</span>
+            <span class="fact-val" id="dayOfWeekBorn">--</span>
+          </div>
+          <div class="fact-item">
+            <span class="fact-label">Next Birthday</span>
+            <span class="fact-val" id="nextBirthday">--</span>
+          </div>
+          <div class="fact-item">
+            <span class="fact-label">Generation</span>
+            <span class="fact-val" id="generation">--</span>
+          </div>
+          <div class="fact-item">
+            <span class="fact-label">Zodiac Sign</span>
+            <span class="fact-val" id="zodiacSign">--</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Planet Ages -->
+      <section id="planetSection" class="card result-card hidden">
+        <h2>Age on Other Planets</h2>
+        <div class="planets-grid">
+          <div class="planet-item"><span class="planet-name">Mercury</span><span class="planet-val" id="ageMercury">--</span></div>
+          <div class="planet-item"><span class="planet-name">Venus</span><span class="planet-val" id="ageVenus">--</span></div>
+          <div class="planet-item"><span class="planet-name">Earth</span><span class="planet-val" id="ageEarth">--</span></div>
+          <div class="planet-item"><span class="planet-name">Mars</span><span class="planet-val" id="ageMars">--</span></div>
+          <div class="planet-item"><span class="planet-name">Jupiter</span><span class="planet-val" id="ageJupiter">--</span></div>
+          <div class="planet-item"><span class="planet-name">Saturn</span><span class="planet-val" id="ageSaturn">--</span></div>
+          <div class="planet-item"><span class="planet-name">Uranus</span><span class="planet-val" id="ageUranus">--</span></div>
+          <div class="planet-item"><span class="planet-name">Neptune</span><span class="planet-val" id="ageNeptune">--</span></div>
+        </div>
+      </section>
+
+      <!-- Age on Specific Date -->
+      <section class="card">
+        <h2>Age on a Specific Date</h2>
+        <p class="card-desc">Find your age on any past or future date.</p>
+        <div class="input-row">
+          <div class="input-group">
+            <label for="specificBirth">Date of Birth</label>
+            <input type="date" id="specificBirth">
+          </div>
+          <div class="input-group">
+            <label for="specificTarget">Target Date</label>
+            <input type="date" id="specificTarget">
+          </div>
+        </div>
+        <button id="specificBtn" class="btn-primary">Calculate</button>
+        <div id="specificResult" class="inline-result hidden"></div>
+      </section>
+
+      <!-- Age Difference -->
+      <section class="card">
+        <h2>Age Difference Between Two People</h2>
+        <p class="card-desc">Compare birthdates to find the exact age gap.</p>
+        <div class="input-row">
+          <div class="input-group">
+            <label for="person1">Person 1 Birthdate</label>
+            <input type="date" id="person1">
+          </div>
+          <div class="input-group">
+            <label for="person2">Person 2 Birthdate</label>
+            <input type="date" id="person2">
+          </div>
+        </div>
+        <button id="diffBtn" class="btn-primary">Calculate Difference</button>
+        <div id="diffResult" class="inline-result hidden"></div>
+      </section>
+    </main>
+
+    <section style="padding: 2rem 1rem; border-top: 1px solid #2e3345; max-width: 800px; margin: 2rem auto 0;">
+      <p style="font-size: 0.82rem; color: #9aa0b0; margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em;">More Free Tools</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+        <a href="/" style="display: inline-block; padding: 0.4rem 0.85rem; background: #1a1d27; border: 1px solid #2e3345; border-radius: 6px; color: #e8eaed; font-size: 0.82rem; text-decoration: none;">All Tools</a>
+        <a href="/date-calculator/" style="display: inline-block; padding: 0.4rem 0.85rem; background: #1a1d27; border: 1px solid #2e3345; border-radius: 6px; color: #e8eaed; font-size: 0.82rem; text-decoration: none;">Date Calculator</a>
+        <a href="/percentage-calc/" style="display: inline-block; padding: 0.4rem 0.85rem; background: #1a1d27; border: 1px solid #2e3345; border-radius: 6px; color: #e8eaed; font-size: 0.82rem; text-decoration: none;">Percentage Calc</a>
+        <a href="/blood-donation/" style="display: inline-block; padding: 0.4rem 0.85rem; background: #1a1d27; border: 1px solid #2e3345; border-radius: 6px; color: #e8eaed; font-size: 0.82rem; text-decoration: none;">Blood Donation</a>
+      </div>
+    </section>
+
+    <footer>
+      <p>&copy; 2026 Automated Insights LLC</p>
+    </footer>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
