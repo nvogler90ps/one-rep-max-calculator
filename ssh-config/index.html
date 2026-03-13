@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SSH Config Generator - Build ~/.ssh/config Files Easily</title>
+  <meta name="description" content="Generate SSH config files with an interactive form. Troubleshoot common SSH errors like Permission denied, Connection refused, and Host key verification failed. Build ~/.ssh/config blocks for jump hosts, tunnels, GitHub deploy keys, and more.">
+  <meta name="keywords" content="ssh config file example, ssh permission denied fix, ssh tunnel command, ssh proxy jump config, ssh config generator, ssh troubleshooter">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://ssh-config.automatedinsights.dev/">
+  <meta property="og:title" content="SSH Config Generator - Build ~/.ssh/config Files Easily">
+  <meta property="og:description" content="Interactive tool to generate SSH config files and troubleshoot common SSH errors.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ssh-config.automatedinsights.dev/">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="SSH Config Generator - Build ~/.ssh/config Files Easily">
+  <meta name="twitter:description" content="Interactive tool to generate SSH config files and troubleshoot common SSH errors.">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3434609691579834" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "SSH Config Generator",
+    "description": "Interactive tool to generate SSH config files and troubleshoot common SSH errors.",
+    "url": "https://ssh-config.automatedinsights.dev/",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1><span class="accent">SSH</span> Config Generator</h1>
+      <p class="subtitle">Build <code>~/.ssh/config</code> files easily. Troubleshoot common SSH errors.</p>
+      <nav class="tab-nav" role="tablist">
+        <button class="tab-btn active" role="tab" aria-selected="true" data-tab="generator">Config Generator</button>
+        <button class="tab-btn" role="tab" aria-selected="false" data-tab="troubleshooter">Troubleshooter</button>
+        <button class="tab-btn" role="tab" aria-selected="false" data-tab="guide">SSH Guide</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Ad Slot 1: Top banner -->
+  <div class="container ad-container">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3434609691579834"
+         data-ad-slot="top-banner"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <main class="container">
+    <!-- Generator Tab -->
+    <section id="tab-generator" class="tab-content active">
+      <div class="generator-layout">
+        <div class="form-panel">
+          <div class="panel-header">
+            <h2>Host Configuration</h2>
+            <div class="quick-patterns">
+              <span class="label">Quick Add:</span>
+              <button class="pattern-btn" data-pattern="jumphost" title="Jump host / bastion pattern">Jump Host</button>
+              <button class="pattern-btn" data-pattern="tunnel" title="SSH tunnel / port forwarding">Tunnel</button>
+              <button class="pattern-btn" data-pattern="github" title="GitHub deploy key setup">GitHub Key</button>
+              <button class="pattern-btn" data-pattern="bastion" title="AWS bastion host pattern">AWS Bastion</button>
+              <button class="pattern-btn" data-pattern="multikey" title="Multi-key identity setup">Multi-Key</button>
+            </div>
+          </div>
+
+          <form id="host-form" autocomplete="off">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="field-host">Host Alias <span class="required">*</span></label>
+                <input type="text" id="field-host" placeholder="my-server" required>
+                <span class="hint">Shortcut name for <code>ssh my-server</code></span>
+              </div>
+              <div class="form-group">
+                <label for="field-hostname">HostName <span class="required">*</span></label>
+                <input type="text" id="field-hostname" placeholder="192.168.1.100 or example.com" required>
+                <span class="hint">IP address or domain name</span>
+              </div>
+              <div class="form-group">
+                <label for="field-user">User</label>
+                <input type="text" id="field-user" placeholder="root">
+              </div>
+              <div class="form-group">
+                <label for="field-port">Port</label>
+                <input type="number" id="field-port" placeholder="22" min="1" max="65535">
+              </div>
+              <div class="form-group">
+                <label for="field-identityfile">IdentityFile</label>
+                <input type="text" id="field-identityfile" placeholder="~/.ssh/id_ed25519">
+                <span class="hint">Path to private key</span>
+              </div>
+              <div class="form-group">
+                <label for="field-proxyjump">ProxyJump</label>
+                <input type="text" id="field-proxyjump" placeholder="bastion-host">
+                <span class="hint">Jump through another host</span>
+              </div>
+              <div class="form-group">
+                <label for="field-forwardagent">ForwardAgent</label>
+                <select id="field-forwardagent">
+                  <option value="">-- Not set --</option>
+                  <option value="yes">yes</option>
+                  <option value="no">no</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="field-localforward">LocalForward</label>
+                <input type="text" id="field-localforward" placeholder="8080 localhost:80">
+                <span class="hint">local_port remote_host:remote_port</span>
+              </div>
+              <div class="form-group">
+                <label for="field-remoteforward">RemoteForward</label>
+                <input type="text" id="field-remoteforward" placeholder="9090 localhost:3000">
+                <span class="hint">remote_port local_host:local_port</span>
+              </div>
+              <div class="form-group">
+                <label for="field-serveraliveinterval">ServerAliveInterval</label>
+                <input type="number" id="field-serveraliveinterval" placeholder="60" min="0">
+                <span class="hint">Seconds between keepalive packets</span>
+              </div>
+              <div class="form-group">
+                <label for="field-serveralivecountmax">ServerAliveCountMax</label>
+                <input type="number" id="field-serveralivecountmax" placeholder="3" min="0">
+                <span class="hint">Max keepalive failures before disconnect</span>
+              </div>
+              <div class="form-group">
+                <label for="field-identitiesonly">IdentitiesOnly</label>
+                <select id="field-identitiesonly">
+                  <option value="">-- Not set --</option>
+                  <option value="yes">yes</option>
+                  <option value="no">no</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="field-stricthostkeychecking">StrictHostKeyChecking</label>
+                <select id="field-stricthostkeychecking">
+                  <option value="">-- Not set --</option>
+                  <option value="yes">yes</option>
+                  <option value="no">no</option>
+                  <option value="accept-new">accept-new</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="field-compression">Compression</label>
+                <select id="field-compression">
+                  <option value="">-- Not set --</option>
+                  <option value="yes">yes</option>
+                  <option value="no">no</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary" id="btn-add-host">Add Host Block</button>
+              <button type="button" class="btn btn-secondary" id="btn-clear-form">Clear Form</button>
+            </div>
+          </form>
+
+          <!-- Host list -->
+          <div id="host-list" class="host-list"></div>
+        </div>
+
+        <div class="preview-panel">
+          <div class="panel-header sticky">
+            <h2>Live Preview</h2>
+            <div class="preview-actions">
+              <button class="btn btn-small" id="btn-copy" title="Copy to clipboard">Copy</button>
+              <button class="btn btn-small" id="btn-download" title="Download as config file">Download</button>
+            </div>
+          </div>
+          <pre id="config-preview" class="config-preview"><code># Add a host block to see your config here
+# Use the form on the left, or try a Quick Add pattern</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- Troubleshooter Tab -->
+    <section id="tab-troubleshooter" class="tab-content">
+      <h2>SSH Troubleshooter</h2>
+      <p class="section-intro">Select the error message you are seeing and follow the step-by-step diagnostic checklist.</p>
+
+      <div class="error-selector">
+        <label for="error-select">What error are you getting?</label>
+        <select id="error-select">
+          <option value="">-- Select an error --</option>
+          <option value="permission-denied">Permission denied (publickey)</option>
+          <option value="connection-refused">Connection refused</option>
+          <option value="host-key-verification">Host key verification failed</option>
+          <option value="connection-timed-out">Connection timed out</option>
+          <option value="too-many-auth">Too many authentication failures</option>
+        </select>
+      </div>
+
+      <div id="troubleshoot-result" class="troubleshoot-result"></div>
+    </section>
+
+    <!-- Guide Tab -->
+    <section id="tab-guide" class="tab-content">
+      <article class="seo-content">
+        <h2>Understanding SSH Config Files</h2>
+
+        <p>The SSH config file (<code>~/.ssh/config</code>) lets you define shortcuts and default settings for SSH connections. Instead of typing long commands like <code>ssh -i ~/.ssh/mykey -p 2222 user@192.168.1.100</code>, you can define a host block and simply type <code>ssh myserver</code>.</p>
+
+        <h3>SSH Config File Location</h3>
+        <p>The user-level SSH config file lives at <code>~/.ssh/config</code>. The system-wide config is at <code>/etc/ssh/ssh_config</code>. User settings override system settings. If the file does not exist, create it:</p>
+        <pre><code>mkdir -p ~/.ssh && chmod 700 ~/.ssh
+touch ~/.ssh/config && chmod 600 ~/.ssh/config</code></pre>
+
+        <h3>Basic SSH Config Syntax</h3>
+        <p>Each host block starts with <code>Host</code> followed by an alias. Indented lines below it set options for that host. You can use wildcards (<code>*</code>) to set defaults for all hosts.</p>
+        <pre><code>Host myserver
+    HostName 192.168.1.100
+    User deploy
+    Port 22
+    IdentityFile ~/.ssh/id_ed25519
+
+Host *
+    ServerAliveInterval 60
+    ServerAliveCountMax 3</code></pre>
+
+        <h3>SSH Config File Example: Jump Host (ProxyJump)</h3>
+        <p>A jump host (or bastion host) is an intermediary server you connect through to reach a private server. This is common in cloud environments where internal servers are not directly accessible from the internet.</p>
+        <pre><code>Host bastion
+    HostName bastion.example.com
+    User admin
+    IdentityFile ~/.ssh/bastion_key
+
+Host internal-server
+    HostName 10.0.1.50
+    User deploy
+    ProxyJump bastion
+    IdentityFile ~/.ssh/internal_key</code></pre>
+        <p>Now <code>ssh internal-server</code> automatically routes through the bastion host.</p>
+
+        <h3>SSH Tunnel Command via Config</h3>
+        <p>SSH tunnels forward ports between your local machine and a remote server. Use <code>LocalForward</code> to access a remote service locally, or <code>RemoteForward</code> to expose a local service remotely.</p>
+        <pre><code>Host db-tunnel
+    HostName db-server.example.com
+    User admin
+    LocalForward 5432 localhost:5432
+    IdentityFile ~/.ssh/db_key</code></pre>
+        <p>After running <code>ssh db-tunnel</code>, connect to <code>localhost:5432</code> to reach the remote database.</p>
+
+        <h3>SSH Proxy Jump Config for AWS</h3>
+        <p>AWS environments often use a bastion host in a public subnet to reach EC2 instances in private subnets. Configure ProxyJump to automate this:</p>
+        <pre><code>Host aws-bastion
+    HostName 54.x.x.x
+    User ec2-user
+    IdentityFile ~/.ssh/aws-bastion.pem
+
+Host aws-private
+    HostName 10.0.2.15
+    User ec2-user
+    ProxyJump aws-bastion
+    IdentityFile ~/.ssh/aws-private.pem</code></pre>
+
+        <h3>GitHub Deploy Key Setup</h3>
+        <p>When you have multiple GitHub accounts or deploy keys, use SSH config to specify which key to use for each:</p>
+        <pre><code>Host github-personal
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/id_personal
+    IdentitiesOnly yes
+
+Host github-work
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/id_work
+    IdentitiesOnly yes</code></pre>
+        <p>Clone with: <code>git clone git@github-personal:user/repo.git</code></p>
+
+        <h3>Common SSH Permission Denied Fix</h3>
+        <p>The "Permission denied (publickey)" error is the most common SSH issue. Typical causes:</p>
+        <ul>
+          <li>Wrong key file -- ensure <code>IdentityFile</code> points to the correct private key</li>
+          <li>Key not added to remote <code>~/.ssh/authorized_keys</code></li>
+          <li>Wrong file permissions -- private key must be <code>600</code>, <code>.ssh</code> directory must be <code>700</code></li>
+          <li>Wrong user -- verify the <code>User</code> field matches the remote account</li>
+          <li>SSH agent not running or key not loaded -- run <code>ssh-add ~/.ssh/your_key</code></li>
+        </ul>
+
+        <h3>Key SSH Config Directives Reference</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Directive</th>
+                <th>Description</th>
+                <th>Example</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><code>Host</code></td><td>Alias for the connection</td><td><code>Host myserver</code></td></tr>
+              <tr><td><code>HostName</code></td><td>IP or domain of the server</td><td><code>HostName 10.0.1.5</code></td></tr>
+              <tr><td><code>User</code></td><td>Username for the connection</td><td><code>User deploy</code></td></tr>
+              <tr><td><code>Port</code></td><td>SSH port (default 22)</td><td><code>Port 2222</code></td></tr>
+              <tr><td><code>IdentityFile</code></td><td>Path to private key</td><td><code>IdentityFile ~/.ssh/id_ed25519</code></td></tr>
+              <tr><td><code>ProxyJump</code></td><td>Jump through another host</td><td><code>ProxyJump bastion</code></td></tr>
+              <tr><td><code>ForwardAgent</code></td><td>Forward SSH agent to remote</td><td><code>ForwardAgent yes</code></td></tr>
+              <tr><td><code>LocalForward</code></td><td>Forward local port to remote</td><td><code>LocalForward 8080 localhost:80</code></td></tr>
+              <tr><td><code>RemoteForward</code></td><td>Forward remote port to local</td><td><code>RemoteForward 9090 localhost:3000</code></td></tr>
+              <tr><td><code>ServerAliveInterval</code></td><td>Keepalive interval in seconds</td><td><code>ServerAliveInterval 60</code></td></tr>
+              <tr><td><code>IdentitiesOnly</code></td><td>Only use specified keys</td><td><code>IdentitiesOnly yes</code></td></tr>
+              <tr><td><code>StrictHostKeyChecking</code></td><td>Host key verification policy</td><td><code>StrictHostKeyChecking accept-new</code></td></tr>
+              <tr><td><code>Compression</code></td><td>Enable compression</td><td><code>Compression yes</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Ad Slot 2: Mid-content -->
+        <div class="ad-container">
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-3434609691579834"
+               data-ad-slot="mid-content"
+               data-ad-format="auto"
+               data-full-width-responsive="true"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+        <h3>Recommended VPS Providers for SSH Practice</h3>
+        <p>If you need a remote server to practice SSH configuration, these providers offer affordable options:</p>
+        <ul class="affiliate-list">
+          <li><a href="https://www.digitalocean.com/?refcode=automatedinsights" target="_blank" rel="noopener noreferrer nofollow">DigitalOcean</a> -- Droplets starting at $4/month. Simple UI, great docs, and fast SSD servers.</li>
+          <li><a href="https://www.linode.com/" target="_blank" rel="noopener noreferrer nofollow">Linode (Akamai)</a> -- Shared plans from $5/month. Reliable performance and global data centers.</li>
+          <li><a href="https://www.vultr.com/" target="_blank" rel="noopener noreferrer nofollow">Vultr</a> -- Cloud compute from $2.50/month. Wide range of locations and OS options.</li>
+        </ul>
+      </article>
+    </section>
+  </main>
+
+  <!-- Ad Slot 3: Bottom banner -->
+  <div class="container ad-container">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3434609691579834"
+         data-ad-slot="bottom-banner"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 Automated Insights LLC. All rights reserved.</p>
+      <p class="footer-note">This tool runs entirely in your browser. No data is sent to any server.</p>
+    </div>
+  </footer>
+
+  <div id="toast" class="toast" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

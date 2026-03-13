@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Config Converter - Convert YAML, TOML, JSON, INI Online</title>
+  <meta name="description" content="Free online config file converter. Convert between YAML, TOML, JSON, and INI formats instantly. Auto-detect input format, syntax highlighting, copy and download.">
+  <meta name="keywords" content="yaml to json converter, toml to yaml, json to toml online, convert ini to yaml, config converter, yaml converter, toml converter, json converter, ini converter, configuration file converter">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://config-converter.pages.dev/">
+  <meta property="og:title" content="Config Converter - Convert YAML, TOML, JSON, INI Online">
+  <meta property="og:description" content="Free online tool to convert between YAML, TOML, JSON, and INI configuration formats. Auto-detection, syntax highlighting, one-click copy.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://config-converter.pages.dev/">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Config Converter - Convert YAML, TOML, JSON, INI Online">
+  <meta name="twitter:description" content="Free online tool to convert between YAML, TOML, JSON, and INI configuration formats.">
+  <link rel="stylesheet" href="styles.css">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3434609691579834" crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container">
+      <h1><span class="accent">{}</span> Config Converter</h1>
+      <p class="subtitle">Convert between YAML, TOML, JSON, and INI -- auto-detect, syntax highlight, copy or download</p>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- Ad Slot 1: Top Banner -->
+    <div class="ad-slot ad-slot--banner">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-3434609691579834"
+           data-ad-slot=""
+           data-ad-format="horizontal"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- Controls -->
+    <div class="controls">
+      <div class="controls-row">
+        <span style="color: var(--text-muted); font-size: 0.85rem;">Load example:</span>
+        <button class="sample-btn" data-format="json">JSON</button>
+        <button class="sample-btn" data-format="yaml">YAML</button>
+        <button class="sample-btn" data-format="toml">TOML</button>
+        <button class="sample-btn" data-format="ini">INI</button>
+      </div>
+      <div style="flex: 1;"></div>
+      <div class="controls-row">
+        <span style="color: var(--text-muted); font-size: 0.85rem;">Detected:</span>
+        <span id="detected-format" class="badge">Paste config to detect</span>
+      </div>
+      <div class="target-group">
+        <label for="target-format">Convert to:</label>
+        <select id="target-format">
+          <option value="json">JSON</option>
+          <option value="yaml">YAML</option>
+          <option value="toml">TOML</option>
+          <option value="ini">INI</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Error Display -->
+    <div id="error-box" class="error-box">
+      <span class="error-icon">!</span>
+      <span id="error-text"></span>
+    </div>
+
+    <!-- Editor Panels -->
+    <div class="editor-grid">
+      <div class="editor-panel">
+        <div class="panel-header">
+          <span>Input</span>
+          <div class="panel-actions">
+            <button id="clear-btn" class="btn btn-secondary">Clear</button>
+          </div>
+        </div>
+        <textarea id="input-area" placeholder="Paste your YAML, TOML, JSON, or INI configuration here..." spellcheck="false"></textarea>
+      </div>
+      <div class="editor-panel">
+        <div class="panel-header">
+          <span>Output</span>
+          <div class="panel-actions">
+            <button id="copy-btn" class="btn btn-secondary" disabled>Copy</button>
+            <button id="download-btn" class="btn btn-secondary" disabled>Download</button>
+          </div>
+        </div>
+        <textarea id="output-area" readonly placeholder="Converted output will appear here..." spellcheck="false"></textarea>
+        <div id="output-highlighted" class="output-display" style="display: none;"></div>
+      </div>
+    </div>
+
+    <!-- Action Bar -->
+    <div class="action-bar">
+      <button id="convert-btn" class="btn btn-primary">Convert (Ctrl+Enter)</button>
+    </div>
+
+    <!-- Ad Slot 2: Middle Banner -->
+    <div class="ad-slot ad-slot--banner">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-3434609691579834"
+           data-ad-slot=""
+           data-ad-format="horizontal"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- SEO Content -->
+    <section class="seo-content">
+      <h2>Free Online Config File Converter</h2>
+      <p>
+        Convert configuration files between YAML, TOML, JSON, and INI formats instantly in your browser.
+        No data is sent to any server -- all conversion happens client-side for maximum privacy and speed.
+      </p>
+
+      <h3>How It Works</h3>
+      <p>
+        Paste your configuration text into the input panel. The tool automatically detects whether your input
+        is JSON, YAML, TOML, or INI. Select your desired output format from the dropdown, click Convert
+        (or press Ctrl+Enter), and get your converted configuration with syntax highlighting. Copy it to
+        your clipboard or download it as a file with the correct extension.
+      </p>
+
+      <h3>Supported Conversions</h3>
+      <ul>
+        <li><strong>YAML to JSON</strong> -- Convert YAML configuration files to JSON format</li>
+        <li><strong>JSON to YAML</strong> -- Transform JSON configs into clean, readable YAML</li>
+        <li><strong>TOML to JSON</strong> -- Convert TOML (used in Rust, Python, Hugo) to JSON</li>
+        <li><strong>JSON to TOML</strong> -- Generate TOML from JSON configuration data</li>
+        <li><strong>INI to JSON</strong> -- Parse INI files and output structured JSON</li>
+        <li><strong>YAML to TOML</strong> -- Convert between YAML and TOML directly</li>
+        <li><strong>TOML to YAML</strong> -- Transform TOML configurations into YAML</li>
+        <li><strong>INI to YAML</strong> -- Upgrade legacy INI files to modern YAML format</li>
+      </ul>
+
+      <h3>Understanding Config Formats</h3>
+      <div class="format-grid">
+        <div class="format-card">
+          <h4>JSON</h4>
+          <p>
+            JavaScript Object Notation is the most widely used data interchange format. It supports objects,
+            arrays, strings, numbers, booleans, and null. Used extensively in web APIs, package managers
+            (package.json), and application configuration.
+          </p>
+        </div>
+        <div class="format-card">
+          <h4>YAML</h4>
+          <p>
+            YAML Ain't Markup Language uses indentation for structure, making it highly human-readable.
+            Popular for Docker Compose, Kubernetes manifests, Ansible playbooks, GitHub Actions, and
+            CI/CD pipeline configuration.
+          </p>
+        </div>
+        <div class="format-card">
+          <h4>TOML</h4>
+          <p>
+            Tom's Obvious Minimal Language is designed to be easy to read and map to a hash table.
+            Used by Rust (Cargo.toml), Python (pyproject.toml), Hugo static site generator, and
+            increasingly adopted for modern configuration files.
+          </p>
+        </div>
+        <div class="format-card">
+          <h4>INI</h4>
+          <p>
+            INI files are a simple configuration format with sections and key-value pairs.
+            Common in Windows applications, PHP (php.ini), MySQL (my.cnf), Git (.gitconfig),
+            and many legacy systems.
+          </p>
+        </div>
+      </div>
+
+      <h3>Why Convert Config Files?</h3>
+      <p>
+        Different tools and platforms require different configuration formats. When migrating between
+        platforms, adopting new tools, or standardizing your team's configuration approach, you often
+        need to convert between formats. This tool makes that process instant and error-free.
+      </p>
+
+      <h3>Privacy and Security</h3>
+      <p>
+        This converter runs entirely in your browser. Your configuration data never leaves your machine --
+        no server requests, no data storage, no tracking of your input. Safe for converting configs that
+        contain sensitive values like database credentials or API keys.
+      </p>
+    </section>
+
+    <!-- Ad Slot 3: Bottom Banner -->
+    <div class="ad-slot ad-slot--banner">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-3434609691579834"
+           data-ad-slot=""
+           data-ad-format="horizontal"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 Automated Insights LLC. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/yaml-parser.js"></script>
+  <script src="js/toml-parser.js"></script>
+  <script src="js/ini-parser.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>

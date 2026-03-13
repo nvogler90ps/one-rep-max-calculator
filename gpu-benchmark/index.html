@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GPU Benchmark Comparison for Machine Learning - ML GPU Calculator</title>
+  <meta name="description" content="Compare GPUs side-by-side for machine learning workloads. Find the best GPU for training and inference with our VRAM calculator for LLMs like Llama 2, Mistral, and Stable Diffusion.">
+  <meta name="keywords" content="gpu comparison for ml, best gpu for training, gpu vram calculator for llm, machine learning gpu benchmark, ai gpu comparison">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://gpu-benchmark.example.com/">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="GPU Benchmark Comparison for Machine Learning">
+  <meta property="og:description" content="Side-by-side GPU comparison tool for ML/AI workloads. Includes VRAM calculator for popular AI models.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://gpu-benchmark.example.com/">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "GPU Benchmark Comparison for Machine Learning",
+    "description": "Compare GPUs side-by-side for ML/AI workloads. VRAM calculator for LLMs, price-performance rankings, and filterable GPU database.",
+    "url": "https://gpu-benchmark.example.com/",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <!-- AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3434609691579834" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <h1>GPU Benchmark Comparator for ML Workloads</h1>
+      <p>Compare GPUs for machine learning training and inference. Find the best GPU for your AI projects.</p>
+    </div>
+  </header>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="container">
+      <a href="#compare">Compare</a>
+      <a href="#can-it-run">Can It Run?</a>
+      <a href="#rankings">Rankings</a>
+      <a href="#all-gpus">All GPUs</a>
+      <a href="#guide">ML GPU Guide</a>
+    </div>
+  </nav>
+
+  <main class="container">
+
+    <!-- Ad Slot 1 -->
+    <div class="ad-slot" aria-hidden="true">Advertisement</div>
+
+    <!-- GPU Comparison Section -->
+    <section id="compare">
+      <h2>GPU Comparison</h2>
+      <p>Select two GPUs to see a detailed side-by-side comparison of ML-relevant specs.</p>
+      <div class="controls-row">
+        <label>
+          GPU A
+          <select id="gpu-select-a"></select>
+        </label>
+        <label>
+          GPU B
+          <select id="gpu-select-b"></select>
+        </label>
+      </div>
+      <div id="comparison-result"></div>
+    </section>
+
+    <!-- "Can it run?" Calculator -->
+    <section id="can-it-run">
+      <h2>"Can It Run?" ML Model Calculator</h2>
+      <p>Select an AI model to see which GPUs have enough VRAM to run it at different quantization levels.</p>
+      <div class="controls-row">
+        <label>
+          Model
+          <select id="model-select"></select>
+        </label>
+      </div>
+      <div class="table-wrapper">
+        <div id="can-it-run-result"></div>
+      </div>
+    </section>
+
+    <!-- Ad Slot 2 -->
+    <div class="ad-slot" aria-hidden="true">Advertisement</div>
+
+    <!-- Price/Performance Rankings -->
+    <section id="rankings">
+      <h2>Price/Performance Rankings</h2>
+      <p>Sort GPUs by performance-per-dollar across different ML-relevant metrics.</p>
+      <div class="controls-row">
+        <label>
+          Metric
+          <select id="ranking-metric">
+            <option value="fp16-per-dollar">FP16 TFLOPS / $1000</option>
+            <option value="fp32-per-dollar">FP32 TFLOPS / $1000</option>
+            <option value="vram-per-dollar">VRAM (GB) / $1000</option>
+            <option value="bandwidth-per-dollar">Bandwidth (GB/s) / $1000</option>
+          </select>
+        </label>
+      </div>
+      <div class="table-wrapper">
+        <div id="ranking-result"></div>
+      </div>
+    </section>
+
+    <!-- Filterable GPU Table -->
+    <section id="all-gpus">
+      <h2>All GPUs</h2>
+      <p>Browse the complete GPU database. Filter by VRAM, price, and type.</p>
+      <div class="controls-row">
+        <label>
+          Min VRAM (GB)
+          <input type="number" id="filter-vram-min" value="0" min="0" step="1">
+        </label>
+        <label>
+          Max Price ($)
+          <input type="number" id="filter-price-max" value="" min="0" step="100" placeholder="Any">
+        </label>
+        <label>
+          Type
+          <select id="filter-type">
+            <option value="all">All</option>
+            <option value="consumer">Consumer</option>
+            <option value="datacenter">Datacenter / Pro</option>
+            <option value="apple">Apple Silicon</option>
+          </select>
+        </label>
+        <label>
+          Sort By
+          <select id="filter-sort">
+            <option value="fp16">FP16 TFLOPS</option>
+            <option value="fp32">FP32 TFLOPS</option>
+            <option value="vram">VRAM</option>
+            <option value="bandwidth">Memory Bandwidth</option>
+            <option value="price-asc">Price (Low to High)</option>
+            <option value="price-desc">Price (High to Low)</option>
+          </select>
+        </label>
+      </div>
+      <div class="table-wrapper">
+        <div id="filter-table-result"></div>
+      </div>
+    </section>
+
+    <!-- Ad Slot 3 -->
+    <div class="ad-slot" aria-hidden="true">Advertisement</div>
+
+    <!-- SEO Content Section -->
+    <section id="guide" class="seo-content">
+      <h2>GPU Specs That Matter for Machine Learning</h2>
+
+      <h3>VRAM (Video Memory)</h3>
+      <p>VRAM is often the most critical spec for ML workloads. It determines the maximum model size you can load and the batch size you can use during training. Large language models like Llama 2 70B require 140 GB of VRAM at FP16 precision -- far more than any single consumer GPU offers. Quantization techniques (INT8, INT4) reduce VRAM requirements significantly, enabling smaller GPUs to run larger models at a slight accuracy trade-off.</p>
+
+      <h3>FP16 and FP32 Performance (TFLOPS)</h3>
+      <p>FP16 (half-precision) performance is the most relevant metric for modern ML training and inference. Most deep learning frameworks use mixed-precision training by default, leveraging FP16 Tensor Cores on NVIDIA GPUs for massive speed gains. FP32 (single-precision) still matters for certain scientific computing workloads and training stability. Datacenter GPUs like the H100 offer dramatically higher FP16 throughput compared to consumer cards.</p>
+
+      <h3>Memory Bandwidth</h3>
+      <p>Memory bandwidth determines how fast data can be read from and written to VRAM. For inference workloads -- especially autoregressive text generation with LLMs -- memory bandwidth is often the bottleneck, not compute. A GPU with high bandwidth will generate tokens faster. The NVIDIA H100 leads with 3,350 GB/s, while consumer cards like the RTX 4090 offer around 1,008 GB/s.</p>
+
+      <h3>TDP (Thermal Design Power)</h3>
+      <p>TDP indicates the maximum power the GPU will draw under load. For home setups, lower TDP means less heat and quieter operation. For data centers, TDP directly impacts electricity costs and cooling requirements. Apple Silicon chips stand out here with very low TDP relative to performance, though they trade raw compute power for energy efficiency.</p>
+
+      <h3>Consumer vs. Datacenter GPUs</h3>
+      <p>Consumer GPUs (like the RTX 4090) offer excellent price-to-performance for ML hobbyists and small-scale experiments. Datacenter GPUs (like the A100 and H100) provide far more VRAM, higher memory bandwidth, support for multi-GPU interconnects (NVLink), and ECC memory for reliability. Apple Silicon provides a unique option with unified memory architecture, allowing very large models to fit in memory at the cost of lower raw throughput.</p>
+
+      <h3>Choosing the Right GPU for Your Workload</h3>
+      <ul>
+        <li><strong>Fine-tuning 7B parameter models:</strong> RTX 4090 (24 GB VRAM) or RTX 3090 for budget builds</li>
+        <li><strong>Running inference on 13B+ models:</strong> A6000 or RTX 6000 Ada (48 GB) for INT8; A100 80GB for FP16</li>
+        <li><strong>Stable Diffusion / image generation:</strong> RTX 4070 or above (12+ GB VRAM is comfortable)</li>
+        <li><strong>Training large models:</strong> H100 or multi-GPU A100 setups</li>
+        <li><strong>Quiet home lab with large models:</strong> Apple M2 Ultra or M4 Max with unified memory</li>
+      </ul>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Automated Insights LLC. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/gpu-data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

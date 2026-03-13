@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Docker Compose Generator - Build docker-compose.yml Instantly</title>
+  <meta name="description" content="Free Docker Compose generator. Pick services from a checklist and get a working docker-compose.yml with health checks, volumes, and networking. Supports PostgreSQL, MySQL, MongoDB, Redis, Nginx, Node.js, and 20+ more services.">
+  <meta name="keywords" content="docker compose generator, docker-compose.yml generator, docker compose postgres example, docker compose mysql, docker compose redis, docker compose nginx, docker compose generator online">
+  <meta name="author" content="Automated Insights LLC">
+  <link rel="canonical" href="https://docker-compose-gen.pages.dev/">
+  <meta property="og:title" content="Docker Compose Generator - Build docker-compose.yml Instantly">
+  <meta property="og:description" content="Pick stack components from a checklist and get a working docker-compose.yml with sane defaults, health checks, volumes, and networking.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://docker-compose-gen.pages.dev/">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Docker Compose Generator">
+  <meta name="twitter:description" content="Build docker-compose.yml files instantly with sane defaults, health checks, and networking.">
+  <link rel="stylesheet" href="style.css">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3434609691579834" crossorigin="anonymous"></script>
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Docker Compose Generator",
+    "description": "Pick stack components from a checklist and get a working docker-compose.yml with sane defaults, health checks, volumes, and networking.",
+    "url": "https://docker-compose-gen.pages.dev/",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Organization",
+      "name": "Automated Insights LLC"
+    }
+  }
+  </script>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <h1><span class="accent">Docker Compose</span> Generator</h1>
+      <p>Pick services, configure options, get a production-ready docker-compose.yml</p>
+    </div>
+  </header>
+
+  <!-- Top Ad Slot -->
+  <div class="container">
+    <div class="ad-slot ad-slot-top">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-3434609691579834"
+           data-ad-slot="auto"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+  </div>
+
+  <!-- App Layout -->
+  <div class="container">
+    <div class="app-layout">
+
+      <!-- Left Panel: Picker + Config -->
+      <div class="left-panel">
+
+        <!-- Preset Stacks -->
+        <div class="panel" style="margin-bottom:16px;">
+          <div class="panel-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            Quick Stacks
+          </div>
+          <div class="presets" id="presets"></div>
+        </div>
+
+        <!-- Service Picker -->
+        <div class="panel" style="margin-bottom:16px;">
+          <div class="panel-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+            Services
+            <span class="service-count" id="service-count" style="display:none;">0</span>
+          </div>
+          <div id="service-picker"></div>
+        </div>
+
+        <!-- Service Configs -->
+        <div class="panel">
+          <div class="panel-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            Configuration
+          </div>
+          <div id="service-configs"></div>
+        </div>
+
+        <!-- Sidebar Ad Slot -->
+        <div class="ad-slot ad-slot-sidebar" style="margin-top:16px;">
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-3434609691579834"
+               data-ad-slot="auto"
+               data-ad-format="auto"
+               data-full-width-responsive="true"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+      </div>
+
+      <!-- Right Panel: YAML Output -->
+      <div class="right-panel">
+        <div class="panel output-panel">
+          <div class="output-header">
+            <h2>docker-compose.yml</h2>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span class="copy-feedback" id="copy-feedback">Copied!</span>
+              <div class="output-actions">
+                <button class="btn" id="btn-copy">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                  Copy
+                </button>
+                <button class="btn btn-primary" id="btn-download">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  Download
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="yaml-output" id="yaml-output"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Affiliate Section -->
+  <div class="container">
+    <div class="affiliate-section">
+      <h3>Deploy your stack instantly on these platforms:</h3>
+      <div class="affiliate-links">
+        <a href="https://www.digitalocean.com/?refcode=docker-compose-gen&utm_campaign=Referral_Invite&utm_medium=Referral_Program" class="affiliate-link" target="_blank" rel="noopener sponsored">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+          DigitalOcean
+        </a>
+        <a href="https://railway.app?referralCode=docker-compose-gen" class="affiliate-link" target="_blank" rel="noopener sponsored">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z"/></svg>
+          Railway
+        </a>
+        <a href="https://render.com?ref=docker-compose-gen" class="affiliate-link" target="_blank" rel="noopener sponsored">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          Render
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Ad Slot -->
+  <div class="container">
+    <div class="ad-slot ad-slot-top" style="margin-top:24px;">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-3434609691579834"
+           data-ad-slot="auto"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+  </div>
+
+  <!-- SEO Content -->
+  <div class="container">
+    <section class="seo-content">
+      <h2>What is Docker Compose?</h2>
+      <p>Docker Compose is a tool for defining and running multi-container Docker applications. With a single YAML file -- <code>docker-compose.yml</code> -- you describe all the services your application needs (databases, web servers, caches, message queues) and bring them up with one command: <code>docker compose up</code>.</p>
+
+      <div class="seo-columns">
+        <div>
+          <h3>Why Use a Docker Compose Generator?</h3>
+          <p>Writing docker-compose.yml files from scratch is tedious and error-prone. You have to remember the correct image names, environment variable formats, health check commands, and volume mount paths for each service. This generator handles all of that for you:</p>
+          <ul>
+            <li>Correct image tags and environment variables for 20+ popular services</li>
+            <li>Health checks so dependent services wait until upstream services are ready</li>
+            <li>Named volumes for persistent data that survives container restarts</li>
+            <li>A shared bridge network for inter-service communication</li>
+            <li>Sensible default ports with easy customization</li>
+          </ul>
+        </div>
+        <div>
+          <h3>How to Use Your Generated File</h3>
+          <p>After downloading your docker-compose.yml:</p>
+          <ul>
+            <li>Place it in your project root directory</li>
+            <li>Run <code>docker compose up -d</code> to start all services in the background</li>
+            <li>Run <code>docker compose logs -f</code> to follow the logs</li>
+            <li>Run <code>docker compose down</code> to stop and remove containers</li>
+            <li>Add <code>-v</code> to <code>down</code> to also remove volumes (deletes data)</li>
+          </ul>
+
+          <h3>Common Docker Compose Stacks</h3>
+          <ul>
+            <li><strong>MERN</strong> - MongoDB, Express (Node.js), React, Nginx</li>
+            <li><strong>LAMP</strong> - Linux, Apache, MySQL, PHP</li>
+            <li><strong>Django</strong> - Python, PostgreSQL, Redis, Nginx</li>
+            <li><strong>Rails</strong> - Ruby, PostgreSQL, Redis, Nginx</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>Docker Compose Best Practices</h3>
+      <p>Whether you use this generator or write your files by hand, follow these best practices for production-ready Docker Compose configurations:</p>
+      <ul>
+        <li><strong>Pin image versions</strong> - Never use <code>latest</code> in production. Pin to specific major or minor versions (e.g., <code>postgres:16-alpine</code>) so your stack is reproducible.</li>
+        <li><strong>Use health checks</strong> - Health checks let Docker and your orchestrator know when a service is truly ready, not just running. This prevents race conditions during startup.</li>
+        <li><strong>Persist important data</strong> - Use named Docker volumes for database data. Bind mounts are fine for config files and development source code.</li>
+        <li><strong>Set resource limits</strong> - In production, use <code>deploy.resources.limits</code> to prevent a single container from consuming all host resources.</li>
+        <li><strong>Use environment files</strong> - Store secrets in <code>.env</code> files (not committed to git) and reference them with <code>env_file</code> in your compose file.</li>
+        <li><strong>Restart policy</strong> - Use <code>restart: unless-stopped</code> for most services so they automatically recover from crashes.</li>
+      </ul>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Automated Insights LLC. All rights reserved.</p>
+      <p style="margin-top:4px;">
+        <a href="https://docs.docker.com/compose/" target="_blank" rel="noopener">Docker Compose Docs</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="services.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

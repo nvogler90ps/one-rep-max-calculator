@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS Cost Calculator - Estimate Monthly AWS Costs by Architecture</title>
+    <meta name="description" content="Free AWS cost calculator. Estimate monthly AWS costs by architecture pattern. Compare pricing for Lambda, EC2, S3, RDS, ECS Fargate, SageMaker, and more.">
+    <meta name="keywords" content="aws cost calculator, how much does aws cost, aws lambda pricing, cheapest way to host on aws, aws pricing calculator, aws monthly cost estimate">
+    <meta name="author" content="Automated Insights LLC">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://aws-estimator.automated-insights.com/">
+    <meta property="og:title" content="AWS Cost Calculator - Estimate Monthly AWS Costs by Architecture">
+    <meta property="og:description" content="Pick a common AWS architecture pattern, adjust sliders for traffic and storage, and get an instant monthly cost estimate with optimization tips.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://aws-estimator.automated-insights.com/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AWS Cost Calculator - Estimate Monthly AWS Costs by Architecture">
+    <meta name="twitter:description" content="Estimate monthly AWS costs by architecture pattern. Free calculator with optimization tips.">
+    <link rel="stylesheet" href="styles.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3434609691579834" crossorigin="anonymous"></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "AWS Cost Calculator",
+        "description": "Estimate monthly AWS costs by architecture pattern",
+        "url": "https://aws-estimator.automated-insights.com/",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "author": {
+            "@type": "Organization",
+            "name": "Automated Insights LLC"
+        }
+    }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>AWS Cost Calculator</h1>
+            <p class="subtitle">Estimate monthly AWS costs by architecture pattern</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Ad Slot 1 -->
+        <div class="ad-slot">
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-3434609691579834"
+                data-ad-slot="auto"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+        <!-- Architecture Selection -->
+        <section class="card" id="architecture-section">
+            <h2>1. Choose an Architecture</h2>
+            <div class="architecture-grid" id="architecture-grid">
+                <button class="arch-card selected" data-arch="static-website">
+                    <div class="arch-icon">
+                        <svg viewBox="0 0 40 40" width="40" height="40"><rect x="4" y="8" width="32" height="24" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><line x1="4" y1="16" x2="36" y2="16" stroke="currentColor" stroke-width="2"/><circle cx="8" cy="12" r="1.5" fill="currentColor"/><circle cx="13" cy="12" r="1.5" fill="currentColor"/></svg>
+                    </div>
+                    <span class="arch-name">Static Website</span>
+                    <span class="arch-services">S3 + CloudFront</span>
+                </button>
+                <button class="arch-card" data-arch="api-backend">
+                    <div class="arch-icon">
+                        <svg viewBox="0 0 40 40" width="40" height="40"><path d="M8 12 L20 6 L32 12 L32 28 L20 34 L8 28Z" fill="none" stroke="currentColor" stroke-width="2"/><line x1="20" y1="6" x2="20" y2="34" stroke="currentColor" stroke-width="1.5"/><line x1="8" y1="12" x2="32" y2="12" stroke="currentColor" stroke-width="1.5"/></svg>
+                    </div>
+                    <span class="arch-name">API Backend</span>
+                    <span class="arch-services">Lambda + API GW + DynamoDB</span>
+                </button>
+                <button class="arch-card" data-arch="traditional-web">
+                    <div class="arch-icon">
+                        <svg viewBox="0 0 40 40" width="40" height="40"><rect x="6" y="6" width="28" height="20" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><line x1="20" y1="26" x2="20" y2="32" stroke="currentColor" stroke-width="2"/><line x1="12" y1="32" x2="28" y2="32" stroke="currentColor" stroke-width="2"/></svg>
+                    </div>
+                    <span class="arch-name">Traditional Web App</span>
+                    <span class="arch-services">EC2 + RDS + ALB</span>
+                </button>
+                <button class="arch-card" data-arch="containerized">
+                    <div class="arch-icon">
+                        <svg viewBox="0 0 40 40" width="40" height="40"><rect x="6" y="10" width="12" height="10" rx="1" fill="none" stroke="currentColor" stroke-width="2"/><rect x="22" y="10" width="12" height="10" rx="1" fill="none" stroke="currentColor" stroke-width="2"/><rect x="14" y="22" width="12" height="10" rx="1" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+                    </div>
+                    <span class="arch-name">Containerized App</span>
+                    <span class="arch-services">ECS Fargate + RDS + ALB</span>
+                </button>
+                <button class="arch-card" data-arch="ml-inference">
+                    <div class="arch-icon">
+                        <svg viewBox="0 0 40 40" width="40" height="40"><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="28" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="20" cy="28" r="3" fill="none" stroke="currentColor" stroke-width="2"/><line x1="14" y1="14" x2="18" y2="26" stroke="currentColor" stroke-width="1.5"/><line x1="26" y1="14" x2="22" y2="26" stroke="currentColor" stroke-width="1.5"/><line x1="15" y1="12" x2="25" y2="12" stroke="currentColor" stroke-width="1.5"/></svg>
+                    </div>
+                    <span class="arch-name">ML Inference</span>
+                    <span class="arch-services">SageMaker Endpoint</span>
+                </button>
+                <button class="arch-card" data-arch="data-pipeline">
+                    <div class="arch-icon">
+                        <svg viewBox="0 0 40 40" width="40" height="40"><rect x="4" y="16" width="8" height="8" rx="1" fill="none" stroke="currentColor" stroke-width="2"/><rect x="16" y="16" width="8" height="8" rx="1" fill="none" stroke="currentColor" stroke-width="2"/><rect x="28" y="16" width="8" height="8" rx="1" fill="none" stroke="currentColor" stroke-width="2"/><line x1="12" y1="20" x2="16" y2="20" stroke="currentColor" stroke-width="2"/><line x1="24" y1="20" x2="28" y2="20" stroke="currentColor" stroke-width="2"/></svg>
+                    </div>
+                    <span class="arch-name">Data Pipeline</span>
+                    <span class="arch-services">S3 + Glue + Athena</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Configuration Sliders -->
+        <section class="card" id="config-section">
+            <div class="config-header">
+                <h2>2. Adjust Parameters</h2>
+                <div class="billing-toggle">
+                    <span id="monthly-label" class="toggle-label active">Monthly</span>
+                    <button class="toggle-switch" id="billing-toggle" aria-label="Toggle between monthly and annual billing">
+                        <span class="toggle-thumb"></span>
+                    </button>
+                    <span id="annual-label" class="toggle-label">Annual</span>
+                </div>
+            </div>
+            <div id="sliders-container"></div>
+        </section>
+
+        <!-- Ad Slot 2 -->
+        <div class="ad-slot">
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-3434609691579834"
+                data-ad-slot="auto"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+        <!-- Cost Breakdown -->
+        <section class="card" id="results-section">
+            <h2>3. Cost Estimate</h2>
+            <div class="results-layout">
+                <div class="total-cost-box">
+                    <div class="total-label" id="total-label">Estimated Monthly Cost</div>
+                    <div class="total-amount" id="total-amount">$0.00</div>
+                    <div class="free-tier-note" id="free-tier-note"></div>
+                </div>
+                <div class="chart-and-breakdown">
+                    <div class="chart-container" id="chart-container">
+                        <div class="bar-chart" id="bar-chart"></div>
+                    </div>
+                    <div class="breakdown-table" id="breakdown-table"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Free Tier Info -->
+        <section class="card" id="free-tier-section">
+            <h2>AWS Free Tier Coverage</h2>
+            <div id="free-tier-details"></div>
+        </section>
+
+        <!-- Optimization Tips -->
+        <section class="card" id="tips-section">
+            <h2>Optimization Tips</h2>
+            <div id="tips-container"></div>
+        </section>
+
+        <!-- CTA -->
+        <section class="card cta-card">
+            <h2>Need Help Optimizing Your AWS Costs?</h2>
+            <p>Our team can audit your AWS infrastructure and identify savings opportunities. We have helped businesses reduce their cloud spend by 30-60%.</p>
+            <a href="mailto:contact@automated-insights.com" class="cta-button">Contact Automated Insights LLC</a>
+        </section>
+
+        <!-- Ad Slot 3 -->
+        <div class="ad-slot">
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-3434609691579834"
+                data-ad-slot="auto"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+        <!-- SEO Content -->
+        <section class="card seo-content">
+            <h2>Understanding AWS Pricing</h2>
+            <p>Amazon Web Services (AWS) uses a pay-as-you-go pricing model, meaning you only pay for the resources you actually consume. While this offers flexibility, it can make cost estimation challenging -- especially when combining multiple services into a complete architecture.</p>
+
+            <h3>How Much Does AWS Cost?</h3>
+            <p>AWS costs vary dramatically depending on your architecture. A simple static website hosted on S3 and CloudFront can cost under $5/month, while a production machine learning inference pipeline can run thousands per month. The key factors that drive cost are:</p>
+            <ul>
+                <li><strong>Compute</strong> -- EC2 instances, Lambda invocations, ECS Fargate tasks, or SageMaker endpoints</li>
+                <li><strong>Storage</strong> -- S3 object storage, EBS volumes, RDS database storage</li>
+                <li><strong>Data Transfer</strong> -- Bandwidth out to the internet, between regions, or between services</li>
+                <li><strong>Requests</strong> -- API Gateway calls, CloudFront requests, DynamoDB read/write units</li>
+            </ul>
+
+            <h3>AWS Free Tier</h3>
+            <p>AWS offers a generous free tier for new accounts (12 months) and some always-free services. This includes 1 million Lambda requests/month, 750 hours of t2.micro/t3.micro EC2, 5 GB of S3 storage, and 25 GB of DynamoDB storage. Our calculator shows exactly which parts of your estimate are covered by the free tier.</p>
+
+            <h3>Cheapest Way to Host on AWS</h3>
+            <p>For most small projects, the cheapest hosting option is a static site on S3 + CloudFront. If you need server-side logic, a serverless architecture using Lambda + API Gateway + DynamoDB scales to zero and costs nothing at low traffic levels. Traditional EC2-based hosting starts around $8-10/month for the smallest instances and increases with traffic and compute requirements.</p>
+
+            <h3>Tips for Reducing AWS Costs</h3>
+            <ul>
+                <li><strong>Reserved Instances</strong> -- Commit to 1 or 3 years for 30-60% savings on EC2 and RDS</li>
+                <li><strong>Spot Instances</strong> -- Use for fault-tolerant workloads at up to 90% discount</li>
+                <li><strong>Right-sizing</strong> -- Monitor utilization and downsize over-provisioned instances</li>
+                <li><strong>S3 Lifecycle Policies</strong> -- Automatically move infrequently accessed data to cheaper storage tiers</li>
+                <li><strong>Auto Scaling</strong> -- Scale down during low-traffic periods</li>
+                <li><strong>AWS Cost Explorer</strong> -- Use native tools to identify spending trends</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Automated Insights LLC. All rights reserved.</p>
+            <p class="disclaimer">Cost estimates are approximate and based on publicly available AWS pricing as of 2025. Actual costs may vary. This calculator is not affiliated with or endorsed by Amazon Web Services.</p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

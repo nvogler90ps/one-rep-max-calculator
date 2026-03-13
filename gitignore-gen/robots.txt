@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://gitignore-gen.pages.dev/sitemap.xml

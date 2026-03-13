@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>.gitignore Generator - Create .gitignore Files for Any Stack</title>
+  <meta name="description" content="Generate comprehensive .gitignore files for any tech stack. Select languages, frameworks, and IDEs to create the perfect .gitignore with comments explaining each section.">
+  <meta name="keywords" content="gitignore generator, gitignore python, gitignore node, gitignore react, what to gitignore, create gitignore, gitignore template">
+  <meta name="author" content="Automated Insights LLC">
+  <link rel="canonical" href="https://gitignore-gen.pages.dev/">
+  <meta property="og:title" content=".gitignore Generator - Create .gitignore Files for Any Stack">
+  <meta property="og:description" content="Generate comprehensive .gitignore files for any tech stack. Select languages, frameworks, and IDEs.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://gitignore-gen.pages.dev/">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content=".gitignore Generator - Create .gitignore Files for Any Stack">
+  <meta name="twitter:description" content="Generate comprehensive .gitignore files for any tech stack.">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3434609691579834" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": ".gitignore Generator",
+    "url": "https://gitignore-gen.pages.dev/",
+    "description": "Generate comprehensive .gitignore files for any tech stack with comments explaining each section.",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1><span class="accent">.</span>gitignore Generator</h1>
+      <p class="subtitle">Create comprehensive .gitignore files for any stack</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Ad Slot 1 -->
+    <div class="ad-slot">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-3434609691579834"
+           data-ad-slot="auto"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- Warnings -->
+    <div id="warnings" class="warnings" hidden>
+      <div class="warning-icon">!</div>
+      <div class="warning-content">
+        <strong>Don't forget!</strong>
+        <ul id="warning-list"></ul>
+      </div>
+    </div>
+
+    <!-- Quick Stacks -->
+    <section class="section">
+      <h2>Common Stacks</h2>
+      <p class="section-desc">Quick-select a preset stack, then customize below.</p>
+      <div class="stacks-grid" id="stacks-grid"></div>
+    </section>
+
+    <!-- Search -->
+    <div class="search-wrap">
+      <input type="text" id="search" placeholder="Search languages, frameworks, IDEs..." autocomplete="off" aria-label="Filter templates">
+      <span class="search-icon" aria-hidden="true">&#128269;</span>
+    </div>
+
+    <div class="main-layout">
+      <!-- Category Picker -->
+      <div class="picker-panel">
+        <div id="categories"></div>
+      </div>
+
+      <!-- Preview -->
+      <div class="preview-panel">
+        <div class="preview-header">
+          <h2>Preview</h2>
+          <div class="preview-actions">
+            <button id="btn-copy" class="btn btn-secondary" title="Copy to clipboard">Copy</button>
+            <button id="btn-download" class="btn btn-primary" title="Download as .gitignore">Download</button>
+          </div>
+        </div>
+        <div class="preview-info" id="preview-info">Select items on the left to generate your .gitignore</div>
+        <pre id="preview" class="preview-code" hidden></pre>
+      </div>
+    </div>
+
+    <!-- Ad Slot 2 -->
+    <div class="ad-slot">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-3434609691579834"
+           data-ad-slot="auto"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- SEO Content -->
+    <section class="seo-content">
+      <h2>What is a .gitignore File?</h2>
+      <p>A <code>.gitignore</code> file tells Git which files and directories to ignore when tracking changes in your repository. It prevents build artifacts, dependency folders, environment files, and IDE configurations from being committed to version control.</p>
+
+      <h3>Why You Need a .gitignore</h3>
+      <ul>
+        <li><strong>Keep your repo clean</strong> -- build outputs, compiled binaries, and dependency folders (like <code>node_modules/</code> or <code>__pycache__/</code>) don't belong in version control.</li>
+        <li><strong>Protect secrets</strong> -- files like <code>.env</code>, <code>credentials.json</code>, and API key files should never be committed. Once pushed, secrets are in the git history forever.</li>
+        <li><strong>Avoid merge conflicts</strong> -- IDE settings, OS-generated files, and user-specific configs cause unnecessary conflicts between team members.</li>
+        <li><strong>Faster operations</strong> -- ignoring large or numerous generated files makes <code>git status</code>, <code>git add</code>, and other commands significantly faster.</li>
+      </ul>
+
+      <h3>Common .gitignore Mistakes</h3>
+      <ol>
+        <li><strong>Adding .gitignore too late</strong> -- if files are already tracked, adding them to .gitignore won't untrack them. You need <code>git rm --cached</code> first.</li>
+        <li><strong>Forgetting .env files</strong> -- environment variables with database passwords, API keys, and secrets are the most commonly leaked files.</li>
+        <li><strong>Not ignoring IDE folders</strong> -- <code>.vscode/</code>, <code>.idea/</code>, and <code>*.xcworkspace</code> contain personal settings that differ per developer.</li>
+        <li><strong>Ignoring too much</strong> -- some config files (like <code>.editorconfig</code> or <code>package.json</code>) should be committed. Only ignore generated or personal files.</li>
+        <li><strong>Missing OS files</strong> -- <code>.DS_Store</code> (macOS), <code>Thumbs.db</code> (Windows), and <code>*~</code> (Linux backup files) clutter repos silently.</li>
+      </ol>
+
+      <h3>How This Generator Works</h3>
+      <p>Select your languages, frameworks, IDEs, and operating systems from the checkboxes above. The generator combines curated templates with comments explaining each pattern, so you understand exactly what's being ignored and why. Use the quick-select presets for common stacks like React, Django, or Unity, then customize as needed.</p>
+    </section>
+
+    <!-- Ad Slot 3 -->
+    <div class="ad-slot">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-3434609691579834"
+           data-ad-slot="auto"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 Automated Insights LLC. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="templates.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -23,6 +23,19 @@ The following global CLAUDE.md rules are **IGNORED** in this project -- they app
 
 This project has its own credentials, its own git repos, and its own rules.
 
+## GitHub Account
+
+Git push/pull is handled automatically via a PAT embedded in the remote URL. No `gh auth switch` needed for git operations -- the repo always authenticates as `nvogler90ps` regardless of global `gh auth` state.
+
+**For `gh` CLI commands** (creating repos, PRs, issues), you MUST still:
+1. Run `gh auth switch --user nvogler90ps`
+2. Run `gh auth status` and confirm `nvogler90ps` is active
+3. Only then run the `gh` command
+
+- **This project uses:** `nvogler90ps` / `nvogler90@gmail.com`
+- **NEVER push under:** `nvogler-90` (that is the employer account)
+- **Incident:** on 2026-03-13, switching to `nvogler90ps` broke employer git pushes in another terminal. The PAT-in-remote-URL approach was adopted to avoid this.
+
 ## Autonomy: Claude Does 99% of the Work
 
 Claude Code must be able to perform virtually all work autonomously in this project:

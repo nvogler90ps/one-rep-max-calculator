@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cron Expression Generator - Build & Explain Crontab Schedules</title>
+  <meta name="description" content="Free cron expression generator and explainer. Build crontab schedules with a visual builder, explain cron syntax in plain English, and see next run times. Supports standard 5-field cron.">
+  <meta name="keywords" content="cron expression generator, crontab every 5 minutes, cron syntax explained, cron job scheduler, crontab generator, cron builder, cron explainer">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://cron-generator.pages.dev/">
+  <meta property="og:title" content="Cron Expression Generator - Build & Explain Crontab Schedules">
+  <meta property="og:description" content="Free cron expression generator and explainer. Build crontab schedules visually, get plain English explanations, and see next 10 run times.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://cron-generator.pages.dev/">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Cron Expression Generator",
+    "description": "Build and explain crontab schedules. Visual cron builder with plain English explanations and next run time calculations.",
+    "url": "https://cron-generator.pages.dev/",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is a cron expression?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A cron expression is a string of five fields separated by spaces that defines a schedule for automated tasks. The five fields represent: minute (0-59), hour (0-23), day of month (1-31), month (1-12), and day of week (0-6, where 0 is Sunday)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I schedule a cron job to run every 5 minutes?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Use the cron expression */5 * * * * to run a job every 5 minutes. The */5 in the minute field means 'every 5th minute'."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What does the asterisk (*) mean in cron?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The asterisk (*) is a wildcard that means 'every' or 'any value'. For example, * in the hour field means 'every hour', and * in the day-of-week field means 'every day of the week'."
+        }
+      }
+    ]
+  }
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3434609691579834" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Cron Expression Generator & Explainer</h1>
+      <p class="subtitle">Build crontab schedules visually or paste an expression to get a plain English explanation</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Ad Slot 1 -->
+    <div class="ad-slot">
+      <ins class="adsbygoogle"
+        style="display:block"
+        data-ad-client="ca-pub-3434609691579834"
+        data-ad-slot=""
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- Builder Section -->
+    <section class="card" id="builder-section">
+      <h2>Build a Cron Expression</h2>
+      <p class="section-desc">Select a frequency and refine the schedule. The cron expression updates in real-time.</p>
+
+      <div class="builder-row">
+        <label for="frequency">Frequency</label>
+        <select id="frequency">
+          <option value="every-minute">Every Minute</option>
+          <option value="hourly">Hourly</option>
+          <option value="daily" selected>Daily</option>
+          <option value="weekly">Weekly</option>
+          <option value="monthly">Monthly</option>
+          <option value="yearly">Yearly</option>
+        </select>
+      </div>
+
+      <div class="builder-options" id="builder-options">
+        <!-- Dynamically populated -->
+      </div>
+
+      <div class="result-box" id="builder-result">
+        <div class="result-label">Generated Cron Expression</div>
+        <div class="result-expression" id="builder-expression">0 0 * * *</div>
+        <button class="copy-btn" id="builder-copy" title="Copy to clipboard">Copy</button>
+      </div>
+
+      <div class="explanation-box" id="builder-explanation">
+        <!-- Populated by JS -->
+      </div>
+
+      <div class="next-runs" id="builder-next-runs">
+        <h3>Next 10 Run Times</h3>
+        <ol id="builder-run-list"></ol>
+      </div>
+    </section>
+
+    <!-- Common Examples -->
+    <section class="card" id="examples-section">
+      <h2>Common Cron Examples</h2>
+      <p class="section-desc">Click any example to load it into the explainer.</p>
+      <div class="examples-grid" id="examples-grid">
+        <!-- Populated by JS -->
+      </div>
+    </section>
+
+    <!-- Ad Slot 2 -->
+    <div class="ad-slot">
+      <ins class="adsbygoogle"
+        style="display:block"
+        data-ad-client="ca-pub-3434609691579834"
+        data-ad-slot=""
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- Explainer Section -->
+    <section class="card" id="explainer-section">
+      <h2>Explain a Cron Expression</h2>
+      <p class="section-desc">Paste a 5-field cron expression to get a plain English explanation and next run times.</p>
+
+      <div class="input-row">
+        <input type="text" id="cron-input" placeholder="e.g. */5 * * * *" autocomplete="off" spellcheck="false">
+        <button class="btn" id="explain-btn">Explain</button>
+      </div>
+
+      <div id="explainer-error" class="error-msg" hidden></div>
+
+      <div id="explainer-results" hidden>
+        <div class="explanation-box" id="explainer-explanation"></div>
+        <div class="next-runs" id="explainer-next-runs">
+          <h3>Next 10 Run Times</h3>
+          <ol id="explainer-run-list"></ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEO Content -->
+    <section class="card seo-content">
+      <h2>Understanding Cron Syntax</h2>
+
+      <h3>What is Cron?</h3>
+      <p>Cron is a time-based job scheduler found in Unix and Linux operating systems. System administrators and developers use cron to schedule commands or scripts to run at specific times, dates, or intervals. The schedule is defined using a <strong>cron expression</strong> -- a compact string of five fields that precisely describes when a job should execute.</p>
+
+      <h3>The Five Fields</h3>
+      <div class="cron-fields-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Field</th>
+              <th>Allowed Values</th>
+              <th>Special Characters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Minute</td><td>0-59</td><td>* , - /</td></tr>
+            <tr><td>Hour</td><td>0-23</td><td>* , - /</td></tr>
+            <tr><td>Day of Month</td><td>1-31</td><td>* , - /</td></tr>
+            <tr><td>Month</td><td>1-12 or JAN-DEC</td><td>* , - /</td></tr>
+            <tr><td>Day of Week</td><td>0-6 or SUN-SAT (0=Sunday)</td><td>* , - /</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Special Characters</h3>
+      <ul>
+        <li><strong>*</strong> (asterisk) -- matches every possible value for that field</li>
+        <li><strong>,</strong> (comma) -- specifies a list of values, e.g. <code>1,3,5</code></li>
+        <li><strong>-</strong> (hyphen) -- specifies a range, e.g. <code>1-5</code> means 1 through 5</li>
+        <li><strong>/</strong> (slash) -- specifies a step value, e.g. <code>*/10</code> means every 10th unit</li>
+      </ul>
+
+      <h3>Common Cron Patterns</h3>
+      <ul>
+        <li><code>* * * * *</code> -- every minute</li>
+        <li><code>*/5 * * * *</code> -- every 5 minutes</li>
+        <li><code>0 * * * *</code> -- every hour (at minute 0)</li>
+        <li><code>0 0 * * *</code> -- daily at midnight</li>
+        <li><code>0 9 * * 1-5</code> -- weekdays at 9:00 AM</li>
+        <li><code>0 0 1 * *</code> -- first day of every month at midnight</li>
+        <li><code>0 0 1 1 *</code> -- once a year on January 1st at midnight</li>
+      </ul>
+    </section>
+
+    <!-- Ad Slot 3 -->
+    <div class="ad-slot">
+      <ins class="adsbygoogle"
+        style="display:block"
+        data-ad-client="ca-pub-3434609691579834"
+        data-ad-slot=""
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Automated Insights LLC. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <div id="toast" class="toast" hidden>Copied to clipboard!</div>
+
+  <script src="cron.js"></script>
+</body>
+</html>

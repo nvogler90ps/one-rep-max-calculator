@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://docker-compose-gen.pages.dev/sitemap.xml

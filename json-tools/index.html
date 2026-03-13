@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Formatter &amp; Validator - Pretty Print, Diff &amp; Validate JSON Online</title>
+    <meta name="description" content="Free online JSON formatter, validator, and diff tool. Pretty print JSON, validate with error messages, compare two JSON objects, and visualize JSON as a collapsible tree.">
+    <meta name="keywords" content="json formatter, json validator, json diff tool, pretty print json, json compare, json beautifier, json minify, json tree view, json online tool">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://json-tools.automatedinsightsllc.com/">
+    <meta property="og:title" content="JSON Formatter & Validator - Pretty Print, Diff & Validate JSON Online">
+    <meta property="og:description" content="Free online JSON formatter, validator, and diff tool. Pretty print, validate, compare, and visualize JSON.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://json-tools.automatedinsightsllc.com/">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="JSON Formatter & Validator Online">
+    <meta name="twitter:description" content="Free JSON formatter, validator, diff, and tree view tool.">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3434609691579834" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>JSON Formatter, Validator &amp; Diff Tool</h1>
+            <p class="subtitle">Format, validate, compare, and visualize JSON -- all in one place.</p>
+        </div>
+    </header>
+
+    <!-- Ad Slot 1: Top Banner -->
+    <div class="ad-slot container">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-3434609691579834"
+             data-ad-slot="top-banner"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <nav class="tabs container">
+        <button class="tab active" data-tab="format">Format</button>
+        <button class="tab" data-tab="validate">Validate</button>
+        <button class="tab" data-tab="diff">Diff</button>
+        <button class="tab" data-tab="tree">Tree View</button>
+    </nav>
+
+    <main class="container">
+        <!-- FORMAT TAB -->
+        <section id="tab-format" class="tab-content active">
+            <div class="toolbar">
+                <label for="indent-select">Indent:</label>
+                <select id="indent-select">
+                    <option value="2">2 Spaces</option>
+                    <option value="4">4 Spaces</option>
+                    <option value="tab">Tab</option>
+                </select>
+                <button id="btn-format" class="btn-primary">Format</button>
+                <button id="btn-minify" class="btn-secondary">Minify</button>
+                <button id="btn-clear-format" class="btn-secondary">Clear</button>
+            </div>
+            <div class="editor-row">
+                <div class="editor-col">
+                    <label for="format-input">Input JSON</label>
+                    <textarea id="format-input" class="code-input" placeholder="Paste your JSON here..." spellcheck="false"></textarea>
+                </div>
+                <div class="editor-col">
+                    <div class="output-header">
+                        <label>Formatted Output</label>
+                        <div class="output-actions">
+                            <button id="btn-copy-format" class="btn-small" title="Copy to clipboard">Copy</button>
+                            <button id="btn-download-format" class="btn-small" title="Download as .json">Download</button>
+                        </div>
+                    </div>
+                    <pre id="format-output" class="code-output"></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- VALIDATE TAB -->
+        <section id="tab-validate" class="tab-content">
+            <div class="toolbar">
+                <button id="btn-validate" class="btn-primary">Validate</button>
+                <button id="btn-clear-validate" class="btn-secondary">Clear</button>
+            </div>
+            <div class="editor-row">
+                <div class="editor-col full-width">
+                    <label for="validate-input">JSON to Validate</label>
+                    <textarea id="validate-input" class="code-input" placeholder="Paste JSON to validate..." spellcheck="false"></textarea>
+                </div>
+            </div>
+            <div id="validate-result" class="validate-result"></div>
+        </section>
+
+        <!-- DIFF TAB -->
+        <section id="tab-diff" class="tab-content">
+            <div class="toolbar">
+                <button id="btn-diff" class="btn-primary">Compare</button>
+                <button id="btn-clear-diff" class="btn-secondary">Clear</button>
+            </div>
+            <div class="editor-row">
+                <div class="editor-col">
+                    <label for="diff-left">Left JSON</label>
+                    <textarea id="diff-left" class="code-input" placeholder="Paste first JSON..." spellcheck="false"></textarea>
+                </div>
+                <div class="editor-col">
+                    <label for="diff-right">Right JSON</label>
+                    <textarea id="diff-right" class="code-input" placeholder="Paste second JSON..." spellcheck="false"></textarea>
+                </div>
+            </div>
+            <div id="diff-output" class="diff-output"></div>
+        </section>
+
+        <!-- TREE VIEW TAB -->
+        <section id="tab-tree" class="tab-content">
+            <div class="toolbar">
+                <button id="btn-tree" class="btn-primary">Build Tree</button>
+                <button id="btn-expand-all" class="btn-secondary">Expand All</button>
+                <button id="btn-collapse-all" class="btn-secondary">Collapse All</button>
+                <button id="btn-clear-tree" class="btn-secondary">Clear</button>
+            </div>
+            <div class="editor-row">
+                <div class="editor-col">
+                    <label for="tree-input">Input JSON</label>
+                    <textarea id="tree-input" class="code-input" placeholder="Paste JSON to visualize..." spellcheck="false"></textarea>
+                </div>
+                <div class="editor-col">
+                    <label>Tree View</label>
+                    <div id="tree-output" class="tree-output"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Ad Slot 2: Middle -->
+    <div class="ad-slot container">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-3434609691579834"
+             data-ad-slot="middle-banner"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- SEO Content -->
+    <section class="seo-content container">
+        <h2>What is JSON Formatting?</h2>
+        <p>JSON (JavaScript Object Notation) is a lightweight data-interchange format that is easy for humans to read and write, and easy for machines to parse and generate. JSON formatting -- also called "pretty printing" -- adds proper indentation and line breaks to compressed or minified JSON, making it readable and easier to debug.</p>
+
+        <h2>Why Validate JSON?</h2>
+        <p>Invalid JSON can cause APIs to fail, configurations to break, and applications to crash. Our JSON validator checks your data against the JSON specification and provides specific error messages with line numbers, so you can quickly find and fix syntax errors like missing commas, unmatched brackets, or invalid escape sequences.</p>
+
+        <h2>Comparing JSON with Diff</h2>
+        <p>When working with API responses, configuration files, or data migrations, you often need to compare two JSON objects to see what changed. Our JSON diff tool performs a deep comparison and highlights additions, removals, and modifications at every level of nesting, making it easy to spot differences between complex data structures.</p>
+
+        <h2>Visualizing JSON as a Tree</h2>
+        <p>Large JSON documents can be difficult to navigate in text form. The tree view presents your JSON as a collapsible, hierarchical structure where you can expand and collapse objects and arrays. This makes it easy to explore deeply nested data and understand the overall shape of your JSON.</p>
+
+        <h2>Common JSON Use Cases</h2>
+        <ul>
+            <li><strong>API Development:</strong> Format and validate request/response payloads during API testing and debugging.</li>
+            <li><strong>Configuration Files:</strong> Validate JSON config files for applications, CI/CD pipelines, and cloud services.</li>
+            <li><strong>Data Migration:</strong> Compare JSON exports before and after migration to verify data integrity.</li>
+            <li><strong>Log Analysis:</strong> Pretty print JSON log entries for easier reading and troubleshooting.</li>
+            <li><strong>Learning:</strong> Explore JSON structure with the tree view to understand unfamiliar data formats.</li>
+        </ul>
+    </section>
+
+    <!-- Ad Slot 3: Bottom -->
+    <div class="ad-slot container">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-3434609691579834"
+             data-ad-slot="bottom-banner"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Automated Insights LLC. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

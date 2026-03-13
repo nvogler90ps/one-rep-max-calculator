@@ -1,0 +1,545 @@
+/* === Reset & Base === */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --border: #2e3345;
+    --text: #e8eaed;
+    --text-muted: #8b8fa3;
+    --accent: #6c63ff;
+    --accent-hover: #5a52e0;
+    --success: #4caf50;
+    --error: #f44336;
+    --warning: #ff9800;
+    --json-string: #98c379;
+    --json-number: #e5c07b;
+    --json-boolean: #61afef;
+    --json-null: #8b8fa3;
+    --json-key: #e8eaed;
+    --diff-add: rgba(76, 175, 80, 0.15);
+    --diff-remove: rgba(244, 67, 54, 0.15);
+    --diff-change: rgba(255, 152, 0, 0.15);
+    --diff-add-text: #4caf50;
+    --diff-remove-text: #f44336;
+    --diff-change-text: #ff9800;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+/* === Header === */
+header {
+    padding: 32px 0 16px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+}
+
+header .subtitle {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+/* === Tabs === */
+.tabs {
+    display: flex;
+    gap: 4px;
+    padding: 16px 16px 0;
+    border-bottom: 1px solid var(--border);
+    overflow-x: auto;
+}
+
+.tab {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+    white-space: nowrap;
+    font-family: inherit;
+}
+
+.tab:hover {
+    color: var(--text);
+}
+
+.tab.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+}
+
+/* === Tab Content === */
+.tab-content {
+    display: none;
+    padding: 16px 0;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* === Toolbar === */
+.toolbar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+}
+
+.toolbar label {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+.toolbar select {
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 0.85rem;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.toolbar select:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+/* === Buttons === */
+.btn-primary,
+.btn-secondary,
+.btn-small {
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.85rem;
+    transition: background 0.2s, opacity 0.2s;
+}
+
+.btn-primary {
+    background: var(--accent);
+    color: #fff;
+    padding: 8px 20px;
+    font-weight: 600;
+}
+
+.btn-primary:hover {
+    background: var(--accent-hover);
+}
+
+.btn-secondary {
+    background: var(--surface);
+    color: var(--text-muted);
+    padding: 8px 16px;
+    border: 1px solid var(--border);
+}
+
+.btn-secondary:hover {
+    color: var(--text);
+    border-color: var(--text-muted);
+}
+
+.btn-small {
+    background: var(--surface);
+    color: var(--text-muted);
+    padding: 4px 12px;
+    border: 1px solid var(--border);
+    font-size: 0.8rem;
+}
+
+.btn-small:hover {
+    color: var(--text);
+}
+
+/* === Editor Layout === */
+.editor-row {
+    display: flex;
+    gap: 12px;
+}
+
+.editor-col {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.editor-col.full-width {
+    flex: 1 1 100%;
+}
+
+.editor-col > label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.output-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.output-header label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.output-actions {
+    display: flex;
+    gap: 4px;
+}
+
+/* === Text Areas & Output === */
+.code-input {
+    width: 100%;
+    min-height: 300px;
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px;
+    font-family: "SF Mono", "Fira Code", "Fira Mono", "Roboto Mono", "Consolas", monospace;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    resize: vertical;
+    tab-size: 2;
+}
+
+.code-input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+.code-input::placeholder {
+    color: var(--text-muted);
+}
+
+.code-output {
+    width: 100%;
+    min-height: 300px;
+    max-height: 600px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px;
+    font-family: "SF Mono", "Fira Code", "Fira Mono", "Roboto Mono", "Consolas", monospace;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    overflow: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+/* === Syntax Highlighting === */
+.json-key { color: var(--json-key); font-weight: 600; }
+.json-string { color: var(--json-string); }
+.json-number { color: var(--json-number); }
+.json-boolean { color: var(--json-boolean); }
+.json-null { color: var(--json-null); font-style: italic; }
+.json-bracket { color: var(--text-muted); }
+
+/* === Validate Result === */
+.validate-result {
+    margin-top: 12px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    display: none;
+}
+
+.validate-result.valid {
+    display: block;
+    background: rgba(76, 175, 80, 0.1);
+    border: 1px solid rgba(76, 175, 80, 0.3);
+    color: var(--success);
+}
+
+.validate-result.invalid {
+    display: block;
+    background: rgba(244, 67, 54, 0.1);
+    border: 1px solid rgba(244, 67, 54, 0.3);
+    color: var(--error);
+}
+
+.validate-result .error-line {
+    font-family: "SF Mono", "Fira Code", "Fira Mono", "Roboto Mono", "Consolas", monospace;
+    font-size: 0.85rem;
+    margin-top: 8px;
+    padding: 8px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    white-space: pre-wrap;
+}
+
+/* === Diff Output === */
+.diff-output {
+    margin-top: 12px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px;
+    font-family: "SF Mono", "Fira Code", "Fira Mono", "Roboto Mono", "Consolas", monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    max-height: 600px;
+    overflow: auto;
+    display: none;
+    white-space: pre-wrap;
+}
+
+.diff-output.visible {
+    display: block;
+}
+
+.diff-line {
+    padding: 1px 8px;
+    border-radius: 3px;
+    margin: 1px 0;
+}
+
+.diff-add {
+    background: var(--diff-add);
+    color: var(--diff-add-text);
+}
+
+.diff-remove {
+    background: var(--diff-remove);
+    color: var(--diff-remove-text);
+}
+
+.diff-change {
+    background: var(--diff-change);
+    color: var(--diff-change-text);
+}
+
+.diff-same {
+    color: var(--text-muted);
+}
+
+.diff-header {
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+/* === Tree View === */
+.tree-output {
+    width: 100%;
+    min-height: 300px;
+    max-height: 600px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px;
+    overflow: auto;
+    font-family: "SF Mono", "Fira Code", "Fira Mono", "Roboto Mono", "Consolas", monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+}
+
+.tree-node {
+    padding-left: 20px;
+}
+
+.tree-node-root {
+    padding-left: 0;
+}
+
+.tree-toggle {
+    cursor: pointer;
+    user-select: none;
+    display: inline-block;
+    width: 16px;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+}
+
+.tree-toggle:hover {
+    color: var(--accent);
+}
+
+.tree-key {
+    color: var(--json-key);
+    font-weight: 600;
+}
+
+.tree-colon {
+    color: var(--text-muted);
+}
+
+.tree-value-string { color: var(--json-string); }
+.tree-value-number { color: var(--json-number); }
+.tree-value-boolean { color: var(--json-boolean); }
+.tree-value-null { color: var(--json-null); font-style: italic; }
+
+.tree-bracket {
+    color: var(--text-muted);
+}
+
+.tree-children {
+    overflow: hidden;
+}
+
+.tree-children.collapsed {
+    display: none;
+}
+
+.tree-count {
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    font-style: italic;
+}
+
+/* === Ad Slot === */
+.ad-slot {
+    margin: 16px auto;
+    text-align: center;
+    min-height: 50px;
+}
+
+/* === SEO Content === */
+.seo-content {
+    padding: 32px 16px;
+    border-top: 1px solid var(--border);
+    margin-top: 24px;
+}
+
+.seo-content h2 {
+    font-size: 1.2rem;
+    color: var(--text);
+    margin: 24px 0 8px;
+}
+
+.seo-content h2:first-child {
+    margin-top: 0;
+}
+
+.seo-content p,
+.seo-content li {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    line-height: 1.7;
+}
+
+.seo-content ul {
+    padding-left: 20px;
+    margin-top: 8px;
+}
+
+.seo-content li {
+    margin-bottom: 6px;
+}
+
+/* === Footer === */
+footer {
+    border-top: 1px solid var(--border);
+    padding: 20px 0;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    margin-top: 16px;
+}
+
+/* === Toast Notification === */
+.toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 0.85rem;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s, transform 0.3s;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+.toast.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* === Responsive === */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 1.3rem;
+    }
+
+    .editor-row {
+        flex-direction: column;
+    }
+
+    .code-input,
+    .code-output,
+    .tree-output {
+        min-height: 200px;
+    }
+
+    .toolbar {
+        gap: 6px;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+
+    .tabs {
+        gap: 0;
+    }
+
+    .tab {
+        padding: 8px 14px;
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.1rem;
+    }
+
+    .container {
+        padding: 0 10px;
+    }
+}

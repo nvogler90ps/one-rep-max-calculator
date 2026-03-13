@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM API Pricing Calculator - Compare ChatGPT, Claude, Gemini Costs</title>
+    <meta name="description" content="Compare LLM API pricing across OpenAI, Anthropic, Google, Mistral, Meta, and Cohere. Calculate monthly costs for ChatGPT, Claude, Gemini, and more. Find the cheapest LLM API for your use case.">
+    <meta name="keywords" content="llm api pricing, chatgpt api cost, claude vs gpt-4 cost, cheapest llm api, llm cost calculator, ai api pricing comparison">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://llm-pricing.example.com/">
+    <meta property="og:title" content="LLM API Pricing Calculator - Compare ChatGPT, Claude, Gemini Costs">
+    <meta property="og:description" content="Interactive calculator comparing LLM API costs across all major providers. Input your expected usage and see cost breakdowns instantly.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://llm-pricing.example.com/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="LLM API Pricing Calculator">
+    <meta name="twitter:description" content="Compare LLM API pricing across OpenAI, Anthropic, Google, Mistral, Meta, and Cohere.">
+    <link rel="stylesheet" href="css/styles.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3434609691579834" crossorigin="anonymous"></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "LLM API Pricing Calculator",
+        "description": "Interactive calculator comparing LLM API costs across all major providers including OpenAI, Anthropic, Google, Mistral, Meta, and Cohere.",
+        "url": "https://llm-pricing.example.com/",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "creator": {
+            "@type": "Organization",
+            "name": "Automated Insights LLC"
+        }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "How much does the ChatGPT API cost?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "OpenAI's GPT-4o costs $2.50 per 1M input tokens and $10.00 per 1M output tokens. GPT-4o-mini is much cheaper at $0.15 per 1M input tokens and $0.60 per 1M output tokens."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What is the cheapest LLM API?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Budget-tier models like GPT-4o-mini, Gemini 2.0 Flash, and Llama 3.1 8B (via providers like Together AI) offer the lowest per-token pricing, often under $0.20 per 1M input tokens."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How is LLM API pricing calculated?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "LLM APIs charge per token, with separate rates for input (prompt) tokens and output (completion) tokens. Your monthly cost equals (input tokens x input price) + (output tokens x output price). Most providers quote prices per 1 million tokens."
+                }
+            }
+        ]
+    }
+    </script>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <h1 class="site-title">LLM API Pricing Calculator</h1>
+            <p class="site-subtitle">Compare costs across ChatGPT, Claude, Gemini, Mistral, Llama, and more</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="calculator-section" id="calculator">
+            <h2>Cost Calculator</h2>
+            <div class="calculator-grid">
+                <div class="input-panel">
+                    <div class="input-group">
+                        <label for="input-tokens">Prompt Tokens / Month</label>
+                        <input type="number" id="input-tokens" value="1000000" min="0" step="100000">
+                        <span class="input-hint" id="input-tokens-hint">1.0M tokens</span>
+                    </div>
+                    <div class="input-group">
+                        <label for="output-tokens">Completion Tokens / Month</label>
+                        <input type="number" id="output-tokens" value="500000" min="0" step="100000">
+                        <span class="input-hint" id="output-tokens-hint">500K tokens</span>
+                    </div>
+                    <div class="presets">
+                        <span class="presets-label">Use Case Presets:</span>
+                        <div class="preset-buttons">
+                            <button class="preset-btn" data-preset="chatbot">Chatbot</button>
+                            <button class="preset-btn" data-preset="code">Code Assistant</button>
+                            <button class="preset-btn" data-preset="documents">Document Processing</button>
+                            <button class="preset-btn" data-preset="rag">RAG Pipeline</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="filters-panel">
+                    <span class="filters-label">Model Tier:</span>
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" data-tier="all">All</button>
+                        <button class="filter-btn" data-tier="flagship">Flagship</button>
+                        <button class="filter-btn" data-tier="mid">Mid-tier</button>
+                        <button class="filter-btn" data-tier="budget">Budget / Fast</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="ad-slot" id="ad-slot-top">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-3434609691579834"
+                 data-ad-slot=""
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+        </div>
+
+        <section class="results-section" id="results">
+            <h2>Monthly Cost Comparison</h2>
+            <div class="sort-controls">
+                <label for="sort-select">Sort by:</label>
+                <select id="sort-select">
+                    <option value="cost-asc">Cost (Low to High)</option>
+                    <option value="cost-desc">Cost (High to Low)</option>
+                    <option value="provider">Provider</option>
+                    <option value="context">Context Window</option>
+                </select>
+            </div>
+            <div class="results-table-wrapper">
+                <table class="results-table" id="results-table">
+                    <thead>
+                        <tr>
+                            <th>Provider</th>
+                            <th>Model</th>
+                            <th>Input $/1M</th>
+                            <th>Output $/1M</th>
+                            <th>Monthly Cost</th>
+                            <th>Context</th>
+                            <th>Speed</th>
+                            <th>Tier</th>
+                            <th>Try It</th>
+                        </tr>
+                    </thead>
+                    <tbody id="results-body">
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <div class="ad-slot" id="ad-slot-middle">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-3434609691579834"
+                 data-ad-slot=""
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+        </div>
+
+        <section class="chart-section" id="chart">
+            <h2>Visual Comparison</h2>
+            <div class="bar-chart" id="bar-chart"></div>
+        </section>
+
+        <section class="seo-content" id="about">
+            <h2>How LLM API Pricing Works</h2>
+            <div class="content-columns">
+                <div class="content-col">
+                    <h3>Token-Based Pricing</h3>
+                    <p>Large Language Model (LLM) APIs charge based on <strong>tokens</strong> -- small chunks of text that models process. A token is roughly 3/4 of a word in English. Most providers charge separately for <strong>input tokens</strong> (your prompt) and <strong>output tokens</strong> (the model's response), with output tokens typically costing 2-5x more than input tokens.</p>
+                    <p>Prices are quoted per 1 million tokens. For example, if a model charges $2.50 per 1M input tokens and you send 10 million input tokens in a month, your input cost alone would be $25.00.</p>
+
+                    <h3>What Affects Your Cost</h3>
+                    <p>Your monthly LLM API bill depends on several factors:</p>
+                    <ul>
+                        <li><strong>Model choice:</strong> Flagship models like GPT-4o, Claude Opus 4, and Gemini 1.5 Pro deliver the highest quality but cost significantly more than budget alternatives.</li>
+                        <li><strong>Input vs. output ratio:</strong> Applications that generate long responses (like code generation) have higher output costs, while search or classification tasks are input-heavy.</li>
+                        <li><strong>Context window usage:</strong> Larger context windows let you include more information but increase input token costs per request.</li>
+                        <li><strong>Request volume:</strong> High-throughput applications like chatbots or document processing can accumulate millions of tokens daily.</li>
+                    </ul>
+                </div>
+                <div class="content-col">
+                    <h3>Choosing the Right Model</h3>
+                    <p>Not every task needs a flagship model. Here is a general guide:</p>
+                    <ul>
+                        <li><strong>Flagship models</strong> (GPT-4o, Claude Opus 4, Gemini 1.5 Pro): Best for complex reasoning, nuanced writing, and multi-step tasks. Use when quality is critical.</li>
+                        <li><strong>Mid-tier models</strong> (Claude Sonnet 4, Mistral Large, Command R+): Good balance of capability and cost. Suitable for most production applications.</li>
+                        <li><strong>Budget models</strong> (GPT-4o-mini, Claude Haiku 3.5, Gemini 2.0 Flash): Ideal for high-volume, simpler tasks like classification, extraction, and basic chat. Often 10-50x cheaper than flagships.</li>
+                    </ul>
+
+                    <h3>Cost Optimization Tips</h3>
+                    <ul>
+                        <li><strong>Prompt caching:</strong> Many providers offer cached prompt pricing at 50-90% discount for repeated prefixes.</li>
+                        <li><strong>Batch APIs:</strong> OpenAI and Anthropic offer batch processing at ~50% discount for non-real-time workloads.</li>
+                        <li><strong>Model routing:</strong> Use cheap models for simple tasks and route only complex queries to expensive models.</li>
+                        <li><strong>Prompt engineering:</strong> Shorter, more efficient prompts reduce input costs without sacrificing quality.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <div class="ad-slot" id="ad-slot-bottom">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-3434609691579834"
+                 data-ad-slot=""
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2026 Automated Insights LLC. All rights reserved.</p>
+            <p class="footer-note">Pricing data is sourced from publicly available provider documentation and may change. Always verify current pricing on provider websites before making purchasing decisions.</p>
+        </div>
+    </footer>
+
+    <script src="js/models.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

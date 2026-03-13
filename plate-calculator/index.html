@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plate Calculator - Barbell Loading Calculator for Gym</title>
+  <meta name="description" content="Free barbell plate loading calculator. Enter your target weight and instantly see which plates to load on each side. Visual barbell diagram with warmup ramp calculator. Works in lbs and kg.">
+  <meta name="keywords" content="barbell plate calculator, what plates for 225 lbs, plate loading calculator, gym plate math, barbell loading calculator, weight plate calculator">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://platecalculator.example.com/">
+  <meta property="og:title" content="Plate Calculator - Barbell Loading Calculator for Gym">
+  <meta property="og:description" content="Enter your target weight and see exactly which plates to load on each side. Visual barbell diagram with warmup sets.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://platecalculator.example.com/">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3434609691579834" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Plate Calculator",
+    "description": "Barbell plate loading calculator with visual diagram and warmup ramp",
+    "applicationCategory": "HealthApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+</head>
+<body>
+  <header>
+    <h1>Plate Calculator</h1>
+    <p class="subtitle">Barbell Loading Calculator</p>
+  </header>
+
+  <main>
+    <!-- Ad Slot 1: Top -->
+    <div class="ad-container">
+      <ins class="adsbygoogle"
+        style="display:block"
+        data-ad-client="ca-pub-3434609691579834"
+        data-ad-slot="top-banner"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- Settings Row -->
+    <section class="settings-row">
+      <div class="setting-group">
+        <label for="unit-toggle">Units</label>
+        <div class="toggle-container">
+          <button id="btn-lbs" class="toggle-btn active" data-unit="lbs">lbs</button>
+          <button id="btn-kg" class="toggle-btn" data-unit="kg">kg</button>
+        </div>
+      </div>
+      <div class="setting-group">
+        <label for="bar-select">Bar</label>
+        <select id="bar-select">
+          <option value="45" data-kg="20">45 lb / 20 kg (Standard)</option>
+          <option value="35" data-kg="15">35 lb / 15 kg (Women's)</option>
+          <option value="33" data-kg="15">33 lb / 15 kg (Training)</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- Target Weight Input -->
+    <section class="input-section">
+      <label for="target-weight">Target Weight (<span id="unit-label">lbs</span>)</label>
+      <div class="weight-input-row">
+        <button class="adjust-btn" id="btn-minus" aria-label="Decrease weight">-</button>
+        <input type="number" id="target-weight" min="0" step="5" value="135" inputmode="numeric">
+        <button class="adjust-btn" id="btn-plus" aria-label="Increase weight">+</button>
+      </div>
+      <div id="weight-message" class="weight-message"></div>
+    </section>
+
+    <!-- Barbell Diagram -->
+    <section class="barbell-section">
+      <h2>Plates Per Side</h2>
+      <div id="plate-summary" class="plate-summary"></div>
+      <div class="barbell-container">
+        <div id="barbell-diagram" class="barbell-diagram">
+          <svg id="barbell-svg" viewBox="0 0 700 200" preserveAspectRatio="xMidYMid meet"></svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- Available Plates -->
+    <section class="plates-section">
+      <h2>Available Plates</h2>
+      <div id="plates-grid" class="plates-grid"></div>
+    </section>
+
+    <!-- Ad Slot 2: Middle -->
+    <div class="ad-container">
+      <ins class="adsbygoogle"
+        style="display:block"
+        data-ad-client="ca-pub-3434609691579834"
+        data-ad-slot="mid-content"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- Warmup Ramp -->
+    <section class="warmup-section">
+      <h2>Warmup Ramp</h2>
+      <p class="warmup-description">Automatic warmup sets ramping up to your working weight.</p>
+      <div id="warmup-sets" class="warmup-sets"></div>
+    </section>
+
+    <!-- Affiliate Placeholders -->
+    <section class="affiliate-section">
+      <h2>Recommended Gear</h2>
+      <div class="affiliate-grid">
+        <a class="affiliate-card" href="https://www.amazon.com/s?k=olympic+barbell+plates&tag=placeholder-20" target="_blank" rel="noopener noreferrer nofollow">
+          <div class="affiliate-icon">&#9878;</div>
+          <span>Olympic Plates on Amazon</span>
+        </a>
+        <a class="affiliate-card" href="https://www.roguefitness.com/weightlifting-bars-plates/plates" target="_blank" rel="noopener noreferrer nofollow">
+          <div class="affiliate-icon">&#9878;</div>
+          <span>Rogue Fitness Plates</span>
+        </a>
+        <a class="affiliate-card" href="https://www.amazon.com/s?k=barbell+clips+clamps&tag=placeholder-20" target="_blank" rel="noopener noreferrer nofollow">
+          <div class="affiliate-icon">&#9878;</div>
+          <span>Barbell Clips & Clamps</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Ad Slot 3: Bottom -->
+    <div class="ad-container">
+      <ins class="adsbygoogle"
+        style="display:block"
+        data-ad-client="ca-pub-3434609691579834"
+        data-ad-slot="bottom-banner"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- SEO Content -->
+    <section class="seo-content">
+      <h2>How Barbell Plate Loading Works</h2>
+      <p>Loading a barbell correctly is one of the first skills every lifter learns. A standard Olympic barbell weighs 45 lbs (20 kg), and plates are added equally to both sides. To figure out the plates needed for a given weight, subtract the bar weight and divide by two -- that gives you the weight needed per side.</p>
+
+      <h3>Standard Plate Weights</h3>
+      <p>Competition and gym plates come in standard sizes. In pounds: 45, 35, 25, 10, 5, and 2.5. In kilograms: 20, 15, 10, 5, 2.5, and 1.25. Competition plates follow a color code: red (25 kg / 55 lb), blue (20 kg / 45 lb), yellow (15 kg / 35 lb), green (10 kg / 25 lb), white (5 kg / 10 lb), and smaller plates in red and gray.</p>
+
+      <h3>Common Plate Combinations</h3>
+      <p>Here are some weights lifters load most often:</p>
+      <ul>
+        <li><strong>135 lbs</strong> -- one 45 lb plate per side (often called "one plate")</li>
+        <li><strong>225 lbs</strong> -- two 45 lb plates per side ("two plates")</li>
+        <li><strong>315 lbs</strong> -- three 45 lb plates per side ("three plates")</li>
+        <li><strong>185 lbs</strong> -- one 45 lb + one 25 lb per side</li>
+        <li><strong>205 lbs</strong> -- one 45 lb + one 25 lb + one 5 lb per side</li>
+      </ul>
+
+      <h3>Why Warm Up?</h3>
+      <p>Warming up with progressively heavier sets prepares your muscles, joints, and nervous system for heavy loads. A typical warmup ramp starts with the empty bar, then adds weight in increments until you reach your working weight. This calculator generates warmup sets automatically so you can focus on lifting.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Automated Insights LLC. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
