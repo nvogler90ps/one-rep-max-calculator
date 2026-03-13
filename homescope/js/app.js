@@ -69,21 +69,32 @@
   function initMap() {
     map = new maplibregl.Map({
       container: 'map',
-      style: 'https://tiles.openfreemap.org/styles/dark',
+      style: {
+        version: 8,
+        sources: {
+          'carto-dark': {
+            type: 'raster',
+            tiles: [
+              'https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png',
+              'https://b.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png',
+              'https://c.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png'
+            ],
+            tileSize: 256,
+            attribution: '&copy; <a href="https://carto.com/">CARTO</a> &copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>'
+          }
+        },
+        layers: [{
+          id: 'carto-dark-layer',
+          type: 'raster',
+          source: 'carto-dark'
+        }]
+      },
       center: TAMPA_CENTER,
       zoom: DEFAULT_ZOOM,
       maxBounds: [[-83.5, 27.0], [-81.5, 28.8]]
     });
 
     map.addControl(new maplibregl.NavigationControl(), 'bottom-right');
-
-    // Provide placeholder for missing sprite images (e.g. wood-pattern)
-    map.on('styleimagemissing', function (e) {
-      var canvas = document.createElement('canvas');
-      canvas.width = 1;
-      canvas.height = 1;
-      map.addImage(e.id, { width: 1, height: 1, data: new Uint8Array([0, 0, 0, 0]) });
-    });
 
     // Add FEMA flood zone tiles as image overlay
     map.on('load', function () {
