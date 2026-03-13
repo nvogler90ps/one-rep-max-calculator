@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 48" fill="none">
+  <!-- Automated Insights wordmark with monogram -->
+  <defs>
+    <linearGradient id="glow" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#8b83ff"/>
+      <stop offset="100%" stop-color="#6c63ff"/>
+    </linearGradient>
+  </defs>
+  <!-- Monogram mark: abstract "AI" in a rounded container -->
+  <rect x="0" y="4" width="40" height="40" rx="10" fill="url(#glow)"/>
+  <!-- "A" shape - two angled lines meeting at top -->
+  <path d="M12 34L20 12L28 34" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <!-- "A" crossbar -->
+  <line x1="14.5" y1="26" x2="25.5" y2="26" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- "I" shape - vertical line with dot -->
+  <line x1="33" y1="18" x2="33" y2="34" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+  <circle cx="33" cy="13" r="1.8" fill="#fff"/>
+  <!-- Wordmark -->
+  <text x="52" y="22" font-family="'DM Serif Display', Georgia, serif" font-size="18" font-weight="400" fill="#e8eaed">Automated</text>
+  <text x="52" y="40" font-family="'DM Serif Display', Georgia, serif" font-size="18" font-weight="400" fill="#6c63ff">Insights</text>
+</svg>
