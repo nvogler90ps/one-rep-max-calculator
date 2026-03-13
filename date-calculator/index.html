@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Date Calculator - Add Days, Weeks, Months to Any Date</title>
+  <meta name="description" content="Free date calculator. Add or subtract days, weeks, months, or years from any date. Find days between two dates, business days count, and day of the week.">
+  <meta name="keywords" content="date calculator, add days to date, days between dates, business days calculator, what day of the week, date difference calculator">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://date-calculator-2yn.pages.dev/">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Date Calculator - Add Days, Weeks, Months to Any Date">
+  <meta property="og:description" content="Free date calculator. Add or subtract days, weeks, months, or years. Find days between dates and business days count.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://date-calculator-2yn.pages.dev/">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Date Calculator",
+    "description": "Add or subtract days, weeks, months, or years from any date. Calculate days between dates, business days, and day of the week.",
+    "url": "https://date-calculator-2yn.pages.dev/",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <!-- AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3434609691579834" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <h1>Date Calculator</h1>
+      <p>Add or subtract days, weeks, months, or years from any date. Find the difference between two dates.</p>
+    </div>
+  </header>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="container">
+      <a href="#add-subtract">Add/Subtract</a>
+      <a href="#between">Between Dates</a>
+      <a href="#day-of-week">Day of Week</a>
+      <a href="#guide">Guide</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="container">
+
+      <!-- Quick Shortcuts -->
+      <section class="card" id="shortcuts">
+        <h2>Quick Shortcuts</h2>
+        <div class="shortcuts-grid">
+          <button class="pill" data-days="30">30 days from now</button>
+          <button class="pill" data-days="60">60 days from now</button>
+          <button class="pill" data-days="90">90 days from now</button>
+          <button class="pill" data-days="180">180 days from now</button>
+          <button class="pill" data-days="365">1 year from now</button>
+          <button class="pill" data-days="-30">30 days ago</button>
+          <button class="pill" data-days="-60">60 days ago</button>
+          <button class="pill" data-days="-90">90 days ago</button>
+        </div>
+        <div id="shortcut-result" class="result-box hidden">
+          <div class="result-date" id="shortcut-date"></div>
+          <div class="result-detail" id="shortcut-detail"></div>
+        </div>
+      </section>
+
+      <!-- Add/Subtract from Date -->
+      <section class="card" id="add-subtract">
+        <h2>Add or Subtract from a Date</h2>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="start-date">Start Date</label>
+            <input type="date" id="start-date">
+          </div>
+          <div class="form-group">
+            <label for="offset-value">Amount</label>
+            <div class="input-with-select">
+              <input type="number" id="offset-value" value="0" inputmode="numeric">
+              <select id="offset-unit">
+                <option value="days">Days</option>
+                <option value="weeks">Weeks</option>
+                <option value="months">Months</option>
+                <option value="years">Years</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="offset-direction">Direction</label>
+            <select id="offset-direction">
+              <option value="add">Add (+)</option>
+              <option value="subtract">Subtract (-)</option>
+            </select>
+          </div>
+        </div>
+        <div id="add-result" class="result-box hidden">
+          <div class="result-label">Result</div>
+          <div class="result-date" id="add-result-date"></div>
+          <div class="result-details">
+            <span class="result-detail" id="add-result-dow"></span>
+            <span class="result-detail" id="add-result-business"></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Ad Slot 1 -->
+      <div class="ad-slot" aria-hidden="true">Advertisement</div>
+
+      <!-- Days Between Dates -->
+      <section class="card" id="between">
+        <h2>Days Between Two Dates</h2>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="between-start">Start Date</label>
+            <input type="date" id="between-start">
+          </div>
+          <div class="form-group">
+            <label for="between-end">End Date</label>
+            <input type="date" id="between-end">
+          </div>
+        </div>
+        <div id="between-result" class="result-box hidden">
+          <div class="result-label">Difference</div>
+          <div class="result-date" id="between-result-days"></div>
+          <div class="result-details">
+            <span class="result-detail" id="between-result-weeks"></span>
+            <span class="result-detail" id="between-result-business"></span>
+            <span class="result-detail" id="between-result-breakdown"></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Ad Slot 2 -->
+      <div class="ad-slot" aria-hidden="true">Advertisement</div>
+
+      <!-- Day of Week -->
+      <section class="card" id="day-of-week">
+        <h2>What Day of the Week Was...?</h2>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="dow-date">Pick a Date</label>
+            <input type="date" id="dow-date">
+          </div>
+        </div>
+        <div id="dow-result" class="result-box hidden">
+          <div class="result-date" id="dow-result-day"></div>
+          <div class="result-detail" id="dow-result-detail"></div>
+        </div>
+      </section>
+
+      <!-- Ad Slot 3 -->
+      <div class="ad-slot" aria-hidden="true">Advertisement</div>
+
+      <!-- SEO Guide -->
+      <section class="card" id="guide">
+        <h2>Date Calculator Guide</h2>
+        <div class="guide-content">
+          <h3>How to Use This Date Calculator</h3>
+          <p>This free date calculator helps you add or subtract days, weeks, months, or years from any date. It also calculates the exact number of days between two dates, counts business days (weekdays), and tells you the day of the week for any date.</p>
+
+          <h3>Common Use Cases</h3>
+          <ul>
+            <li><strong>Contract deadlines:</strong> Find the exact date 30, 60, or 90 days from a signing date.</li>
+            <li><strong>Project planning:</strong> Calculate delivery dates by adding weeks or months to a start date.</li>
+            <li><strong>Legal deadlines:</strong> Determine filing deadlines, notice periods, and statute of limitations dates.</li>
+            <li><strong>Travel planning:</strong> Count the days until your trip or calculate return dates.</li>
+            <li><strong>Pregnancy due dates:</strong> Add 40 weeks (280 days) from the last menstrual period.</li>
+            <li><strong>Financial calculations:</strong> Determine maturity dates, payment schedules, and interest periods.</li>
+            <li><strong>Warranty tracking:</strong> Find when a 1-year or 2-year warranty expires.</li>
+          </ul>
+
+          <h3>Business Days vs. Calendar Days</h3>
+          <p>Calendar days include every day (Monday through Sunday), while business days count only weekdays (Monday through Friday). This distinction matters for contracts, shipping estimates, and legal deadlines. Our calculator shows both so you always have the information you need.</p>
+
+          <h3>Adding Months and Years</h3>
+          <p>When adding months, the calculator preserves the day of the month when possible. For example, adding 1 month to January 15 gives February 15. If the target month has fewer days (e.g., adding 1 month to January 31), the result is clamped to the last day of that month (February 28 or 29).</p>
+
+          <h3>Leap Years</h3>
+          <p>A leap year occurs every 4 years, except for years divisible by 100 -- unless also divisible by 400. This means 2024 and 2028 are leap years, but 2100 is not. The calculator handles leap years automatically in all calculations.</p>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Automated Insights LLC. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

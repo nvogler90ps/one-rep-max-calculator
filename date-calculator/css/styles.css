@@ -1,0 +1,402 @@
+/* -------------------------------------------------------
+   Date Calculator - Styles
+   ------------------------------------------------------- */
+
+:root {
+  --bg: #0f1117;
+  --surface: #1a1d27;
+  --border: #2e3345;
+  --text: #e8eaed;
+  --text-muted: #9aa0b0;
+  --accent: #6c63ff;
+  --accent-hover: #8078ff;
+  --green: #34d399;
+  --red: #f87171;
+  --yellow: #fbbf24;
+  --radius: 8px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial,
+    sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+
+/* -------------------------------------------------------
+   Layout
+   ------------------------------------------------------- */
+
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 1.5rem 0;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+header p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+nav {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 0.75rem 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+nav .container {
+  display: flex;
+  gap: 1.25rem;
+  white-space: nowrap;
+  justify-content: center;
+}
+
+nav a {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 0.25rem 0;
+}
+nav a:hover {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+main {
+  padding: 1.25rem 0 2rem;
+}
+
+/* -------------------------------------------------------
+   Cards
+   ------------------------------------------------------- */
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.card h2 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+/* -------------------------------------------------------
+   Form Elements
+   ------------------------------------------------------- */
+
+.form-row {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.form-group {
+  flex: 1;
+  min-width: 140px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 0.35rem;
+  font-weight: 500;
+}
+
+input[type="date"],
+input[type="number"],
+select {
+  width: 100%;
+  padding: 0.65rem 0.75rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-size: 1rem;
+  font-family: inherit;
+  -webkit-appearance: none;
+  appearance: none;
+  min-height: 44px;
+}
+
+input[type="date"]:focus,
+input[type="number"]:focus,
+select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.25);
+}
+
+/* Fix date input icon color in dark mode */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.8);
+  cursor: pointer;
+  padding: 4px;
+}
+
+select {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%239aa0b0' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  padding-right: 2rem;
+}
+
+.input-with-select {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.input-with-select input {
+  flex: 1;
+  min-width: 80px;
+}
+
+.input-with-select select {
+  flex: 1;
+  min-width: 100px;
+}
+
+/* -------------------------------------------------------
+   Quick Shortcuts (pill buttons)
+   ------------------------------------------------------- */
+
+.shortcuts-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.pill {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--text);
+  font-size: 0.85rem;
+  font-family: inherit;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  white-space: nowrap;
+  min-height: 40px;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.pill:hover {
+  border-color: var(--accent);
+  background: rgba(108, 99, 255, 0.1);
+}
+
+.pill:active,
+.pill.active {
+  border-color: var(--accent);
+  background: rgba(108, 99, 255, 0.2);
+  color: #fff;
+}
+
+/* -------------------------------------------------------
+   Results
+   ------------------------------------------------------- */
+
+.result-box {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.result-box.hidden {
+  display: none;
+}
+
+.result-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.25rem;
+}
+
+.result-date {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 0.35rem;
+}
+
+.result-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+}
+
+.result-detail {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.result-detail strong {
+  color: var(--text);
+}
+
+/* -------------------------------------------------------
+   Ad Slots
+   ------------------------------------------------------- */
+
+.ad-slot {
+  background: var(--surface);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  margin-bottom: 1.25rem;
+  min-height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* -------------------------------------------------------
+   Guide / SEO Content
+   ------------------------------------------------------- */
+
+.guide-content h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 1.25rem 0 0.5rem;
+}
+
+.guide-content h3:first-child {
+  margin-top: 0;
+}
+
+.guide-content p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
+}
+
+.guide-content ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 0.75rem;
+}
+
+.guide-content li {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  padding: 0.3rem 0 0.3rem 1rem;
+  position: relative;
+}
+
+.guide-content li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.7rem;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+/* -------------------------------------------------------
+   Footer
+   ------------------------------------------------------- */
+
+footer {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  padding: 1.25rem 0;
+  text-align: center;
+}
+
+footer p {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+/* -------------------------------------------------------
+   Responsive
+   ------------------------------------------------------- */
+
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 1.3rem;
+  }
+
+  .form-row {
+    flex-direction: column;
+  }
+
+  .form-group {
+    min-width: 100%;
+  }
+
+  .result-date {
+    font-size: 1.2rem;
+  }
+
+  .result-details {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  nav .container {
+    justify-content: flex-start;
+    padding: 0 1rem;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+  .form-group {
+    min-width: 45%;
+  }
+}
