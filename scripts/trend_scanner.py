@@ -1,18 +1,19 @@
 """Daily trend scanner -- orchestrates trend fetching, filtering, and reporting.
 
 Fetches trending search terms from multiple sources, filters them for
-tool-building opportunities using keyword heuristics and LLM classification,
-then generates a markdown report and structured JSON output.
+tool-building opportunities using keyword heuristics and LLM classification
+(via Claude CLI), then generates a markdown report and structured JSON output.
 
 Usage:
-    GEMINI_API_KEY=xxx python scripts/trend_scanner.py
+    python scripts/trend_scanner.py           # Full run with Claude CLI for LLM
+    python scripts/trend_scanner.py --no-llm  # Skip LLM, output raw trends only
 
-If GEMINI_API_KEY is not set, LLM steps are skipped and raw trend data
-is output instead.
+Requires the `claude` CLI to be installed and authenticated for LLM steps.
 """
 
 import json
 import os
+import shutil
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -24,11 +25,21 @@ from trend_filter import pre_filter, classify_with_llm, rank_candidates
 TRENDS_DIR = Path(__file__).resolve().parent.parent / "trends"
 
 
+def _claude_cli_available() -> bool:
+    """Check if the claude CLI is installed and accessible."""
+    return shutil.which("claude") is not None
+
+
 def main() -> None:
     """Run the full trend scanning pipeline."""
     start_time = datetime.now(timezone.utc)
     today = start_time.strftime("%Y-%m-%d")
-    api_key = os.environ.get("GEMINI_API_KEY", "").strip()
+    skip_llm = "--no-llm" in sys.argv
+    use_llm = not skip_llm and _claude_cli_available()
+
+    if not skip_llm and not use_llm:
+        print("[WARN] Claude CLI not found. Run with --no-llm or install claude CLI.")
+        print("       Proceeding without LLM classification.")
 
     print(f"=== Trend Scanner: {today} ===")
     print()
@@ -62,19 +73,19 @@ def main() -> None:
     print(f"  Removed {removed_count}, kept {len(filtered_trends)}")
     print()
 
-    # Step 3 & 4: LLM classification and ranking (if API key available)
+    # Step 3 & 4: LLM classification and ranking (via Claude CLI)
     candidates = []
     top_5 = []
     total_llm_calls = 0
 
-    if not api_key:
-        print("[3/4] Skipping LLM classification (GEMINI_API_KEY not set)")
-        print("[4/4] Skipping LLM ranking (GEMINI_API_KEY not set)")
+    if not use_llm:
+        print("[3/4] Skipping LLM classification (Claude CLI not available or --no-llm)")
+        print("[4/4] Skipping LLM ranking")
         print()
     else:
-        print(f"[3/4] Classifying {len(filtered_trends)} trends with Gemini...")
+        print(f"[3/4] Classifying {len(filtered_trends)} trends with Claude CLI...")
         try:
-            candidates, classify_calls = classify_with_llm(filtered_trends, api_key)
+            candidates, classify_calls = classify_with_llm(filtered_trends)
             total_llm_calls += classify_calls
             print(f"  Found {len(candidates)} tool candidates ({classify_calls} LLM calls)")
         except Exception as e:
@@ -85,7 +96,7 @@ def main() -> None:
         if candidates:
             print(f"[4/4] Ranking top 5 from {len(candidates)} candidates...")
             try:
-                top_5, rank_calls = rank_candidates(candidates, api_key)
+                top_5, rank_calls = rank_candidates(candidates)
                 total_llm_calls += rank_calls
                 print(f"  Top 5 selected ({rank_calls} LLM calls)")
             except Exception as e:
@@ -104,7 +115,7 @@ def main() -> None:
         "summary": {
             "trends_scanned": len(trends),
             "pre_filtered_removed": removed_count,
-            "llm_evaluated": len(filtered_trends) if api_key else 0,
+            "llm_evaluated": len(filtered_trends) if use_llm else 0,
             "tool_candidates_found": len(candidates),
         },
         "top_5": top_5,
@@ -126,7 +137,7 @@ def main() -> None:
                 "source": t["source"],
             }
             for t in trends
-        ] if not api_key else [],  # Include raw trends only when no LLM
+        ] if not use_llm else [],  # Include raw trends only when no LLM
     }
 
     # Write markdown report

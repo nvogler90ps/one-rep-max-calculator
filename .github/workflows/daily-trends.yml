@@ -23,10 +23,8 @@ jobs:
       - name: Install dependencies
         run: pip install -r scripts/requirements.txt
 
-      - name: Run trend scanner
-        env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: python scripts/trend_scanner.py
+      - name: Run trend scanner (no LLM -- classification done locally via Claude CLI)
+        run: python scripts/trend_scanner.py --no-llm
 
       - name: Commit and push results
         run: |

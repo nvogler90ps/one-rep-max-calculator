@@ -2,11 +2,12 @@
 
 Uses a two-stage approach:
 1. Pre-filter: remove obvious non-tool trends (sports, entertainment, politics, etc.)
-2. LLM classification: use Gemini 2.5 Flash to identify tool candidates and rank them.
+2. LLM classification: use Claude CLI to identify tool candidates and rank them.
 """
 
 import json
 import re
+import subprocess
 import time
 from typing import Optional
 
@@ -91,26 +92,38 @@ def pre_filter(trends: list[dict]) -> tuple[list[dict], int]:
     return kept, removed
 
 
+def _call_claude(prompt: str) -> str:
+    """Call the Claude CLI with a prompt and return the response text.
+
+    Uses `claude -p` (print mode) which reads from stdin and prints response to stdout.
+    """
+    result = subprocess.run(
+        ["claude", "-p"],
+        input=prompt,
+        capture_output=True,
+        text=True,
+        timeout=120,
+    )
+    if result.returncode != 0:
+        raise RuntimeError(f"claude CLI failed (exit {result.returncode}): {result.stderr[:200]}")
+    return result.stdout.strip()
+
+
 def classify_with_llm(
     trends: list[dict],
-    api_key: str,
+    api_key: str = "",
 ) -> tuple[list[dict], int]:
-    """Classify trends as TOOL_CANDIDATE or NOT_TOOL using Gemini 2.5 Flash.
+    """Classify trends as TOOL_CANDIDATE or NOT_TOOL using Claude CLI.
 
-    Processes trends in batches of 25 per API call.
+    Processes trends in batches of 25 per CLI call.
 
     Args:
         trends: Pre-filtered list of trend dicts.
-        api_key: Gemini API key.
+        api_key: Unused (kept for interface compatibility). Claude CLI uses existing auth.
 
     Returns:
         Tuple of (list of tool candidate dicts, number of LLM calls made).
     """
-    import google.generativeai as genai
-
-    genai.configure(api_key=api_key)
-    model = genai.GenerativeModel("gemini-2.5-flash")
-
     candidates = []
     llm_calls = 0
 
@@ -130,9 +143,9 @@ def classify_with_llm(
 
         for attempt in range(MAX_RETRIES + 1):
             try:
-                response = model.generate_content(prompt)
+                response_text = _call_claude(prompt)
                 llm_calls += 1
-                parsed = _parse_classification_response(response.text)
+                parsed = _parse_classification_response(response_text)
                 break
             except json.JSONDecodeError:
                 if attempt < MAX_RETRIES:
@@ -163,7 +176,7 @@ def classify_with_llm(
                     "complexity": result.get("complexity", "medium"),
                 })
 
-        # Small delay between batches to respect rate limits
+        # Small delay between batches
         if i + BATCH_SIZE < len(trends):
             time.sleep(0.5)
 
@@ -219,26 +232,21 @@ def _parse_classification_response(text: str) -> list[dict]:
 
 def rank_candidates(
     candidates: list[dict],
-    api_key: str,
+    api_key: str = "",
 ) -> tuple[list[dict], int]:
     """Rank tool candidates and return the top 5 with detailed specs.
 
-    Makes one LLM call to rank all candidates.
+    Makes one Claude CLI call to rank all candidates.
 
     Args:
         candidates: List of tool candidate dicts from classify_with_llm.
-        api_key: Gemini API key.
+        api_key: Unused (kept for interface compatibility).
 
     Returns:
         Tuple of (top 5 ranked candidates with specs, number of LLM calls made).
     """
     if not candidates:
         return [], 0
-
-    import google.generativeai as genai
-
-    genai.configure(api_key=api_key)
-    model = genai.GenerativeModel("gemini-2.5-flash")
 
     # Prepare summary of all candidates for ranking
     candidate_summaries = []
@@ -258,9 +266,9 @@ def rank_candidates(
     llm_calls = 0
     for attempt in range(MAX_RETRIES + 1):
         try:
-            response = model.generate_content(prompt)
+            response_text = _call_claude(prompt)
             llm_calls += 1
-            ranked = _parse_ranking_response(response.text)
+            ranked = _parse_ranking_response(response_text)
             break
         except json.JSONDecodeError:
             if attempt < MAX_RETRIES:
@@ -269,7 +277,6 @@ def rank_candidates(
                 continue
             else:
                 print(f"  [WARN] Ranking JSON parse failed after retries")
-                # Fall back to top 5 by traffic volume
                 ranked = _fallback_ranking(candidates)
         except Exception as e:
             print(f"  [WARN] Ranking LLM call failed: {e}")

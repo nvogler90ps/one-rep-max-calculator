@@ -6,19 +6,21 @@ Automated daily identification of trending search terms that could become micro-
 
 1. **Fetch**: Pulls trending searches from Google Trends RSS (10 geos) and pytrends (15 countries)
 2. **Pre-filter**: Removes obvious non-tool trends (sports, entertainment, politics, person names)
-3. **Classify**: Uses Gemini 2.5 Flash to identify which trends suggest a tool-building opportunity
+3. **Classify**: Uses Claude CLI (`claude -p`) to identify which trends suggest a tool-building opportunity
 4. **Rank**: Selects the top 5 opportunities based on volume, evergreen potential, competition, feasibility, and monetization
 
 ## Running manually
 
-```bash
-GEMINI_API_KEY=your-key-here python scripts/trend_scanner.py
-```
-
-Without a Gemini API key, the scanner skips LLM steps and outputs raw trend data:
+Full run with LLM classification (requires Claude CLI installed and authenticated):
 
 ```bash
 python scripts/trend_scanner.py
+```
+
+Without LLM (just fetches and pre-filters trends):
+
+```bash
+python scripts/trend_scanner.py --no-llm
 ```
 
 ## Output
@@ -30,4 +32,4 @@ Reports are stored in this directory:
 
 ## GitHub Action
 
-The `daily-trends.yml` workflow runs automatically at 10:00 UTC every day. It can also be triggered manually from the Actions tab. Results are committed and pushed to this directory automatically.
+The `daily-trends.yml` workflow runs automatically at 10:00 UTC every day in `--no-llm` mode (fetches and pre-filters trends). LLM classification is done locally via Claude CLI when reviewing opportunities. The workflow can also be triggered manually from the Actions tab.
