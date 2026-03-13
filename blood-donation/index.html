@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blood Donation Eligibility Checker - Can I Donate Blood?</title>
+  <meta name="description" content="Free blood donation eligibility quiz. Find out if you can donate blood, plasma, or platelets based on your health, medications, travel history, and more.">
+  <meta name="keywords" content="can I donate blood, blood donation eligibility quiz, blood donation requirements, am I eligible to donate blood, plasma donation eligibility checker">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://automated-insights.com/blood-donation/">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Blood Donation Eligibility Checker - Can I Donate Blood?">
+  <meta property="og:description" content="Interactive quiz to determine if you can donate blood, plasma, or platelets. Covers US, UK, Canada, and Australia guidelines.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://automated-insights.com/blood-donation/">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Blood Donation Eligibility Checker",
+    "description": "Interactive quiz to determine if you can donate blood, plasma, or platelets. Covers eligibility rules for the US (Red Cross), UK (NHS Blood), Canada (Canadian Blood Services), and Australia (Lifeblood).",
+    "url": "https://automated-insights.com/blood-donation/",
+    "applicationCategory": "HealthApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <!-- AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3434609691579834" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <h1>Blood Donation Eligibility Checker</h1>
+      <p>Find out if you can donate blood, plasma, or platelets with our quick eligibility quiz.</p>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- Ad Slot 1 -->
+    <div class="ad-slot" aria-hidden="true">Advertisement</div>
+
+    <!-- Disclaimer -->
+    <div class="disclaimer">
+      <strong>Important:</strong> This tool provides general guidance only. Final eligibility is always determined at the donation center by trained staff.
+    </div>
+
+    <!-- Quiz Section -->
+    <section id="quiz-section">
+      <!-- Country Selector -->
+      <div id="country-selector" class="card">
+        <h2>Select Your Country</h2>
+        <p>Eligibility rules vary by country. Choose yours to get accurate guidance.</p>
+        <div class="country-grid">
+          <button class="country-btn" data-country="us">
+            <span class="country-flag">&#127482;&#127480;</span>
+            <span class="country-name">United States</span>
+            <span class="country-org">American Red Cross</span>
+          </button>
+          <button class="country-btn" data-country="uk">
+            <span class="country-flag">&#127468;&#127463;</span>
+            <span class="country-name">United Kingdom</span>
+            <span class="country-org">NHS Blood and Transplant</span>
+          </button>
+          <button class="country-btn" data-country="ca">
+            <span class="country-flag">&#127464;&#127462;</span>
+            <span class="country-name">Canada</span>
+            <span class="country-org">Canadian Blood Services</span>
+          </button>
+          <button class="country-btn" data-country="au">
+            <span class="country-flag">&#127462;&#127482;</span>
+            <span class="country-name">Australia</span>
+            <span class="country-org">Lifeblood</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Progress Bar -->
+      <div id="progress-container" class="hidden">
+        <div class="progress-bar">
+          <div id="progress-fill" class="progress-fill"></div>
+        </div>
+        <div id="progress-text" class="progress-text">Question 1 of 9</div>
+      </div>
+
+      <!-- Question Container -->
+      <div id="question-container" class="card hidden">
+        <h3 id="question-title"></h3>
+        <p id="question-subtitle" class="question-subtitle"></p>
+        <div id="question-body"></div>
+        <div class="question-nav">
+          <button id="btn-back" class="btn btn-secondary hidden">Back</button>
+          <button id="btn-next" class="btn btn-primary">Next</button>
+        </div>
+      </div>
+
+      <!-- Results -->
+      <div id="results-container" class="hidden">
+        <div id="results-card" class="card results-card">
+          <div id="results-icon" class="results-icon"></div>
+          <h2 id="results-title"></h2>
+          <p id="results-summary"></p>
+          <div id="results-details"></div>
+          <div id="results-types" class="hidden">
+            <h3>Donation Types Available to You</h3>
+            <div id="donation-types-grid" class="donation-types-grid"></div>
+          </div>
+          <div id="results-deferral" class="hidden">
+            <h3>When You May Become Eligible</h3>
+            <div id="deferral-info"></div>
+          </div>
+          <div id="schedule-links" class="schedule-links">
+            <h3>Ready to Schedule?</h3>
+            <div id="schedule-link-container"></div>
+          </div>
+          <div class="results-actions">
+            <button id="btn-restart" class="btn btn-primary">Start Over</button>
+          </div>
+        </div>
+        <div class="disclaimer">
+          <strong>Reminder:</strong> This tool provides general guidance only. Final eligibility is determined at the donation center. Always be honest during the screening process -- it protects both you and the recipient.
+        </div>
+      </div>
+    </section>
+
+    <!-- Ad Slot 2 -->
+    <div class="ad-slot" aria-hidden="true">Advertisement</div>
+
+    <!-- SEO Content Section -->
+    <section id="guide" class="seo-content">
+      <h2>Blood Donation Requirements and Benefits</h2>
+
+      <h3>Who Can Donate Blood?</h3>
+      <p>Most healthy adults can donate blood. In the United States, donors must be at least 17 years old (16 with parental consent in some states), weigh at least 110 pounds, and be in good general health. Similar requirements apply in the UK, Canada, and Australia, though specific age limits and weight thresholds may differ slightly.</p>
+
+      <h3>Types of Blood Donation</h3>
+      <p><strong>Whole blood donation</strong> is the most common type. About one pint is collected, and the process takes roughly 10 minutes after setup. You can donate whole blood every 56 days (8 weeks).</p>
+      <p><strong>Platelet donation (apheresis)</strong> collects only platelets while returning other blood components to your body. Platelets are critical for cancer patients and surgical procedures. You can donate platelets every 7 days, up to 24 times per year.</p>
+      <p><strong>Plasma donation</strong> collects the liquid portion of your blood. Plasma is used to treat burn victims, patients with clotting disorders, and those with immune deficiencies. You can donate plasma every 28 days.</p>
+
+      <h3>Common Reasons for Temporary Deferral</h3>
+      <ul>
+        <li><strong>Recent tattoo or piercing:</strong> Wait 3 to 12 months depending on your country and whether the facility was state-regulated.</li>
+        <li><strong>Travel to malaria-risk areas:</strong> Deferral periods range from 3 to 12 months after returning.</li>
+        <li><strong>Medications:</strong> Blood thinners, antibiotics, and Accutane (isotretinoin) typically require deferral until the medication is completed or a waiting period has passed.</li>
+        <li><strong>Recent surgery or dental work:</strong> Minor dental work may require a 24-72 hour wait; surgery deferrals vary based on the procedure.</li>
+        <li><strong>Pregnancy:</strong> Most countries require waiting 6 weeks to 6 months after giving birth before donating.</li>
+        <li><strong>Cold or flu:</strong> You must be symptom-free and feeling well on the day of donation.</li>
+      </ul>
+
+      <h3>Why Donate Blood?</h3>
+      <p>Every two seconds, someone in the United States needs blood. A single donation can save up to three lives. Blood cannot be manufactured -- it can only come from generous donors. Regular donation also provides free health screenings, including blood pressure checks, hemoglobin levels, and tests for infectious diseases.</p>
+
+      <h3>How to Prepare for Blood Donation</h3>
+      <ul>
+        <li>Drink plenty of water before your appointment</li>
+        <li>Eat a healthy meal within a few hours of donating</li>
+        <li>Get a good night's sleep the night before</li>
+        <li>Bring a valid photo ID</li>
+        <li>Wear clothing with sleeves that can be rolled up above the elbow</li>
+      </ul>
+    </section>
+
+    <!-- Ad Slot 3 -->
+    <div class="ad-slot" aria-hidden="true">Advertisement</div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Automated Insights LLC. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fuel Price Comparison Calculator - Compare Gas & Diesel Prices</title>
+  <meta name="description" content="Compare gas and diesel prices across stations. Calculate cost per fill-up, annual fuel costs, and savings. Supports regular, mid-grade, premium, and diesel.">
+  <meta name="keywords" content="fuel price comparison, gas price calculator, diesel price near me, fuel cost calculator, petrol price comparison">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://automated-insights.com/fuel-calculator/">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Fuel Price Comparison Calculator">
+  <meta property="og:description" content="Compare gas and diesel prices across stations. Calculate cost per fill-up, annual fuel costs, and find the cheapest option.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://automated-insights.com/fuel-calculator/">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Fuel Price Comparison Calculator",
+    "description": "Compare gas and diesel prices across stations. Calculate cost per fill-up, annual fuel costs, and savings by choosing the cheapest station.",
+    "url": "https://automated-insights.com/fuel-calculator/",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <!-- AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3434609691579834" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <h1>Fuel Price Comparison Calculator</h1>
+      <p>Compare gas and diesel prices, estimate fill-up costs, and find the cheapest station near you.</p>
+    </div>
+  </header>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="container">
+      <a href="#vehicle">Vehicle Profile</a>
+      <a href="#compare">Price Comparison</a>
+      <a href="#savings">Savings</a>
+      <a href="#tips">Fuel Economy Tips</a>
+    </div>
+  </nav>
+
+  <main class="container">
+
+    <!-- Ad Slot 1 -->
+    <div class="ad-slot" aria-hidden="true">Advertisement</div>
+
+    <!-- Unit Toggle -->
+    <section id="units">
+      <div class="controls-row">
+        <label>
+          Volume Unit
+          <select id="unit-toggle">
+            <option value="gallons">Gallons (US)</option>
+            <option value="liters">Liters</option>
+          </select>
+        </label>
+      </div>
+    </section>
+
+    <!-- Vehicle Profile Section -->
+    <section id="vehicle">
+      <h2>Vehicle Profile</h2>
+      <p>Enter your vehicle details to calculate fuel costs accurately.</p>
+      <div class="card">
+        <div class="form-grid">
+          <label class="form-label">
+            <span>Fuel Type</span>
+            <select id="fuel-type">
+              <option value="regular">Regular Unleaded</option>
+              <option value="midgrade">Mid-Grade</option>
+              <option value="premium">Premium</option>
+              <option value="diesel">Diesel</option>
+            </select>
+          </label>
+          <label class="form-label">
+            <span>Tank Size (<span class="unit-volume">gallons</span>)</span>
+            <input type="number" id="tank-size" value="14" min="1" max="100" step="0.5">
+          </label>
+          <label class="form-label">
+            <span>Weekly Miles Driven</span>
+            <input type="number" id="weekly-miles" value="250" min="1" max="5000" step="10">
+          </label>
+          <label class="form-label">
+            <span>Fuel Economy (MPG)</span>
+            <input type="number" id="mpg" value="28" min="1" max="200" step="0.5">
+          </label>
+        </div>
+        <div id="vehicle-summary" class="summary-box"></div>
+      </div>
+    </section>
+
+    <!-- Price Comparison Section -->
+    <section id="compare">
+      <h2>Station Price Comparison</h2>
+      <p>Enter prices from up to 3 stations to compare cost per fill-up and annual fuel expenses.</p>
+      <div class="card">
+        <div class="form-grid form-grid-3">
+          <label class="form-label">
+            <span>Station 1 Name</span>
+            <input type="text" id="station-1-name" value="Station A" maxlength="30">
+          </label>
+          <label class="form-label">
+            <span>Price per <span class="unit-volume">gallon</span> ($)</span>
+            <input type="number" id="station-1-price" value="3.29" min="0" max="20" step="0.01">
+          </label>
+          <div></div>
+
+          <label class="form-label">
+            <span>Station 2 Name</span>
+            <input type="text" id="station-2-name" value="Station B" maxlength="30">
+          </label>
+          <label class="form-label">
+            <span>Price per <span class="unit-volume">gallon</span> ($)</span>
+            <input type="number" id="station-2-price" value="3.49" min="0" max="20" step="0.01">
+          </label>
+          <div></div>
+
+          <label class="form-label">
+            <span>Station 3 Name (optional)</span>
+            <input type="text" id="station-3-name" value="" maxlength="30" placeholder="e.g. Costco">
+          </label>
+          <label class="form-label">
+            <span>Price per <span class="unit-volume">gallon</span> ($)</span>
+            <input type="number" id="station-3-price" value="" min="0" max="20" step="0.01" placeholder="Optional">
+          </label>
+          <div></div>
+        </div>
+        <button id="compare-btn" class="btn">Compare Prices</button>
+      </div>
+      <div id="comparison-result"></div>
+    </section>
+
+    <!-- Ad Slot 2 -->
+    <div class="ad-slot" aria-hidden="true">Advertisement</div>
+
+    <!-- Savings Calculator -->
+    <section id="savings">
+      <h2>Savings Calculator</h2>
+      <p>See how much you save per fill-up and per year by choosing the cheapest station.</p>
+      <div id="savings-result"></div>
+    </section>
+
+    <!-- Ad Slot 3 -->
+    <div class="ad-slot" aria-hidden="true">Advertisement</div>
+
+    <!-- SEO Content Section -->
+    <section id="tips" class="seo-content">
+      <h2>Fuel Economy Tips and Buying Guide</h2>
+
+      <h3>How to Save Money on Gas</h3>
+      <p>Fuel is one of the largest recurring expenses for drivers. Even small price differences between stations add up over time. A $0.10 per gallon difference on a 14-gallon tank saves $1.40 per fill-up, which amounts to over $70 per year if you fill up weekly. Shopping around and using price comparison tools can lead to meaningful annual savings.</p>
+
+      <h3>Understanding Fuel Grades</h3>
+      <p>Most gas stations offer three grades of gasoline: regular (87 octane), mid-grade (89 octane), and premium (91-93 octane). Unless your vehicle's owner manual specifically requires premium fuel, using regular unleaded is perfectly fine and saves you $0.30 to $0.60 per gallon. Higher octane does not improve performance or fuel economy in engines designed for regular fuel.</p>
+
+      <h3>Diesel vs. Gasoline</h3>
+      <p>Diesel engines typically deliver 25-35% better fuel economy than comparable gasoline engines. However, diesel fuel often costs more per gallon. When comparing total fuel costs, factor in the higher MPG rating of diesel vehicles. For high-mileage drivers, diesel can be more cost-effective despite the higher per-gallon price.</p>
+
+      <h3>Driving Habits That Improve Fuel Economy</h3>
+      <ul>
+        <li><strong>Maintain steady speeds:</strong> Use cruise control on highways. Frequent acceleration and braking can reduce fuel economy by 15-30%.</li>
+        <li><strong>Reduce idling:</strong> Idling wastes fuel. If you are stopped for more than 60 seconds, turn off the engine.</li>
+        <li><strong>Check tire pressure:</strong> Under-inflated tires increase rolling resistance. Keeping tires at the recommended pressure improves MPG by up to 3%.</li>
+        <li><strong>Remove excess weight:</strong> Every 100 pounds of extra weight reduces fuel economy by about 1%. Clear out unnecessary cargo.</li>
+        <li><strong>Plan routes efficiently:</strong> Combine errands and avoid peak traffic hours to reduce stop-and-go driving.</li>
+      </ul>
+
+      <h3>When to Fill Up</h3>
+      <p>Gas prices tend to be lowest early in the week (Monday through Wednesday) and highest on weekends. Prices also fluctuate seasonally, with summer blends costing more due to stricter environmental regulations. Filling up in the morning when fuel is cooler gives you slightly denser fuel per gallon, though the difference is minimal with modern underground storage tanks.</p>
+
+      <h3>Gallons vs. Liters</h3>
+      <p>In the United States, fuel is sold by the gallon (3.785 liters). In most other countries, fuel is priced per liter. When comparing international fuel prices, remember that 1 US gallon equals approximately 3.785 liters. This calculator supports both units so you can compare prices regardless of your location.</p>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Automated Insights LLC. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

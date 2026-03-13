@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Winter Storm Preparedness Tool - Emergency Checklist & Supply Calculator</title>
+  <meta name="description" content="Free winter storm preparedness tool. Check storm severity tiers, calculate emergency supplies for your household, and get an interactive checklist you can print.">
+  <meta name="keywords" content="winter storm preparedness checklist, winter storm warning what to do, emergency storm supplies list, blizzard preparation guide, winter storm safety tips">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://automated-insights.com/storm-prep/">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Winter Storm Preparedness Tool - Emergency Checklist & Supply Calculator">
+  <meta property="og:description" content="Check storm severity tiers, calculate emergency supplies for your household, and get a printable emergency checklist.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://automated-insights.com/storm-prep/">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Winter Storm Preparedness Tool",
+    "description": "Check storm severity tiers, calculate emergency supplies for your household, and get a printable interactive checklist for winter storm preparedness.",
+    "url": "https://automated-insights.com/storm-prep/",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <!-- AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3434609691579834" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <h1>Winter Storm Preparedness Tool</h1>
+      <p>Check storm severity, calculate supplies for your household, and build a printable emergency checklist.</p>
+    </div>
+  </header>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="container">
+      <a href="#severity">Severity</a>
+      <a href="#household">Household</a>
+      <a href="#supplies">Supplies</a>
+      <a href="#checklist">Checklist</a>
+      <a href="#guide">Guide</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="container">
+
+      <!-- Storm Severity Explainer -->
+      <section class="card" id="severity">
+        <h2>Storm Severity Tiers</h2>
+        <p class="section-desc">Understanding the difference between a watch, warning, and emergency helps you take the right action at the right time.</p>
+        <div class="severity-grid">
+          <div class="severity-card severity-watch">
+            <div class="severity-badge badge-yellow">Watch</div>
+            <h3>Winter Storm Watch</h3>
+            <p class="severity-meaning">Conditions are <strong>possible</strong> within the next 24-48 hours.</p>
+            <ul class="severity-actions">
+              <li>Monitor local weather forecasts</li>
+              <li>Review your emergency supplies</li>
+              <li>Charge devices and portable batteries</li>
+              <li>Fill your vehicle's gas tank</li>
+              <li>Plan to stay home if possible</li>
+            </ul>
+          </div>
+          <div class="severity-card severity-warning">
+            <div class="severity-badge badge-orange">Warning</div>
+            <h3>Winter Storm Warning</h3>
+            <p class="severity-meaning">Hazardous conditions are <strong>expected</strong> within 12-36 hours.</p>
+            <ul class="severity-actions">
+              <li>Complete all supply purchases now</li>
+              <li>Fill bathtubs and containers with water</li>
+              <li>Move vehicles into garages if possible</li>
+              <li>Insulate pipes and seal drafts</li>
+              <li>Avoid all unnecessary travel</li>
+            </ul>
+          </div>
+          <div class="severity-card severity-emergency">
+            <div class="severity-badge badge-red">Emergency</div>
+            <h3>Blizzard / Ice Storm Emergency</h3>
+            <p class="severity-meaning">Life-threatening conditions are <strong>occurring or imminent</strong>.</p>
+            <ul class="severity-actions">
+              <li>Stay indoors -- do not travel</li>
+              <li>Conserve heat: close off unused rooms</li>
+              <li>Use flashlights, not candles</li>
+              <li>Check on neighbors and elderly</li>
+              <li>Call 911 only for true emergencies</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Ad Slot 1 -->
+      <div class="ad-slot" aria-hidden="true">Advertisement</div>
+
+      <!-- Household Profile -->
+      <section class="card" id="household">
+        <h2>Household Profile</h2>
+        <p class="section-desc">Enter your household details to calculate the supplies you'll need.</p>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="num-adults">Adults</label>
+            <input type="number" id="num-adults" min="0" max="20" value="2" inputmode="numeric">
+          </div>
+          <div class="form-group">
+            <label for="num-children">Children</label>
+            <input type="number" id="num-children" min="0" max="20" value="0" inputmode="numeric">
+          </div>
+          <div class="form-group">
+            <label for="num-pets">Pets</label>
+            <input type="number" id="num-pets" min="0" max="20" value="0" inputmode="numeric">
+          </div>
+          <div class="form-group">
+            <label for="storm-days">Storm Duration (days)</label>
+            <input type="number" id="storm-days" min="1" max="14" value="3" inputmode="numeric">
+          </div>
+        </div>
+      </section>
+
+      <!-- Supply Calculator -->
+      <section class="card" id="supplies">
+        <h2>Supply Calculator</h2>
+        <div id="supply-results" class="supply-results">
+          <table class="supply-table">
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Amount Needed</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody id="supply-tbody"></tbody>
+          </table>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-accent" id="btn-print-supplies">Print Supply List</button>
+        </div>
+      </section>
+
+      <!-- Ad Slot 2 -->
+      <div class="ad-slot" aria-hidden="true">Advertisement</div>
+
+      <!-- Emergency Checklist -->
+      <section class="card" id="checklist">
+        <h2>Emergency Checklist</h2>
+        <p class="section-desc">Check off items as you prepare. Your progress is saved automatically.</p>
+        <div class="checklist-controls">
+          <button class="btn btn-small" id="btn-expand-all">Expand All</button>
+          <button class="btn btn-small" id="btn-collapse-all">Collapse All</button>
+          <button class="btn btn-small btn-danger" id="btn-reset-checklist">Reset</button>
+        </div>
+        <div id="checklist-container"></div>
+        <div class="btn-row">
+          <button class="btn btn-accent" id="btn-print-checklist">Print Checklist</button>
+        </div>
+        <div class="progress-bar-wrap">
+          <div class="progress-bar" id="progress-bar"></div>
+        </div>
+        <p class="progress-text" id="progress-text">0 of 0 items complete</p>
+      </section>
+
+      <!-- Ad Slot 3 -->
+      <div class="ad-slot" aria-hidden="true">Advertisement</div>
+
+      <!-- SEO Guide -->
+      <section class="card" id="guide">
+        <h2>Winter Storm Preparedness Guide</h2>
+        <div class="guide-content">
+          <h3>Why Winter Storm Preparedness Matters</h3>
+          <p>Winter storms can knock out power for days, make roads impassable, and create life-threatening cold. According to the National Weather Service, winter storms are responsible for roughly 70 deaths and thousands of injuries each year in the United States. Having a plan and the right supplies can make the difference between a manageable inconvenience and a dangerous situation.</p>
+
+          <h3>Understanding Storm Severity Levels</h3>
+          <p>The National Weather Service issues three main levels of winter weather alerts. A <strong>Winter Storm Watch</strong> means conditions are possible in the next 24 to 48 hours -- this is your signal to prepare. A <strong>Winter Storm Warning</strong> means hazardous conditions are expected within 12 to 36 hours -- finish all preparations immediately. A <strong>Blizzard Warning</strong> or <strong>Ice Storm Warning</strong> indicates life-threatening conditions are imminent or occurring.</p>
+
+          <h3>How Much Water Do You Need?</h3>
+          <p>The general guideline is one gallon of water per person per day. This covers drinking and basic sanitation. For a family of four preparing for a 3-day storm, that means 12 gallons minimum. Don't forget water for pets -- plan roughly half a gallon per large pet per day. If you have advance warning, fill bathtubs and large containers as backup.</p>
+
+          <h3>Food and Cooking Without Power</h3>
+          <p>Stock non-perishable foods that require little or no cooking: canned goods, crackers, peanut butter, dried fruit, granola bars, and baby food if needed. A manual can opener is essential. If you have a gas grill or camping stove, keep extra fuel on hand -- but never use these indoors due to carbon monoxide risk.</p>
+
+          <h3>Staying Warm Without Heat</h3>
+          <p>If your heating system fails, close off unused rooms and gather everyone into one interior room. Use blankets, sleeping bags, and layered clothing. Seal drafts under doors with rolled towels. If you have a fireplace, keep a supply of seasoned firewood. Never use a gas oven or stove for heating -- it produces carbon monoxide.</p>
+
+          <h3>Protecting Pipes and Your Home</h3>
+          <p>Frozen pipes are one of the most common and expensive winter storm damages. Let faucets drip slightly during extreme cold. Open cabinet doors to let warm air reach pipes under sinks. Know where your water shut-off valve is in case a pipe bursts. Insulate exposed pipes with foam sleeves or heat tape before the storm arrives.</p>
+
+          <h3>Vehicle and Travel Safety</h3>
+          <p>Keep your gas tank at least half full during winter months. Stock a winter emergency kit in your car: blankets, flashlight, jumper cables, ice scraper, sand or kitty litter for traction, snacks, and water. If you must drive during a storm, tell someone your route and expected arrival time. If you get stranded, stay in your vehicle, run the engine periodically for heat, and keep a window slightly open to prevent carbon monoxide buildup.</p>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Automated Insights LLC. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

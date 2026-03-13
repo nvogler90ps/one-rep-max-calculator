@@ -1,0 +1,530 @@
+/* ========================================
+   Horse Racing Prize Money Calculator
+   ======================================== */
+
+:root {
+  --bg: #0f1117;
+  --surface: #1a1d27;
+  --surface-2: #242836;
+  --border: #2e3345;
+  --text: #e8eaed;
+  --text-muted: #9aa0b0;
+  --accent: #6c63ff;
+  --accent-hover: #7b73ff;
+  --green: #34d399;
+  --yellow: #fbbf24;
+  --orange: #fb923c;
+  --red: #f87171;
+  --blue: #60a5fa;
+  --radius: 8px;
+  --radius-lg: 12px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ---- Header ---- */
+
+header {
+  text-align: center;
+  padding: 1.5rem 1rem 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+header h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+header .subtitle {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-top: 0.25rem;
+}
+
+/* ---- Main ---- */
+
+main {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+section {
+  margin-bottom: 1.5rem;
+}
+
+h2 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--text);
+}
+
+h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  color: var(--text);
+}
+
+/* ---- Cards ---- */
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.card-description {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+/* ---- Form Elements ---- */
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group:last-child {
+  margin-bottom: 0;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 0.35rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+select {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface-2);
+  color: var(--text);
+  font-size: 0.9rem;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%239aa0b0' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  cursor: pointer;
+}
+
+select:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: -1px;
+}
+
+input[type="number"] {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface-2);
+  color: var(--text);
+  font-size: 0.9rem;
+  -moz-appearance: textfield;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"]:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: -1px;
+}
+
+.input-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.input-row select.currency-select {
+  width: 130px;
+  flex-shrink: 0;
+}
+
+.input-row input[type="number"] {
+  flex: 1;
+}
+
+/* ---- Position Breakdown ---- */
+
+.position-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.position-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 0.75rem;
+  background: var(--surface-2);
+  border-radius: var(--radius);
+  border-left: 3px solid var(--border);
+}
+
+.position-row.first {
+  border-left-color: var(--yellow);
+}
+
+.position-row.second {
+  border-left-color: var(--text-muted);
+}
+
+.position-row.third {
+  border-left-color: var(--orange);
+}
+
+.position-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.position-pct {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-left: 0.5rem;
+}
+
+.position-amount {
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- Winner Total ---- */
+
+.winner-total {
+  text-align: center;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background: var(--surface-2);
+  border-radius: var(--radius);
+  border: 1px solid var(--accent);
+}
+
+.winner-total .label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.winner-total .amount {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--yellow);
+  margin-top: 0.25rem;
+}
+
+/* ---- Stakeholder Splits ---- */
+
+.splits-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+}
+
+.split-card {
+  text-align: center;
+  padding: 1rem 0.5rem;
+  background: var(--surface-2);
+  border-radius: var(--radius);
+}
+
+.split-card .role {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.25rem;
+}
+
+.split-card .pct {
+  font-size: 0.85rem;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+}
+
+.split-card .amount {
+  font-size: 1rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- Custom Split Editor ---- */
+
+.split-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.split-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.split-row label {
+  width: 60px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.slider-group {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+input[type="range"] {
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  background: var(--surface-2);
+  border-radius: 3px;
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--accent);
+  cursor: pointer;
+  border: 2px solid var(--bg);
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--accent);
+  cursor: pointer;
+  border: 2px solid var(--bg);
+}
+
+.pct-label {
+  width: 40px;
+  text-align: right;
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+}
+
+.split-warning {
+  font-size: 0.85rem;
+  min-height: 1.3em;
+  text-align: center;
+}
+
+.split-warning.error {
+  color: var(--red);
+}
+
+.split-warning.ok {
+  color: var(--green);
+}
+
+/* ---- Comparison Table ---- */
+
+.table-container {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+thead th {
+  text-align: left;
+  padding: 0.6rem 0.75rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+tbody td {
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid var(--border);
+  font-variant-numeric: tabular-nums;
+}
+
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+tbody tr:hover {
+  background: var(--surface-2);
+}
+
+tbody tr.active-row {
+  background: rgba(108, 99, 255, 0.1);
+}
+
+td.race-name {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+td.amount {
+  text-align: right;
+  white-space: nowrap;
+}
+
+td.currency-col {
+  text-align: center;
+  color: var(--text-muted);
+}
+
+/* ---- Ad Container ---- */
+
+.ad-container {
+  margin: 1.25rem 0;
+  min-height: 50px;
+  text-align: center;
+}
+
+/* ---- SEO Content ---- */
+
+.seo-content {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.seo-content h2 {
+  color: var(--text);
+}
+
+.seo-content h3 {
+  color: var(--text);
+}
+
+.seo-content p {
+  margin-bottom: 0.75rem;
+}
+
+.seo-content ul {
+  margin-left: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.seo-content li {
+  margin-bottom: 0.35rem;
+}
+
+/* ---- Footer ---- */
+
+footer {
+  text-align: center;
+  padding: 1.5rem 1rem;
+  border-top: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+/* ---- Responsive ---- */
+
+@media (max-width: 480px) {
+  .splits-grid {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .split-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: left;
+    padding: 0.75rem 1rem;
+  }
+
+  .split-card .role {
+    margin-bottom: 0;
+  }
+
+  .split-card .pct {
+    margin-bottom: 0;
+    margin-left: auto;
+    margin-right: 1rem;
+  }
+
+  header h1 {
+    font-size: 1.5rem;
+  }
+
+  .winner-total .amount {
+    font-size: 1.25rem;
+  }
+
+  table {
+    font-size: 0.8rem;
+  }
+
+  thead th,
+  tbody td {
+    padding: 0.5rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .input-row {
+    flex-direction: column;
+  }
+
+  .input-row select.currency-select {
+    width: 100%;
+  }
+}

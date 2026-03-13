@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Horse Racing Prize Money Calculator - Owner, Trainer & Jockey Splits</title>
+  <meta name="description" content="Calculate horse racing prize money splits for owners, trainers, and jockeys. Compare purses across major races including the Kentucky Derby, Dubai World Cup, Cheltenham Gold Cup, and more.">
+  <meta name="keywords" content="horse racing prize money calculator, cheltenham prize money breakdown, jockey trainer owner split calculator, race purse calculator, horse racing winnings calculator">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://automated-insights.com/prize-calculator/">
+  <meta property="og:title" content="Horse Racing Prize Money Calculator - Owner, Trainer & Jockey Splits">
+  <meta property="og:description" content="Calculate horse racing prize money splits for owners, trainers, and jockeys. Compare purses across Kentucky Derby, Dubai World Cup, Cheltenham Gold Cup, and more.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://automated-insights.com/prize-calculator/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Horse Racing Prize Money Calculator">
+  <meta name="twitter:description" content="Calculate owner, trainer, and jockey prize money splits across major horse races worldwide.">
+  <link rel="stylesheet" href="css/styles.css">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3434609691579834" crossorigin="anonymous"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Horse Racing Prize Money Calculator",
+    "description": "Calculate horse racing prize money splits for owners, trainers, and jockeys. Compare purses across major races worldwide.",
+    "url": "https://automated-insights.com/prize-calculator/",
+    "applicationCategory": "SportsApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "creator": {
+      "@type": "Organization",
+      "name": "Automated Insights LLC"
+    }
+  }
+  </script>
+</head>
+<body>
+  <header>
+    <h1>Prize Money Calculator</h1>
+    <p class="subtitle">Horse Racing Owner, Trainer & Jockey Splits</p>
+  </header>
+
+  <main>
+    <!-- Ad Slot 1: Top -->
+    <div class="ad-container">
+      <ins class="adsbygoogle"
+        style="display:block"
+        data-ad-client="ca-pub-3434609691579834"
+        data-ad-slot="top-banner"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- Race Selector -->
+    <section class="card">
+      <h2>Select Race</h2>
+      <div class="form-group">
+        <label for="race-select">Major Race</label>
+        <select id="race-select">
+          <option value="kentucky-derby">Kentucky Derby -- $5,000,000</option>
+          <option value="preakness">Preakness Stakes -- $2,000,000</option>
+          <option value="belmont">Belmont Stakes -- $2,000,000</option>
+          <option value="breeders-cup">Breeders' Cup Classic -- $7,000,000</option>
+          <option value="dubai-world-cup">Dubai World Cup -- $12,000,000</option>
+          <option value="cheltenham">Cheltenham Gold Cup -- GBP625,000</option>
+          <option value="royal-ascot">Royal Ascot Gold Cup -- GBP600,000</option>
+          <option value="prix-arc">Prix de l'Arc de Triomphe -- EUR5,000,000</option>
+          <option value="melbourne-cup">Melbourne Cup -- AUD8,000,000</option>
+          <option value="japan-cup">Japan Cup -- JPY700,000,000</option>
+          <option value="custom">Custom Purse Amount</option>
+        </select>
+      </div>
+      <div id="custom-purse-group" class="form-group" style="display: none;">
+        <label for="custom-purse">Total Purse</label>
+        <div class="input-row">
+          <select id="custom-currency" class="currency-select">
+            <option value="USD">USD ($)</option>
+            <option value="GBP">GBP (GBP)</option>
+            <option value="EUR">EUR (EUR)</option>
+            <option value="AUD">AUD (A$)</option>
+            <option value="JPY">JPY (JPY)</option>
+          </select>
+          <input type="number" id="custom-purse" placeholder="Enter total purse" min="0" step="1000" inputmode="numeric">
+        </div>
+      </div>
+    </section>
+
+    <!-- Position Breakdown -->
+    <section class="card">
+      <h2>Prize Distribution by Position</h2>
+      <p class="card-description">Purse split across finishing positions</p>
+      <div id="position-breakdown" class="position-list"></div>
+    </section>
+
+    <!-- Stakeholder Splits -->
+    <section class="card">
+      <h2>Winner's Share Breakdown</h2>
+      <p class="card-description">How the first-place prize is divided among stakeholders</p>
+      <div id="winner-total" class="winner-total"></div>
+      <div id="stakeholder-splits" class="splits-grid"></div>
+    </section>
+
+    <!-- Ad Slot 2: Middle -->
+    <div class="ad-container">
+      <ins class="adsbygoogle"
+        style="display:block"
+        data-ad-client="ca-pub-3434609691579834"
+        data-ad-slot="mid-content"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- Custom Split Editor -->
+    <section class="card">
+      <h2>Custom Split Editor</h2>
+      <p class="card-description">Adjust the owner/trainer/jockey percentages</p>
+      <div class="split-editor">
+        <div class="split-row">
+          <label for="owner-pct">Owner</label>
+          <div class="slider-group">
+            <input type="range" id="owner-pct" min="0" max="100" value="80" step="1">
+            <span id="owner-pct-label" class="pct-label">80%</span>
+          </div>
+        </div>
+        <div class="split-row">
+          <label for="trainer-pct">Trainer</label>
+          <div class="slider-group">
+            <input type="range" id="trainer-pct" min="0" max="100" value="10" step="1">
+            <span id="trainer-pct-label" class="pct-label">10%</span>
+          </div>
+        </div>
+        <div class="split-row">
+          <label for="jockey-pct">Jockey</label>
+          <div class="slider-group">
+            <input type="range" id="jockey-pct" min="0" max="100" value="10" step="1">
+            <span id="jockey-pct-label" class="pct-label">10%</span>
+          </div>
+        </div>
+        <div id="split-warning" class="split-warning"></div>
+      </div>
+    </section>
+
+    <!-- Race Comparison Table -->
+    <section class="card">
+      <h2>Major Races Comparison</h2>
+      <div class="table-container">
+        <table id="comparison-table">
+          <thead>
+            <tr>
+              <th>Race</th>
+              <th>Total Purse</th>
+              <th>Winner's Share</th>
+              <th>Currency</th>
+            </tr>
+          </thead>
+          <tbody id="comparison-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Ad Slot 3: Bottom -->
+    <div class="ad-container">
+      <ins class="adsbygoogle"
+        style="display:block"
+        data-ad-client="ca-pub-3434609691579834"
+        data-ad-slot="bottom-banner"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- SEO Content -->
+    <section class="seo-content">
+      <h2>Understanding Horse Racing Prize Money</h2>
+      <p>Prize money in horse racing -- often called the "purse" -- is the total amount of money distributed to connections of the horses that finish in the top positions. The purse varies dramatically depending on the prestige and grade of the race, from a few thousand at local tracks to tens of millions at marquee events like the Dubai World Cup.</p>
+
+      <h3>How Prize Money Is Split by Position</h3>
+      <p>Most races distribute the purse across the top five or six finishers, with the winner taking the lion's share. In American racing, the winner typically receives 60% of the total purse, with second place earning around 20%, third 10%, and smaller shares for fourth and fifth. European and international races sometimes use different splits -- the Cheltenham Gold Cup, for example, pays down to fourth place, while Japanese racing distributes to fifth.</p>
+
+      <h3>Owner, Trainer, and Jockey Shares</h3>
+      <p>The prize money awarded for a horse's finishing position is further divided among the horse's connections. The standard split in North American racing gives roughly 80% to the owner, 10% to the trainer, and 10% to the jockey. In the UK, the split differs: trainers typically receive around 10% and jockeys around 8-9%, with the exact terms varying by contract.</p>
+
+      <h3>The World's Richest Races</h3>
+      <p>The Dubai World Cup tops the global purse rankings at $12 million, followed by the Breeders' Cup Classic at $7 million. Japan Cup (JPY700 million) and the Prix de l'Arc de Triomphe (EUR5 million) represent the pinnacle of racing in Asia and Europe respectively. The Kentucky Derby, America's most famous race, carries a purse of $5 million.</p>
+      <ul>
+        <li><strong>Dubai World Cup</strong> -- $12,000,000 (richest race in the world)</li>
+        <li><strong>Breeders' Cup Classic</strong> -- $7,000,000</li>
+        <li><strong>Prix de l'Arc de Triomphe</strong> -- EUR5,000,000</li>
+        <li><strong>Kentucky Derby</strong> -- $5,000,000</li>
+        <li><strong>Melbourne Cup</strong> -- AUD8,000,000</li>
+        <li><strong>Japan Cup</strong> -- JPY700,000,000</li>
+      </ul>
+
+      <h3>Factors Affecting Prize Money</h3>
+      <p>Race purses are funded by a combination of sources: track revenue (betting handle commissions), entry fees and nominations, sponsorship deals, and government or racing authority subsidies. Tracks in jurisdictions with strong gambling revenue -- like Hong Kong, Japan, and the Middle East -- tend to offer the richest purses. Prize money can also fluctuate year to year based on betting handle performance and sponsorship changes.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Automated Insights LLC. All rights reserved.</p>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

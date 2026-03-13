@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Automated Insights LLC - ML, Data & Defense Consulting</title>
+  <meta name="description" content="Machine learning, data engineering, and defense consulting by Nicholas Vogler. UC Berkeley MS, USMC veteran, patent holder. Tampa, FL.">
+  <link rel="canonical" href="https://automated-insights.com/consulting/">
+  <meta property="og:title" content="Automated Insights LLC - ML, Data & Defense Consulting">
+  <meta property="og:description" content="Machine learning, data engineering, and defense consulting. UC Berkeley MS, USMC veteran, patent holder.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://automated-insights.com/consulting/">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Automated Insights LLC",
+    "description": "Machine learning, data engineering, and defense consulting services.",
+    "url": "https://automated-insights.com/consulting/",
+    "founder": {
+      "@type": "Person",
+      "name": "Nicholas Vogler",
+      "jobTitle": "Principal Consultant"
+    },
+    "areaServed": "US",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Tampa",
+      "addressRegion": "FL",
+      "addressCountry": "US"
+    }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3434609691579834" crossorigin="anonymous"></script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0f1117;
+      --surface: #1a1d27;
+      --surface-2: #242836;
+      --border: #2e3345;
+      --text: #e8eaed;
+      --text-muted: #9aa0b0;
+      --accent: #6c63ff;
+      --accent-dim: rgba(108, 99, 255, 0.12);
+      --accent-glow: rgba(108, 99, 255, 0.25);
+      --serif: 'DM Serif Display', Georgia, serif;
+      --sans: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a { color: var(--accent); text-decoration: none; transition: opacity 0.2s; }
+    a:hover { opacity: 0.8; }
+
+    /* --- Grain overlay --- */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      z-index: 9999;
+    }
+
+    /* --- Nav --- */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1.25rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      background: rgba(15, 17, 23, 0.8);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s;
+    }
+
+    nav.scrolled { border-bottom-color: var(--border); }
+
+    .nav-mark {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      color: var(--text);
+      letter-spacing: -0.01em;
+    }
+
+    .nav-mark span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); opacity: 1; }
+
+    /* --- Sections --- */
+    section { padding: 7rem 2rem; }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .section-label::before {
+      content: '';
+      width: 24px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    /* --- Hero --- */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      padding-top: 5rem;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .hero-bg .grid-pattern {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(108, 99, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(108, 99, 255, 0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 70% 50% at 50% 50%, black 20%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse 70% 50% at 50% 50%, black 20%, transparent 70%);
+    }
+
+    .hero-bg .glow {
+      position: absolute;
+      top: 20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(108, 99, 255, 0.08), transparent 70%);
+    }
+
+    .hero .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.5rem, 5.5vw, 4.25rem);
+      font-weight: 400;
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+      max-width: 700px;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      font-weight: 300;
+      max-width: 520px;
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 3rem;
+    }
+
+    .hero-meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+
+    .hero-meta-item .num {
+      font-family: var(--serif);
+      font-size: 1.75rem;
+      color: var(--text);
+    }
+
+    .hero-meta-item .label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 2rem;
+      border-radius: 6px;
+      font-family: var(--sans);
+      font-size: 0.88rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      transition: all 0.25s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: #7b73ff;
+      opacity: 1;
+      box-shadow: 0 4px 24px rgba(108, 99, 255, 0.3);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--accent);
+      color: var(--text);
+      opacity: 1;
+    }
+
+    /* --- About --- */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .about-text p {
+      color: var(--text-muted);
+      font-weight: 300;
+      font-size: 1.02rem;
+      line-height: 1.8;
+      margin-bottom: 1.25rem;
+    }
+
+    .about-text p strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .credential-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .credential-list li {
+      padding: 1.25rem 1.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      transition: border-color 0.2s;
+    }
+
+    .credential-list li:hover { border-color: var(--accent); }
+
+    .credential-list .cred-title {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 0.2rem;
+    }
+
+    .credential-list .cred-detail {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    /* --- Expertise --- */
+    .expertise-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .expertise-card {
+      padding: 2rem 1.75rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      transition: border-color 0.25s, transform 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .expertise-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .expertise-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--accent);
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+
+    .expertise-card:hover::before { opacity: 1; }
+
+    .expertise-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background: var(--accent-dim);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.25rem;
+      font-size: 1.1rem;
+    }
+
+    .expertise-card h3 {
+      font-size: 1rem;
+      font-weight: 500;
+      margin-bottom: 0.6rem;
+    }
+
+    .expertise-card p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      font-weight: 300;
+      line-height: 1.6;
+    }
+
+    /* --- Timeline --- */
+    .timeline {
+      position: relative;
+      padding-left: 2.5rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 7px;
+      top: 8px;
+      bottom: 8px;
+      width: 1px;
+      background: var(--border);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-bottom: 2.5rem;
+    }
+
+    .timeline-item:last-child { padding-bottom: 0; }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -2.5rem;
+      top: 8px;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 2px solid var(--border);
+      transition: border-color 0.2s;
+      z-index: 1;
+    }
+
+    .timeline-item:first-child::before {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px var(--accent-dim);
+    }
+
+    .timeline-date {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.3rem;
+    }
+
+    .timeline-role {
+      font-size: 1.05rem;
+      font-weight: 500;
+      margin-bottom: 0.15rem;
+    }
+
+    .timeline-org {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+    }
+
+    .timeline-note {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-weight: 300;
+      font-style: italic;
+    }
+
+    /* --- Tools --- */
+    .tools-showcase {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 0.75rem;
+    }
+
+    .tool-chip {
+      display: block;
+      padding: 0.9rem 1.1rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 400;
+      color: var(--text);
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .tool-chip:hover {
+      border-color: var(--accent);
+      transform: translateY(-1px);
+      opacity: 1;
+    }
+
+    .tool-chip .tool-arrow {
+      float: right;
+      color: var(--text-muted);
+      transition: color 0.2s, transform 0.2s;
+    }
+
+    .tool-chip:hover .tool-arrow {
+      color: var(--accent);
+      transform: translateX(2px);
+    }
+
+    .tools-note {
+      margin-top: 1.5rem;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      font-weight: 300;
+    }
+
+    /* --- Contact --- */
+    .contact-section {
+      text-align: center;
+      padding: 8rem 2rem;
+    }
+
+    .contact-section h2 {
+      font-family: var(--serif);
+      font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+      font-weight: 400;
+      margin-bottom: 1rem;
+    }
+
+    .contact-section p {
+      color: var(--text-muted);
+      font-weight: 300;
+      font-size: 1.05rem;
+      max-width: 440px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+    }
+
+    .contact-email {
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      color: var(--accent);
+      border-bottom: 1px solid transparent;
+      padding-bottom: 2px;
+      transition: border-color 0.2s;
+    }
+
+    .contact-email:hover {
+      border-bottom-color: var(--accent);
+      opacity: 1;
+    }
+
+    /* --- Footer --- */
+    footer {
+      text-align: center;
+      padding: 2.5rem 2rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+    }
+
+    footer span { color: var(--border); margin: 0 0.75rem; }
+
+    /* --- Ad slot --- */
+    .ad-slot {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* --- Divider --- */
+    .divider {
+      max-width: 1000px;
+      margin: 0 auto;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* --- Animations --- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* --- Responsive --- */
+    @media (max-width: 768px) {
+      section { padding: 5rem 1.25rem; }
+
+      .nav-links { display: none; }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      .expertise-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-meta { gap: 1.5rem; }
+
+      .tools-showcase {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .contact-section { padding: 5rem 1.25rem; }
+    }
+
+    @media (max-width: 480px) {
+      .tools-showcase {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav id="nav">
+    <div class="nav-mark">Automated <span>Insights</span></div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#expertise">Expertise</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#tools">Tools</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg">
+      <div class="grid-pattern"></div>
+      <div class="glow"></div>
+    </div>
+    <div class="container">
+      <div class="section-label">Automated Insights LLC</div>
+      <h1>Machine learning and data engineering for <em>defense and industry</em></h1>
+      <p class="hero-sub">
+        Independent consulting at the intersection of ML systems, data infrastructure,
+        and national security -- backed by a decade of hands-on engineering and military service.
+      </p>
+      <div class="hero-meta">
+        <div class="hero-meta-item">
+          <div class="num">15+</div>
+          <div class="label">Years in tech</div>
+        </div>
+        <div class="hero-meta-item">
+          <div class="num">1</div>
+          <div class="label">US Patent</div>
+        </div>
+        <div class="hero-meta-item">
+          <div class="num">5.5</div>
+          <div class="label">Years USMC</div>
+        </div>
+        <div class="hero-meta-item">
+          <div class="num">18</div>
+          <div class="label">Open-source tools</div>
+        </div>
+      </div>
+      <div class="cta-row">
+        <a href="#contact" class="btn btn-primary">Get in touch</a>
+        <a href="#expertise" class="btn btn-ghost">See expertise</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- About -->
+  <section id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-text reveal">
+          <div class="section-label">About</div>
+          <p>
+            <strong>Nicholas Vogler</strong> is a machine learning engineer and data architect
+            with experience spanning defense, intelligence, healthcare, and commercial ML systems.
+          </p>
+          <p>
+            After serving as a Marine Corps Sergeant -- managing data systems and networks
+            across three continents -- he earned a BS in Computer Science from the
+            University of Michigan and a Master's in Data Science from UC Berkeley.
+          </p>
+          <p>
+            His career includes building data extraction pipelines at Northrop Grumman
+            (resulting in a US patent), engineering ML infrastructure at Striveworks,
+            and contributing to published research on diabetes prevention at the VA.
+          </p>
+          <p>
+            Through Automated Insights LLC, he brings this cross-domain expertise to
+            organizations building data-intensive systems where reliability and
+            security are non-negotiable.
+          </p>
+        </div>
+        <div class="reveal" style="transition-delay: 0.1s">
+          <ul class="credential-list">
+            <li>
+              <div class="cred-title">MS, Information and Data Science</div>
+              <div class="cred-detail">University of California, Berkeley</div>
+            </li>
+            <li>
+              <div class="cred-title">BS, Computer Science</div>
+              <div class="cred-detail">University of Michigan</div>
+            </li>
+            <li>
+              <div class="cred-title">US Patent 11,314,765 B2</div>
+              <div class="cred-detail">Multistage Data Sniffer for Data Extraction</div>
+            </li>
+            <li>
+              <div class="cred-title">CompTIA Security+</div>
+              <div class="cred-detail">Active through May 2027</div>
+            </li>
+            <li>
+              <div class="cred-title">USMC Sergeant (E-5)</div>
+              <div class="cred-detail">Data Systems Supervisor / Network Administrator</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Expertise -->
+  <section id="expertise">
+    <div class="container">
+      <div class="section-label reveal">Expertise</div>
+      <div class="expertise-grid">
+        <div class="expertise-card reveal" style="transition-delay: 0s">
+          <div class="expertise-icon">
+            <svg width="20" height="20" fill="none" stroke="#6c63ff" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          </div>
+          <h3>ML / AI Strategy</h3>
+          <p>End-to-end machine learning system design, from problem framing through production deployment and monitoring.</p>
+        </div>
+        <div class="expertise-card reveal" style="transition-delay: 0.07s">
+          <div class="expertise-icon">
+            <svg width="20" height="20" fill="none" stroke="#6c63ff" stroke-width="1.5" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/><circle cx="20" cy="18" r="2"/></svg>
+          </div>
+          <h3>Data Engineering</h3>
+          <p>Scalable data pipelines, ETL architecture, and infrastructure for high-throughput analytical workloads.</p>
+        </div>
+        <div class="expertise-card reveal" style="transition-delay: 0.14s">
+          <div class="expertise-icon">
+            <svg width="20" height="20" fill="none" stroke="#6c63ff" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M7 21l5-4 5 4"/></svg>
+          </div>
+          <h3>Computer Vision</h3>
+          <p>Image and video analysis systems, object detection, and visual data pipelines for real-world applications.</p>
+        </div>
+        <div class="expertise-card reveal" style="transition-delay: 0.21s">
+          <div class="expertise-icon">
+            <svg width="20" height="20" fill="none" stroke="#6c63ff" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3>Defense / National Security</h3>
+          <p>Security-cleared engineering background. Fluent in DoD workflows, compliance requirements, and mission-critical systems.</p>
+        </div>
+        <div class="expertise-card reveal" style="transition-delay: 0.28s">
+          <div class="expertise-icon">
+            <svg width="20" height="20" fill="none" stroke="#6c63ff" stroke-width="1.5" viewBox="0 0 24 24"><path d="M16 16v4M8 16v4M12 16v4M4 8h16M5 4h14a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1V5a1 1 0 011-1z"/></svg>
+          </div>
+          <h3>MLOps</h3>
+          <p>Model lifecycle management, CI/CD for ML, reproducible training pipelines, and production inference systems.</p>
+        </div>
+        <div class="expertise-card reveal" style="transition-delay: 0.35s">
+          <div class="expertise-icon">
+            <svg width="20" height="20" fill="none" stroke="#6c63ff" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2v-4M9 21H5a2 2 0 01-2-2v-4m0 0h18"/></svg>
+          </div>
+          <h3>Data Architecture</h3>
+          <p>Designing data models, warehouse schemas, and integration patterns that scale with organizational growth.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Experience -->
+  <section id="experience">
+    <div class="container">
+      <div class="section-label reveal">Experience</div>
+      <div class="timeline reveal" style="transition-delay: 0.1s">
+        <div class="timeline-item">
+          <div class="timeline-date">2026 - Present</div>
+          <div class="timeline-role">Machine Learning Engineer</div>
+          <div class="timeline-org">OpenMotion AI -- Remote</div>
+          <div class="timeline-note">Computer vision, software development, data engineering</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">2021 - 2026</div>
+          <div class="timeline-role">Data Engineer</div>
+          <div class="timeline-org">Striveworks -- North Carolina</div>
+          <div class="timeline-note">5 years building ML infrastructure for defense applications</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">2019 - 2021</div>
+          <div class="timeline-role">Senior Principal Data Engineer</div>
+          <div class="timeline-org">Northrop Grumman</div>
+          <div class="timeline-note">US Patent 11,314,765 B2 -- Multistage Data Sniffer for Data Extraction</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">2017 - 2019</div>
+          <div class="timeline-role">Software Engineer / MS Data Science</div>
+          <div class="timeline-org">Northrop Grumman + UC Berkeley</div>
+          <div class="timeline-note">Concurrent work and graduate education</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">2015 - 2017</div>
+          <div class="timeline-role">Research Assistant</div>
+          <div class="timeline-org">U.S. Department of Veterans Affairs -- Ann Arbor, MI</div>
+          <div class="timeline-note">Published research: FINDIT diabetes prevention trial</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">2009 - 2014</div>
+          <div class="timeline-role">Sergeant (E-5)</div>
+          <div class="timeline-org">United States Marine Corps</div>
+          <div class="timeline-note">Network Admin, Data Systems Supervisor -- Stuttgart, Cherry Point, Pano Aquil</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Tools -->
+  <section id="tools">
+    <div class="container">
+      <div class="section-label reveal">Free Tools</div>
+      <div class="tools-showcase reveal" style="transition-delay: 0.1s">
+        <a href="/one-rep-max/" class="tool-chip">One Rep Max <span class="tool-arrow">&rarr;</span></a>
+        <a href="/gpu-benchmark/" class="tool-chip">GPU Benchmark <span class="tool-arrow">&rarr;</span></a>
+        <a href="/llm-pricing/" class="tool-chip">LLM Pricing <span class="tool-arrow">&rarr;</span></a>
+        <a href="/cron-generator/" class="tool-chip">Cron Generator <span class="tool-arrow">&rarr;</span></a>
+        <a href="/plate-calculator/" class="tool-chip">Plate Calculator <span class="tool-arrow">&rarr;</span></a>
+        <a href="/json-tools/" class="tool-chip">JSON Tools <span class="tool-arrow">&rarr;</span></a>
+        <a href="/ssh-config/" class="tool-chip">SSH Config <span class="tool-arrow">&rarr;</span></a>
+        <a href="/gitignore-gen/" class="tool-chip">.gitignore Gen <span class="tool-arrow">&rarr;</span></a>
+        <a href="/docker-compose-gen/" class="tool-chip">Docker Compose <span class="tool-arrow">&rarr;</span></a>
+        <a href="/aws-estimator/" class="tool-chip">AWS Estimator <span class="tool-arrow">&rarr;</span></a>
+        <a href="/config-converter/" class="tool-chip">Config Converter <span class="tool-arrow">&rarr;</span></a>
+        <a href="/workout-generator/" class="tool-chip">Workout Gen <span class="tool-arrow">&rarr;</span></a>
+        <a href="/date-calculator/" class="tool-chip">Date Calculator <span class="tool-arrow">&rarr;</span></a>
+        <a href="/fuel-calculator/" class="tool-chip">Fuel Calculator <span class="tool-arrow">&rarr;</span></a>
+        <a href="/storm-prep/" class="tool-chip">Storm Prep <span class="tool-arrow">&rarr;</span></a>
+        <a href="/prize-calculator/" class="tool-chip">Prize Calculator <span class="tool-arrow">&rarr;</span></a>
+        <a href="/vbucks-calc/" class="tool-chip">V-Bucks Calc <span class="tool-arrow">&rarr;</span></a>
+        <a href="/blood-donation/" class="tool-chip">Blood Donation <span class="tool-arrow">&rarr;</span></a>
+      </div>
+      <p class="tools-note reveal" style="transition-delay: 0.2s">
+        Free, open-source utilities built to solve everyday problems. No signup, no tracking, no nonsense.
+      </p>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="contact-section" id="contact">
+    <div class="container">
+      <div class="section-label reveal" style="justify-content: center;">Let's talk</div>
+      <h2 class="reveal" style="transition-delay: 0.05s">Have a project in mind?</h2>
+      <p class="reveal" style="transition-delay: 0.1s">
+        Whether you need ML strategy, data engineering, or a technical assessment --
+        reach out and let's see if there's a fit.
+      </p>
+      <a href="mailto:nvogler90@gmail.com" class="contact-email reveal" style="transition-delay: 0.15s">nvogler90@gmail.com</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2026 Automated Insights LLC. All rights reserved.
+    <span>|</span>
+    Tampa, FL
+  </footer>
+
+  <script>
+    /* Nav scroll effect */
+    (function() {
+      var nav = document.getElementById('nav');
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 40) {
+          nav.classList.add('scrolled');
+        } else {
+          nav.classList.remove('scrolled');
+        }
+      });
+    })();
+
+    /* Reveal on scroll */
+    (function() {
+      var reveals = document.querySelectorAll('.reveal');
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+      reveals.forEach(function(el) {
+        observer.observe(el);
+      });
+    })();
+  </script>
+</body>
+</html>
