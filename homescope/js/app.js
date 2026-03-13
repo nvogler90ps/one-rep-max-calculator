@@ -14,8 +14,9 @@
     femaTiles: 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/export',
     fccArea: 'https://geo.fcc.gov/api/census/area',
     censusAcs: 'https://api.census.gov/data/2022/acs/acs5',
-    sexOffenders: 'https://services1.arcgis.com/Hp6G80Pky0om6HgA/arcgis/rest/services/Sex_Offenders/FeatureServer/0/query',
-    hudSection8: 'https://services.arcgis.com/VTyQ9soQAGYKSRGJ/arcgis/rest/services/Public_Housing_Buildings/FeatureServer/0/query'
+    hudBuildings: 'https://services.arcgis.com/VTyQ9soqVukalItT/ArcGIS/rest/services/Public_Housing_Buildings/FeatureServer/0/query',
+    hudMultifamily: 'https://services.arcgis.com/VTyQ9soqVukalItT/ArcGIS/rest/services/MULTIFAMILY_PROPERTIES_ASSISTED/FeatureServer/0/query',
+    hudLihtc: 'https://services.arcgis.com/VTyQ9soqVukalItT/ArcGIS/rest/services/LIHTC/FeatureServer/0/query'
   };
 
   // Flood zone risk classification
@@ -186,28 +187,33 @@
   });
 
   function typeaheadSearch(query) {
-    if (!/tampa|st\.?\s*pete|clearwater|largo|brandon|sarasota|bradenton/i.test(query)) {
-      query += ', FL';
-    }
-
-    var url = API.nominatim +
+    // Photon geocoder (Komoot) - better for autocomplete than Nominatim
+    var url = 'https://photon.komoot.io/api/' +
       '?q=' + encodeURIComponent(query) +
-      '&format=json&addressdetails=1&limit=5' +
-      '&viewbox=-83.5,28.8,-81.5,27.0';
+      '&lat=27.95&lon=-82.46&limit=5&lang=en' +
+      '&bbox=-83.5,27.0,-81.5,28.8';
 
-    fetch(url, { headers: { 'Accept': 'application/json' } })
+    fetch(url)
       .then(function (r) { return r.json(); })
-      .then(function (results) {
-        if (!results || results.length === 0) {
+      .then(function (data) {
+        if (!data.features || data.features.length === 0) {
           searchResults.classList.add('hidden');
           return;
         }
 
-        var matches = results.map(function (r) {
+        var matches = data.features.map(function (f) {
+          var p = f.properties;
+          var parts = [];
+          if (p.housenumber) { parts.push(p.housenumber); }
+          if (p.street) { parts.push(p.street); }
+          var addrLine = parts.join(' ') || p.name || '';
+          var cityLine = [p.city, p.state].filter(Boolean).join(', ');
           return {
-            displayName: r.display_name,
-            lat: parseFloat(r.lat),
-            lng: parseFloat(r.lon)
+            displayName: [addrLine, cityLine].filter(Boolean).join(', '),
+            addrLine: addrLine,
+            cityLine: cityLine,
+            lat: f.geometry.coordinates[1],
+            lng: f.geometry.coordinates[0]
           };
         });
 
@@ -228,14 +234,15 @@
   function geocodeAddress(address) {
     // Nominatim geocoder (CORS-friendly, unlike Census Bureau)
     var query = address;
-    // Append Tampa Bay context if user didn't include a city
-    if (!/tampa|st\.?\s*pete|clearwater|largo|brandon|sarasota|bradenton/i.test(query)) {
+    // Append FL context if user didn't include a city
+    if (!/tampa|st\.?\s*pete|clearwater|largo|brandon|sarasota|bradenton|florida|fl\b/i.test(query)) {
       query += ', FL';
     }
 
     var url = API.nominatim +
       '?q=' + encodeURIComponent(query) +
       '&format=json&addressdetails=1&limit=5' +
+      '&countrycodes=us' +
       '&viewbox=-83.5,28.8,-81.5,27.0';
 
     showLoading();
@@ -279,9 +286,8 @@
     matches.forEach(function (m) {
       var div = document.createElement('div');
       div.className = 'search-result-item';
-      var parts = m.displayName.split(', ');
-      var addr = parts.slice(0, 2).join(', ');
-      var city = parts.slice(2, 4).join(', ');
+      var addr = m.addrLine || m.displayName.split(', ').slice(0, 2).join(', ');
+      var city = m.cityLine || m.displayName.split(', ').slice(2, 4).join(', ');
       div.innerHTML =
         '<div class="match-addr">' + addr + '</div>' +
         '<div class="match-city">' + city + '</div>';
@@ -425,7 +431,8 @@
         if (!fcc.results || fcc.results.length === 0) { return null; }
         var block = fcc.results[0];
         var state = block.state_fips;
-        var county = block.county_fips;
+        // county_fips includes state prefix (e.g. "12103"), Census API needs just "103"
+        var county = block.county_fips.substring(state.length);
         var tract = block.block_fips.substring(5, 11);
 
         // Step 2: Query ACS for this census tract
@@ -488,63 +495,57 @@
       .catch(function (err) { console.error('Census error:', err); return null; });
   }
 
-  // --- Sex offender query (1-mile radius) ---
+  // --- Sex offender query ---
   function querySexOffenders(lat, lng) {
-    // Query FL sex offender registry via ArcGIS
-    // 1 mile = ~1609 meters
-    var url = API.sexOffenders +
-      '?where=1%3D1' +
-      '&geometry=' + lng + '%2C' + lat +
-      '&geometryType=esriGeometryPoint' +
-      '&inSR=4326' +
-      '&spatialRel=esriSpatialRelIntersects' +
-      '&distance=1' +
-      '&units=esriSRUnit_StatuteMile' +
-      '&outFields=NAME,ADDRESS,CITY,STATE' +
-      '&returnCountOnly=false' +
-      '&returnGeometry=false' +
-      '&resultRecordCount=100' +
-      '&f=json';
-
-    return fetch(url)
-      .then(function (r) { return r.json(); })
-      .then(function (data) {
-        if (data.features) {
-          return { count: data.features.length, features: data.features.slice(0, 10) };
-        }
-        return { count: 0, features: [] };
-      })
-      .catch(function () { return null; });
+    // No free, CORS-enabled national or FL-statewide sex offender API exists.
+    // NSOPW and FDLE have no public REST APIs.
+    // Return null to show "check FDLE" link instead of misleading data.
+    return Promise.resolve(null);
   }
 
-  // --- HUD Public/Section 8 housing (2-mile radius) ---
+  // --- HUD Subsidized housing (bounding box ~2 miles) ---
   function queryPublicHousing(lat, lng) {
-    var url = API.hudSection8 +
-      '?where=1%3D1' +
-      '&geometry=' + lng + '%2C' + lat +
-      '&geometryType=esriGeometryPoint' +
+    // ~0.03 degrees is roughly 2 miles
+    var delta = 0.03;
+    var bbox = (lng - delta) + ',' + (lat - delta) + ',' + (lng + delta) + ',' + (lat + delta);
+    var baseParams = '?where=1%3D1' +
+      '&geometry=' + encodeURIComponent(bbox) +
+      '&geometryType=esriGeometryEnvelope' +
       '&inSR=4326' +
       '&spatialRel=esriSpatialRelIntersects' +
-      '&distance=2' +
-      '&units=esriSRUnit_StatuteMile' +
-      '&outFields=PROJECT_NAME,TOTAL_UNITS,PROGRAM_LABEL,CLIENT_GROUP_NAME' +
       '&returnGeometry=false' +
-      '&resultRecordCount=50' +
       '&f=json';
 
-    return fetch(url)
-      .then(function (r) { return r.json(); })
-      .then(function (data) {
-        if (data.features) {
-          var totalUnits = 0;
-          data.features.forEach(function (f) {
-            totalUnits += (f.attributes.TOTAL_UNITS || 0);
-          });
-          return { count: data.features.length, totalUnits: totalUnits, features: data.features };
-        }
-        return { count: 0, totalUnits: 0, features: [] };
-      })
-      .catch(function () { return null; });
+    // Query public housing + Section 8 multifamily in parallel
+    return Promise.all([
+      fetch(API.hudBuildings + baseParams + '&outFields=PROJECT_NAME,TOTAL_UNITS')
+        .then(function (r) { return r.json(); })
+        .catch(function () { return { features: [] }; }),
+      fetch(API.hudMultifamily + baseParams + '&outFields=PROPERTY_NAME_TEXT,TOTAL_UNIT_COUNT,ADDRESS_LINE1_TEXT')
+        .then(function (r) { return r.json(); })
+        .catch(function () { return { features: [] }; })
+    ]).then(function (results) {
+      var buildings = (results[0].features || []);
+      var multifamily = (results[1].features || []);
+
+      var allProperties = [];
+      var totalUnits = 0;
+
+      buildings.forEach(function (f) {
+        var a = f.attributes;
+        allProperties.push({ name: a.PROJECT_NAME, units: a.TOTAL_UNITS || 0, type: 'Public Housing' });
+        totalUnits += (a.TOTAL_UNITS || 0);
+      });
+
+      multifamily.forEach(function (f) {
+        var a = f.attributes;
+        allProperties.push({ name: a.PROPERTY_NAME_TEXT, units: a.TOTAL_UNIT_COUNT || 0, type: 'HUD Assisted' });
+        totalUnits += (a.TOTAL_UNIT_COUNT || 0);
+      });
+
+      return { count: allProperties.length, totalUnits: totalUnits, properties: allProperties };
+    })
+    .catch(function () { return null; });
   }
 
   // --- Render results ---
@@ -825,32 +826,11 @@
   function renderOffenderDetails(offenders) {
     var container = document.getElementById('offender-details');
 
-    if (!offenders) {
-      container.innerHTML = '<div class="detail-item full-width"><div class="d-label">Status</div><div class="d-value">Sex offender data unavailable</div></div>';
-      return;
-    }
-
-    var countClass = '';
-    if (offenders.count > 20) { countClass = 'risk-high'; }
-    else if (offenders.count > 5) { countClass = 'risk-medium'; }
-    else { countClass = 'risk-low'; }
-
-    var html =
-      '<div class="detail-item full-width"><div class="d-label">Registered Offenders Within 1 Mile</div><div class="d-value ' + countClass + '" style="font-size: 1.3rem;">' + offenders.count + '</div></div>';
-
-    if (offenders.features.length > 0) {
-      html += '<div class="detail-item full-width"><div class="d-label">Nearest Offenders</div><div class="d-value" style="font-size: 0.78rem; line-height: 1.6;">';
-      offenders.features.forEach(function (f) {
-        var a = f.attributes;
-        var name = a.NAME || a.name || 'Unknown';
-        var addr = a.ADDRESS || a.address || '';
-        var city = a.CITY || a.city || '';
-        html += name + ' -- ' + addr + (city ? ', ' + city : '') + '<br>';
-      });
-      html += '</div></div>';
-    }
-
-    container.innerHTML = html;
+    container.innerHTML =
+      '<div class="detail-item full-width"><div class="d-label">Registry Search</div>' +
+      '<div class="d-value" style="font-size: 0.85rem;">No free API available. Check the ' +
+      '<a href="https://offender.fdle.state.fl.us/offender/sops/offenderSearch.jsf" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: underline;">Florida FDLE Registry</a> ' +
+      'or <a href="https://www.nsopw.gov/" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: underline;">NSOPW</a> directly.</div></div>';
   }
 
   // --- Public/Section 8 housing details ---
@@ -868,17 +848,13 @@
     else { countClass = 'risk-low'; }
 
     var html =
-      '<div class="detail-item"><div class="d-label">Properties (2 mi)</div><div class="d-value ' + countClass + '">' + housing.count + '</div></div>' +
+      '<div class="detail-item"><div class="d-label">Properties (~2 mi)</div><div class="d-value ' + countClass + '">' + housing.count + '</div></div>' +
       '<div class="detail-item"><div class="d-label">Total Units</div><div class="d-value ' + countClass + '">' + housing.totalUnits.toLocaleString() + '</div></div>';
 
-    if (housing.features.length > 0) {
+    if (housing.properties && housing.properties.length > 0) {
       html += '<div class="detail-item full-width"><div class="d-label">Nearby Properties</div><div class="d-value" style="font-size: 0.78rem; line-height: 1.6;">';
-      housing.features.slice(0, 8).forEach(function (f) {
-        var a = f.attributes;
-        var name = a.PROJECT_NAME || 'Unknown';
-        var units = a.TOTAL_UNITS || '?';
-        var program = a.PROGRAM_LABEL || '';
-        html += name + ' (' + units + ' units' + (program ? ', ' + program : '') + ')<br>';
+      housing.properties.slice(0, 8).forEach(function (p) {
+        html += (p.name || 'Unknown') + ' (' + p.units + ' units, ' + p.type + ')<br>';
       });
       html += '</div></div>';
     }
