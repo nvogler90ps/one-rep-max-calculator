@@ -187,13 +187,13 @@
 
   function typeaheadSearch(query) {
     if (!/tampa|st\.?\s*pete|clearwater|largo|brandon|sarasota|bradenton/i.test(query)) {
-      query += ', Tampa Bay, FL';
+      query += ', FL';
     }
 
     var url = API.nominatim +
       '?q=' + encodeURIComponent(query) +
       '&format=json&addressdetails=1&limit=5' +
-      '&viewbox=-83.5,28.8,-81.5,27.0&bounded=1';
+      '&viewbox=-83.5,28.8,-81.5,27.0';
 
     fetch(url, { headers: { 'Accept': 'application/json' } })
       .then(function (r) { return r.json(); })
@@ -230,13 +230,13 @@
     var query = address;
     // Append Tampa Bay context if user didn't include a city
     if (!/tampa|st\.?\s*pete|clearwater|largo|brandon|sarasota|bradenton/i.test(query)) {
-      query += ', Tampa Bay, FL';
+      query += ', FL';
     }
 
     var url = API.nominatim +
       '?q=' + encodeURIComponent(query) +
       '&format=json&addressdetails=1&limit=5' +
-      '&viewbox=-83.5,28.8,-81.5,27.0&bounded=1';
+      '&viewbox=-83.5,28.8,-81.5,27.0';
 
     showLoading();
 
