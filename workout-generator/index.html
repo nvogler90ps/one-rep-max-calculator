@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Injury-Aware Workout Generator - Safe Exercise Plans for Any Body</title>
+  <meta name="description" content="Generate personalized workout plans that adapt to your injuries. Free tool for safe exercise selection with shoulder, knee, back, and elbow injury support.">
+  <meta name="keywords" content="workout plan generator, workout with injury, safe exercises bad shoulder, safe exercises bad knee, safe exercises bad back, injury workout plan, exercise with pain">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://workout-gen-3bh.pages.dev/">
+  <meta property="og:title" content="Injury-Aware Workout Generator - Safe Exercise Plans for Any Body">
+  <meta property="og:description" content="Generate personalized workout plans that adapt to your injuries. Free, no signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://workout-gen-3bh.pages.dev/">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Injury-Aware Workout Generator">
+  <meta name="twitter:description" content="Generate personalized workout plans that adapt to your injuries.">
+
+  <link rel="stylesheet" href="css/styles.css">
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3434609691579834" crossorigin="anonymous"></script>
+
+  <!-- Structured Data: WebApplication -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Injury-Aware Workout Generator",
+    "url": "https://workout-gen-3bh.pages.dev/",
+    "description": "Generate personalized workout plans that adapt to your injuries. Supports shoulder, knee, back, elbow, and other common injuries.",
+    "applicationCategory": "HealthApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "creator": {
+      "@type": "Organization",
+      "name": "Automated Insights LLC"
+    }
+  }
+  </script>
+
+  <!-- Structured Data: FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Can I work out with an injury?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "In many cases, yes -- but you need to avoid exercises that stress the injured area. This tool helps by filtering out contraindicated movements based on your specific injury. Always consult a doctor or physical therapist before starting any exercise program with an injury."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does the injury detection work?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The tool matches keywords in your injury description against a database of 12 common injury types. Each injury type has associated movement contraindications (like 'avoid overhead pressing' for shoulder impingement). Exercises with those contraindications are automatically removed from your plan."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What injuries does this tool support?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The tool supports shoulder impingement, rotator cuff injuries, labrum tears, tennis elbow, golfer's elbow, wrist pain, lower back pain, knee injuries, hip pain, neck pain, ankle sprains, and chest/pec strains."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is this a replacement for a physical therapist?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. This tool provides general exercise guidance based on common contraindications. It cannot diagnose injuries, assess severity, or account for your specific anatomy and recovery stage. Always work with a qualified physical therapist or doctor for injury rehabilitation."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why do I get different exercises each time?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The generator randomizes exercise selection within safety tiers to provide variety. Exercises with fewer contraindications are preferred, but within each safety tier, the selection is randomized. Hit 'Regenerate' for a fresh plan."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I use this tool at the gym?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Absolutely. The tool is mobile-first and works great on your phone. You can also use the Print button to create a paper copy of your workout plan to bring to the gym."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- Header -->
+    <header class="site-header">
+      <h1><span class="accent">Injury-Aware</span> Workout Generator</h1>
+      <p>Safe, personalized exercise plans that work around your injuries</p>
+    </header>
+
+    <!-- Ad Slot 1 -->
+    <div class="ad-slot no-print">
+      <ins class="adsbygoogle"
+        style="display:block"
+        data-ad-client="ca-pub-3434609691579834"
+        data-ad-slot="auto"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- Input Form -->
+    <div class="card">
+      <form id="workout-form">
+        <div class="form-group">
+          <label for="muscle-group">Target Muscle Group</label>
+          <select id="muscle-group" required>
+            <option value="">Select a muscle group...</option>
+            <option value="chest">Chest</option>
+            <option value="back">Back</option>
+            <option value="shoulders">Shoulders</option>
+            <option value="biceps">Biceps</option>
+            <option value="triceps">Triceps</option>
+            <option value="legs">Legs</option>
+            <option value="core">Core</option>
+            <option value="full_body">Full Body</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="injury-text">Describe Any Injuries (Optional)</label>
+          <textarea id="injury-text" placeholder="e.g., shoulder impingement, bad knee, lower back pain, tennis elbow..."></textarea>
+          <p class="form-hint">Describe your injuries in plain language. The tool will avoid exercises that could aggravate them.</p>
+        </div>
+
+        <div class="form-group">
+          <label for="experience">Experience Level</label>
+          <select id="experience">
+            <option value="beginner">Beginner (lighter weight, more reps)</option>
+            <option value="intermediate" selected>Intermediate (moderate weight and reps)</option>
+            <option value="advanced">Advanced (heavier weight, fewer reps)</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary" id="generate-btn">Generate Workout Plan</button>
+      </form>
+    </div>
+
+    <!-- Medical Disclaimer -->
+    <div class="disclaimer">
+      <h3>Medical Disclaimer</h3>
+      <p>This tool provides general exercise guidance only. It is not medical advice and cannot replace consultation with a qualified healthcare provider or physical therapist. Always get clearance from your doctor before exercising with an injury. If you experience pain during any exercise, stop immediately.</p>
+    </div>
+
+    <!-- Results Section -->
+    <section id="results" class="hidden">
+
+      <!-- Plan Header -->
+      <div class="plan-header">
+        <h2 id="plan-title">Workout Plan</h2>
+        <p class="subtitle" id="plan-subtitle">Intermediate Level</p>
+      </div>
+
+      <!-- Injury Summary Card -->
+      <div id="injury-card" class="card injury-card hidden">
+        <div class="card-title">Injury Adaptations Active</div>
+        <div id="injury-list" class="injury-tags"></div>
+        <ul id="advice-list" class="advice-list"></ul>
+      </div>
+
+      <!-- Warning Card -->
+      <div id="warning-card" class="card warning-card hidden">
+        <div class="card-title">Limited Exercise Options</div>
+        <p>Due to your injuries, fewer than 3 safe exercises are available for this muscle group. Consider consulting a physical therapist for a personalized rehabilitation program before training this area.</p>
+      </div>
+
+      <!-- Warmup Table -->
+      <div class="card">
+        <div class="card-title">Warmup</div>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Exercise</th>
+                <th>Duration / Reps</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody id="warmup-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Ad Slot 2 -->
+      <div class="ad-slot no-print">
+        <ins class="adsbygoogle"
+          style="display:block"
+          data-ad-client="ca-pub-3434609691579834"
+          data-ad-slot="auto"
+          data-ad-format="auto"
+          data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </div>
+
+      <!-- Workout Table -->
+      <div class="card">
+        <div class="card-title">Workout</div>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Exercise</th>
+                <th>Sets</th>
+                <th>Reps</th>
+                <th>Rest</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody id="workout-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="btn-group no-print">
+        <button class="btn btn-primary" id="regenerate-btn">Regenerate Plan</button>
+        <button class="btn btn-secondary" id="print-btn">Print Plan</button>
+      </div>
+
+      <!-- Equipment Affiliate Placeholders -->
+      <div class="card equipment-section no-print">
+        <h3>Recommended Equipment</h3>
+        <div class="equipment-links">
+          <a href="#" class="equipment-link" rel="nofollow sponsored" data-affiliate="resistance-bands">Resistance Bands</a>
+          <a href="#" class="equipment-link" rel="nofollow sponsored" data-affiliate="dumbbells">Adjustable Dumbbells</a>
+          <a href="#" class="equipment-link" rel="nofollow sponsored" data-affiliate="pull-up-bar">Pull-Up Bar</a>
+          <a href="#" class="equipment-link" rel="nofollow sponsored" data-affiliate="ab-wheel">Ab Wheel</a>
+          <a href="#" class="equipment-link" rel="nofollow sponsored" data-affiliate="kettlebell">Kettlebell</a>
+          <a href="#" class="equipment-link" rel="nofollow sponsored" data-affiliate="wrist-wraps">Wrist Wraps</a>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Ad Slot 3 -->
+    <div class="ad-slot no-print">
+      <ins class="adsbygoogle"
+        style="display:block"
+        data-ad-client="ca-pub-3434609691579834"
+        data-ad-slot="auto"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- SEO Content -->
+    <section class="seo-content">
+      <h2>How to Work Out Safely with Injuries</h2>
+      <p>Working out with an injury does not mean you have to stop training entirely. With the right exercise selection, you can continue building strength and fitness while protecting your injured areas. The key is understanding which movements to avoid and which safe alternatives exist.</p>
+
+      <h3>Understanding Exercise Contraindications</h3>
+      <p>Every exercise places specific demands on your joints and muscles. When you have an injury, certain movement patterns can aggravate your condition. For example:</p>
+      <ul>
+        <li><strong>Shoulder injuries</strong> often require avoiding overhead pressing, wide-grip movements, and exercises that place the shoulder in extreme external rotation.</li>
+        <li><strong>Knee injuries</strong> typically mean limiting deep knee flexion, avoiding plyometrics, and choosing exercises with a controlled range of motion.</li>
+        <li><strong>Lower back injuries</strong> require avoiding spinal compression from heavy squats and deadlifts, and focusing on core stability exercises.</li>
+        <li><strong>Elbow injuries</strong> (tennis elbow or golfer's elbow) mean reducing gripping demand and avoiding movements that stress the forearm tendons.</li>
+      </ul>
+
+      <h3>The Importance of Warmups</h3>
+      <p>A proper warmup is even more important when training with an injury. It increases blood flow to the working muscles, improves joint lubrication, and prepares your nervous system for the workout ahead. This tool includes injury-aware warmup exercises that are safe for your specific condition.</p>
+
+      <h3>Adjusting Sets, Reps, and Rest</h3>
+      <p>Your experience level determines the appropriate training intensity. Beginners benefit from higher reps with lighter weight to build movement patterns, while advanced lifters can handle heavier loads with lower reps. Regardless of level, when training around an injury, err on the side of lighter weight and more control.</p>
+
+      <h3>When to See a Professional</h3>
+      <p>This tool is a starting point, not a replacement for professional guidance. You should consult a physical therapist or doctor if:</p>
+      <ul>
+        <li>Your pain is sharp, sudden, or worsening</li>
+        <li>You have numbness, tingling, or weakness</li>
+        <li>Your injury is less than 2 weeks old</li>
+        <li>You are recovering from surgery</li>
+        <li>The tool shows very few safe exercises for your situation</li>
+      </ul>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+      <h2>Frequently Asked Questions</h2>
+
+      <div class="faq-item">
+        <div class="faq-question">Can I work out with an injury?</div>
+        <div class="faq-answer">In many cases, yes -- but you need to avoid exercises that stress the injured area. This tool helps by filtering out contraindicated movements based on your specific injury. Always consult a doctor or physical therapist before starting any exercise program with an injury.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">How does the injury detection work?</div>
+        <div class="faq-answer">The tool matches keywords in your injury description against a database of 12 common injury types. Each injury type has associated movement contraindications (like "avoid overhead pressing" for shoulder impingement). Exercises with those contraindications are automatically removed from your plan.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">What injuries does this tool support?</div>
+        <div class="faq-answer">The tool supports shoulder impingement, rotator cuff injuries, labrum tears, tennis elbow, golfer's elbow, wrist pain, lower back pain, knee injuries, hip pain, neck pain, ankle sprains, and chest/pec strains.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">Is this a replacement for a physical therapist?</div>
+        <div class="faq-answer">No. This tool provides general exercise guidance based on common contraindications. It cannot diagnose injuries, assess severity, or account for your specific anatomy and recovery stage. Always work with a qualified physical therapist or doctor for injury rehabilitation.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">Why do I get different exercises each time?</div>
+        <div class="faq-answer">The generator randomizes exercise selection within safety tiers to provide variety. Exercises with fewer contraindications are preferred, but within each safety tier, the selection is randomized. Hit "Regenerate" for a fresh plan.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">Can I use this tool at the gym?</div>
+        <div class="faq-answer">Absolutely. The tool is mobile-first and works great on your phone. You can also use the Print button to create a paper copy of your workout plan to bring to the gym.</div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="footer-links">
+        <a href="https://one-rep-max-calculator-dld.pages.dev" target="_blank" rel="noopener">One Rep Max Calculator</a>
+      </div>
+      <p>&copy; 2026 Automated Insights LLC. All rights reserved.</p>
+    </footer>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/exercises.js"></script>
+  <script src="js/injuries.js"></script>
+  <script src="js/generator.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>

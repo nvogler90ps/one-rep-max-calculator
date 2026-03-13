@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://workout-gen-3bh.pages.dev/sitemap.xml
