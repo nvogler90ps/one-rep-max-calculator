@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>One Rep Max Calculator - Estimate Your 1RM &amp; Strength Level</title>
+  <meta name="description" content="Free one rep max calculator. Estimate your 1RM using 7 proven formulas (Epley, Brzycki, Wathan). Compare your strength level to population standards by bodyweight.">
+  <meta name="keywords" content="one rep max calculator, 1rm calculator, strength standards, bench press calculator, squat calculator, deadlift calculator, how strong am I">
+  <link rel="canonical" href="https://onerepmaxcalc.com/">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="One Rep Max Calculator - Estimate Your 1RM">
+  <meta property="og:description" content="Calculate your estimated one rep max using 7 proven formulas. See how your strength compares to other lifters at your bodyweight.">
+  <meta property="og:type" content="website">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "One Rep Max Calculator",
+    "description": "Calculate your estimated one rep max using 7 proven formulas and compare your strength to population standards.",
+    "applicationCategory": "HealthApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <link rel="stylesheet" href="css/styles.css">
+
+  <!-- AdSense placeholder - replace with real code after approval -->
+  <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
+</head>
+<body>
+
+  <div class="container">
+    <header class="site-header">
+      <h1>One Rep Max Calculator</h1>
+      <p>Estimate your 1RM using 7 proven formulas. Compare your strength to population standards.</p>
+    </header>
+
+    <!-- Calculator Form -->
+    <div class="card">
+      <h2>Calculate Your 1RM</h2>
+      <form id="calc-form">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="weight">Weight Lifted</label>
+            <input type="number" id="weight" min="1" max="2000" step="0.5" placeholder="225" required>
+          </div>
+          <div class="form-group">
+            <label for="reps">Reps Performed</label>
+            <input type="number" id="reps" min="1" max="30" step="1" placeholder="5" required>
+          </div>
+          <div class="form-group">
+            <label for="exercise">Exercise</label>
+            <select id="exercise">
+              <option value="bench_press">Bench Press</option>
+              <option value="squat">Squat</option>
+              <option value="deadlift">Deadlift</option>
+              <option value="overhead_press">Overhead Press</option>
+              <option value="barbell_row">Barbell Row</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="unit-toggle">Units</label>
+            <select id="unit-toggle">
+              <option value="lbs">Pounds (lbs)</option>
+              <option value="kg">Kilograms (kg)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="bodyweight">Your Bodyweight</label>
+            <input type="number" id="bodyweight" min="50" max="500" step="0.5" placeholder="180">
+          </div>
+          <div class="form-group">
+            <label for="sex">Sex</label>
+            <select id="sex">
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Results -->
+    <div id="results" class="hidden">
+
+      <!-- Hero result -->
+      <div class="result-hero">
+        <div class="label">Estimated One Rep Max</div>
+        <div class="value" id="estimated-1rm">--</div>
+        <div class="sublabel">Average across 7 formulas</div>
+      </div>
+
+      <!-- Formula breakdown -->
+      <div class="card">
+        <h2>Formula Breakdown</h2>
+        <div class="formula-grid" id="formula-breakdown"></div>
+      </div>
+
+      <!-- Ad slot -->
+      <div class="ad-slot" id="ad-slot-1">
+        <!-- AdSense ad unit will go here -->
+        <span>Ad</span>
+      </div>
+
+      <!-- Strength Standards -->
+      <div class="card" id="strength-standards">
+        <h2>Your Strength Level</h2>
+        <div style="text-align: center; margin-bottom: 16px;">
+          <span class="level-badge" id="strength-level">--</span>
+        </div>
+        <p id="strength-percentile"></p>
+        <p id="strength-description"></p>
+        <div id="standards-bars"></div>
+      </div>
+
+      <!-- Percentage Table -->
+      <div class="card">
+        <h2>Training Percentages</h2>
+        <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 12px;">
+          Use these percentages to program your training based on your estimated 1RM.
+        </p>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>% of 1RM</th>
+                <th>Weight</th>
+                <th>Reps</th>
+                <th>Training Goal</th>
+              </tr>
+            </thead>
+            <tbody id="percentage-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Ad slot -->
+      <div class="ad-slot" id="ad-slot-2">
+        <!-- AdSense ad unit will go here -->
+        <span>Ad</span>
+      </div>
+
+      <!-- Warmup Sets -->
+      <div class="card">
+        <h2>Suggested Warmup Sets</h2>
+        <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 12px;">
+          Warmup ramp to your estimated 1RM. Adjust based on how you feel.
+        </p>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Set</th>
+                <th>Weight</th>
+                <th>Reps</th>
+                <th>Purpose</th>
+              </tr>
+            </thead>
+            <tbody id="warmup-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- SEO Content -->
+    <div class="content-section card">
+      <h2>How to Calculate Your One Rep Max</h2>
+      <p>
+        Your one rep max (1RM) is the maximum weight you can lift for a single repetition of a given exercise.
+        Knowing your 1RM is essential for programming effective training -- most strength and hypertrophy programs
+        prescribe weights as a percentage of your 1RM.
+      </p>
+      <p>
+        Rather than attempting a true 1RM (which carries injury risk), you can estimate it from a submaximal set.
+        Simply enter the weight you lifted and the number of reps you completed, and this calculator will estimate
+        your 1RM using seven well-established formulas.
+      </p>
+
+      <h3>The Formulas</h3>
+      <p>
+        This calculator uses seven peer-reviewed formulas to estimate your 1RM:
+      </p>
+      <ul>
+        <li><strong>Epley (1985)</strong> -- The most widely used formula. Works well for 1-10 reps.</li>
+        <li><strong>Brzycki (1993)</strong> -- Very accurate for low rep ranges (1-7 reps). Popular in academic research.</li>
+        <li><strong>Wathan (1994)</strong> -- Exponential model often considered the most accurate overall.</li>
+        <li><strong>Lander (1985)</strong> -- Good accuracy across moderate rep ranges.</li>
+        <li><strong>Lombardi (1989)</strong> -- Power-based formula. Tends toward conservative estimates.</li>
+        <li><strong>Mayhew et al. (1992)</strong> -- Exponential model that handles higher rep ranges (8-15) well.</li>
+        <li><strong>O'Conner et al. (1989)</strong> -- Simple linear model. Conservative but reliable.</li>
+      </ul>
+      <p>
+        We display the average across all seven formulas as your primary estimate. For the most accurate result,
+        use a weight you can lift for 3-8 reps. Accuracy decreases above 10 reps.
+      </p>
+
+      <h3>Strength Standards</h3>
+      <p>
+        Enter your bodyweight and sex to see how your estimated 1RM compares to population-level strength standards.
+        These standards are based on publicly available data from competitive powerlifting and gym populations,
+        categorized into five levels:
+      </p>
+      <ul>
+        <li><strong>Beginner</strong> -- Less than 6 months of training. Stronger than roughly 5% of lifters.</li>
+        <li><strong>Novice</strong> -- 6-12 months of consistent training. Stronger than roughly 20% of lifters.</li>
+        <li><strong>Intermediate</strong> -- 1-3 years of dedicated training. Stronger than roughly 50% of lifters.</li>
+        <li><strong>Advanced</strong> -- 3-5+ years of serious training. Competitive at a local level.</li>
+        <li><strong>Elite</strong> -- 5+ years of dedicated training. Competitive at regional or national level.</li>
+      </ul>
+
+      <h3>Tips for Accurate Results</h3>
+      <ul>
+        <li>Use a weight you can lift with good form for 3-8 reps.</li>
+        <li>Take the set close to failure (1-2 reps in reserve) for the best accuracy.</li>
+        <li>Accuracy decreases significantly above 10 reps.</li>
+        <li>Results are estimates -- your actual 1RM may vary based on technique, fatigue, and other factors.</li>
+        <li>Never attempt a true 1RM without a spotter and proper warmup.</li>
+      </ul>
+    </div>
+
+    <!-- Ad slot -->
+    <div class="ad-slot" id="ad-slot-3">
+      <!-- AdSense ad unit will go here -->
+      <span>Ad</span>
+    </div>
+
+    <footer class="site-footer">
+      <p>&copy; 2026 Automated Insights LLC. All rights reserved.</p>
+      <p>This tool provides estimates only. Consult a qualified trainer before attempting maximal lifts.</p>
+    </footer>
+  </div>
+
+  <script src="js/standards.js"></script>
+  <script src="js/calculator.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
