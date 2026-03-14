@@ -659,7 +659,7 @@
      Results display
      ------------------------------------------------------- */
   function showResults() {
-    var eval = evaluate();
+    var result = evaluate();
     var rules = RULES[state.country];
 
     questionContainer.classList.add('hidden');
@@ -672,13 +672,13 @@
     var title = document.getElementById('results-title');
     var summary = document.getElementById('results-summary');
 
-    if (eval.result === 'eligible') {
+    if (result.result === 'eligible') {
       icon.textContent = '\u2714';
       icon.style.color = 'var(--green)';
       title.textContent = 'You Appear Eligible to Donate!';
       title.style.color = 'var(--green)';
       summary.textContent = 'Based on your answers, you meet the general eligibility requirements for blood donation in ' + rules.name + '. Schedule an appointment to confirm with a screening professional.';
-    } else if (eval.result === 'maybe') {
+    } else if (result.result === 'maybe') {
       icon.textContent = '?';
       icon.style.color = 'var(--yellow)';
       title.textContent = 'You May Be Eligible';
@@ -695,8 +695,8 @@
     // Details
     var detailsDiv = document.getElementById('results-details');
     detailsDiv.innerHTML = '';
-    for (var i = 0; i < eval.issues.length; i++) {
-      var issue = eval.issues[i];
+    for (var i = 0; i < result.issues.length; i++) {
+      var issue = result.issues[i];
       var item = document.createElement('div');
       item.className = 'result-item';
 
@@ -724,14 +724,14 @@
     // Donation types
     var typesSection = document.getElementById('results-types');
     var typesGrid = document.getElementById('donation-types-grid');
-    if (eval.result === 'eligible' || eval.result === 'maybe') {
+    if (result.result === 'eligible' || result.result === 'maybe') {
       typesSection.classList.remove('hidden');
       typesGrid.innerHTML = '';
 
       var types = [
-        { name: 'Whole Blood', freq: 'Every ' + rules.wholeBloodDays + ' days', available: eval.canWholeBlood, icon: '\uD83E\uDE78' },
-        { name: 'Platelets', freq: 'Every ' + rules.plateletDays + ' days', available: eval.canPlatelets, icon: '\uD83E\uDDE0' },
-        { name: 'Plasma', freq: 'Every ' + rules.plasmaDays + ' days', available: eval.canPlasma, icon: '\uD83E\uDDEA' }
+        { name: 'Whole Blood', freq: 'Every ' + rules.wholeBloodDays + ' days', available: result.canWholeBlood, icon: '\uD83E\uDE78' },
+        { name: 'Platelets', freq: 'Every ' + rules.plateletDays + ' days', available: result.canPlatelets, icon: '\uD83E\uDDE0' },
+        { name: 'Plasma', freq: 'Every ' + rules.plasmaDays + ' days', available: result.canPlasma, icon: '\uD83E\uDDEA' }
       ];
 
       for (var j = 0; j < types.length; j++) {
@@ -763,11 +763,11 @@
     // Deferral info
     var deferralSection = document.getElementById('results-deferral');
     var deferralInfo = document.getElementById('deferral-info');
-    if (eval.deferrals.length > 0) {
+    if (result.deferrals.length > 0) {
       deferralSection.classList.remove('hidden');
       deferralInfo.innerHTML = '';
-      for (var k = 0; k < eval.deferrals.length; k++) {
-        var d = eval.deferrals[k];
+      for (var k = 0; k < result.deferrals.length; k++) {
+        var d = result.deferrals[k];
         var dItem = document.createElement('div');
         dItem.className = 'deferral-item';
         dItem.innerHTML = '<strong>' + d.text + '</strong><div class="deferral-reason">' + d.reason + '</div>';
