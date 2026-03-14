@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compound Interest Explained: How Your Money Grows Over Time</title>
+    <meta name="description" content="Understand how compound interest works with clear examples. Learn the difference between simple and compound interest, the Rule of 72, and how compounding builds wealth over time.">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="canonical" href="https://automated-insights.com/blog/compound-interest-explained/">
+    <meta property="og:title" content="Compound Interest Explained: How Your Money Grows Over Time">
+    <meta property="og:description" content="Learn how compound interest works with clear examples, the Rule of 72, and simple vs compound comparisons.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://automated-insights.com/blog/compound-interest-explained/">
+    <meta property="article:published_time" content="2026-03-13">
+    <meta property="article:author" content="Nicholas Vogler">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Compound Interest Explained: How Your Money Grows Over Time",
+        "author": { "@type": "Person", "name": "Nicholas Vogler" },
+        "datePublished": "2026-03-13",
+        "publisher": { "@type": "Organization", "name": "Automated Insights" },
+        "description": "Understand how compound interest works with clear examples and the Rule of 72."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://automated-insights.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://automated-insights.com/blog/" },
+            { "@type": "ListItem", "position": 3, "name": "Compound Interest Explained" }
+        ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is the difference between simple and compound interest?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Simple interest is calculated only on the original principal. Compound interest is calculated on the principal plus all previously accumulated interest. For example, $1,000 at 10% simple interest earns $100 per year every year. With compound interest, it earns $100 the first year, $110 the second year (10% of $1,100), $121 the third year, and so on -- the interest itself earns interest."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What is the Rule of 72?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The Rule of 72 is a quick way to estimate how long it takes for an investment to double. Divide 72 by the annual interest rate to get the approximate number of years. For example, at 8% annual return, your money doubles in roughly 72 / 8 = 9 years."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How often should interest compound?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "More frequent compounding produces slightly more growth. Daily compounding earns more than monthly, which earns more than annual. However, the difference is small in practice. Going from annual to daily compounding on a $10,000 investment at 5% adds only about $12 extra per year. The interest rate and time invested matter far more than compounding frequency."
+                }
+            }
+        ]
+    }
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3434609691579834" crossorigin="anonymous"></script>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: #0f1117;
+            color: #e8eaed;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            line-height: 1.7;
+        }
+
+        a { color: #6c63ff; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        nav {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid #2e3345;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        nav a { color: #9aa0b0; font-size: 0.95rem; transition: color 0.2s; }
+        nav a:hover { color: #e8eaed; text-decoration: none; }
+        nav .brand { color: #6c63ff; font-weight: 700; font-size: 1.05rem; }
+
+        .breadcrumb {
+            max-width: 720px;
+            margin: 1.5rem auto 0;
+            padding: 0 1rem;
+            font-size: 0.85rem;
+            color: #9aa0b0;
+        }
+
+        .breadcrumb a { color: #9aa0b0; }
+        .breadcrumb a:hover { color: #6c63ff; }
+
+        article {
+            flex: 1;
+            width: 100%;
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 2rem 1rem 3rem;
+        }
+
+        .post-meta {
+            color: #9aa0b0;
+            font-size: 0.85rem;
+            margin-bottom: 2rem;
+        }
+
+        h1 { font-size: 2rem; font-weight: 700; margin-bottom: 0.75rem; line-height: 1.25; }
+        h2 { font-size: 1.4rem; font-weight: 600; margin: 2rem 0 0.75rem; }
+        h3 { font-size: 1.1rem; font-weight: 600; margin: 1.5rem 0 0.5rem; }
+        p { margin-bottom: 1rem; }
+        ul, ol { margin: 0 0 1rem 1.5rem; }
+        li { margin-bottom: 0.4rem; }
+
+        .formula-box {
+            background: #1a1d27;
+            border: 1px solid #2e3345;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        .cta-box {
+            background: #1a1d27;
+            border: 2px solid #6c63ff;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .cta-box h3 { color: #6c63ff; margin: 0 0 0.5rem; }
+        .cta-box p { color: #9aa0b0; margin-bottom: 1rem; }
+
+        .cta-box a.btn {
+            display: inline-block;
+            background: #6c63ff;
+            color: #fff;
+            padding: 0.6rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: opacity 0.2s;
+        }
+
+        .cta-box a.btn:hover { opacity: 0.85; text-decoration: none; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0 1.5rem;
+        }
+
+        th, td {
+            padding: 0.6rem 0.8rem;
+            text-align: left;
+            border-bottom: 1px solid #2e3345;
+        }
+
+        th {
+            background: #1a1d27;
+            color: #9aa0b0;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        td { font-size: 0.95rem; }
+
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: #9aa0b0;
+            font-size: 0.85rem;
+            border-top: 1px solid #2e3345;
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 1.5rem; }
+            h2 { font-size: 1.2rem; }
+            article { padding: 1.5rem 1rem 2rem; }
+            table { font-size: 0.85rem; }
+            th, td { padding: 0.4rem 0.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/" class="brand">Automated Insights</a>
+        <a href="/">Tools</a>
+        <a href="/blog/">Blog</a>
+    </nav>
+
+    <div class="breadcrumb">
+        <a href="/">Home</a> / <a href="/blog/">Blog</a> / Compound Interest Explained
+    </div>
+
+    <article>
+        <h1>Compound Interest Explained: How Your Money Grows (or Your Debt Snowballs)</h1>
+        <div class="post-meta">By Nicholas Vogler -- March 13, 2026 -- 5 min read</div>
+
+        <p>Compound interest is the single most important concept in personal finance. It is the reason a small amount invested early can grow into a fortune, and the reason credit card debt can spiral out of control. Once you understand how it works, you will never look at saving, investing, or borrowing the same way.</p>
+
+        <h2>Simple Interest vs. Compound Interest</h2>
+
+        <p>With <strong>simple interest</strong>, you earn interest only on your original deposit (the principal). The amount of interest is the same every year.</p>
+
+        <p>With <strong>compound interest</strong>, you earn interest on your principal <em>plus</em> all the interest that has already accumulated. Your interest earns interest, which earns more interest. This creates exponential growth.</p>
+
+        <h3>Example: $10,000 at 8% for 30 years</h3>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Year</th>
+                    <th>Simple Interest Balance</th>
+                    <th>Compound Interest Balance</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>0</td>
+                    <td>$10,000</td>
+                    <td>$10,000</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>$14,000</td>
+                    <td>$14,693</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>$18,000</td>
+                    <td>$21,589</td>
+                </tr>
+                <tr>
+                    <td>20</td>
+                    <td>$26,000</td>
+                    <td>$46,610</td>
+                </tr>
+                <tr>
+                    <td>30</td>
+                    <td>$34,000</td>
+                    <td>$100,627</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>After 30 years, simple interest turns $10,000 into $34,000 -- a gain of $24,000. Compound interest turns the same $10,000 into over $100,000 -- a gain of $90,627. The difference is entirely due to interest earning interest.</p>
+
+        <h2>The Compound Interest Formula</h2>
+
+        <div class="formula-box">
+            <strong>A = P(1 + r/n)<sup>nt</sup></strong>
+        </div>
+
+        <p>Where:</p>
+        <ul>
+            <li><strong>A</strong> = final amount</li>
+            <li><strong>P</strong> = principal (starting amount)</li>
+            <li><strong>r</strong> = annual interest rate (as a decimal)</li>
+            <li><strong>n</strong> = number of times interest compounds per year</li>
+            <li><strong>t</strong> = number of years</li>
+        </ul>
+
+        <p>For $10,000 at 8% compounded annually for 30 years:</p>
+        <p>A = 10,000 &times; (1 + 0.08/1)<sup>1&times;30</sup> = 10,000 &times; (1.08)<sup>30</sup> = 10,000 &times; 10.0627 = <strong>$100,627</strong></p>
+
+        <div class="cta-box">
+            <h3>Try Our Free Interest Calculator</h3>
+            <p>See how your savings or investments grow over time with compound interest. Adjust rate, term, contributions, and compounding frequency.</p>
+            <a href="/interest-calculator/" class="btn">Calculate Compound Interest</a>
+        </div>
+
+        <h2>The Rule of 72</h2>
+
+        <p>The Rule of 72 is a mental shortcut for estimating how long it takes for money to double at a given interest rate. Just divide 72 by the annual rate:</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Annual Rate</th>
+                    <th>Years to Double (Rule of 72)</th>
+                    <th>Actual Years to Double</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>4%</td>
+                    <td>18.0</td>
+                    <td>17.7</td>
+                </tr>
+                <tr>
+                    <td>6%</td>
+                    <td>12.0</td>
+                    <td>11.9</td>
+                </tr>
+                <tr>
+                    <td>8%</td>
+                    <td>9.0</td>
+                    <td>9.0</td>
+                </tr>
+                <tr>
+                    <td>10%</td>
+                    <td>7.2</td>
+                    <td>7.3</td>
+                </tr>
+                <tr>
+                    <td>12%</td>
+                    <td>6.0</td>
+                    <td>6.1</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>The Rule of 72 is remarkably accurate for rates between 4% and 12%. It also works in reverse: if you want to know what rate you need to double your money in 10 years, divide 72 by 10 to get approximately 7.2%.</p>
+
+        <h2>Compounding Frequency Matters (a Little)</h2>
+
+        <p>Interest can compound annually, monthly, daily, or even continuously. More frequent compounding produces slightly more growth because interest starts earning interest sooner.</p>
+
+        <p>Here is $10,000 at 8% for 10 years with different compounding frequencies:</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Compounding</th>
+                    <th>Final Balance</th>
+                    <th>Interest Earned</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Annually</td>
+                    <td>$21,589</td>
+                    <td>$11,589</td>
+                </tr>
+                <tr>
+                    <td>Monthly</td>
+                    <td>$22,196</td>
+                    <td>$12,196</td>
+                </tr>
+                <tr>
+                    <td>Daily</td>
+                    <td>$22,253</td>
+                    <td>$12,253</td>
+                </tr>
+                <tr>
+                    <td>Continuously</td>
+                    <td>$22,255</td>
+                    <td>$12,255</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>The difference between annual and daily compounding is $664 over 10 years -- meaningful but not dramatic. The interest rate and the amount of time invested matter far more than compounding frequency.</p>
+
+        <h2>Compound Interest Works Against You Too</h2>
+
+        <p>When you borrow money, compound interest works in the lender's favor. Credit cards are the most common example -- with APRs of 20-30%, unpaid balances grow rapidly.</p>
+
+        <p>A $5,000 credit card balance at 24% APR, making only minimum payments (typically 2% of balance or $25, whichever is greater), would take over 30 years to pay off and cost more than $12,000 in interest -- over twice the original balance.</p>
+
+        <p>This is why paying off high-interest debt is the best "investment" most people can make. Paying off a 24% credit card is equivalent to earning a guaranteed 24% return on your money.</p>
+
+        <h2>Why Starting Early Matters So Much</h2>
+
+        <p>Consider two people who each invest $5,000 per year at 8% returns:</p>
+
+        <ul>
+            <li><strong>Person A</strong> starts at age 25 and invests until age 35 (10 years, $50,000 total invested), then stops contributing but leaves the money to grow until age 65.</li>
+            <li><strong>Person B</strong> starts at age 35 and invests until age 65 (30 years, $150,000 total invested).</li>
+        </ul>
+
+        <p>At age 65, Person A has approximately <strong>$787,000</strong>. Person B has approximately <strong>$611,000</strong>. Person A invested $100,000 less but ended up with $176,000 more, purely because of the extra 10 years of compounding.</p>
+
+        <p>That is the power of compound interest: time is the most important variable, and every year of delay has a real cost.</p>
+
+        <h2>Run the Numbers Yourself</h2>
+
+        <p>The examples above give a general sense of how compounding works, but your situation is specific. Use our <a href="/interest-calculator/">compound interest calculator</a> to model your own scenarios -- adjust the principal, interest rate, contributions, compounding frequency, and time period to see exactly how your money will grow. Seeing the actual numbers makes the concept concrete and can be the motivation you need to start saving or accelerate debt payoff.</p>
+    </article>
+
+    <footer>
+        &copy; 2026 Automated Insights LLC. All rights reserved.
+    </footer>
+</body>
+</html>

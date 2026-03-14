@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Calculate Mortgage Payments: Formula, Examples, and Tips</title>
+    <meta name="description" content="Learn the exact formula lenders use to calculate monthly mortgage payments. Includes worked examples at different loan amounts and interest rates, plus tips to lower your payment.">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="canonical" href="https://automated-insights.com/blog/how-to-calculate-mortgage-payments/">
+    <meta property="og:title" content="How to Calculate Mortgage Payments: Formula, Examples, and Tips">
+    <meta property="og:description" content="Learn the exact formula lenders use to calculate monthly mortgage payments with worked examples.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://automated-insights.com/blog/how-to-calculate-mortgage-payments/">
+    <meta property="article:published_time" content="2026-03-13">
+    <meta property="article:author" content="Nicholas Vogler">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "How to Calculate Mortgage Payments: Formula, Examples, and Tips",
+        "author": { "@type": "Person", "name": "Nicholas Vogler" },
+        "datePublished": "2026-03-13",
+        "publisher": { "@type": "Organization", "name": "Automated Insights" },
+        "description": "Learn the exact formula lenders use to calculate monthly mortgage payments."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://automated-insights.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://automated-insights.com/blog/" },
+            { "@type": "ListItem", "position": 3, "name": "How to Calculate Mortgage Payments" }
+        ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is the formula for calculating a monthly mortgage payment?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The formula is M = P[r(1+r)^n] / [(1+r)^n - 1], where M is the monthly payment, P is the loan principal, r is the monthly interest rate (annual rate divided by 12), and n is the total number of monthly payments."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Does the mortgage payment formula include taxes and insurance?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "No. The standard mortgage formula only calculates principal and interest (P&I). Your actual monthly payment will also include property taxes, homeowner's insurance, and possibly PMI and HOA fees. These are added on top of the P&I amount."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How much does a 1% difference in interest rate affect my payment?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "On a $300,000 30-year loan, a 1% rate increase (from 6% to 7%) raises the monthly payment by about $200, from $1,799 to $1,996. Over the life of the loan, that 1% costs roughly $71,000 in additional interest."
+                }
+            }
+        ]
+    }
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3434609691579834" crossorigin="anonymous"></script>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: #0f1117;
+            color: #e8eaed;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            line-height: 1.7;
+        }
+
+        a { color: #6c63ff; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        nav {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid #2e3345;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        nav a { color: #9aa0b0; font-size: 0.95rem; transition: color 0.2s; }
+        nav a:hover { color: #e8eaed; text-decoration: none; }
+        nav .brand { color: #6c63ff; font-weight: 700; font-size: 1.05rem; }
+
+        .breadcrumb {
+            max-width: 720px;
+            margin: 1.5rem auto 0;
+            padding: 0 1rem;
+            font-size: 0.85rem;
+            color: #9aa0b0;
+        }
+
+        .breadcrumb a { color: #9aa0b0; }
+        .breadcrumb a:hover { color: #6c63ff; }
+
+        article {
+            flex: 1;
+            width: 100%;
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 2rem 1rem 3rem;
+        }
+
+        .post-meta {
+            color: #9aa0b0;
+            font-size: 0.85rem;
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            line-height: 1.25;
+        }
+
+        h2 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin: 2rem 0 0.75rem;
+            color: #e8eaed;
+        }
+
+        h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 1.5rem 0 0.5rem;
+        }
+
+        p { margin-bottom: 1rem; color: #e8eaed; }
+
+        ul, ol {
+            margin: 0 0 1rem 1.5rem;
+            color: #e8eaed;
+        }
+
+        li { margin-bottom: 0.4rem; }
+
+        code {
+            background: #1a1d27;
+            border: 1px solid #2e3345;
+            border-radius: 4px;
+            padding: 0.15rem 0.4rem;
+            font-size: 0.9em;
+        }
+
+        .formula-box {
+            background: #1a1d27;
+            border: 1px solid #2e3345;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        .cta-box {
+            background: #1a1d27;
+            border: 2px solid #6c63ff;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .cta-box h3 {
+            color: #6c63ff;
+            margin: 0 0 0.5rem;
+        }
+
+        .cta-box p { color: #9aa0b0; margin-bottom: 1rem; }
+
+        .cta-box a.btn {
+            display: inline-block;
+            background: #6c63ff;
+            color: #fff;
+            padding: 0.6rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: opacity 0.2s;
+        }
+
+        .cta-box a.btn:hover { opacity: 0.85; text-decoration: none; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0 1.5rem;
+        }
+
+        th, td {
+            padding: 0.6rem 0.8rem;
+            text-align: left;
+            border-bottom: 1px solid #2e3345;
+        }
+
+        th {
+            background: #1a1d27;
+            color: #9aa0b0;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        td { font-size: 0.95rem; }
+
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: #9aa0b0;
+            font-size: 0.85rem;
+            border-top: 1px solid #2e3345;
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 1.5rem; }
+            h2 { font-size: 1.2rem; }
+            article { padding: 1.5rem 1rem 2rem; }
+            table { font-size: 0.85rem; }
+            th, td { padding: 0.4rem 0.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/" class="brand">Automated Insights</a>
+        <a href="/">Tools</a>
+        <a href="/blog/">Blog</a>
+    </nav>
+
+    <div class="breadcrumb">
+        <a href="/">Home</a> / <a href="/blog/">Blog</a> / How to Calculate Mortgage Payments
+    </div>
+
+    <article>
+        <h1>How to Calculate Mortgage Payments: The Math Behind Your Monthly Bill</h1>
+        <div class="post-meta">By Nicholas Vogler -- March 13, 2026 -- 5 min read</div>
+
+        <p>When you take out a mortgage, your lender uses a specific formula to determine your monthly payment. Understanding this formula helps you evaluate offers, plan your budget, and see exactly how interest rates and loan terms affect what you pay. This guide walks through the math step by step, with real examples you can follow along with.</p>
+
+        <h2>The Mortgage Payment Formula</h2>
+
+        <p>The standard formula for calculating a fixed-rate mortgage payment is:</p>
+
+        <div class="formula-box">
+            <strong>M = P &times; [r(1 + r)<sup>n</sup>] / [(1 + r)<sup>n</sup> - 1]</strong>
+        </div>
+
+        <p>Where:</p>
+        <ul>
+            <li><strong>M</strong> = monthly payment (principal and interest only)</li>
+            <li><strong>P</strong> = loan principal (the amount you borrow)</li>
+            <li><strong>r</strong> = monthly interest rate (annual rate divided by 12)</li>
+            <li><strong>n</strong> = total number of payments (loan term in years times 12)</li>
+        </ul>
+
+        <p>This formula produces an <em>amortized</em> payment -- the same fixed dollar amount every month for the life of the loan. Early in the loan, most of your payment goes toward interest. Over time, more goes toward principal. The formula ensures the loan is fully paid off by the end of the term.</p>
+
+        <h2>A Worked Example: $300,000 Loan at 7%</h2>
+
+        <p>Say you are borrowing $300,000 at a 7% annual interest rate on a 30-year fixed mortgage.</p>
+
+        <h3>Step 1: Convert the rate</h3>
+        <p>Monthly interest rate: 7% / 12 = 0.5833% = 0.005833</p>
+
+        <h3>Step 2: Calculate total payments</h3>
+        <p>30 years times 12 months = 360 payments</p>
+
+        <h3>Step 3: Plug into the formula</h3>
+        <p>M = 300,000 &times; [0.005833 &times; (1.005833)<sup>360</sup>] / [(1.005833)<sup>360</sup> - 1]</p>
+        <p>(1.005833)<sup>360</sup> = 8.1165 (approximately)</p>
+        <p>M = 300,000 &times; [0.005833 &times; 8.1165] / [8.1165 - 1]</p>
+        <p>M = 300,000 &times; 0.04735 / 7.1165</p>
+        <p>M = 300,000 &times; 0.006653</p>
+        <p><strong>M = $1,996 per month</strong> (principal and interest)</p>
+
+        <p>Over 30 years, you will pay $1,996 &times; 360 = $718,527 total -- meaning $418,527 goes to interest alone. That is nearly 1.4 times the original loan amount in interest.</p>
+
+        <h2>How Interest Rate and Loan Term Change Your Payment</h2>
+
+        <p>The table below shows monthly principal and interest payments on a $300,000 loan at different rates and terms:</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Interest Rate</th>
+                    <th>30-Year Payment</th>
+                    <th>15-Year Payment</th>
+                    <th>Total Interest (30-yr)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>5%</td>
+                    <td>$1,610</td>
+                    <td>$2,372</td>
+                    <td>$279,767</td>
+                </tr>
+                <tr>
+                    <td>6%</td>
+                    <td>$1,799</td>
+                    <td>$2,532</td>
+                    <td>$347,515</td>
+                </tr>
+                <tr>
+                    <td>7%</td>
+                    <td>$1,996</td>
+                    <td>$2,696</td>
+                    <td>$418,527</td>
+                </tr>
+                <tr>
+                    <td>8%</td>
+                    <td>$2,201</td>
+                    <td>$2,867</td>
+                    <td>$492,467</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>Two key takeaways from this table:</p>
+        <ol>
+            <li><strong>Each 1% rate increase adds roughly $200/month</strong> to the payment on a $300,000 loan.</li>
+            <li><strong>A 15-year term costs more monthly but saves a massive amount on interest.</strong> At 7%, the 15-year loan saves over $233,000 in total interest compared to the 30-year option.</li>
+        </ol>
+
+        <h2>What the Formula Does Not Include</h2>
+
+        <p>The standard mortgage formula only calculates <strong>principal and interest (P&I)</strong>. Your actual monthly bill will also include:</p>
+
+        <ul>
+            <li><strong>Property taxes</strong> -- varies by location, typically 0.5-2.5% of home value per year</li>
+            <li><strong>Homeowner's insurance</strong> -- usually $1,000-$3,000 per year</li>
+            <li><strong>Private mortgage insurance (PMI)</strong> -- required if your down payment is less than 20%, typically 0.5-1% of the loan per year</li>
+            <li><strong>HOA fees</strong> -- if applicable, can range from $100 to $1,000+ per month</li>
+        </ul>
+
+        <p>These extras can add $300-$800 or more to your monthly bill. To see a complete breakdown including taxes, insurance, and PMI, use our <a href="/mortgage-calc/">free mortgage calculator with full payment breakdown</a>.</p>
+
+        <h2>Strategies to Lower Your Monthly Payment</h2>
+
+        <ul>
+            <li><strong>Make a larger down payment.</strong> Borrowing less means paying less. A 20% down payment also eliminates PMI.</li>
+            <li><strong>Shop for lower rates.</strong> Even a 0.25% difference saves thousands over the life of a loan. Get quotes from at least 3 lenders.</li>
+            <li><strong>Choose a longer term.</strong> A 30-year loan has lower monthly payments than a 15-year, though you pay more total interest.</li>
+            <li><strong>Buy discount points.</strong> Paying 1% of the loan upfront (one "point") typically reduces your rate by 0.25%. This makes sense if you plan to keep the loan for many years.</li>
+        </ul>
+
+        <h2>When to Use a 15-Year vs. 30-Year Mortgage</h2>
+
+        <p>A 15-year mortgage is better if you can comfortably afford the higher payment and want to build equity faster. A 30-year mortgage gives you more flexibility in your monthly budget. If you get a 30-year loan and make extra principal payments when you can, you get some of the interest savings with more flexibility.</p>
+
+        <p>Not sure what you can comfortably afford? Our <a href="/home-affordability/">home affordability calculator</a> can help you figure out a price range based on your income and debts.</p>
+
+        <div class="cta-box">
+            <h3>Try Our Free Mortgage Calculator</h3>
+            <p>Skip the manual math. Get your exact monthly payment with taxes, insurance, PMI, and a full amortization schedule.</p>
+            <a href="/mortgage-calc/" class="btn">Calculate Your Payment</a>
+        </div>
+
+        <h2>Understanding Amortization</h2>
+
+        <p>Amortization is how your payment splits between principal and interest over time. In the early years of a 30-year mortgage, roughly 70-80% of each payment goes to interest. By the final years, nearly all of it goes to principal.</p>
+
+        <p>This is why making extra payments early in the loan is so powerful -- each dollar of extra principal you pay now saves you multiple dollars of future interest. On our <a href="/mortgage-calc/">mortgage calculator</a>, you can model extra payments and see exactly how much time and money they save.</p>
+
+        <h2>The Bottom Line</h2>
+
+        <p>The mortgage payment formula is straightforward once you break it down: your loan amount, interest rate, and loan term determine your payment. Small changes in rate or term have a big impact over 15 or 30 years. Before committing to a loan, run the numbers at different scenarios. You can also use our <a href="/interest-calculator/">interest calculator</a> to explore how interest works on other types of loans and investments.</p>
+    </article>
+
+    <footer>
+        &copy; 2026 Automated Insights LLC. All rights reserved.
+    </footer>
+</body>
+</html>
