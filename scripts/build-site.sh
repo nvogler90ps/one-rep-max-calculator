@@ -80,17 +80,22 @@ if [ -f "$ROOT/site-homepage/theme-toggle.js" ]; then
     cp "$ROOT/site-homepage/theme-toggle.js" "$SITE/theme-toggle.js"
 fi
 
-# Inject shared CSS and theme JS into every HTML page
-echo "Injecting shared theme into HTML pages..."
+# Inject shared CSS, theme JS, and cache-busted favicons into every HTML page
+echo "Injecting shared theme and favicons into HTML pages..."
+CACHE_BUST="$(date +%s)"
 INJECT_CSS='<link rel="stylesheet" href="/shared-styles.css">'
 INJECT_JS='<script src="/theme-toggle.js"></script>'
 find "$SITE" -name "index.html" -print0 | while IFS= read -r -d '' htmlfile; do
-    # Insert before </head>
+    # Replace old favicon references with cache-busted versions
+    sed -i '' "s|href=\"/favicon.svg\"|href=\"/favicon.svg?v=${CACHE_BUST}\"|g" "$htmlfile"
+    sed -i '' "s|href=\"/favicon-32.png\"|href=\"/favicon-32.png?v=${CACHE_BUST}\"|g" "$htmlfile"
+    sed -i '' "s|href=\"/apple-touch-icon.png\"|href=\"/apple-touch-icon.png?v=${CACHE_BUST}\"|g" "$htmlfile"
+    # Insert shared CSS + JS before </head>
     sed -i '' "s|</head>|${INJECT_CSS}\\
 ${INJECT_JS}\\
 </head>|" "$htmlfile"
 done
-echo "Theme injection complete."
+echo "Theme and favicon injection complete."
 
 # ---------- favicons ----------
 for fav in favicon.svg favicon-32.png apple-touch-icon.png; do
