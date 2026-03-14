@@ -1,0 +1,483 @@
+/* ========================================
+   Automated Insights - Shared Theme System
+   Light theme (default) + Dark theme toggle
+   ======================================== */
+
+/* --- CSS Variables: Light Theme (Default) --- */
+:root {
+  --bg-primary: #f8fafc;
+  --bg-secondary: #ffffff;
+  --bg-card: #ffffff;
+  --bg-input: #ffffff;
+  --bg-code: #f1f5f9;
+  --border: #e2e8f0;
+  --border-hover: #4f46e5;
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --text-muted: #94a3b8;
+  --accent: #4f46e5;
+  --accent-hover: #4338ca;
+  --accent-light: #eef2ff;
+  --accent-text: #ffffff;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.05);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -4px rgba(0,0,0,0.04);
+  --nav-bg: #ffffff;
+  --nav-border: #e2e8f0;
+  --footer-bg: #f8fafc;
+  --table-header-bg: #f1f5f9;
+  --table-stripe: #f8fafc;
+  --highlight-bg: rgba(79,70,229,0.08);
+  --success: #16a34a;
+  --warning: #d97706;
+  --error: #dc2626;
+}
+
+/* --- CSS Variables: Dark Theme --- */
+[data-theme="dark"] {
+  --bg-primary: #0f1117;
+  --bg-secondary: #1a1d27;
+  --bg-card: #1a1d27;
+  --bg-input: #1a1d27;
+  --bg-code: #1a1d27;
+  --border: #2e3345;
+  --border-hover: #6c63ff;
+  --text-primary: #e8eaed;
+  --text-secondary: #9aa0b0;
+  --text-muted: #6b7280;
+  --accent: #6c63ff;
+  --accent-hover: #5a52e0;
+  --accent-light: rgba(108,99,255,0.15);
+  --accent-text: #ffffff;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.4);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.5);
+  --nav-bg: #0f1117;
+  --nav-border: #2e3345;
+  --footer-bg: #0f1117;
+  --table-header-bg: #1a1d27;
+  --table-stripe: #161921;
+  --highlight-bg: rgba(108,99,255,0.15);
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --error: #ef4444;
+}
+
+/* --- Global Overrides --- */
+body {
+  background: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+/* --- Navigation --- */
+nav, header nav, .nav, [class*="nav"] {
+  background: var(--nav-bg) !important;
+  border-color: var(--nav-border) !important;
+}
+
+nav a, header nav a {
+  color: var(--text-secondary) !important;
+  transition: color 0.15s ease !important;
+}
+
+nav a:hover, header nav a:hover {
+  color: var(--text-primary) !important;
+}
+
+nav a.brand, nav a:first-child,
+nav a[style*="font-weight:700"],
+nav a[style*="font-weight: 700"] {
+  color: var(--accent) !important;
+}
+
+/* --- Cards & Containers --- */
+.card, .post-card, [class*="card"],
+div[style*="background: #1a1d27"],
+div[style*="background:#1a1d27"],
+section[style*="background: #1a1d27"],
+section[style*="background:#1a1d27"] {
+  background: var(--bg-card) !important;
+  border-color: var(--border) !important;
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.card:hover, .post-card:hover, [class*="card"]:hover {
+  border-color: var(--border-hover) !important;
+  box-shadow: var(--shadow-md);
+}
+
+/* --- Backgrounds that were hardcoded #0f1117 --- */
+div[style*="background: #0f1117"],
+div[style*="background:#0f1117"],
+section[style*="background: #0f1117"],
+section[style*="background:#0f1117"],
+main[style*="background: #0f1117"],
+main[style*="background:#0f1117"] {
+  background: var(--bg-primary) !important;
+}
+
+/* --- Text Colors --- */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-primary) !important;
+}
+
+p {
+  color: var(--text-primary) !important;
+}
+
+/* Muted/secondary text */
+.post-meta, .breadcrumb, .breadcrumb span,
+span[style*="color: #9aa0b0"],
+span[style*="color:#9aa0b0"],
+span[style*="color: #9ba1b0"],
+span[style*="color:#9ba1b0"],
+p[style*="color: #9aa0b0"],
+p[style*="color:#9aa0b0"],
+div[style*="color: #9aa0b0"],
+div[style*="color:#9aa0b0"],
+span[class*="meta"], .text-muted {
+  color: var(--text-secondary) !important;
+}
+
+/* --- Links --- */
+a {
+  color: var(--accent) !important;
+  transition: color 0.15s ease;
+}
+
+a:hover {
+  color: var(--accent-hover) !important;
+}
+
+/* Card links should inherit text color */
+a.card, a.post-card, a[class*="card"] {
+  color: var(--text-primary) !important;
+  text-decoration: none !important;
+}
+
+a.card h2, a.post-card h2 {
+  color: var(--text-primary) !important;
+}
+
+a.card p, a.post-card p {
+  color: var(--text-secondary) !important;
+}
+
+/* --- Breadcrumbs --- */
+.breadcrumb a {
+  color: var(--text-secondary) !important;
+}
+
+.breadcrumb a:hover {
+  color: var(--accent) !important;
+}
+
+/* --- Buttons --- */
+button, .btn, a.btn,
+input[type="submit"],
+input[type="button"],
+a[style*="background: #6c63ff"],
+a[style*="background:#6c63ff"],
+button[style*="background: #6c63ff"],
+button[style*="background:#6c63ff"] {
+  background: var(--accent) !important;
+  color: var(--accent-text) !important;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+button:hover, .btn:hover, a.btn:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover {
+  background: var(--accent-hover) !important;
+}
+
+button:active, .btn:active {
+  transform: scale(0.98);
+}
+
+/* --- Inputs & Forms --- */
+input, select, textarea {
+  background: var(--bg-input) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 3px var(--accent-light) !important;
+  outline: none !important;
+}
+
+input[type="range"] {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* --- Tables --- */
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th {
+  background: var(--table-header-bg) !important;
+  color: var(--text-secondary) !important;
+}
+
+th, td {
+  border-color: var(--border) !important;
+  padding: 0.6rem 0.8rem;
+}
+
+tr:nth-child(even) {
+  background: var(--table-stripe);
+}
+
+/* --- Code --- */
+code {
+  background: var(--bg-code) !important;
+  border-color: var(--border) !important;
+  color: var(--text-primary) !important;
+}
+
+pre {
+  background: var(--bg-code) !important;
+  border-color: var(--border) !important;
+}
+
+/* --- Accent-colored elements --- */
+.answer-value, .answer-box,
+[style*="color: #6c63ff"],
+[style*="color:#6c63ff"] {
+  color: var(--accent) !important;
+}
+
+[style*="border-color: #6c63ff"],
+[style*="border-color:#6c63ff"],
+[style*="border: 2px solid #6c63ff"],
+.answer-box, .cta-box {
+  border-color: var(--accent) !important;
+}
+
+/* --- Footer --- */
+footer {
+  background: var(--footer-bg) !important;
+  color: var(--text-secondary) !important;
+  border-color: var(--border) !important;
+}
+
+/* --- CTA Boxes --- */
+.cta-box, .cta, div[class*="cta"] {
+  background: var(--bg-card) !important;
+  border-color: var(--accent) !important;
+}
+
+.cta-box h3, .cta h3 {
+  color: var(--accent) !important;
+}
+
+.cta-box p, .cta p {
+  color: var(--text-secondary) !important;
+}
+
+/* --- Related Links Grid --- */
+.related-grid a, .related-link,
+a[class*="related"] {
+  background: var(--bg-card) !important;
+  border-color: var(--border) !important;
+  color: var(--text-primary) !important;
+}
+
+.related-grid a:hover, .related-link:hover {
+  border-color: var(--accent) !important;
+}
+
+/* --- Breakdown / Steps --- */
+.breakdown, .steps, div[class*="breakdown"] {
+  background: var(--bg-card) !important;
+  border-color: var(--border) !important;
+}
+
+.step-num {
+  background: var(--accent-light) !important;
+  color: var(--accent) !important;
+}
+
+/* --- More Tools Row --- */
+.tools-row a, .more-tools a {
+  background: var(--bg-card) !important;
+  border-color: var(--border) !important;
+  color: var(--text-primary) !important;
+}
+
+.tools-row a:hover, .more-tools a:hover {
+  border-color: var(--accent) !important;
+}
+
+.more-tools {
+  border-color: var(--border) !important;
+}
+
+/* --- Formula Box --- */
+.formula-box {
+  background: var(--bg-card) !important;
+  border-color: var(--border) !important;
+}
+
+/* --- Scrollbars (dark mode) --- */
+[data-theme="dark"] ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+/* --- Theme Toggle Button --- */
+.theme-toggle {
+  position: fixed;
+  bottom: 1.25rem;
+  right: 1.25rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  box-shadow: var(--shadow-md);
+  z-index: 9999;
+  transition: background 0.2s, border-color 0.2s, transform 0.15s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent) !important;
+  transform: scale(1.08);
+  background: var(--bg-card) !important;
+}
+
+/* --- Mobile Responsiveness Improvements --- */
+@media (max-width: 768px) {
+  body {
+    font-size: 15px;
+  }
+
+  nav {
+    padding: 0.75rem 1rem !important;
+    gap: 1rem !important;
+    flex-wrap: wrap;
+  }
+
+  nav a {
+    font-size: 0.9rem !important;
+  }
+
+  h1 {
+    font-size: 1.5rem !important;
+    line-height: 1.3 !important;
+  }
+
+  h2 {
+    font-size: 1.2rem !important;
+  }
+
+  main, article, .container {
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+  }
+
+  table {
+    font-size: 0.85rem;
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  th, td {
+    padding: 0.5rem 0.6rem !important;
+    white-space: nowrap;
+  }
+
+  .grid {
+    grid-template-columns: 1fr !important;
+    gap: 0.75rem !important;
+  }
+
+  .card, .post-card {
+    padding: 1.25rem !important;
+  }
+
+  .answer-value {
+    font-size: 2rem !important;
+  }
+
+  .related-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  .tools-row {
+    gap: 0.4rem !important;
+  }
+
+  .tools-row a {
+    font-size: 0.78rem !important;
+    padding: 0.35rem 0.65rem !important;
+  }
+
+  input, select, textarea {
+    font-size: 16px !important; /* Prevents iOS zoom on focus */
+    padding: 0.6rem 0.75rem !important;
+  }
+
+  button, .btn, a.btn {
+    padding: 0.65rem 1.25rem !important;
+    font-size: 0.95rem !important;
+    min-height: 44px; /* Touch target */
+  }
+
+  .theme-toggle {
+    bottom: 1rem;
+    right: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.3rem !important;
+  }
+
+  .related-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .breadcrumb {
+    font-size: 0.78rem !important;
+  }
+}
+
+/* --- Print Styles --- */
+@media print {
+  .theme-toggle { display: none !important; }
+  nav { position: static !important; }
+  body { background: white !important; color: black !important; }
+}

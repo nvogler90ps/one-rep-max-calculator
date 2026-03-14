@@ -72,6 +72,26 @@ else
     echo "WARNING: site-homepage/index.html not found -- skipping homepage"
 fi
 
+# ---------- shared theme CSS + JS ----------
+if [ -f "$ROOT/site-homepage/shared-styles.css" ]; then
+    cp "$ROOT/site-homepage/shared-styles.css" "$SITE/shared-styles.css"
+fi
+if [ -f "$ROOT/site-homepage/theme-toggle.js" ]; then
+    cp "$ROOT/site-homepage/theme-toggle.js" "$SITE/theme-toggle.js"
+fi
+
+# Inject shared CSS and theme JS into every HTML page
+echo "Injecting shared theme into HTML pages..."
+INJECT_CSS='<link rel="stylesheet" href="/shared-styles.css">'
+INJECT_JS='<script src="/theme-toggle.js"></script>'
+find "$SITE" -name "index.html" -print0 | while IFS= read -r -d '' htmlfile; do
+    # Insert before </head>
+    sed -i '' "s|</head>|${INJECT_CSS}\\
+${INJECT_JS}\\
+</head>|" "$htmlfile"
+done
+echo "Theme injection complete."
+
 # ---------- Cloudflare headers (speed + security) ----------
 if [ -f "$ROOT/site-homepage/_headers" ]; then
     cp "$ROOT/site-homepage/_headers" "$SITE/_headers"
