@@ -72,6 +72,18 @@ else
     echo "WARNING: site-homepage/index.html not found -- skipping homepage"
 fi
 
+# ---------- Cloudflare headers (speed + security) ----------
+if [ -f "$ROOT/site-homepage/_headers" ]; then
+    cp "$ROOT/site-homepage/_headers" "$SITE/_headers"
+fi
+
+# ---------- IndexNow key file ----------
+for keyfile in "$ROOT/site-homepage"/*.txt; do
+    if [ -f "$keyfile" ]; then
+        cp "$keyfile" "$SITE/$(basename "$keyfile")"
+    fi
+done
+
 # ---------- root ads.txt ----------
 # Use canonical ads.txt content (same across all tools)
 cat > "$SITE/ads.txt" <<'ADSTXT'
