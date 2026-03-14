@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{TITLE}}</title>
+    <meta name="description" content="{{DESCRIPTION}}">
+    <link rel="canonical" href="{{CANONICAL}}">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="{{TITLE}}">
+    <meta property="og:description" content="{{DESCRIPTION}}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{CANONICAL}}">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3434609691579834" crossorigin="anonymous"></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "How old am I if I was born in {{BIRTH_YEAR}}?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "If you were born in {{BIRTH_YEAR}}, you are {{AGE_MIN}} to {{AGE_MAX}} years old in 2026, depending on whether your birthday has occurred yet this year. You belong to the {{GENERATION}} generation. Your Chinese zodiac sign is the {{ZODIAC}}."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What generation is someone born in {{BIRTH_YEAR}}?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Someone born in {{BIRTH_YEAR}} belongs to the {{GENERATION}} generation."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What is the Chinese zodiac for {{BIRTH_YEAR}}?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The Chinese zodiac animal for {{BIRTH_YEAR}} is the {{ZODIAC}}."
+                }
+            }
+        ]
+    }
+    </script>
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, sans-serif;
+            background: #0f1117;
+            color: #e1e1e6;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        a {
+            color: #6c63ff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            padding: 16px 0;
+            font-size: 14px;
+            color: #8888a0;
+        }
+
+        .breadcrumb a {
+            color: #8888a0;
+        }
+
+        .breadcrumb a:hover {
+            color: #6c63ff;
+        }
+
+        .breadcrumb .separator {
+            margin: 0 8px;
+        }
+
+        .breadcrumb .current {
+            color: #c0c0d0;
+        }
+
+        /* Hero answer */
+        .hero {
+            background: #1a1d27;
+            border-radius: 16px;
+            padding: 48px 32px;
+            text-align: center;
+            margin: 16px 0 32px;
+            border: 1px solid #2a2d3a;
+        }
+
+        .hero-label {
+            font-size: 16px;
+            color: #8888a0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+
+        .hero-age {
+            font-size: 72px;
+            font-weight: 800;
+            color: #6c63ff;
+            line-height: 1.1;
+            margin-bottom: 8px;
+        }
+
+        .hero-suffix {
+            font-size: 28px;
+            color: #c0c0d0;
+            margin-bottom: 24px;
+        }
+
+        .hero-detail {
+            font-size: 16px;
+            color: #8888a0;
+            margin-bottom: 4px;
+        }
+
+        .hero-detail strong {
+            color: #c0c0d0;
+        }
+
+        /* Info cards grid */
+        .cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .card {
+            background: #1a1d27;
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid #2a2d3a;
+        }
+
+        .card-label {
+            font-size: 12px;
+            color: #8888a0;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 8px;
+        }
+
+        .card-value {
+            font-size: 22px;
+            font-weight: 700;
+            color: #e1e1e6;
+        }
+
+        /* Fun facts */
+        .section {
+            background: #1a1d27;
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 24px;
+            border: 1px solid #2a2d3a;
+        }
+
+        .section h2 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #e1e1e6;
+            margin-bottom: 20px;
+        }
+
+        .fact-list {
+            list-style: none;
+        }
+
+        .fact-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid #2a2d3a;
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+        }
+
+        .fact-list li:last-child {
+            border-bottom: none;
+        }
+
+        .fact-icon {
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .fact-text {
+            font-size: 15px;
+            color: #c0c0d0;
+        }
+
+        .fact-text strong {
+            color: #e1e1e6;
+        }
+
+        /* CTA */
+        .cta {
+            background: linear-gradient(135deg, #6c63ff 0%, #5a52d5 100%);
+            border-radius: 12px;
+            padding: 32px;
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .cta h2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .cta p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 16px;
+            font-size: 15px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #fff;
+            color: #6c63ff;
+            font-weight: 700;
+            padding: 12px 32px;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: transform 0.15s ease;
+        }
+
+        .cta-button:hover {
+            text-decoration: none;
+            transform: translateY(-1px);
+        }
+
+        /* Related links */
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 10px;
+        }
+
+        .related-link {
+            display: block;
+            background: #22253a;
+            border-radius: 8px;
+            padding: 14px 16px;
+            font-size: 14px;
+            color: #c0c0d0;
+            border: 1px solid #2a2d3a;
+            transition: border-color 0.15s ease;
+        }
+
+        .related-link:hover {
+            border-color: #6c63ff;
+            text-decoration: none;
+            color: #e1e1e6;
+        }
+
+        /* Ad slot */
+        .ad-slot {
+            margin: 24px 0;
+            text-align: center;
+            min-height: 90px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 32px 0;
+            font-size: 13px;
+            color: #5a5a70;
+            border-top: 1px solid #1a1d27;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .hero {
+                padding: 32px 20px;
+            }
+
+            .hero-age {
+                font-size: 52px;
+            }
+
+            .hero-suffix {
+                font-size: 22px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 24px 20px;
+            }
+
+            .related-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="breadcrumb">
+            <a href="/">Home</a>
+            <span class="separator">></span>
+            <a href="/age-calculator/">Age Calculator</a>
+            <span class="separator">></span>
+            <span class="current">Born in {{BIRTH_YEAR}}</span>
+        </nav>
+
+        <div class="hero">
+            <div class="hero-label">If you were born in {{BIRTH_YEAR}}</div>
+            <div class="hero-age">{{AGE_MIN}}-{{AGE_MAX}}</div>
+            <div class="hero-suffix">years old in 2026</div>
+            <div class="hero-detail">Birth year: <strong>{{BIRTH_YEAR}}</strong></div>
+            <div class="hero-detail">Current year: <strong>2026</strong></div>
+            <div class="hero-detail">You are <strong>{{AGE_MIN}}</strong> if your birthday hasn't happened yet, or <strong>{{AGE_MAX}}</strong> if it has</div>
+        </div>
+
+        <div class="ad-slot">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-3434609691579834"
+                 data-ad-slot="auto"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+        <div class="cards">
+            <div class="card">
+                <div class="card-label">Generation</div>
+                <div class="card-value">{{GENERATION}}</div>
+            </div>
+            <div class="card">
+                <div class="card-label">Chinese Zodiac</div>
+                <div class="card-value">{{ZODIAC}}</div>
+            </div>
+            <div class="card">
+                <div class="card-label">Age in Months</div>
+                <div class="card-value" id="age-months">--</div>
+            </div>
+            <div class="card">
+                <div class="card-label">Age in Days</div>
+                <div class="card-value" id="age-days">--</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Fun Facts About {{BIRTH_YEAR}}</h2>
+            <ul class="fact-list">
+                <li>
+                    <span class="fact-icon">*</span>
+                    <span class="fact-text">You belong to the <strong>{{GENERATION}}</strong> generation</span>
+                </li>
+                <li>
+                    <span class="fact-icon">*</span>
+                    <span class="fact-text">Your Chinese zodiac animal is the <strong>{{ZODIAC}}</strong></span>
+                </li>
+                <li>
+                    <span class="fact-icon">*</span>
+                    <span class="fact-text">You have lived through approximately <strong id="fact-decades">--</strong> decades</span>
+                </li>
+                <li>
+                    <span class="fact-icon">*</span>
+                    <span class="fact-text">You have experienced roughly <strong id="fact-leapyears">--</strong> leap years</span>
+                </li>
+                <li>
+                    <span class="fact-icon">*</span>
+                    <span class="fact-text">Your heart has beaten approximately <strong id="fact-heartbeats">--</strong> times</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="cta">
+            <h2>Want your exact age?</h2>
+            <p>Enter your full birthdate for a precise calculation down to the day, hour, and minute.</p>
+            <a href="/age-calculator/" class="cta-button">Calculate Exact Age</a>
+        </div>
+
+        <div class="ad-slot">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-3434609691579834"
+                 data-ad-slot="auto"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+        <div class="section">
+            <h2>Related Birth Years</h2>
+            <div class="related-grid">
+                {{RELATED_LINKS}}
+            </div>
+        </div>
+
+        <footer class="footer">
+            &copy; 2026 Automated Insights LLC. All rights reserved.
+        </footer>
+    </div>
+
+    <script>
+        (function() {
+            var birthYear = {{BIRTH_YEAR}};
+            var now = new Date();
+            var currentYear = now.getFullYear();
+            var approxAge = currentYear - birthYear;
+
+            // Approximate months and days (using July 1 as midpoint if no month specified)
+            var approxBirthDate = new Date(birthYear, 6, 1);
+            var diffMs = now - approxBirthDate;
+            var diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+            var diffMonths = (currentYear - birthYear) * 12 + (now.getMonth() - 6);
+
+            var monthsEl = document.getElementById('age-months');
+            var daysEl = document.getElementById('age-days');
+            var decadesEl = document.getElementById('fact-decades');
+            var leapEl = document.getElementById('fact-leapyears');
+            var heartEl = document.getElementById('fact-heartbeats');
+
+            if (monthsEl) { monthsEl.textContent = Math.abs(diffMonths).toLocaleString(); }
+            if (daysEl) { daysEl.textContent = Math.abs(diffDays).toLocaleString(); }
+            if (decadesEl) { decadesEl.textContent = Math.floor(approxAge / 10); }
+
+            // Count leap years
+            var leapCount = 0;
+            for (var y = birthYear; y <= currentYear; y++) {
+                if ((y % 4 === 0 && y % 100 !== 0) || (y % 400 === 0)) {
+                    leapCount++;
+                }
+            }
+            if (leapEl) { leapEl.textContent = leapCount; }
+
+            // Heartbeats: ~72 bpm average
+            var heartbeats = Math.abs(diffDays) * 24 * 60 * 72;
+            if (heartEl) { heartEl.textContent = (heartbeats / 1e9).toFixed(1) + ' billion'; }
+        })();
+    </script>
+</body>
+</html>

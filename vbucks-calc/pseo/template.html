@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{TITLE}}</title>
+<meta name="description" content="{{DESCRIPTION}}">
+<link rel="canonical" href="{{CANONICAL}}">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="{{TITLE}}">
+<meta property="og:description" content="{{DESCRIPTION}}">
+<meta property="og:type" content="article">
+<meta property="og:url" content="{{CANONICAL}}">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="{{TITLE}}">
+<meta name="twitter:description" content="{{DESCRIPTION}}">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How much is {{VBUCKS}} V-Bucks in USD?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "{{VBUCKS}} V-Bucks costs approximately ${{USD}} USD."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What can you buy with {{VBUCKS}} V-Bucks in Fortnite?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "{{WHAT_TO_BUY_TEXT}}"
+      }
+    }
+  ]
+}
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3434609691579834" crossorigin="anonymous"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0f1117;
+    color: #e0e0e0;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  a { color: #6c63ff; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .breadcrumb {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 16px 20px 0;
+    font-size: 0.85rem;
+    color: #888;
+  }
+  .breadcrumb a { color: #999; }
+  .breadcrumb span { color: #6c63ff; }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  .hero {
+    background: #1a1d27;
+    border-radius: 16px;
+    padding: 48px 32px;
+    text-align: center;
+    margin-bottom: 32px;
+    border: 1px solid #2a2d3a;
+  }
+  .hero-label {
+    font-size: 1rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+  }
+  .hero-amount {
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+  .hero-amount .vbucks { color: #6c63ff; }
+  .hero-amount .equals { color: #555; margin: 0 8px; }
+  .hero-amount .usd { color: #4caf50; }
+  .hero-sub {
+    font-size: 1.1rem;
+    color: #999;
+    margin-top: 8px;
+  }
+
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .stat-card {
+    background: #1a1d27;
+    border-radius: 12px;
+    padding: 24px;
+    text-align: center;
+    border: 1px solid #2a2d3a;
+  }
+  .stat-card .label {
+    font-size: 0.85rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .stat-card .value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+  }
+  .stat-card .value.accent { color: #6c63ff; }
+  .stat-card .value.green { color: #4caf50; }
+
+  .section {
+    background: #1a1d27;
+    border-radius: 12px;
+    padding: 32px;
+    margin-bottom: 24px;
+    border: 1px solid #2a2d3a;
+  }
+  .section h2 {
+    font-size: 1.4rem;
+    color: #fff;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #2a2d3a;
+  }
+
+  .buy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+  }
+  .buy-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    background: #0f1117;
+    border-radius: 8px;
+    border: 1px solid #2a2d3a;
+  }
+  .buy-item .icon {
+    font-size: 1.5rem;
+    width: 36px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+  .buy-item .info .name {
+    font-weight: 600;
+    color: #e0e0e0;
+    font-size: 0.95rem;
+  }
+  .buy-item .info .cost {
+    font-size: 0.8rem;
+    color: #888;
+  }
+
+  .pack-rec {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px;
+    background: linear-gradient(135deg, rgba(108,99,255,0.1), rgba(108,99,255,0.05));
+    border: 1px solid rgba(108,99,255,0.3);
+    border-radius: 10px;
+    margin-top: 16px;
+  }
+  .pack-rec .badge {
+    background: #6c63ff;
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 4px 10px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+  .pack-rec .detail {
+    flex: 1;
+  }
+  .pack-rec .detail .pack-name {
+    font-weight: 700;
+    color: #fff;
+    font-size: 1.05rem;
+  }
+  .pack-rec .detail .pack-info {
+    color: #999;
+    font-size: 0.9rem;
+  }
+
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 10px;
+  }
+  .related-link {
+    display: block;
+    padding: 14px 16px;
+    background: #0f1117;
+    border: 1px solid #2a2d3a;
+    border-radius: 8px;
+    color: #e0e0e0;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .related-link:hover {
+    border-color: #6c63ff;
+    background: rgba(108,99,255,0.05);
+    text-decoration: none;
+  }
+  .related-link .sub {
+    display: block;
+    font-size: 0.8rem;
+    color: #888;
+    margin-top: 2px;
+  }
+
+  .ad-slot {
+    margin: 24px 0;
+    text-align: center;
+    min-height: 90px;
+  }
+
+  .faq-item {
+    margin-bottom: 20px;
+  }
+  .faq-item h3 {
+    font-size: 1.1rem;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+  .faq-item p {
+    color: #bbb;
+    font-size: 0.95rem;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 24px;
+    padding: 12px 20px;
+    background: #1a1d27;
+    border: 1px solid #2a2d3a;
+    border-radius: 8px;
+    color: #6c63ff;
+    font-weight: 600;
+  }
+  .back-link:hover { background: #22253a; text-decoration: none; }
+
+  footer {
+    text-align: center;
+    padding: 40px 20px;
+    color: #555;
+    font-size: 0.8rem;
+  }
+
+  @media (max-width: 600px) {
+    .hero { padding: 32px 20px; }
+    .section { padding: 24px 16px; }
+    .stats-row { grid-template-columns: 1fr; }
+    .buy-grid { grid-template-columns: 1fr; }
+    .related-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="breadcrumb">
+  <a href="/">Home</a> &rsaquo;
+  <a href="/vbucks-calc/">V-Bucks Calculator</a> &rsaquo;
+  <span>{{VBUCKS_FORMATTED}} V-Bucks</span>
+</nav>
+
+<div class="container">
+
+  <div class="hero">
+    <div class="hero-label">V-Bucks to USD</div>
+    <div class="hero-amount">
+      <span class="vbucks">{{VBUCKS_FORMATTED}} V-Bucks</span>
+      <span class="equals">=</span>
+      <span class="usd">${{USD}} USD</span>
+    </div>
+    <div class="hero-sub">Based on current Fortnite store pricing</div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="label">Total Cost</div>
+      <div class="value green">${{USD}}</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Cost per V-Buck</div>
+      <div class="value accent">{{COST_PER}}</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Best Value Pack</div>
+      <div class="value">{{BEST_PACK}}</div>
+    </div>
+  </div>
+
+  <div class="ad-slot">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3434609691579834"
+         data-ad-slot="auto"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <div class="section">
+    <h2>What Can You Buy with {{VBUCKS_FORMATTED}} V-Bucks?</h2>
+    <div class="buy-grid">
+      {{WHAT_TO_BUY}}
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Best Way to Get {{VBUCKS_FORMATTED}} V-Bucks</h2>
+    <p style="color:#bbb; margin-bottom:16px;">
+      Here's the most cost-effective way to get {{VBUCKS_FORMATTED}} V-Bucks in the Fortnite Item Shop:
+    </p>
+    {{PACK_RECOMMENDATION}}
+  </div>
+
+  <div class="ad-slot">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3434609691579834"
+         data-ad-slot="auto"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <div class="section">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-item">
+      <h3>How much does {{VBUCKS_FORMATTED}} V-Bucks cost in real money?</h3>
+      <p>{{VBUCKS_FORMATTED}} V-Bucks costs approximately ${{USD}} USD based on current Fortnite pricing. The exact cost depends on which V-Bucks pack(s) you purchase, as larger packs offer better per-V-Buck value.</p>
+    </div>
+    <div class="faq-item">
+      <h3>What is the cost per V-Buck?</h3>
+      <p>At {{VBUCKS_FORMATTED}} V-Bucks for ${{USD}}, each V-Buck costs {{COST_PER}}. The standard base rate is $0.00799 per V-Buck (from the 1,000 V-Bucks pack), but bulk packs reduce this cost.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Can you buy exactly {{VBUCKS_FORMATTED}} V-Bucks?</h3>
+      <p>{{EXACT_PURCHASE_ANSWER}}</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Other V-Bucks Amounts</h2>
+    <div class="related-grid">
+      {{RELATED_LINKS}}
+    </div>
+  </div>
+
+  <a href="/vbucks-calc/" class="back-link">
+    &#8592; V-Bucks Calculator
+  </a>
+
+</div>
+
+<footer>
+  &copy; {{YEAR}} Automated Insights LLC. Not affiliated with Epic Games or Fortnite.
+  <br>Prices are estimates based on publicly available Fortnite store pricing.
+</footer>
+
+</body>
+</html>

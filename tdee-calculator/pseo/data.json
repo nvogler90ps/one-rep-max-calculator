@@ -1,0 +1,464 @@
+[
+  {
+    "weight_lbs": 120,
+    "gender": "male",
+    "activity": "sedentary",
+    "tdee": 1813,
+    "bmr": 1511
+  },
+  {
+    "weight_lbs": 120,
+    "gender": "male",
+    "activity": "moderate",
+    "tdee": 2341,
+    "bmr": 1511
+  },
+  {
+    "weight_lbs": 120,
+    "gender": "male",
+    "activity": "active",
+    "tdee": 2606,
+    "bmr": 1511
+  },
+  {
+    "weight_lbs": 120,
+    "gender": "female",
+    "activity": "sedentary",
+    "tdee": 1556,
+    "bmr": 1297
+  },
+  {
+    "weight_lbs": 120,
+    "gender": "female",
+    "activity": "moderate",
+    "tdee": 2010,
+    "bmr": 1297
+  },
+  {
+    "weight_lbs": 120,
+    "gender": "female",
+    "activity": "active",
+    "tdee": 2237,
+    "bmr": 1297
+  },
+  {
+    "weight_lbs": 130,
+    "gender": "male",
+    "activity": "sedentary",
+    "tdee": 1867,
+    "bmr": 1556
+  },
+  {
+    "weight_lbs": 130,
+    "gender": "male",
+    "activity": "moderate",
+    "tdee": 2412,
+    "bmr": 1556
+  },
+  {
+    "weight_lbs": 130,
+    "gender": "male",
+    "activity": "active",
+    "tdee": 2684,
+    "bmr": 1556
+  },
+  {
+    "weight_lbs": 130,
+    "gender": "female",
+    "activity": "sedentary",
+    "tdee": 1611,
+    "bmr": 1342
+  },
+  {
+    "weight_lbs": 130,
+    "gender": "female",
+    "activity": "moderate",
+    "tdee": 2081,
+    "bmr": 1342
+  },
+  {
+    "weight_lbs": 130,
+    "gender": "female",
+    "activity": "active",
+    "tdee": 2315,
+    "bmr": 1342
+  },
+  {
+    "weight_lbs": 140,
+    "gender": "male",
+    "activity": "sedentary",
+    "tdee": 1922,
+    "bmr": 1601
+  },
+  {
+    "weight_lbs": 140,
+    "gender": "male",
+    "activity": "moderate",
+    "tdee": 2482,
+    "bmr": 1601
+  },
+  {
+    "weight_lbs": 140,
+    "gender": "male",
+    "activity": "active",
+    "tdee": 2762,
+    "bmr": 1601
+  },
+  {
+    "weight_lbs": 140,
+    "gender": "female",
+    "activity": "sedentary",
+    "tdee": 1665,
+    "bmr": 1388
+  },
+  {
+    "weight_lbs": 140,
+    "gender": "female",
+    "activity": "moderate",
+    "tdee": 2151,
+    "bmr": 1388
+  },
+  {
+    "weight_lbs": 140,
+    "gender": "female",
+    "activity": "active",
+    "tdee": 2394,
+    "bmr": 1388
+  },
+  {
+    "weight_lbs": 150,
+    "gender": "male",
+    "activity": "sedentary",
+    "tdee": 1976,
+    "bmr": 1647
+  },
+  {
+    "weight_lbs": 150,
+    "gender": "male",
+    "activity": "moderate",
+    "tdee": 2552,
+    "bmr": 1647
+  },
+  {
+    "weight_lbs": 150,
+    "gender": "male",
+    "activity": "active",
+    "tdee": 2840,
+    "bmr": 1647
+  },
+  {
+    "weight_lbs": 150,
+    "gender": "female",
+    "activity": "sedentary",
+    "tdee": 1720,
+    "bmr": 1433
+  },
+  {
+    "weight_lbs": 150,
+    "gender": "female",
+    "activity": "moderate",
+    "tdee": 2221,
+    "bmr": 1433
+  },
+  {
+    "weight_lbs": 150,
+    "gender": "female",
+    "activity": "active",
+    "tdee": 2472,
+    "bmr": 1433
+  },
+  {
+    "weight_lbs": 160,
+    "gender": "male",
+    "activity": "sedentary",
+    "tdee": 2030,
+    "bmr": 1692
+  },
+  {
+    "weight_lbs": 160,
+    "gender": "male",
+    "activity": "moderate",
+    "tdee": 2623,
+    "bmr": 1692
+  },
+  {
+    "weight_lbs": 160,
+    "gender": "male",
+    "activity": "active",
+    "tdee": 2919,
+    "bmr": 1692
+  },
+  {
+    "weight_lbs": 160,
+    "gender": "female",
+    "activity": "sedentary",
+    "tdee": 1774,
+    "bmr": 1478
+  },
+  {
+    "weight_lbs": 160,
+    "gender": "female",
+    "activity": "moderate",
+    "tdee": 2291,
+    "bmr": 1478
+  },
+  {
+    "weight_lbs": 160,
+    "gender": "female",
+    "activity": "active",
+    "tdee": 2550,
+    "bmr": 1478
+  },
+  {
+    "weight_lbs": 170,
+    "gender": "male",
+    "activity": "sedentary",
+    "tdee": 2085,
+    "bmr": 1737
+  },
+  {
+    "weight_lbs": 170,
+    "gender": "male",
+    "activity": "moderate",
+    "tdee": 2693,
+    "bmr": 1737
+  },
+  {
+    "weight_lbs": 170,
+    "gender": "male",
+    "activity": "active",
+    "tdee": 2997,
+    "bmr": 1737
+  },
+  {
+    "weight_lbs": 170,
+    "gender": "female",
+    "activity": "sedentary",
+    "tdee": 1828,
+    "bmr": 1524
+  },
+  {
+    "weight_lbs": 170,
+    "gender": "female",
+    "activity": "moderate",
+    "tdee": 2362,
+    "bmr": 1524
+  },
+  {
+    "weight_lbs": 170,
+    "gender": "female",
+    "activity": "active",
+    "tdee": 2628,
+    "bmr": 1524
+  },
+  {
+    "weight_lbs": 180,
+    "gender": "male",
+    "activity": "sedentary",
+    "tdee": 2139,
+    "bmr": 1783
+  },
+  {
+    "weight_lbs": 180,
+    "gender": "male",
+    "activity": "moderate",
+    "tdee": 2763,
+    "bmr": 1783
+  },
+  {
+    "weight_lbs": 180,
+    "gender": "male",
+    "activity": "active",
+    "tdee": 3075,
+    "bmr": 1783
+  },
+  {
+    "weight_lbs": 180,
+    "gender": "female",
+    "activity": "sedentary",
+    "tdee": 1883,
+    "bmr": 1569
+  },
+  {
+    "weight_lbs": 180,
+    "gender": "female",
+    "activity": "moderate",
+    "tdee": 2432,
+    "bmr": 1569
+  },
+  {
+    "weight_lbs": 180,
+    "gender": "female",
+    "activity": "active",
+    "tdee": 2707,
+    "bmr": 1569
+  },
+  {
+    "weight_lbs": 190,
+    "gender": "male",
+    "activity": "sedentary",
+    "tdee": 2194,
+    "bmr": 1828
+  },
+  {
+    "weight_lbs": 190,
+    "gender": "male",
+    "activity": "moderate",
+    "tdee": 2834,
+    "bmr": 1828
+  },
+  {
+    "weight_lbs": 190,
+    "gender": "male",
+    "activity": "active",
+    "tdee": 3153,
+    "bmr": 1828
+  },
+  {
+    "weight_lbs": 190,
+    "gender": "female",
+    "activity": "sedentary",
+    "tdee": 1937,
+    "bmr": 1614
+  },
+  {
+    "weight_lbs": 190,
+    "gender": "female",
+    "activity": "moderate",
+    "tdee": 2502,
+    "bmr": 1614
+  },
+  {
+    "weight_lbs": 190,
+    "gender": "female",
+    "activity": "active",
+    "tdee": 2785,
+    "bmr": 1614
+  },
+  {
+    "weight_lbs": 200,
+    "gender": "male",
+    "activity": "sedentary",
+    "tdee": 2248,
+    "bmr": 1873
+  },
+  {
+    "weight_lbs": 200,
+    "gender": "male",
+    "activity": "moderate",
+    "tdee": 2904,
+    "bmr": 1873
+  },
+  {
+    "weight_lbs": 200,
+    "gender": "male",
+    "activity": "active",
+    "tdee": 3232,
+    "bmr": 1873
+  },
+  {
+    "weight_lbs": 200,
+    "gender": "female",
+    "activity": "sedentary",
+    "tdee": 1992,
+    "bmr": 1660
+  },
+  {
+    "weight_lbs": 200,
+    "gender": "female",
+    "activity": "moderate",
+    "tdee": 2573,
+    "bmr": 1660
+  },
+  {
+    "weight_lbs": 200,
+    "gender": "female",
+    "activity": "active",
+    "tdee": 2863,
+    "bmr": 1660
+  },
+  {
+    "weight_lbs": 220,
+    "gender": "male",
+    "activity": "sedentary",
+    "tdee": 2357,
+    "bmr": 1964
+  },
+  {
+    "weight_lbs": 220,
+    "gender": "male",
+    "activity": "moderate",
+    "tdee": 3044,
+    "bmr": 1964
+  },
+  {
+    "weight_lbs": 220,
+    "gender": "male",
+    "activity": "active",
+    "tdee": 3388,
+    "bmr": 1964
+  },
+  {
+    "weight_lbs": 220,
+    "gender": "female",
+    "activity": "sedentary",
+    "tdee": 2101,
+    "bmr": 1751
+  },
+  {
+    "weight_lbs": 220,
+    "gender": "female",
+    "activity": "moderate",
+    "tdee": 2713,
+    "bmr": 1751
+  },
+  {
+    "weight_lbs": 220,
+    "gender": "female",
+    "activity": "active",
+    "tdee": 3020,
+    "bmr": 1751
+  },
+  {
+    "weight_lbs": 250,
+    "gender": "male",
+    "activity": "sedentary",
+    "tdee": 2520,
+    "bmr": 2100
+  },
+  {
+    "weight_lbs": 250,
+    "gender": "male",
+    "activity": "moderate",
+    "tdee": 3255,
+    "bmr": 2100
+  },
+  {
+    "weight_lbs": 250,
+    "gender": "male",
+    "activity": "active",
+    "tdee": 3623,
+    "bmr": 2100
+  },
+  {
+    "weight_lbs": 250,
+    "gender": "female",
+    "activity": "sedentary",
+    "tdee": 2264,
+    "bmr": 1887
+  },
+  {
+    "weight_lbs": 250,
+    "gender": "female",
+    "activity": "moderate",
+    "tdee": 2924,
+    "bmr": 1887
+  },
+  {
+    "weight_lbs": 250,
+    "gender": "female",
+    "activity": "active",
+    "tdee": 3254,
+    "bmr": 1887
+  }
+]

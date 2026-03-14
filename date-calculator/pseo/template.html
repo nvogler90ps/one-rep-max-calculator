@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{TITLE}}</title>
+  <meta name="description" content="{{DESCRIPTION}}">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="canonical" href="{{CANONICAL}}">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="{{TITLE}}">
+  <meta property="og:description" content="{{DESCRIPTION}}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{CANONICAL}}">
+
+  <!-- AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3434609691579834" crossorigin="anonymous"></script>
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://automated-insights.com/"},
+      {"@type": "ListItem", "position": 2, "name": "Date Calculator", "item": "https://automated-insights.com/date-calculator/"},
+      {"@type": "ListItem", "position": 3, "name": "{{TARGET_NAME}}"}
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [{
+      "@type": "Question",
+      "name": "{{TITLE}}",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "{{DESCRIPTION}}"
+      }
+    }]
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, sans-serif;
+      background: #0f1117;
+      color: #e0e0e0;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    a { color: #6c63ff; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .breadcrumb {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 16px 20px 0;
+      font-size: 14px;
+      color: #888;
+    }
+    .breadcrumb a { color: #999; }
+    .breadcrumb span { color: #666; margin: 0 6px; }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 24px;
+      line-height: 1.3;
+    }
+
+    .result-card {
+      background: #1a1d27;
+      border-radius: 16px;
+      padding: 40px;
+      text-align: center;
+      margin-bottom: 32px;
+      border: 1px solid #2a2d3a;
+    }
+
+    .countdown-number {
+      font-size: 96px;
+      font-weight: 800;
+      color: #6c63ff;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .countdown-label {
+      font-size: 24px;
+      color: #999;
+      margin-bottom: 24px;
+    }
+
+    .detail-row {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .detail-item {
+      text-align: center;
+    }
+
+    .detail-value {
+      font-size: 20px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .detail-label {
+      font-size: 13px;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    .info-section {
+      background: #1a1d27;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+      border: 1px solid #2a2d3a;
+    }
+
+    .info-section h2 {
+      font-size: 18px;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    .info-section p {
+      color: #bbb;
+      font-size: 15px;
+    }
+
+    .related-links {
+      background: #1a1d27;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+      border: 1px solid #2a2d3a;
+    }
+
+    .related-links h2 {
+      font-size: 18px;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 10px;
+    }
+
+    .related-grid a {
+      display: block;
+      padding: 10px 14px;
+      background: #0f1117;
+      border-radius: 8px;
+      color: #ccc;
+      font-size: 14px;
+      transition: background 0.15s;
+    }
+
+    .related-grid a:hover {
+      background: #252836;
+      text-decoration: none;
+      color: #6c63ff;
+    }
+
+    .cta-link {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 28px;
+      background: #6c63ff;
+      color: #fff;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 15px;
+      transition: background 0.15s;
+    }
+
+    .cta-link:hover {
+      background: #5a52e0;
+      text-decoration: none;
+    }
+
+    .ad-slot {
+      margin: 24px 0;
+      text-align: center;
+      min-height: 90px;
+    }
+
+    footer {
+      max-width: 800px;
+      margin: 40px auto 0;
+      padding: 20px;
+      text-align: center;
+      color: #666;
+      font-size: 13px;
+      border-top: 1px solid #1a1d27;
+    }
+
+    @media (max-width: 600px) {
+      .countdown-number { font-size: 64px; }
+      .countdown-label { font-size: 18px; }
+      .result-card { padding: 28px 20px; }
+      h1 { font-size: 22px; }
+      .detail-row { gap: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="breadcrumb">
+    <a href="/">Home</a><span>></span><a href="/date-calculator/">Date Calculator</a><span>></span>{{TARGET_NAME}}
+  </nav>
+
+  <main class="container">
+    <h1>{{TITLE}}</h1>
+
+    <div class="result-card">
+      <!-- until_holiday type -->
+      <div id="until-display" style="display:none;">
+        <div class="countdown-number" id="days-count">--</div>
+        <div class="countdown-label">days until {{TARGET_NAME}}</div>
+        <div class="detail-row">
+          <div class="detail-item">
+            <div class="detail-value" id="target-date-display">--</div>
+            <div class="detail-label">Target Date</div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-value" id="target-day-of-week">--</div>
+            <div class="detail-label">Day of Week</div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-value" id="weeks-count">--</div>
+            <div class="detail-label">Weeks</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- days_from_now type -->
+      <div id="from-now-display" style="display:none;">
+        <div class="countdown-number" id="from-now-days">--</div>
+        <div class="countdown-label" id="from-now-label">days from today</div>
+        <div class="detail-row">
+          <div class="detail-item">
+            <div class="detail-value" id="result-date">--</div>
+            <div class="detail-label">Result Date</div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-value" id="result-day-of-week">--</div>
+            <div class="detail-label">Day of Week</div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-value" id="result-weeks">--</div>
+            <div class="detail-label">Weeks + Days</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- days_between type -->
+      <div id="between-display" style="display:none;">
+        <div class="countdown-number" id="between-count">--</div>
+        <div class="countdown-label" id="between-label">days between dates</div>
+        <div class="detail-row">
+          <div class="detail-item">
+            <div class="detail-value" id="between-weeks">--</div>
+            <div class="detail-label">Weeks + Days</div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-value" id="between-months">--</div>
+            <div class="detail-label">Approx. Months</div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-value" id="between-business">--</div>
+            <div class="detail-label">Business Days</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- days_from_date type -->
+      <div id="from-date-display" style="display:none;">
+        <div class="countdown-number" id="from-date-days">--</div>
+        <div class="countdown-label" id="from-date-label">days from date</div>
+        <div class="detail-row">
+          <div class="detail-item">
+            <div class="detail-value" id="from-date-result">--</div>
+            <div class="detail-label">Result Date</div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-value" id="from-date-dow">--</div>
+            <div class="detail-label">Day of Week</div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-value" id="from-date-weeks">--</div>
+            <div class="detail-label">Weeks + Days</div>
+          </div>
+        </div>
+      </div>
+
+      <a href="/date-calculator/" class="cta-link">Open Full Date Calculator</a>
+    </div>
+
+    <div class="ad-slot">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-3434609691579834"
+           data-ad-slot="auto"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <div class="info-section" id="info-section"></div>
+
+    <div class="related-links">
+      <h2>Related Date Calculations</h2>
+      <div class="related-grid">
+        {{RELATED_LINKS}}
+      </div>
+    </div>
+
+    <div class="ad-slot">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-3434609691579834"
+           data-ad-slot="auto"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+  </main>
+
+  <footer>
+    &copy; 2026 Automated Insights LLC. Free date calculator tools.
+  </footer>
+
+  <script>
+  (function() {
+    var TYPE = '{{TYPE}}';
+    var TARGET_DATE = '{{TARGET_DATE}}';
+    var TARGET_NAME = '{{TARGET_NAME}}';
+    var SLUG = '{{SLUG}}';
+
+    var DAYS_OF_WEEK = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+    function formatDate(d) {
+      return MONTHS[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
+    }
+
+    function countBusinessDays(start, end) {
+      var count = 0;
+      var cur = new Date(start);
+      while (cur < end) {
+        var dow = cur.getDay();
+        if (dow !== 0 && dow !== 6) { count++; }
+        cur.setDate(cur.getDate() + 1);
+      }
+      return count;
+    }
+
+    function weeksAndDays(totalDays) {
+      var w = Math.floor(totalDays / 7);
+      var d = totalDays % 7;
+      if (d === 0) { return w + ' weeks'; }
+      return w + 'w ' + d + 'd';
+    }
+
+    var today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    var infoEl = document.getElementById('info-section');
+
+    if (TYPE === 'until_holiday') {
+      document.getElementById('until-display').style.display = '';
+      var target = new Date(TARGET_DATE + 'T00:00:00');
+      var diff = Math.ceil((target - today) / 86400000);
+      if (diff < 0) { diff = 0; }
+      document.getElementById('days-count').textContent = diff;
+      document.getElementById('target-date-display').textContent = formatDate(target);
+      document.getElementById('target-day-of-week').textContent = DAYS_OF_WEEK[target.getDay()];
+      document.getElementById('weeks-count').textContent = weeksAndDays(diff);
+
+      infoEl.innerHTML = '<h2>About ' + TARGET_NAME + '</h2>' +
+        '<p>' + TARGET_NAME + ' falls on ' + DAYS_OF_WEEK[target.getDay()] + ', ' + formatDate(target) + '. ' +
+        'There are <strong>' + diff + ' days</strong> remaining from today (' + formatDate(today) + '). ' +
+        'That is approximately ' + weeksAndDays(diff) + '.</p>';
+
+    } else if (TYPE === 'days_from_now') {
+      document.getElementById('from-now-display').style.display = '';
+      var parts = SLUG.match(/^(\d+)-days-from-today$/);
+      var numDays = parts ? parseInt(parts[1], 10) : 0;
+      var result = new Date(today);
+      result.setDate(result.getDate() + numDays);
+
+      document.getElementById('from-now-days').textContent = numDays;
+      document.getElementById('from-now-label').textContent = 'days from today';
+      document.getElementById('result-date').textContent = formatDate(result);
+      document.getElementById('result-day-of-week').textContent = DAYS_OF_WEEK[result.getDay()];
+      document.getElementById('result-weeks').textContent = weeksAndDays(numDays);
+
+      infoEl.innerHTML = '<h2>' + numDays + ' Days From Today</h2>' +
+        '<p>' + numDays + ' days from today (' + formatDate(today) + ') is <strong>' +
+        DAYS_OF_WEEK[result.getDay()] + ', ' + formatDate(result) + '</strong>. ' +
+        'That is ' + weeksAndDays(numDays) + ' from now.</p>';
+
+    } else if (TYPE === 'days_from_date') {
+      document.getElementById('from-date-display').style.display = '';
+      // TARGET_DATE contains "FROM_DATE|DAYS"
+      var fdParts = TARGET_DATE.split('|');
+      var fromDate = new Date(fdParts[0] + 'T00:00:00');
+      var numDays = parseInt(fdParts[1], 10);
+      var result = new Date(fromDate);
+      result.setDate(result.getDate() + numDays);
+
+      document.getElementById('from-date-days').textContent = numDays;
+      document.getElementById('from-date-label').textContent = 'days from ' + formatDate(fromDate);
+      document.getElementById('from-date-result').textContent = formatDate(result);
+      document.getElementById('from-date-dow').textContent = DAYS_OF_WEEK[result.getDay()];
+      document.getElementById('from-date-weeks').textContent = weeksAndDays(numDays);
+
+      infoEl.innerHTML = '<h2>' + numDays + ' Days From ' + formatDate(fromDate) + '</h2>' +
+        '<p>' + numDays + ' days from ' + formatDate(fromDate) + ' is <strong>' +
+        DAYS_OF_WEEK[result.getDay()] + ', ' + formatDate(result) + '</strong>. ' +
+        'That is ' + weeksAndDays(numDays) + '.</p>';
+
+    } else if (TYPE === 'days_between') {
+      document.getElementById('between-display').style.display = '';
+      // TARGET_DATE contains "START_DATE|END_DATE"
+      var dbParts = TARGET_DATE.split('|');
+      var startD = new Date(dbParts[0] + 'T00:00:00');
+      var endD = new Date(dbParts[1] + 'T00:00:00');
+      var diff = Math.ceil((endD - startD) / 86400000);
+      var bdays = countBusinessDays(startD, endD);
+      var approxMonths = (diff / 30.44).toFixed(1);
+
+      document.getElementById('between-count').textContent = diff;
+      document.getElementById('between-label').textContent = 'days between ' + formatDate(startD) + ' and ' + formatDate(endD);
+      document.getElementById('between-weeks').textContent = weeksAndDays(diff);
+      document.getElementById('between-months').textContent = approxMonths;
+      document.getElementById('between-business').textContent = bdays;
+
+      infoEl.innerHTML = '<h2>Days Between ' + formatDate(startD) + ' and ' + formatDate(endD) + '</h2>' +
+        '<p>There are <strong>' + diff + ' calendar days</strong> (' + bdays + ' business days) between ' +
+        formatDate(startD) + ' and ' + formatDate(endD) + '. ' +
+        'That is ' + weeksAndDays(diff) + ', or approximately ' + approxMonths + ' months.</p>';
+    }
+  })();
+  </script>
+</body>
+</html>

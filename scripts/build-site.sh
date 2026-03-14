@@ -35,18 +35,33 @@ done
 
 echo "Found ${#tools[@]} tools: ${tools[*]}"
 
+# ---------- generate pSEO pages ----------
+if [ -f "$ROOT/scripts/generate-pseo.sh" ]; then
+    bash "$ROOT/scripts/generate-pseo.sh"
+fi
+
 # ---------- copy tools into site/<tool-name>/ ----------
 for tool in "${tools[@]}"; do
     cp -R "$ROOT/$tool" "$SITE/$tool"
 
-    # remove per-tool root-only files
+    # remove per-tool root-only files and pseo source
     rm -f "$SITE/$tool/ads.txt"
     rm -f "$SITE/$tool/robots.txt"
     rm -f "$SITE/$tool"/google*.html
+    rm -rf "$SITE/$tool/pseo"
 
     # rewrite sitemap URLs from old .pages.dev domains to consolidated domain
     if [ -f "$SITE/$tool/sitemap.xml" ]; then
         sed -i '' "s|https://[^<]*\.pages\.dev/[^<]*|${DOMAIN}/${tool}/|g" "$SITE/$tool/sitemap.xml"
+    fi
+
+    # copy pSEO generated pages into site
+    if [ -d "$ROOT/$tool/pseo/pages" ]; then
+        cp -R "$ROOT/$tool/pseo/pages"/* "$SITE/$tool/" 2>/dev/null || true
+        # copy pSEO sitemap
+        if [ -f "$ROOT/$tool/pseo/sitemap-pseo.xml" ]; then
+            cp "$ROOT/$tool/pseo/sitemap-pseo.xml" "$SITE/$tool/sitemap-pseo.xml"
+        fi
     fi
 done
 
@@ -104,6 +119,14 @@ for tool in "${tools[@]}"; do
         cat >> "$SITE/sitemap.xml" <<ENTRY
   <sitemap>
     <loc>${DOMAIN}/${tool}/sitemap.xml</loc>
+  </sitemap>
+ENTRY
+    fi
+    # include pSEO sitemap if it exists
+    if [ -f "$SITE/$tool/sitemap-pseo.xml" ]; then
+        cat >> "$SITE/sitemap.xml" <<ENTRY
+  <sitemap>
+    <loc>${DOMAIN}/${tool}/sitemap-pseo.xml</loc>
   </sitemap>
 ENTRY
     fi

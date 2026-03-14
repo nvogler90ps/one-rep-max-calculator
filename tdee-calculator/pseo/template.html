@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{TITLE}}</title>
+  <meta name="description" content="{{DESCRIPTION}}">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="canonical" href="{{CANONICAL}}">
+  <meta property="og:title" content="{{TITLE}}">
+  <meta property="og:description" content="{{DESCRIPTION}}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{CANONICAL}}">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the TDEE for a {{WEIGHT_LBS}} lb {{GENDER_DISPLAY}} with {{ACTIVITY_DISPLAY}} activity?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A {{WEIGHT_LBS}} lb {{GENDER_DISPLAY}} with a {{ACTIVITY_DISPLAY}} activity level has an estimated TDEE of {{TDEE}} calories per day, based on a BMR of {{BMR}} calories using the Mifflin-St Jeor formula."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How many calories should a {{WEIGHT_LBS}} lb {{GENDER_DISPLAY}} eat to lose weight?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "To lose about 1 pound per week, a {{WEIGHT_LBS}} lb {{GENDER_DISPLAY}} with {{ACTIVITY_DISPLAY}} activity should eat approximately {{CUT_CALORIES}} calories per day (TDEE of {{TDEE}} minus 500 calories)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How many calories should a {{WEIGHT_LBS}} lb {{GENDER_DISPLAY}} eat to gain muscle?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "To gain muscle, a {{WEIGHT_LBS}} lb {{GENDER_DISPLAY}} with {{ACTIVITY_DISPLAY}} activity should eat approximately {{BULK_CALORIES}} calories per day (TDEE of {{TDEE}} plus 500 calories)."
+        }
+      }
+    ]
+  }
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3434609691579834" crossorigin="anonymous"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0f1117;
+      --surface: #1a1d27;
+      --border: #2e3345;
+      --text: #e8eaed;
+      --muted: #9aa0b0;
+      --accent: #6c63ff;
+      --accent-hover: #5a52e0;
+      --danger: #ff6b6b;
+      --success: #51cf66;
+      --warning: #ffd43b;
+      --radius-card: 10px;
+      --radius-input: 6px;
+    }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    .container { max-width: 900px; margin: 0 auto; padding: 0 16px; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* Breadcrumb */
+    .breadcrumb {
+      padding: 16px 0 0;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    .breadcrumb a { color: var(--muted); }
+    .breadcrumb a:hover { color: var(--accent); }
+    .breadcrumb span { margin: 0 6px; }
+
+    /* Header */
+    header { text-align: center; padding: 32px 0 24px; }
+    header h1 { font-size: 1.75rem; font-weight: 700; margin-bottom: 8px; }
+    header p { color: var(--muted); font-size: 1.05rem; max-width: 600px; margin: 0 auto; }
+
+    /* Cards */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+    .card h2 { font-size: 1.25rem; font-weight: 600; margin-bottom: 16px; }
+    .card h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 12px; color: var(--muted); }
+
+    /* Hero result */
+    .result-hero {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 8px;
+    }
+    .result-box {
+      flex: 1;
+      text-align: center;
+      padding: 24px 16px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-input);
+    }
+    .result-box .label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+    .result-box .value {
+      font-size: 2.25rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .result-box .unit {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    .result-box.primary .value { font-size: 2.75rem; }
+
+    /* Breakdown table */
+    .breakdown-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+    }
+    .breakdown-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.95rem;
+    }
+    .breakdown-table tr:last-child td {
+      border-bottom: none;
+      font-weight: 700;
+      color: var(--accent);
+      font-size: 1.05rem;
+    }
+    .breakdown-table td:first-child { color: var(--muted); }
+    .breakdown-table td:last-child { text-align: right; }
+
+    /* Macro goals grid */
+    .goals-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .goal-card {
+      padding: 20px 16px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-input);
+      text-align: center;
+    }
+    .goal-card .goal-title {
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 6px;
+    }
+    .goal-card .goal-cals {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .goal-card .goal-delta {
+      font-size: 0.8rem;
+      margin-bottom: 12px;
+    }
+    .goal-card.cut .goal-cals, .goal-card.cut .goal-delta { color: var(--danger); }
+    .goal-card.maintain .goal-cals, .goal-card.maintain .goal-delta { color: var(--warning); }
+    .goal-card.bulk .goal-cals, .goal-card.bulk .goal-delta { color: var(--success); }
+
+    .macro-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 4px 0;
+      font-size: 0.85rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      margin-top: 8px;
+    }
+    .macro-row:first-of-type { border-top: none; margin-top: 0; }
+    .macro-row span:last-child { color: var(--text); font-weight: 500; }
+
+    /* Info section */
+    .info-section { margin-top: 8px; }
+    .info-section h3 { margin-bottom: 8px; }
+    .info-section p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 12px;
+      line-height: 1.7;
+    }
+    .info-section ul {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 12px;
+    }
+    .info-section ul li {
+      font-size: 0.9rem;
+      color: var(--muted);
+      padding: 6px 0;
+      padding-left: 16px;
+      position: relative;
+    }
+    .info-section ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 13px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    /* Related links */
+    .related-links { margin: 32px 0 24px; }
+    .related-links h2 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: var(--muted);
+    }
+    .link-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 10px;
+    }
+    .link-grid a {
+      display: block;
+      padding: 14px 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-input);
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: border-color 0.2s;
+    }
+    .link-grid a:hover { border-color: var(--accent); text-decoration: none; }
+
+    /* CTA */
+    .cta-box {
+      text-align: center;
+      padding: 24px;
+      background: rgba(108, 99, 255, 0.08);
+      border: 1px solid var(--accent);
+      border-radius: var(--radius-card);
+      margin-top: 20px;
+    }
+    .cta-box p { color: var(--muted); font-size: 0.95rem; margin-bottom: 12px; }
+    .cta-box a.btn {
+      display: inline-block;
+      padding: 12px 32px;
+      background: var(--accent);
+      color: #fff;
+      border-radius: var(--radius-input);
+      font-weight: 600;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .cta-box a.btn:hover { background: var(--accent-hover); }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 24px 0 32px;
+      color: var(--muted);
+      font-size: 0.8rem;
+      border-top: 1px solid var(--border);
+    }
+
+    /* Ad slot */
+    .ad-slot {
+      margin: 20px 0;
+      text-align: center;
+      min-height: 90px;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      header h1 { font-size: 1.35rem; }
+      .result-hero { flex-direction: column; }
+      .result-box.primary .value { font-size: 2.25rem; }
+      .goals-grid { grid-template-columns: 1fr; }
+      .link-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="breadcrumb">
+      <a href="/">Home</a>
+      <span>></span>
+      <a href="/tdee-calculator/">TDEE Calculator</a>
+      <span>></span>
+      TDEE for {{WEIGHT_LBS}} lb {{GENDER_DISPLAY}}
+    </nav>
+
+    <header>
+      <h1>TDEE for {{WEIGHT_LBS}} lb {{GENDER_DISPLAY}} ({{ACTIVITY_DISPLAY}} Activity)</h1>
+      <p>Pre-calculated daily calorie needs using the Mifflin-St Jeor formula with macronutrient breakdowns for cutting, maintenance, and bulking.</p>
+    </header>
+
+    <main>
+      <!-- Primary Result -->
+      <div class="card">
+        <h2>Your Estimated TDEE</h2>
+        <div class="result-hero">
+          <div class="result-box primary">
+            <div class="label">TDEE</div>
+            <div class="value">{{TDEE}}</div>
+            <div class="unit">calories / day</div>
+          </div>
+          <div class="result-box">
+            <div class="label">BMR</div>
+            <div class="value">{{BMR}}</div>
+            <div class="unit">calories / day</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Breakdown -->
+      <div class="card">
+        <h2>How This Was Calculated</h2>
+        <table class="breakdown-table">
+          <tr>
+            <td>Weight</td>
+            <td>{{WEIGHT_LBS}} lbs ({{WEIGHT_KG}} kg)</td>
+          </tr>
+          <tr>
+            <td>Height</td>
+            <td>{{HEIGHT_DISPLAY}}</td>
+          </tr>
+          <tr>
+            <td>Age</td>
+            <td>30 years (default)</td>
+          </tr>
+          <tr>
+            <td>Gender</td>
+            <td>{{GENDER_DISPLAY}}</td>
+          </tr>
+          <tr>
+            <td>Formula</td>
+            <td>Mifflin-St Jeor</td>
+          </tr>
+          <tr>
+            <td>BMR</td>
+            <td>{{BMR}} cal/day</td>
+          </tr>
+          <tr>
+            <td>Activity Multiplier</td>
+            <td>{{ACTIVITY_DISPLAY}} (x{{ACTIVITY_FACTOR}})</td>
+          </tr>
+          <tr>
+            <td>TDEE</td>
+            <td>{{TDEE}} cal/day</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- Ad slot -->
+      <div class="ad-slot">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-3434609691579834"
+             data-ad-slot="auto"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </div>
+
+      <!-- Calorie Goals with Macros -->
+      <div class="card">
+        <h2>Calorie Goals & Macros</h2>
+        <div class="goals-grid">
+          <!-- Cutting -->
+          <div class="goal-card cut">
+            <div class="goal-title">Cutting</div>
+            <div class="goal-cals">{{CUT_CALORIES}}</div>
+            <div class="goal-delta">-500 cal/day</div>
+            <div class="macro-row"><span>Protein</span><span>{{CUT_PROTEIN_G}}g</span></div>
+            <div class="macro-row"><span>Carbs</span><span>{{CUT_CARBS_G}}g</span></div>
+            <div class="macro-row"><span>Fat</span><span>{{CUT_FAT_G}}g</span></div>
+          </div>
+          <!-- Maintenance -->
+          <div class="goal-card maintain">
+            <div class="goal-title">Maintenance</div>
+            <div class="goal-cals">{{TDEE}}</div>
+            <div class="goal-delta">+0 cal/day</div>
+            <div class="macro-row"><span>Protein</span><span>{{MAINT_PROTEIN_G}}g</span></div>
+            <div class="macro-row"><span>Carbs</span><span>{{MAINT_CARBS_G}}g</span></div>
+            <div class="macro-row"><span>Fat</span><span>{{MAINT_FAT_G}}g</span></div>
+          </div>
+          <!-- Bulking -->
+          <div class="goal-card bulk">
+            <div class="goal-title">Bulking</div>
+            <div class="goal-cals">{{BULK_CALORIES}}</div>
+            <div class="goal-delta">+500 cal/day</div>
+            <div class="macro-row"><span>Protein</span><span>{{BULK_PROTEIN_G}}g</span></div>
+            <div class="macro-row"><span>Carbs</span><span>{{BULK_CARBS_G}}g</span></div>
+            <div class="macro-row"><span>Fat</span><span>{{BULK_FAT_G}}g</span></div>
+          </div>
+        </div>
+        <p style="font-size: 0.8rem; color: var(--muted); margin-top: 12px; text-align: center;">
+          Macros use a balanced 40/30/30 split (carbs/protein/fat). Protein: 4 cal/g, Carbs: 4 cal/g, Fat: 9 cal/g.
+        </p>
+      </div>
+
+      <!-- Explanation -->
+      <div class="card">
+        <div class="info-section">
+          <h3>What Does This Mean?</h3>
+          <p>
+            A {{WEIGHT_LBS}} lb {{GENDER_DISPLAY}} with a {{ACTIVITY_DISPLAY}} lifestyle burns approximately
+            <strong>{{TDEE}} calories per day</strong>. This is your Total Daily Energy Expenditure (TDEE) --
+            the total number of calories your body uses for basic functions, daily activities, and exercise.
+          </p>
+
+          <h3>How to Use Your TDEE</h3>
+          <ul>
+            <li><strong>To lose weight:</strong> Eat below your TDEE. A 500 calorie deficit ({{CUT_CALORIES}} cal/day) leads to roughly 1 lb of fat loss per week.</li>
+            <li><strong>To maintain weight:</strong> Eat at your TDEE ({{TDEE}} cal/day). Your weight will stay approximately the same.</li>
+            <li><strong>To gain muscle:</strong> Eat above your TDEE. A 500 calorie surplus ({{BULK_CALORIES}} cal/day) supports muscle growth with strength training.</li>
+          </ul>
+
+          <h3>Important Notes</h3>
+          <p>
+            This estimate uses default values of age 30 and a height of {{HEIGHT_DISPLAY}}. Your actual TDEE
+            may differ based on your specific age, height, body composition, and metabolism. For a personalized
+            calculation, use our full interactive calculator.
+          </p>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="cta-box">
+        <p>Want a more precise calculation with your exact age, height, and body fat percentage?</p>
+        <a href="/tdee-calculator/" class="btn">Use the Full TDEE Calculator</a>
+      </div>
+
+      <!-- Related Links -->
+      <div class="related-links">
+        <h2>Related Calculations</h2>
+        <div class="link-grid">
+          {{RELATED_LINKS}}
+        </div>
+      </div>
+
+      <!-- More Tools -->
+      <div class="related-links">
+        <h2>More Tools</h2>
+        <div class="link-grid">
+          <a href="/tdee-calculator/">TDEE & Macro Calculator</a>
+          <a href="/one-rep-max/">One Rep Max Calculator</a>
+          <a href="/plate-calculator/">Plate Calculator</a>
+          <a href="/workout-generator/">Workout Generator</a>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>&copy; 2026 Automated Insights LLC</p>
+    </footer>
+  </div>
+</body>
+</html>
