@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Marina Fuel Price Finder - Compare Boat Fuel Prices Near You</title>
+<meta name="description" content="Find nearby marinas with fuel and compare gas and diesel prices. Interactive map with 90+ US marinas, fuel cost calculator, and price reporting for boaters.">
+<link rel="canonical" href="https://automated-insights.com/marina-fuel/">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3434609691579834" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Marina Fuel Price Finder",
+  "url": "https://automated-insights.com/marina-fuel/",
+  "description": "Find nearby marinas with fuel and compare gas and diesel prices. Interactive map with 90+ US marinas and fuel cost calculator.",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "All",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "author": {
+    "@type": "Organization",
+    "name": "Automated Insights LLC",
+    "url": "https://automated-insights.com"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How much does marina fuel cost?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Marina fuel typically costs $1-2 more per gallon than road fuel. As of early 2026, marina gas prices range from $4.50 to $6.50 per gallon and diesel from $5.00 to $7.00, depending on region and location. Florida marinas average around $4.75-5.50 for gas, while the Northeast and West Coast tend to be higher at $5.50-6.50 for gas."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why is marina fuel more expensive than road fuel?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Marina fuel costs more due to several factors: delivery logistics (fuel must be transported to waterfront locations by specialized trucks or barges), lower sales volume compared to gas stations, higher insurance and environmental compliance costs for waterfront fueling, specialized equipment like fuel docks and spill containment systems, and the convenience premium of fueling directly at the water."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is marina fuel different from gas station fuel?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Marina gasoline is generally the same grade as gas station fuel, though many marinas offer ethanol-free (E0) fuel which is preferred for marine engines. Ethanol can attract moisture and cause corrosion in marine fuel systems. Marina diesel is the same ULSD (Ultra Low Sulfur Diesel) available at gas stations. The key difference is availability of ethanol-free options and the convenience of dockside fueling."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Should I use ethanol-free fuel in my boat?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ethanol-free fuel is recommended for marine engines, especially for boats that sit unused for extended periods. Ethanol (E10) can absorb water from humid marine environments through a process called phase separation, which can damage fuel systems, corrode aluminum components, and degrade fiberglass fuel tanks. While modern outboard engines are designed to handle E10, ethanol-free fuel provides better performance and fewer maintenance issues for most boats."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much fuel does a typical boat use?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Fuel consumption varies dramatically by boat type. A small fishing boat with a 90hp outboard uses about 7-9 gallons per hour at cruising speed. A 25-foot center console with twin 150hp engines burns 15-25 GPH. Pontoon boats are more efficient at 3-6 GPH. Large cabin cruisers can consume 20-50+ GPH. Sailboats under auxiliary power use only 1-3 GPH. For planning purposes, multiply your engine's GPH at cruising RPM by your expected hours on the water."
+      }
+    }
+  ]
+}
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f1117;color:#e8eaed;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;min-height:100vh}
+a{color:#6c63ff;text-decoration:none}
+a:hover{text-decoration:underline}
+.container{max-width:1100px;margin:0 auto;padding:1.5rem}
+h1{font-size:1.8rem;margin-bottom:0.5rem}
+h2{font-size:1.3rem;margin-bottom:1rem;color:#e8eaed}
+h3{font-size:1.1rem;margin-bottom:0.5rem}
+.subtitle{color:#9aa0b0;margin-bottom:1.5rem;font-size:1rem}
+.controls{display:flex;flex-wrap:wrap;gap:0.75rem;margin-bottom:1rem;align-items:center}
+.filter-btn{padding:0.5rem 1rem;border:1px solid #2e3345;background:#1a1d27;color:#9aa0b0;border-radius:6px;cursor:pointer;font-size:0.9rem;transition:all 0.2s}
+.filter-btn:hover,.filter-btn.active{background:#6c63ff;color:#fff;border-color:#6c63ff}
+.search-box{display:flex;gap:0.5rem;flex:1;min-width:200px}
+.search-box input{flex:1;padding:0.5rem 0.75rem;border:1px solid #2e3345;background:#1a1d27;color:#e8eaed;border-radius:6px;font-size:0.9rem;outline:none}
+.search-box input:focus{border-color:#6c63ff}
+.search-box button{padding:0.5rem 1rem;background:#6c63ff;color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.9rem}
+.search-box button:hover{background:#5a52e0}
+.radius-control{display:flex;align-items:center;gap:0.5rem;color:#9aa0b0;font-size:0.9rem}
+.radius-control input[type=range]{width:120px;accent-color:#6c63ff}
+#map{width:100%;height:400px;border-radius:8px;border:1px solid #2e3345;margin-bottom:1.5rem}
+.marina-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1rem;margin-bottom:2rem}
+.marina-card{background:#1a1d27;border:1px solid #2e3345;border-radius:8px;padding:1rem;transition:border-color 0.2s}
+.marina-card:hover{border-color:#6c63ff}
+.marina-card.cheapest{border-color:#00c853;box-shadow:0 0 12px rgba(0,200,83,0.15)}
+.cheapest-badge{display:inline-block;background:#00c853;color:#0f1117;font-size:0.7rem;font-weight:700;padding:2px 8px;border-radius:4px;margin-bottom:0.5rem;text-transform:uppercase;letter-spacing:0.5px}
+.marina-name{font-size:1.05rem;font-weight:600;margin-bottom:0.25rem}
+.marina-address{color:#9aa0b0;font-size:0.85rem;margin-bottom:0.5rem}
+.marina-distance{color:#6c63ff;font-size:0.85rem;font-weight:600;margin-bottom:0.5rem}
+.fuel-badges{display:flex;gap:0.4rem;margin-bottom:0.5rem}
+.fuel-badge{padding:2px 8px;border-radius:4px;font-size:0.75rem;font-weight:600;text-transform:uppercase}
+.fuel-badge.gas{background:rgba(76,175,80,0.15);color:#66bb6a;border:1px solid rgba(76,175,80,0.3)}
+.fuel-badge.diesel{background:rgba(66,165,245,0.15);color:#42a5f5;border:1px solid rgba(66,165,245,0.3)}
+.price-row{display:flex;gap:1rem;margin-bottom:0.5rem}
+.price-item{flex:1}
+.price-label{color:#9aa0b0;font-size:0.75rem;text-transform:uppercase}
+.price-value{font-size:1.3rem;font-weight:700}
+.price-value.gas-price{color:#66bb6a}
+.price-value.diesel-price{color:#42a5f5}
+.marina-meta{display:flex;justify-content:space-between;align-items:center;margin-top:0.5rem;padding-top:0.5rem;border-top:1px solid #2e3345;font-size:0.8rem;color:#9aa0b0}
+.marina-meta a{font-size:0.8rem}
+.section{background:#1a1d27;border:1px solid #2e3345;border-radius:8px;padding:1.5rem;margin-bottom:1.5rem}
+.calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.calc-group label{display:block;color:#9aa0b0;font-size:0.85rem;margin-bottom:0.35rem}
+.calc-group input,.calc-group select{width:100%;padding:0.5rem;border:1px solid #2e3345;background:#0f1117;color:#e8eaed;border-radius:6px;font-size:0.95rem}
+.calc-group select{appearance:auto}
+.calc-result{margin-top:1rem;padding:1rem;background:#0f1117;border-radius:6px;text-align:center}
+.calc-result .total{font-size:1.8rem;font-weight:700;color:#6c63ff}
+.calc-comparison{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:0.75rem}
+.comp-item{padding:0.5rem;border-radius:6px;text-align:center}
+.comp-item.cheapest-comp{background:rgba(0,200,83,0.1);border:1px solid rgba(0,200,83,0.2)}
+.comp-item.expensive-comp{background:rgba(244,67,54,0.1);border:1px solid rgba(244,67,54,0.2)}
+.comp-label{font-size:0.75rem;color:#9aa0b0;text-transform:uppercase}
+.comp-value{font-size:1.1rem;font-weight:700}
+.comp-name{font-size:0.8rem;color:#9aa0b0;margin-top:2px}
+.report-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.report-grid select,.report-grid input{width:100%;padding:0.5rem;border:1px solid #2e3345;background:#0f1117;color:#e8eaed;border-radius:6px;font-size:0.95rem}
+.report-grid select{appearance:auto}
+.btn-submit{padding:0.6rem 1.5rem;background:#6c63ff;color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.95rem;margin-top:1rem}
+.btn-submit:hover{background:#5a52e0}
+.report-note{color:#9aa0b0;font-size:0.8rem;margin-top:0.75rem;font-style:italic}
+.faq-item{border-bottom:1px solid #2e3345;padding:1rem 0}
+.faq-item:last-child{border-bottom:none}
+.faq-q{font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.faq-q:hover{color:#6c63ff}
+.faq-a{color:#9aa0b0;margin-top:0.5rem;line-height:1.6;display:none;font-size:0.95rem}
+.faq-a.open{display:block}
+.faq-arrow{transition:transform 0.2s;font-size:0.8rem;color:#9aa0b0}
+.faq-arrow.open{transform:rotate(180deg)}
+.no-results{text-align:center;padding:3rem 1rem;color:#9aa0b0}
+.status-msg{padding:0.75rem 1rem;background:#1a1d27;border:1px solid #2e3345;border-radius:6px;margin-bottom:1rem;color:#9aa0b0;font-size:0.9rem}
+.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:#00c853;color:#0f1117;padding:0.75rem 1.5rem;border-radius:6px;font-weight:600;font-size:0.9rem;opacity:0;transition:opacity 0.3s;pointer-events:none;z-index:9999}
+.toast.show{opacity:1}
+footer{text-align:center;padding:2rem 1rem;color:#9aa0b0;font-size:0.85rem;border-top:1px solid #2e3345;margin-top:2rem}
+@media(max-width:768px){
+  #map{height:300px}
+  .marina-grid{grid-template-columns:1fr}
+  .calc-grid,.report-grid,.calc-comparison{grid-template-columns:1fr}
+  h1{font-size:1.4rem}
+  .controls{flex-direction:column;align-items:stretch}
+  .search-box{min-width:unset}
+}
+.leaflet-popup-content-wrapper{background:#1a1d27;color:#e8eaed;border:1px solid #2e3345;border-radius:8px}
+.leaflet-popup-tip{background:#1a1d27}
+.leaflet-popup-content{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:0.85rem;line-height:1.4}
+.leaflet-popup-content a{color:#6c63ff}
+</style>
+</head>
+<body>
+<nav style="padding:1rem 1.5rem;border-bottom:1px solid #2e3345;display:flex;align-items:center;gap:1.5rem">
+    <a href="/" style="color:#6c63ff;font-weight:700;font-size:1.05rem;text-decoration:none">Automated Insights</a>
+    <a href="/" style="color:#9aa0b0;font-size:0.95rem;text-decoration:none">Tools</a>
+    <a href="/blog/" style="color:#9aa0b0;font-size:0.95rem;text-decoration:none">Blog</a>
+</nav>
+
+<div class="container">
+<h1>Marina Fuel Price Finder</h1>
+<p class="subtitle">Compare gas and diesel prices at 90+ US marinas. Find the cheapest fuel near you.</p>
+
+<div id="statusMsg" class="status-msg">Requesting your location to find nearby marinas...</div>
+
+<div class="controls">
+    <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
+        <button class="filter-btn active" data-filter="all" onclick="setFilter('all')">All</button>
+        <button class="filter-btn" data-filter="gas" onclick="setFilter('gas')">Gas</button>
+        <button class="filter-btn" data-filter="diesel" onclick="setFilter('diesel')">Diesel</button>
+        <button class="filter-btn" data-filter="both" onclick="setFilter('both')">Both</button>
+    </div>
+    <div class="radius-control">
+        <label for="radiusSlider">Radius:</label>
+        <input type="range" id="radiusSlider" min="10" max="100" value="50" oninput="updateRadius(this.value)">
+        <span id="radiusValue">50 mi</span>
+    </div>
+    <div class="search-box">
+        <input type="text" id="locationSearch" placeholder="City, state, or ZIP code" onkeydown="if(event.key==='Enter')searchLocation()">
+        <button onclick="searchLocation()">Search</button>
+    </div>
+</div>
+
+<div id="map"></div>
+
+<div id="marinaCount" style="color:#9aa0b0;font-size:0.9rem;margin-bottom:1rem"></div>
+<div id="marinaGrid" class="marina-grid"></div>
+<div id="noResults" class="no-results" style="display:none">No marinas found within the selected radius. Try increasing the search radius or searching a different location.</div>
+
+<ins class="adsbygoogle" style="display:block;margin:1.5rem 0" data-ad-client="ca-pub-3434609691579834" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+
+<div class="section">
+    <h2>Fuel Cost Calculator</h2>
+    <div class="calc-grid">
+        <div class="calc-group">
+            <label for="calcGallons">Gallons Needed</label>
+            <input type="number" id="calcGallons" value="50" min="1" max="5000" oninput="calculateCost()">
+        </div>
+        <div class="calc-group">
+            <label for="calcSource">Price Source</label>
+            <select id="calcSource" onchange="calculateCost()">
+                <option value="manual">Enter price manually</option>
+            </select>
+        </div>
+        <div class="calc-group">
+            <label for="calcFuelType">Fuel Type</label>
+            <select id="calcFuelType" onchange="calculateCost()">
+                <option value="gas">Gas</option>
+                <option value="diesel">Diesel</option>
+            </select>
+        </div>
+        <div class="calc-group">
+            <label for="calcPrice">Price per Gallon ($)</label>
+            <input type="number" id="calcPrice" value="5.00" min="0" step="0.01" oninput="calculateCost()">
+        </div>
+    </div>
+    <div class="calc-result">
+        <div style="color:#9aa0b0;font-size:0.85rem;margin-bottom:0.25rem">Estimated Total Cost</div>
+        <div class="total" id="calcTotal">$250.00</div>
+        <div class="calc-comparison" id="calcComparison"></div>
+    </div>
+</div>
+
+<div class="section">
+    <h2>Report a Price Update</h2>
+    <p style="color:#9aa0b0;font-size:0.9rem;margin-bottom:1rem">Help fellow boaters by reporting current fuel prices at marinas you visit.</p>
+    <div class="report-grid">
+        <div class="calc-group">
+            <label for="reportMarina">Marina</label>
+            <select id="reportMarina"></select>
+        </div>
+        <div class="calc-group">
+            <label for="reportDate">Date</label>
+            <input type="date" id="reportDate">
+        </div>
+        <div class="calc-group">
+            <label for="reportGas">Gas Price ($/gal)</label>
+            <input type="number" id="reportGas" step="0.01" min="0" placeholder="e.g. 5.29">
+        </div>
+        <div class="calc-group">
+            <label for="reportDiesel">Diesel Price ($/gal)</label>
+            <input type="number" id="reportDiesel" step="0.01" min="0" placeholder="e.g. 5.79">
+        </div>
+    </div>
+    <button class="btn-submit" onclick="submitReport()">Submit Price Report</button>
+    <p class="report-note">Prices are estimates and may not reflect current rates. Report updated prices to help other boaters.</p>
+</div>
+
+<ins class="adsbygoogle" style="display:block;margin:1.5rem 0" data-ad-client="ca-pub-3434609691579834" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+
+<div class="section">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">How much does marina fuel cost?<span class="faq-arrow">&#9660;</span></div>
+        <div class="faq-a">Marina fuel typically costs $1-2 more per gallon than road fuel. As of early 2026, marina gas prices range from $4.50 to $6.50 per gallon and diesel from $5.00 to $7.00, depending on region and location. Florida marinas average around $4.75-5.50 for gas, while the Northeast and West Coast tend to be higher at $5.50-6.50 for gas. Prices vary by season, with summer months often seeing the highest rates due to increased demand.</div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Why is marina fuel more expensive than road fuel?<span class="faq-arrow">&#9660;</span></div>
+        <div class="faq-a">Marina fuel costs more due to several factors: delivery logistics (fuel must be transported to waterfront locations by specialized trucks or barges), lower sales volume compared to gas stations, higher insurance and environmental compliance costs for waterfront fueling, specialized equipment like fuel docks and spill containment systems, and the convenience premium of fueling directly at the water. Marinas in remote or island locations tend to have the highest markups.</div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Is marina fuel different from gas station fuel?<span class="faq-arrow">&#9660;</span></div>
+        <div class="faq-a">Marina gasoline is generally the same grade as gas station fuel, though many marinas offer ethanol-free (E0) fuel which is preferred for marine engines. Ethanol can attract moisture and cause corrosion in marine fuel systems. Marina diesel is the same ULSD (Ultra Low Sulfur Diesel) available at gas stations. The key difference is availability of ethanol-free options and the convenience of dockside fueling.</div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Should I use ethanol-free fuel in my boat?<span class="faq-arrow">&#9660;</span></div>
+        <div class="faq-a">Ethanol-free fuel is recommended for marine engines, especially for boats that sit unused for extended periods. Ethanol (E10) can absorb water from humid marine environments through a process called phase separation, which can damage fuel systems, corrode aluminum components, and degrade fiberglass fuel tanks. While modern outboard engines are designed to handle E10, ethanol-free fuel provides better performance and fewer maintenance issues for most boats.</div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">How much fuel does a typical boat use?<span class="faq-arrow">&#9660;</span></div>
+        <div class="faq-a">Fuel consumption varies dramatically by boat type. A small fishing boat with a 90hp outboard uses about 7-9 gallons per hour at cruising speed. A 25-foot center console with twin 150hp engines burns 15-25 GPH. Pontoon boats are more efficient at 3-6 GPH. Large cabin cruisers can consume 20-50+ GPH. Sailboats under auxiliary power use only 1-3 GPH. For planning purposes, multiply your engine's GPH at cruising RPM by your expected hours on the water.</div>
+    </div>
+</div>
+</div>
+
+<footer>
+    <p>Automated Insights LLC -- Free tools built for everyday problems.</p>
+    <p style="margin-top:0.5rem">Prices are community-reported estimates and may not reflect current rates. Always confirm prices with the marina before fueling.</p>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+var MARINAS = [
+  // FLORIDA - Tampa Bay Area
+  {"name":"Harborage Marina","address":"700 S Florida Ave","city":"Tampa","state":"FL","zip":"33602","lat":27.9383,"lng":-82.4582,"phone":"(813) 229-5324","fuel_types":["gas","diesel"],"gas_price":4.89,"diesel_price":5.29,"last_updated":"2026-03-10","website":""},
+  {"name":"Westshore Marina","address":"6001 Bridgeshore Blvd","city":"Tampa","state":"FL","zip":"33611","lat":27.8875,"lng":-82.5241,"phone":"(813) 831-4242","fuel_types":["gas","diesel"],"gas_price":4.95,"diesel_price":5.35,"last_updated":"2026-03-08","website":""},
+  {"name":"Maximo Marina","address":"4801 37th St S","city":"St. Petersburg","state":"FL","zip":"33711","lat":27.7244,"lng":-82.6787,"phone":"(727) 867-1102","fuel_types":["gas","diesel"],"gas_price":4.79,"diesel_price":5.19,"last_updated":"2026-03-09","website":""},
+  {"name":"Salt Creek Marina","address":"107 8th Ave SE","city":"St. Petersburg","state":"FL","zip":"33701","lat":27.7627,"lng":-82.6262,"phone":"(727) 893-7329","fuel_types":["gas"],"gas_price":4.85,"diesel_price":null,"last_updated":"2026-03-07","website":""},
+  {"name":"Clearwater Municipal Marina","address":"25 Causeway Blvd","city":"Clearwater","state":"FL","zip":"33767","lat":27.9767,"lng":-82.7724,"phone":"(727) 462-6954","fuel_types":["gas","diesel"],"gas_price":4.99,"diesel_price":5.45,"last_updated":"2026-03-10","website":""},
+  {"name":"Dunedin Marina","address":"51 Main St","city":"Dunedin","state":"FL","zip":"34698","lat":28.0011,"lng":-82.7887,"phone":"(727) 298-3030","fuel_types":["gas"],"gas_price":5.05,"diesel_price":null,"last_updated":"2026-03-06","website":""},
+  {"name":"Marker 1 Marina","address":"1 Desoto Ave","city":"Dunedin","state":"FL","zip":"34698","lat":28.0043,"lng":-82.7921,"phone":"(727) 736-0740","fuel_types":["gas","diesel"],"gas_price":4.92,"diesel_price":5.32,"last_updated":"2026-03-08","website":""},
+  // FLORIDA - Southwest
+  {"name":"Cape Harbour Marina","address":"5785 Cape Harbour Dr","city":"Cape Coral","state":"FL","zip":"33914","lat":26.5527,"lng":-82.0244,"phone":"(239) 549-5200","fuel_types":["gas","diesel"],"gas_price":5.05,"diesel_price":5.49,"last_updated":"2026-03-09","website":""},
+  {"name":"Legacy Harbour Marina","address":"2000 Main St","city":"Fort Myers","state":"FL","zip":"33901","lat":26.6469,"lng":-81.8706,"phone":"(239) 461-7400","fuel_types":["gas","diesel"],"gas_price":4.99,"diesel_price":5.45,"last_updated":"2026-03-07","website":""},
+  {"name":"Naples City Dock","address":"880 12th Ave S","city":"Naples","state":"FL","zip":"34102","lat":26.1334,"lng":-81.7965,"phone":"(239) 213-3070","fuel_types":["gas","diesel"],"gas_price":5.15,"diesel_price":5.59,"last_updated":"2026-03-10","website":""},
+  {"name":"Marco Island Marina","address":"1402 N Collier Blvd","city":"Marco Island","state":"FL","zip":"34145","lat":25.9617,"lng":-81.7268,"phone":"(239) 642-2502","fuel_types":["gas","diesel"],"gas_price":5.25,"diesel_price":5.69,"last_updated":"2026-03-06","website":""},
+  // FLORIDA - Southeast
+  {"name":"Lauderdale Marine Center","address":"2000 SW 20th St","city":"Fort Lauderdale","state":"FL","zip":"33315","lat":26.0896,"lng":-80.1494,"phone":"(954) 713-0333","fuel_types":["gas","diesel"],"gas_price":5.19,"diesel_price":5.65,"last_updated":"2026-03-10","website":""},
+  {"name":"Bahia Mar Marina","address":"801 Seabreeze Blvd","city":"Fort Lauderdale","state":"FL","zip":"33316","lat":26.1001,"lng":-80.1048,"phone":"(954) 627-6309","fuel_types":["gas","diesel"],"gas_price":5.29,"diesel_price":5.75,"last_updated":"2026-03-09","website":""},
+  {"name":"Miami Beach Marina","address":"300 Alton Rd","city":"Miami Beach","state":"FL","zip":"33139","lat":25.7741,"lng":-80.1393,"phone":"(305) 673-6000","fuel_types":["gas","diesel"],"gas_price":5.35,"diesel_price":5.85,"last_updated":"2026-03-10","website":""},
+  {"name":"Crandon Park Marina","address":"4000 Crandon Blvd","city":"Key Biscayne","state":"FL","zip":"33149","lat":25.6943,"lng":-80.1559,"phone":"(305) 361-1281","fuel_types":["gas","diesel"],"gas_price":5.39,"diesel_price":5.89,"last_updated":"2026-03-08","website":""},
+  {"name":"Key West Bight Marina","address":"201 William St","city":"Key West","state":"FL","zip":"33040","lat":24.5641,"lng":-81.8057,"phone":"(305) 809-3981","fuel_types":["gas","diesel"],"gas_price":5.65,"diesel_price":6.15,"last_updated":"2026-03-07","website":""},
+  {"name":"Stock Island Marina","address":"7009 Shrimp Rd","city":"Key West","state":"FL","zip":"33040","lat":24.5701,"lng":-81.7401,"phone":"(305) 294-2288","fuel_types":["gas","diesel"],"gas_price":5.55,"diesel_price":6.05,"last_updated":"2026-03-09","website":""},
+  // FLORIDA - East Coast
+  {"name":"Halifax Harbor Marina","address":"437 Basin St","city":"Daytona Beach","state":"FL","zip":"32114","lat":29.2130,"lng":-81.0108,"phone":"(386) 671-8380","fuel_types":["gas","diesel"],"gas_price":4.79,"diesel_price":5.25,"last_updated":"2026-03-08","website":""},
+  {"name":"Camachee Cove Marina","address":"3076 Harbor Dr","city":"St. Augustine","state":"FL","zip":"32084","lat":29.9093,"lng":-81.2954,"phone":"(904) 829-5676","fuel_types":["gas","diesel"],"gas_price":4.85,"diesel_price":5.29,"last_updated":"2026-03-07","website":""},
+  {"name":"Fernandina Harbor Marina","address":"1 N Front St","city":"Fernandina Beach","state":"FL","zip":"32034","lat":30.6684,"lng":-81.4617,"phone":"(904) 491-2090","fuel_types":["gas","diesel"],"gas_price":4.89,"diesel_price":5.35,"last_updated":"2026-03-10","website":""},
+  {"name":"New Smyrna Beach Marina","address":"200 N Riverside Dr","city":"New Smyrna Beach","state":"FL","zip":"32168","lat":29.0299,"lng":-80.9239,"phone":"(386) 427-3891","fuel_types":["gas"],"gas_price":4.75,"diesel_price":null,"last_updated":"2026-03-06","website":""},
+  // FLORIDA - Panhandle
+  {"name":"HarborWalk Marina","address":"66 Harbor Blvd","city":"Destin","state":"FL","zip":"32541","lat":30.3889,"lng":-86.5106,"phone":"(850) 650-2400","fuel_types":["gas","diesel"],"gas_price":4.69,"diesel_price":5.15,"last_updated":"2026-03-09","website":""},
+  {"name":"Panama City Marina","address":"1 Harrison Ave","city":"Panama City","state":"FL","zip":"32401","lat":30.1562,"lng":-85.6619,"phone":"(850) 872-7272","fuel_types":["gas","diesel"],"gas_price":4.65,"diesel_price":5.09,"last_updated":"2026-03-08","website":""},
+  {"name":"Pensacola Shipyard Marina","address":"655 S Palafox St","city":"Pensacola","state":"FL","zip":"32502","lat":30.4025,"lng":-87.2154,"phone":"(850) 432-9960","fuel_types":["gas","diesel"],"gas_price":4.59,"diesel_price":5.05,"last_updated":"2026-03-07","website":""},
+  {"name":"Port St. Joe Marina","address":"340 Marina Dr","city":"Port St. Joe","state":"FL","zip":"32456","lat":29.8107,"lng":-85.3026,"phone":"(850) 227-9393","fuel_types":["gas","diesel"],"gas_price":4.72,"diesel_price":5.19,"last_updated":"2026-03-06","website":""},
+  // GULF COAST
+  {"name":"South Shore Harbour Marina","address":"4000 S Shore Blvd","city":"League City","state":"TX","zip":"77573","lat":29.5321,"lng":-95.0700,"phone":"(281) 334-0515","fuel_types":["gas","diesel"],"gas_price":4.55,"diesel_price":4.99,"last_updated":"2026-03-09","website":""},
+  {"name":"Galveston Yacht Basin","address":"715 Holiday Dr","city":"Galveston","state":"TX","zip":"77550","lat":29.2906,"lng":-94.7889,"phone":"(409) 765-3301","fuel_types":["gas","diesel"],"gas_price":4.49,"diesel_price":4.95,"last_updated":"2026-03-08","website":""},
+  {"name":"Port Aransas Marina","address":"429 N Alister St","city":"Port Aransas","state":"TX","zip":"78373","lat":27.8350,"lng":-97.0574,"phone":"(361) 749-5448","fuel_types":["gas","diesel"],"gas_price":4.59,"diesel_price":5.05,"last_updated":"2026-03-07","website":""},
+  {"name":"Grand Isle Marina","address":"108 Ludwig Ln","city":"Grand Isle","state":"LA","zip":"70358","lat":29.2378,"lng":-89.9889,"phone":"(985) 787-3200","fuel_types":["gas","diesel"],"gas_price":4.65,"diesel_price":5.09,"last_updated":"2026-03-06","website":""},
+  {"name":"Gulfport Municipal Marina","address":"1410 E Pier","city":"Gulfport","state":"MS","zip":"39501","lat":30.3577,"lng":-89.0873,"phone":"(228) 868-5713","fuel_types":["gas","diesel"],"gas_price":4.55,"diesel_price":4.99,"last_updated":"2026-03-09","website":""},
+  {"name":"Dog River Marina","address":"4851 Halls Mill Creek Rd","city":"Mobile","state":"AL","zip":"36693","lat":30.6311,"lng":-88.1181,"phone":"(251) 666-5100","fuel_types":["gas","diesel"],"gas_price":4.49,"diesel_price":4.95,"last_updated":"2026-03-08","website":""},
+  {"name":"Orange Beach Marina","address":"27075 Marina Rd","city":"Orange Beach","state":"AL","zip":"36561","lat":30.2835,"lng":-87.5589,"phone":"(251) 981-4207","fuel_types":["gas","diesel"],"gas_price":4.55,"diesel_price":5.05,"last_updated":"2026-03-07","website":""},
+  // EAST COAST - GA, SC, NC
+  {"name":"Thunderbolt Marina","address":"3124 River Dr","city":"Savannah","state":"GA","zip":"31404","lat":32.0332,"lng":-81.0490,"phone":"(912) 356-3875","fuel_types":["gas","diesel"],"gas_price":5.05,"diesel_price":5.49,"last_updated":"2026-03-10","website":""},
+  {"name":"Savannah Bend Marina","address":"41 Rowing Club Dr","city":"Savannah","state":"GA","zip":"31404","lat":32.0355,"lng":-81.0445,"phone":"(912) 897-2896","fuel_types":["gas","diesel"],"gas_price":5.09,"diesel_price":5.55,"last_updated":"2026-03-08","website":""},
+  {"name":"Charleston City Marina","address":"17 Lockwood Dr","city":"Charleston","state":"SC","zip":"29401","lat":32.7747,"lng":-79.9530,"phone":"(843) 723-5098","fuel_types":["gas","diesel"],"gas_price":5.15,"diesel_price":5.59,"last_updated":"2026-03-09","website":""},
+  {"name":"Patriots Point Marina","address":"40 Patriots Point Rd","city":"Mt. Pleasant","state":"SC","zip":"29464","lat":32.7874,"lng":-79.9048,"phone":"(843) 856-7020","fuel_types":["gas","diesel"],"gas_price":5.09,"diesel_price":5.55,"last_updated":"2026-03-07","website":""},
+  {"name":"Morehead City Yacht Basin","address":"208 Arendell St","city":"Morehead City","state":"NC","zip":"28557","lat":34.7218,"lng":-76.7270,"phone":"(252) 726-6862","fuel_types":["gas","diesel"],"gas_price":5.19,"diesel_price":5.65,"last_updated":"2026-03-08","website":""},
+  {"name":"Southport Marina","address":"601 W West St","city":"Southport","state":"NC","zip":"28461","lat":33.9206,"lng":-78.0173,"phone":"(910) 457-5261","fuel_types":["gas","diesel"],"gas_price":5.12,"diesel_price":5.55,"last_updated":"2026-03-06","website":""},
+  // EAST COAST - VA, MD, NJ, NY
+  {"name":"Rudee Inlet Marina","address":"227 Mediterranean Ave","city":"Virginia Beach","state":"VA","zip":"23451","lat":36.8313,"lng":-75.9681,"phone":"(757) 422-2999","fuel_types":["gas","diesel"],"gas_price":5.29,"diesel_price":5.75,"last_updated":"2026-03-09","website":""},
+  {"name":"York River Yacht Haven","address":"8109 Yacht Haven Rd","city":"Gloucester Point","state":"VA","zip":"23062","lat":37.2492,"lng":-76.5108,"phone":"(804) 642-2156","fuel_types":["gas","diesel"],"gas_price":5.19,"diesel_price":5.65,"last_updated":"2026-03-07","website":""},
+  {"name":"Herrington Harbour South","address":"7149 Lake Shore Dr","city":"North Beach","state":"MD","zip":"20714","lat":38.6741,"lng":-76.5403,"phone":"(410) 257-6134","fuel_types":["gas","diesel"],"gas_price":5.39,"diesel_price":5.89,"last_updated":"2026-03-10","website":""},
+  {"name":"Annapolis City Marina","address":"1 Dock St","city":"Annapolis","state":"MD","zip":"21401","lat":38.9731,"lng":-76.4812,"phone":"(410) 268-0660","fuel_types":["gas","diesel"],"gas_price":5.45,"diesel_price":5.95,"last_updated":"2026-03-08","website":""},
+  {"name":"Atlantic Highlands Marina","address":"2 Simon Lake Dr","city":"Atlantic Highlands","state":"NJ","zip":"07716","lat":40.4113,"lng":-74.0321,"phone":"(732) 291-1670","fuel_types":["gas","diesel"],"gas_price":5.55,"diesel_price":6.05,"last_updated":"2026-03-09","website":""},
+  {"name":"Liberty Landing Marina","address":"80 Audrey Zapp Dr","city":"Jersey City","state":"NJ","zip":"07305","lat":40.7054,"lng":-74.0575,"phone":"(201) 985-8000","fuel_types":["gas","diesel"],"gas_price":5.65,"diesel_price":6.15,"last_updated":"2026-03-10","website":""},
+  {"name":"Montauk Yacht Club","address":"32 Star Island Rd","city":"Montauk","state":"NY","zip":"11954","lat":41.0710,"lng":-71.9441,"phone":"(631) 668-3100","fuel_types":["gas","diesel"],"gas_price":5.75,"diesel_price":6.25,"last_updated":"2026-03-08","website":""},
+  {"name":"Port Washington Town Dock","address":"1 Blvd Dr","city":"Port Washington","state":"NY","zip":"11050","lat":40.8329,"lng":-73.6993,"phone":"(516) 883-7862","fuel_types":["gas","diesel"],"gas_price":5.69,"diesel_price":6.19,"last_updated":"2026-03-07","website":""},
+  // EAST COAST - CT, MA
+  {"name":"Brewer Yacht Haven","address":"333 Dyke Ln","city":"Stamford","state":"CT","zip":"06902","lat":41.0476,"lng":-73.5369,"phone":"(203) 359-4500","fuel_types":["gas","diesel"],"gas_price":5.79,"diesel_price":6.29,"last_updated":"2026-03-09","website":""},
+  {"name":"Norwalk Cove Marina","address":"48 Calf Pasture Beach Rd","city":"Norwalk","state":"CT","zip":"06855","lat":41.0818,"lng":-73.4072,"phone":"(203) 838-2326","fuel_types":["gas","diesel"],"gas_price":5.75,"diesel_price":6.25,"last_updated":"2026-03-08","website":""},
+  {"name":"Boston Waterboat Marina","address":"66 Long Wharf","city":"Boston","state":"MA","zip":"02110","lat":42.3595,"lng":-71.0490,"phone":"(617) 261-1840","fuel_types":["gas","diesel"],"gas_price":5.89,"diesel_price":6.39,"last_updated":"2026-03-10","website":""},
+  {"name":"Provincetown Marina","address":"9 Ryder St Ext","city":"Provincetown","state":"MA","zip":"02657","lat":42.0520,"lng":-70.1849,"phone":"(508) 487-0571","fuel_types":["gas","diesel"],"gas_price":5.95,"diesel_price":6.45,"last_updated":"2026-03-07","website":""},
+  {"name":"Hyannis Marina","address":"1 Willow St","city":"Hyannis","state":"MA","zip":"02601","lat":41.6352,"lng":-70.2894,"phone":"(508) 790-4000","fuel_types":["gas","diesel"],"gas_price":5.85,"diesel_price":6.35,"last_updated":"2026-03-09","website":""},
+  {"name":"Nantucket Boat Basin","address":"1 New Whale St","city":"Nantucket","state":"MA","zip":"02554","lat":41.2847,"lng":-70.0970,"phone":"(508) 325-1350","fuel_types":["gas","diesel"],"gas_price":6.25,"diesel_price":6.75,"last_updated":"2026-03-06","website":""},
+  {"name":"Newport Yachting Center","address":"4 Commercial Wharf","city":"Newport","state":"RI","zip":"02840","lat":41.4896,"lng":-71.3250,"phone":"(401) 846-1600","fuel_types":["gas","diesel"],"gas_price":5.79,"diesel_price":6.29,"last_updated":"2026-03-08","website":""},
+  // GREAT LAKES
+  {"name":"DuSable Harbor","address":"1559 S Lake Shore Dr","city":"Chicago","state":"IL","zip":"60605","lat":41.8577,"lng":-87.6134,"phone":"(312) 747-7009","fuel_types":["gas","diesel"],"gas_price":5.15,"diesel_price":5.59,"last_updated":"2026-03-08","website":""},
+  {"name":"Burnham Park Harbor","address":"1559 S Lake Shore Dr","city":"Chicago","state":"IL","zip":"60605","lat":41.8561,"lng":-87.6088,"phone":"(312) 747-7009","fuel_types":["gas"],"gas_price":5.09,"diesel_price":null,"last_updated":"2026-03-07","website":""},
+  {"name":"Michigan City Marina","address":"111 N Washington St","city":"Michigan City","state":"IN","zip":"46360","lat":41.7258,"lng":-86.9072,"phone":"(219) 879-8606","fuel_types":["gas","diesel"],"gas_price":4.89,"diesel_price":5.35,"last_updated":"2026-03-09","website":""},
+  {"name":"Put-in-Bay Marina","address":"131 W Shore Blvd","city":"Put-in-Bay","state":"OH","zip":"43456","lat":41.6573,"lng":-82.8215,"phone":"(419) 285-3371","fuel_types":["gas","diesel"],"gas_price":5.25,"diesel_price":5.69,"last_updated":"2026-03-06","website":""},
+  {"name":"Cleveland Edgewater Marina","address":"6500 Cleveland Memorial Shoreway","city":"Cleveland","state":"OH","zip":"44102","lat":41.4930,"lng":-81.7387,"phone":"(216) 631-9191","fuel_types":["gas","diesel"],"gas_price":4.95,"diesel_price":5.39,"last_updated":"2026-03-08","website":""},
+  {"name":"Bay Harbor Marina","address":"4275 Harbor Vista Dr","city":"Bay Harbor","state":"MI","zip":"49770","lat":45.3759,"lng":-85.0709,"phone":"(231) 439-2200","fuel_types":["gas","diesel"],"gas_price":5.19,"diesel_price":5.65,"last_updated":"2026-03-07","website":""},
+  {"name":"Mackinac Island Marina","address":"7274 Main St","city":"Mackinac Island","state":"MI","zip":"49757","lat":45.8503,"lng":-84.6190,"phone":"(906) 847-3561","fuel_types":["gas","diesel"],"gas_price":5.45,"diesel_price":5.95,"last_updated":"2026-03-06","website":""},
+  {"name":"Charlevoix Municipal Marina","address":"101 E Elm St","city":"Charlevoix","state":"MI","zip":"49720","lat":45.3177,"lng":-85.2578,"phone":"(231) 547-3272","fuel_types":["gas","diesel"],"gas_price":5.15,"diesel_price":5.59,"last_updated":"2026-03-08","website":""},
+  {"name":"Bayfield Municipal Marina","address":"7 N Front St","city":"Bayfield","state":"WI","zip":"54814","lat":46.8106,"lng":-90.8218,"phone":"(715) 779-3611","fuel_types":["gas","diesel"],"gas_price":4.89,"diesel_price":5.35,"last_updated":"2026-03-07","website":""},
+  {"name":"Duluth Marina","address":"601 S Lake Ave","city":"Duluth","state":"MN","zip":"55802","lat":46.7785,"lng":-92.0923,"phone":"(218) 723-3337","fuel_types":["gas","diesel"],"gas_price":4.85,"diesel_price":5.29,"last_updated":"2026-03-09","website":""},
+  // WEST COAST - California
+  {"name":"Marina del Rey Harbor","address":"13737 Fiji Way","city":"Marina del Rey","state":"CA","zip":"90292","lat":33.9727,"lng":-118.4477,"phone":"(310) 822-9101","fuel_types":["gas","diesel"],"gas_price":6.15,"diesel_price":6.69,"last_updated":"2026-03-10","website":""},
+  {"name":"Dana Point Marina","address":"24500 Dana Point Harbor Dr","city":"Dana Point","state":"CA","zip":"92629","lat":33.4601,"lng":-117.6921,"phone":"(949) 496-6137","fuel_types":["gas","diesel"],"gas_price":6.09,"diesel_price":6.59,"last_updated":"2026-03-09","website":""},
+  {"name":"Shelter Island Marina","address":"2051 Shelter Island Dr","city":"San Diego","state":"CA","zip":"92106","lat":32.7187,"lng":-117.2282,"phone":"(619) 224-2471","fuel_types":["gas","diesel"],"gas_price":5.99,"diesel_price":6.49,"last_updated":"2026-03-10","website":""},
+  {"name":"Pier 39 Marina","address":"Beach St & The Embarcadero","city":"San Francisco","state":"CA","zip":"94133","lat":37.8088,"lng":-122.4098,"phone":"(415) 705-5556","fuel_types":["gas","diesel"],"gas_price":6.35,"diesel_price":6.85,"last_updated":"2026-03-08","website":""},
+  {"name":"Sausalito Yacht Harbor","address":"100 Gate 6 Rd","city":"Sausalito","state":"CA","zip":"94965","lat":37.8612,"lng":-122.4879,"phone":"(415) 332-3500","fuel_types":["gas","diesel"],"gas_price":6.29,"diesel_price":6.79,"last_updated":"2026-03-07","website":""},
+  {"name":"Channel Islands Harbor","address":"3900 Pelican Way","city":"Oxnard","state":"CA","zip":"93035","lat":34.1587,"lng":-119.2248,"phone":"(805) 382-3007","fuel_types":["gas","diesel"],"gas_price":6.05,"diesel_price":6.55,"last_updated":"2026-03-09","website":""},
+  {"name":"Santa Barbara Harbor","address":"132 Harbor Way","city":"Santa Barbara","state":"CA","zip":"93109","lat":34.4013,"lng":-119.6870,"phone":"(805) 564-5530","fuel_types":["gas","diesel"],"gas_price":6.19,"diesel_price":6.69,"last_updated":"2026-03-08","website":""},
+  // WEST COAST - OR, WA
+  {"name":"Portland Downtown Marina","address":"1510 SW Harbor Way","city":"Portland","state":"OR","zip":"97201","lat":45.5036,"lng":-122.6751,"phone":"(503) 241-8283","fuel_types":["gas","diesel"],"gas_price":5.79,"diesel_price":6.29,"last_updated":"2026-03-09","website":""},
+  {"name":"Astoria East Basin","address":"36 Basin St","city":"Astoria","state":"OR","zip":"97103","lat":46.1884,"lng":-123.8305,"phone":"(503) 325-7275","fuel_types":["gas","diesel"],"gas_price":5.69,"diesel_price":6.19,"last_updated":"2026-03-07","website":""},
+  {"name":"Shilshole Bay Marina","address":"7001 Seaview Ave NW","city":"Seattle","state":"WA","zip":"98117","lat":47.6856,"lng":-122.4054,"phone":"(206) 728-3006","fuel_types":["gas","diesel"],"gas_price":5.89,"diesel_price":6.39,"last_updated":"2026-03-10","website":""},
+  {"name":"Anacortes Marina","address":"2415 T Ave","city":"Anacortes","state":"WA","zip":"98221","lat":48.5076,"lng":-122.6125,"phone":"(360) 293-4543","fuel_types":["gas","diesel"],"gas_price":5.85,"diesel_price":6.35,"last_updated":"2026-03-08","website":""},
+  {"name":"Elliott Bay Marina","address":"2601 W Marina Pl","city":"Seattle","state":"WA","zip":"98199","lat":47.6359,"lng":-122.3871,"phone":"(206) 285-4817","fuel_types":["gas","diesel"],"gas_price":5.95,"diesel_price":6.45,"last_updated":"2026-03-09","website":""},
+  {"name":"Bellingham Squalicum Harbor","address":"722 Coho Way","city":"Bellingham","state":"WA","zip":"98225","lat":48.7545,"lng":-122.4997,"phone":"(360) 676-2542","fuel_types":["gas","diesel"],"gas_price":5.79,"diesel_price":6.29,"last_updated":"2026-03-07","website":""},
+  // PACIFIC NW & HAWAII
+  {"name":"Friday Harbor Marina","address":"204 Front St","city":"Friday Harbor","state":"WA","zip":"98250","lat":48.5353,"lng":-123.0162,"phone":"(360) 378-2688","fuel_types":["gas","diesel"],"gas_price":5.99,"diesel_price":6.49,"last_updated":"2026-03-06","website":""},
+  {"name":"Juneau Aurora Harbor","address":"1800 Glacier Ave","city":"Juneau","state":"AK","zip":"99801","lat":58.2971,"lng":-134.4078,"phone":"(907) 586-5255","fuel_types":["gas","diesel"],"gas_price":5.75,"diesel_price":6.19,"last_updated":"2026-03-05","website":""},
+  {"name":"Seward Small Boat Harbor","address":"302 Railway Ave","city":"Seward","state":"AK","zip":"99664","lat":60.1040,"lng":-149.4395,"phone":"(907) 224-3138","fuel_types":["gas","diesel"],"gas_price":5.85,"diesel_price":6.29,"last_updated":"2026-03-04","website":""},
+  {"name":"Ko Olina Marina","address":"92-100 Waipahe Pl","city":"Kapolei","state":"HI","zip":"96707","lat":21.3369,"lng":-158.1216,"phone":"(808) 679-0966","fuel_types":["gas","diesel"],"gas_price":6.45,"diesel_price":6.95,"last_updated":"2026-03-09","website":""},
+  {"name":"Ala Wai Small Boat Harbor","address":"1651 Ala Moana Blvd","city":"Honolulu","state":"HI","zip":"96815","lat":21.2879,"lng":-157.8401,"phone":"(808) 943-0270","fuel_types":["gas","diesel"],"gas_price":6.39,"diesel_price":6.89,"last_updated":"2026-03-08","website":""},
+  // Additional Florida marinas for heavy coverage
+  {"name":"Riviera Beach Marina","address":"200 E 13th St","city":"Riviera Beach","state":"FL","zip":"33404","lat":26.7745,"lng":-80.0524,"phone":"(561) 842-7806","fuel_types":["gas","diesel"],"gas_price":5.15,"diesel_price":5.59,"last_updated":"2026-03-09","website":""},
+  {"name":"Stuart Harbor Marina","address":"3740 SE St Lucie Blvd","city":"Stuart","state":"FL","zip":"34997","lat":27.1806,"lng":-80.2169,"phone":"(772) 220-4009","fuel_types":["gas","diesel"],"gas_price":5.05,"diesel_price":5.49,"last_updated":"2026-03-08","website":""},
+  {"name":"Cocoa Village Marina","address":"90 Delannoy Ave","city":"Cocoa","state":"FL","zip":"32922","lat":28.3512,"lng":-80.7263,"phone":"(321) 639-3550","fuel_types":["gas","diesel"],"gas_price":4.85,"diesel_price":5.29,"last_updated":"2026-03-07","website":""},
+  {"name":"Titusville Municipal Marina","address":"451 S Washington Ave","city":"Titusville","state":"FL","zip":"32796","lat":28.6087,"lng":-80.8035,"phone":"(321) 269-7255","fuel_types":["gas"],"gas_price":4.79,"diesel_price":null,"last_updated":"2026-03-06","website":""},
+  {"name":"Ponce de Leon Inlet Marina","address":"100 Inlet Harbor Rd","city":"Ponce Inlet","state":"FL","zip":"32127","lat":29.0822,"lng":-80.9357,"phone":"(386) 767-3266","fuel_types":["gas","diesel"],"gas_price":4.82,"diesel_price":5.25,"last_updated":"2026-03-10","website":""},
+  {"name":"Jacksonville Marina at Metropolitan Park","address":"1410 Gator Bowl Blvd","city":"Jacksonville","state":"FL","zip":"32202","lat":30.3240,"lng":-81.6512,"phone":"(904) 665-7419","fuel_types":["gas","diesel"],"gas_price":4.85,"diesel_price":5.29,"last_updated":"2026-03-09","website":""}
+];
+
+var map, userLat, userLng, currentFilter = 'all', currentRadius = 50;
+var markers = [];
+var visibleMarinas = [];
+var userReports = {};
+
+function init() {
+    loadReports();
+    applyReports();
+    map = L.map('map').setView([28.0, -82.5], 7);
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; <a href="https://carto.com/">CARTO</a>',
+        maxZoom: 19
+    }).addTo(map);
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(pos) {
+            userLat = pos.coords.latitude;
+            userLng = pos.coords.longitude;
+            document.getElementById('statusMsg').textContent = 'Location found. Showing marinas within ' + currentRadius + ' miles.';
+            map.setView([userLat, userLng], 9);
+            L.circleMarker([userLat, userLng], {radius: 8, color: '#6c63ff', fillColor: '#6c63ff', fillOpacity: 1, weight: 2}).addTo(map).bindPopup('Your Location');
+            renderMarinas();
+        }, function() {
+            document.getElementById('statusMsg').textContent = 'Location access denied. Showing all marinas. Use the search box to find marinas near you.';
+            renderMarinas();
+        });
+    } else {
+        document.getElementById('statusMsg').textContent = 'Geolocation not supported. Showing all marinas. Use the search box to find marinas near you.';
+        renderMarinas();
+    }
+    populateSelects();
+    document.getElementById('reportDate').value = new Date().toISOString().split('T')[0];
+    calculateCost();
+}
+
+function loadReports() {
+    try {
+        var stored = localStorage.getItem('marinaFuelReports');
+        if (stored) {
+            userReports = JSON.parse(stored);
+        }
+    } catch(e) {}
+}
+
+function applyReports() {
+    for (var i = 0; i < MARINAS.length; i++) {
+        var key = MARINAS[i].name;
+        if (userReports[key]) {
+            var r = userReports[key];
+            if (r.gas_price) { MARINAS[i].gas_price = r.gas_price; }
+            if (r.diesel_price) { MARINAS[i].diesel_price = r.diesel_price; }
+            if (r.date) { MARINAS[i].last_updated = r.date; }
+        }
+    }
+}
+
+function haversine(lat1, lng1, lat2, lng2) {
+    var R = 3958.8;
+    var dLat = (lat2 - lat1) * Math.PI / 180;
+    var dLng = (lng2 - lng1) * Math.PI / 180;
+    var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(lat1 * Math.PI/180) * Math.cos(lat2 * Math.PI/180) * Math.sin(dLng/2) * Math.sin(dLng/2);
+    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+
+function setFilter(f) {
+    currentFilter = f;
+    document.querySelectorAll('.filter-btn').forEach(function(btn) {
+        btn.classList.toggle('active', btn.getAttribute('data-filter') === f);
+    });
+    renderMarinas();
+}
+
+function updateRadius(val) {
+    currentRadius = parseInt(val);
+    document.getElementById('radiusValue').textContent = val + ' mi';
+    renderMarinas();
+}
+
+function searchLocation() {
+    var query = document.getElementById('locationSearch').value.trim();
+    if (!query) { return; }
+    document.getElementById('statusMsg').textContent = 'Searching for "' + query + '"...';
+    fetch('https://nominatim.openstreetmap.org/search?q=' + encodeURIComponent(query) + '&format=json&countrycodes=us&limit=1')
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+            if (data && data.length > 0) {
+                userLat = parseFloat(data[0].lat);
+                userLng = parseFloat(data[0].lon);
+                map.setView([userLat, userLng], 9);
+                markers.forEach(function(m) { map.removeLayer(m); });
+                markers = [];
+                L.circleMarker([userLat, userLng], {radius: 8, color: '#6c63ff', fillColor: '#6c63ff', fillOpacity: 1, weight: 2}).addTo(map).bindPopup('Search Location: ' + query);
+                document.getElementById('statusMsg').textContent = 'Showing marinas within ' + currentRadius + ' miles of "' + query + '".';
+                renderMarinas();
+            } else {
+                document.getElementById('statusMsg').textContent = 'Location not found. Try a different search term.';
+            }
+        })
+        .catch(function() {
+            document.getElementById('statusMsg').textContent = 'Search failed. Please try again.';
+        });
+}
+
+function renderMarinas() {
+    markers.forEach(function(m) { map.removeLayer(m); });
+    markers = [];
+    var filtered = MARINAS.filter(function(m) {
+        if (currentFilter === 'gas') { return m.fuel_types.indexOf('gas') !== -1; }
+        if (currentFilter === 'diesel') { return m.fuel_types.indexOf('diesel') !== -1; }
+        if (currentFilter === 'both') { return m.fuel_types.indexOf('gas') !== -1 && m.fuel_types.indexOf('diesel') !== -1; }
+        return true;
+    });
+    if (userLat !== undefined && userLng !== undefined) {
+        filtered.forEach(function(m) {
+            m._dist = haversine(userLat, userLng, m.lat, m.lng);
+        });
+        filtered = filtered.filter(function(m) { return m._dist <= currentRadius; });
+        filtered.sort(function(a, b) { return a._dist - b._dist; });
+    } else {
+        filtered.forEach(function(m) { m._dist = null; });
+        filtered.sort(function(a, b) { return a.name.localeCompare(b.name); });
+    }
+    visibleMarinas = filtered;
+
+    // Find cheapest gas and diesel
+    var cheapestGas = null, cheapestDiesel = null;
+    filtered.forEach(function(m) {
+        if (m.gas_price && (!cheapestGas || m.gas_price < cheapestGas.gas_price)) { cheapestGas = m; }
+        if (m.diesel_price && (!cheapestDiesel || m.diesel_price < cheapestDiesel.diesel_price)) { cheapestDiesel = m; }
+    });
+
+    var grid = document.getElementById('marinaGrid');
+    var noResults = document.getElementById('noResults');
+    var countEl = document.getElementById('marinaCount');
+
+    if (filtered.length === 0) {
+        grid.innerHTML = '';
+        noResults.style.display = 'block';
+        countEl.textContent = '';
+        return;
+    }
+    noResults.style.display = 'none';
+    countEl.textContent = filtered.length + ' marina' + (filtered.length !== 1 ? 's' : '') + ' found' + (userLat !== undefined ? ' within ' + currentRadius + ' miles' : '');
+
+    var html = '';
+    filtered.forEach(function(m) {
+        var isCheapest = (m === cheapestGas || m === cheapestDiesel);
+        var distStr = m._dist !== null ? m._dist.toFixed(1) + ' miles away' : '';
+        var directionsUrl = 'https://www.google.com/maps/dir/?api=1&destination=' + m.lat + ',' + m.lng;
+        html += '<div class="marina-card' + (isCheapest ? ' cheapest' : '') + '">';
+        if (isCheapest) {
+            var badges = [];
+            if (m === cheapestGas) { badges.push('Cheapest Gas'); }
+            if (m === cheapestDiesel) { badges.push('Cheapest Diesel'); }
+            html += '<span class="cheapest-badge">' + badges.join(' + ') + '</span>';
+        }
+        html += '<div class="marina-name">' + m.name + '</div>';
+        html += '<div class="marina-address">' + m.address + ', ' + m.city + ', ' + m.state + ' ' + m.zip + '</div>';
+        if (distStr) { html += '<div class="marina-distance">' + distStr + '</div>'; }
+        html += '<div class="fuel-badges">';
+        if (m.fuel_types.indexOf('gas') !== -1) { html += '<span class="fuel-badge gas">Gas</span>'; }
+        if (m.fuel_types.indexOf('diesel') !== -1) { html += '<span class="fuel-badge diesel">Diesel</span>'; }
+        html += '</div>';
+        html += '<div class="price-row">';
+        if (m.gas_price) { html += '<div class="price-item"><div class="price-label">Gas /gal</div><div class="price-value gas-price">$' + m.gas_price.toFixed(2) + '</div></div>'; }
+        if (m.diesel_price) { html += '<div class="price-item"><div class="price-label">Diesel /gal</div><div class="price-value diesel-price">$' + m.diesel_price.toFixed(2) + '</div></div>'; }
+        html += '</div>';
+        html += '<div class="marina-meta">';
+        html += '<span>Updated ' + m.last_updated + '</span>';
+        var metaLinks = '<a href="' + directionsUrl + '" target="_blank" rel="noopener">Get Directions</a>';
+        if (m.phone) { metaLinks += ' &middot; <a href="tel:' + m.phone.replace(/[^0-9+]/g, '') + '">' + m.phone + '</a>'; }
+        html += '<span>' + metaLinks + '</span>';
+        html += '</div></div>';
+
+        // Map marker
+        var popupHtml = '<strong>' + m.name + '</strong><br>' + m.city + ', ' + m.state + '<br>';
+        if (m.gas_price) { popupHtml += 'Gas: $' + m.gas_price.toFixed(2) + '/gal<br>'; }
+        if (m.diesel_price) { popupHtml += 'Diesel: $' + m.diesel_price.toFixed(2) + '/gal<br>'; }
+        popupHtml += '<a href="' + directionsUrl + '" target="_blank" rel="noopener">Directions</a>';
+        var markerColor = isCheapest ? '#00c853' : (m.fuel_types.length === 2 ? '#6c63ff' : (m.fuel_types.indexOf('gas') !== -1 ? '#66bb6a' : '#42a5f5'));
+        var marker = L.circleMarker([m.lat, m.lng], {radius: 7, color: markerColor, fillColor: markerColor, fillOpacity: 0.8, weight: 1}).addTo(map).bindPopup(popupHtml);
+        markers.push(marker);
+    });
+    grid.innerHTML = html;
+
+    // Fit map to markers if we have them
+    if (markers.length > 0) {
+        var group = L.featureGroup(markers);
+        if (userLat !== undefined) {
+            group.addLayer(L.circleMarker([userLat, userLng]));
+        }
+        map.fitBounds(group.getBounds().pad(0.1));
+    }
+
+    updateCalcSelect();
+}
+
+function populateSelects() {
+    var reportSel = document.getElementById('reportMarina');
+    var sorted = MARINAS.slice().sort(function(a, b) { return a.name.localeCompare(b.name); });
+    var html = '';
+    sorted.forEach(function(m) {
+        html += '<option value="' + m.name + '">' + m.name + ' (' + m.city + ', ' + m.state + ')</option>';
+    });
+    reportSel.innerHTML = html;
+}
+
+function updateCalcSelect() {
+    var sel = document.getElementById('calcSource');
+    var html = '<option value="manual">Enter price manually</option>';
+    visibleMarinas.forEach(function(m) {
+        html += '<option value="' + m.name + '">' + m.name + ' (' + m.city + ', ' + m.state + ')</option>';
+    });
+    sel.innerHTML = html;
+}
+
+function calculateCost() {
+    var gallons = parseFloat(document.getElementById('calcGallons').value) || 0;
+    var source = document.getElementById('calcSource').value;
+    var fuelType = document.getElementById('calcFuelType').value;
+    var priceInput = document.getElementById('calcPrice');
+
+    if (source !== 'manual') {
+        var marina = MARINAS.find(function(m) { return m.name === source; });
+        if (marina) {
+            var p = fuelType === 'gas' ? marina.gas_price : marina.diesel_price;
+            if (p) {
+                priceInput.value = p.toFixed(2);
+            }
+        }
+    }
+
+    var price = parseFloat(priceInput.value) || 0;
+    var total = gallons * price;
+    document.getElementById('calcTotal').textContent = '$' + total.toFixed(2);
+
+    // Comparison
+    var compHtml = '';
+    if (visibleMarinas.length > 1) {
+        var withPrice = visibleMarinas.filter(function(m) {
+            return fuelType === 'gas' ? m.gas_price : m.diesel_price;
+        });
+        if (withPrice.length > 1) {
+            withPrice.sort(function(a, b) {
+                var ap = fuelType === 'gas' ? a.gas_price : a.diesel_price;
+                var bp = fuelType === 'gas' ? b.gas_price : b.diesel_price;
+                return ap - bp;
+            });
+            var cheapest = withPrice[0];
+            var expensive = withPrice[withPrice.length - 1];
+            var cheapPrice = fuelType === 'gas' ? cheapest.gas_price : cheapest.diesel_price;
+            var expPrice = fuelType === 'gas' ? expensive.gas_price : expensive.diesel_price;
+            compHtml += '<div class="comp-item cheapest-comp"><div class="comp-label">Cheapest Nearby</div><div class="comp-value" style="color:#00c853">$' + (gallons * cheapPrice).toFixed(2) + '</div><div class="comp-name">' + cheapest.name + ' ($' + cheapPrice.toFixed(2) + '/gal)</div></div>';
+            compHtml += '<div class="comp-item expensive-comp"><div class="comp-label">Most Expensive</div><div class="comp-value" style="color:#f44336">$' + (gallons * expPrice).toFixed(2) + '</div><div class="comp-name">' + expensive.name + ' ($' + expPrice.toFixed(2) + '/gal)</div></div>';
+        }
+    }
+    document.getElementById('calcComparison').innerHTML = compHtml;
+}
+
+function submitReport() {
+    var name = document.getElementById('reportMarina').value;
+    var gas = parseFloat(document.getElementById('reportGas').value);
+    var diesel = parseFloat(document.getElementById('reportDiesel').value);
+    var date = document.getElementById('reportDate').value;
+
+    if (!name) { showToast('Please select a marina.'); return; }
+    if (isNaN(gas) && isNaN(diesel)) { showToast('Please enter at least one fuel price.'); return; }
+    if (!date) { showToast('Please enter a date.'); return; }
+
+    var report = { date: date };
+    if (!isNaN(gas) && gas > 0) { report.gas_price = gas; }
+    if (!isNaN(diesel) && diesel > 0) { report.diesel_price = diesel; }
+    userReports[name] = report;
+
+    try {
+        localStorage.setItem('marinaFuelReports', JSON.stringify(userReports));
+    } catch(e) {}
+
+    // Apply to data
+    var marina = MARINAS.find(function(m) { return m.name === name; });
+    if (marina) {
+        if (report.gas_price) { marina.gas_price = report.gas_price; }
+        if (report.diesel_price) { marina.diesel_price = report.diesel_price; }
+        marina.last_updated = date;
+    }
+
+    renderMarinas();
+    showToast('Price report submitted. Thank you!');
+    document.getElementById('reportGas').value = '';
+    document.getElementById('reportDiesel').value = '';
+}
+
+function showToast(msg) {
+    var t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(function() { t.classList.remove('show'); }, 3000);
+}
+
+function toggleFaq(el) {
+    var answer = el.nextElementSibling;
+    var arrow = el.querySelector('.faq-arrow');
+    answer.classList.toggle('open');
+    arrow.classList.toggle('open');
+}
+
+window.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>

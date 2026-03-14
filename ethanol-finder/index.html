@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E85 &amp; E15 Fuel Finder - Ethanol Station Locator &amp; Blend Calculator</title>
+    <meta name="description" content="Find nearby E85 and E15 gas stations on a live map. Calculate ethanol blend ratios and octane ratings for performance driving. Free tool with real-time station data.">
+    <link rel="canonical" href="https://automated-insights.com/ethanol-finder/">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3434609691579834" crossorigin="anonymous"></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "E85 & E15 Fuel Finder",
+        "description": "Find nearby E85 and E15 gas stations and calculate ethanol blend ratios for performance driving.",
+        "url": "https://automated-insights.com/ethanol-finder/",
+        "applicationCategory": "UtilityApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "author": {
+            "@type": "Organization",
+            "name": "Automated Insights"
+        }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is E85?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "E85 is a fuel blend containing 51-83% ethanol mixed with gasoline. The exact ethanol percentage varies by season and region. In summer, E85 typically contains around 70-83% ethanol, while winter blends may drop to 51-70% to aid cold starting. E85 is sold at specially labeled pumps at participating gas stations and is significantly cheaper per gallon than regular gasoline, though it contains less energy per gallon."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Can I run E85 in my car?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Only flex-fuel vehicles (FFVs) can safely run pure E85 without modifications. FFVs have sensors and engine calibrations that automatically adjust for any ethanol blend from E0 to E85. Non-flex-fuel vehicles can potentially run lower ethanol blends (E15-E30) with a proper ECU tune from a qualified tuner. Running high ethanol content on a stock tune in a non-flex vehicle can cause lean conditions, misfires, and potential engine damage. Always consult your tuner before changing ethanol content."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What octane is E85?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "E85 has an effective octane rating of approximately 100-105, depending on the actual ethanol content. This high octane rating is one of the primary reasons performance enthusiasts use E85 -- it allows for more aggressive ignition timing and higher boost pressures on turbocharged vehicles without detonation. Even partial E85 blends significantly raise the octane of pump gas."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Does E85 make more power?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "E85 itself does not magically create power, but its high octane rating (100-105) and cooling effect allow engines to be tuned more aggressively. With a proper tune, turbocharged vehicles commonly see 5-15% power gains on E85 compared to 93 octane due to more ignition advance and higher boost. Naturally aspirated engines see smaller gains, typically 2-5%. However, E85 has about 27% less energy per gallon than gasoline, so fuel consumption increases roughly 25-30%."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How do I know the ethanol content of E85 at the pump?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The only reliable way to know the exact ethanol content is to use an ethanol content tester (fuel composition sensor). These devices cost $30-100 and measure the percentage directly from a fuel sample. The pump label saying E85 only guarantees the fuel contains between 51-83% ethanol. Many performance drivers test every fill-up and log the results, since ethanol content directly affects the tune. Some stations post the current ethanol percentage, but this is not universal."
+                }
+            }
+        ]
+    }
+    </script>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0f1117;
+            color: #e8eaed;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        a { color: #6c63ff; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 1.5rem; }
+        h1 { font-size: 1.8rem; font-weight: 700; margin-bottom: 0.5rem; }
+        h2 { font-size: 1.3rem; font-weight: 600; margin-bottom: 1rem; color: #e8eaed; }
+        h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.75rem; color: #e8eaed; }
+        .subtitle { color: #9aa0b0; font-size: 1rem; margin-bottom: 1.5rem; }
+        .tabs {
+            display: flex; gap: 0; margin-bottom: 1.5rem;
+            border-bottom: 2px solid #2e3345;
+        }
+        .tab {
+            padding: 0.75rem 1.5rem; cursor: pointer;
+            color: #9aa0b0; font-weight: 600; font-size: 0.95rem;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px; transition: all 0.2s;
+            background: none; border-top: none; border-left: none; border-right: none;
+            font-family: inherit;
+        }
+        .tab:hover { color: #e8eaed; }
+        .tab.active { color: #6c63ff; border-bottom-color: #6c63ff; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .card {
+            background: #1a1d27; border: 1px solid #2e3345;
+            border-radius: 10px; padding: 1.25rem; margin-bottom: 1rem;
+        }
+        .search-bar {
+            display: flex; gap: 0.75rem; margin-bottom: 1rem;
+            flex-wrap: wrap; align-items: center;
+        }
+        .search-bar input[type="text"] {
+            flex: 1; min-width: 200px; padding: 0.65rem 1rem;
+            background: #1a1d27; border: 1px solid #2e3345;
+            border-radius: 8px; color: #e8eaed; font-size: 0.95rem;
+            font-family: inherit; outline: none; transition: border-color 0.2s;
+        }
+        .search-bar input[type="text"]:focus { border-color: #6c63ff; }
+        .search-bar input[type="text"]::placeholder { color: #9aa0b0; }
+        .btn {
+            padding: 0.65rem 1.25rem; background: #6c63ff; color: #fff;
+            border: none; border-radius: 8px; cursor: pointer;
+            font-weight: 600; font-size: 0.95rem; font-family: inherit;
+            transition: background 0.2s;
+        }
+        .btn:hover { background: #5a52e0; }
+        .btn-outline {
+            background: transparent; border: 1px solid #6c63ff;
+            color: #6c63ff;
+        }
+        .btn-outline:hover { background: rgba(108, 99, 255, 0.1); }
+        .radius-control {
+            display: flex; align-items: center; gap: 0.75rem;
+            margin-bottom: 1rem; flex-wrap: wrap;
+        }
+        .radius-control label { color: #9aa0b0; font-size: 0.9rem; }
+        .radius-control input[type="range"] {
+            flex: 1; min-width: 150px; accent-color: #6c63ff;
+        }
+        .radius-value {
+            color: #6c63ff; font-weight: 700; font-size: 0.95rem;
+            min-width: 60px;
+        }
+        #map {
+            width: 100%; height: 450px; border-radius: 10px;
+            border: 1px solid #2e3345; margin-bottom: 1.25rem;
+        }
+        @media (max-width: 768px) {
+            #map { height: 320px; }
+            h1 { font-size: 1.4rem; }
+            .container { padding: 1rem; }
+        }
+        .station-list { display: flex; flex-direction: column; gap: 0.75rem; }
+        .station-card {
+            background: #1a1d27; border: 1px solid #2e3345;
+            border-radius: 10px; padding: 1.1rem 1.25rem;
+            display: flex; justify-content: space-between;
+            align-items: flex-start; gap: 1rem;
+            transition: border-color 0.2s;
+        }
+        .station-card:hover { border-color: #6c63ff; }
+        .station-info { flex: 1; }
+        .station-name { font-weight: 700; font-size: 1.05rem; margin-bottom: 0.25rem; }
+        .station-address { color: #9aa0b0; font-size: 0.9rem; margin-bottom: 0.35rem; }
+        .station-meta { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+        .station-meta span { font-size: 0.85rem; color: #9aa0b0; }
+        .badge {
+            display: inline-block; padding: 0.2rem 0.6rem;
+            background: rgba(108, 99, 255, 0.15); color: #6c63ff;
+            border-radius: 5px; font-size: 0.78rem; font-weight: 600;
+        }
+        .badge-green {
+            background: rgba(76, 175, 80, 0.15); color: #4caf50;
+        }
+        .station-actions {
+            display: flex; flex-direction: column; gap: 0.5rem;
+            align-items: flex-end; min-width: 100px;
+        }
+        .distance-badge {
+            font-size: 1.1rem; font-weight: 700; color: #6c63ff;
+            white-space: nowrap;
+        }
+        .directions-link {
+            font-size: 0.85rem; color: #6c63ff; white-space: nowrap;
+        }
+        .loading {
+            text-align: center; padding: 3rem; color: #9aa0b0;
+        }
+        .loading-spinner {
+            width: 40px; height: 40px; border: 3px solid #2e3345;
+            border-top-color: #6c63ff; border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 1rem;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .error-msg {
+            text-align: center; padding: 2rem; color: #ff6b6b;
+            background: rgba(255, 107, 107, 0.08); border-radius: 10px;
+            border: 1px solid rgba(255, 107, 107, 0.2);
+        }
+        .calc-section { margin-bottom: 2rem; }
+        .calc-grid {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 1rem; margin-bottom: 1rem;
+        }
+        @media (max-width: 600px) {
+            .calc-grid { grid-template-columns: 1fr; }
+            .station-card { flex-direction: column; }
+            .station-actions { flex-direction: row; align-items: center; min-width: auto; }
+        }
+        .input-group { display: flex; flex-direction: column; gap: 0.35rem; }
+        .input-group label {
+            font-size: 0.85rem; color: #9aa0b0; font-weight: 500;
+        }
+        .input-group input, .input-group select {
+            padding: 0.6rem 0.85rem; background: #0f1117;
+            border: 1px solid #2e3345; border-radius: 8px;
+            color: #e8eaed; font-size: 0.95rem; font-family: inherit;
+            outline: none; transition: border-color 0.2s;
+        }
+        .input-group input:focus, .input-group select:focus { border-color: #6c63ff; }
+        .input-group select option { background: #1a1d27; }
+        .result-box {
+            background: rgba(108, 99, 255, 0.08); border: 1px solid rgba(108, 99, 255, 0.2);
+            border-radius: 10px; padding: 1.25rem; margin-top: 1rem;
+        }
+        .result-row {
+            display: flex; justify-content: space-between;
+            align-items: center; padding: 0.4rem 0;
+        }
+        .result-label { color: #9aa0b0; font-size: 0.95rem; }
+        .result-value { color: #6c63ff; font-weight: 700; font-size: 1.15rem; }
+        .ref-table {
+            width: 100%; border-collapse: collapse; font-size: 0.9rem;
+        }
+        .ref-table th {
+            text-align: left; padding: 0.6rem 0.75rem;
+            border-bottom: 2px solid #2e3345; color: #9aa0b0;
+            font-weight: 600; font-size: 0.8rem; text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .ref-table td {
+            padding: 0.55rem 0.75rem; border-bottom: 1px solid #2e3345;
+        }
+        .ref-table tr:hover td { background: rgba(108, 99, 255, 0.04); }
+        .note-box {
+            background: rgba(255, 183, 77, 0.08); border: 1px solid rgba(255, 183, 77, 0.2);
+            border-radius: 10px; padding: 1.1rem 1.25rem; margin-top: 1.5rem;
+        }
+        .note-box h3 { color: #ffb74d; margin-bottom: 0.5rem; }
+        .note-box ul { padding-left: 1.25rem; }
+        .note-box li { color: #9aa0b0; font-size: 0.9rem; margin-bottom: 0.4rem; }
+        .faq-section { margin-top: 2.5rem; }
+        .faq-item { border-bottom: 1px solid #2e3345; }
+        .faq-question {
+            width: 100%; text-align: left; padding: 1rem 0;
+            background: none; border: none; color: #e8eaed;
+            font-size: 1rem; font-weight: 600; cursor: pointer;
+            font-family: inherit; display: flex;
+            justify-content: space-between; align-items: center;
+        }
+        .faq-question:hover { color: #6c63ff; }
+        .faq-arrow {
+            transition: transform 0.2s; font-size: 0.8rem; color: #9aa0b0;
+        }
+        .faq-answer {
+            max-height: 0; overflow: hidden; transition: max-height 0.3s ease;
+        }
+        .faq-answer-inner {
+            padding: 0 0 1rem; color: #9aa0b0; font-size: 0.95rem;
+            line-height: 1.7;
+        }
+        .faq-item.open .faq-arrow { transform: rotate(180deg); }
+        .faq-item.open .faq-answer { max-height: 500px; }
+        .count-info {
+            color: #9aa0b0; font-size: 0.9rem; margin-bottom: 1rem;
+        }
+        .count-info strong { color: #6c63ff; }
+        footer {
+            text-align: center; padding: 2rem 1.5rem;
+            color: #9aa0b0; font-size: 0.85rem;
+            border-top: 1px solid #2e3345; margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <nav style="padding:1rem 1.5rem;border-bottom:1px solid #2e3345;display:flex;align-items:center;gap:1.5rem">
+        <a href="/" style="color:#6c63ff;font-weight:700;font-size:1.05rem;text-decoration:none">Automated Insights</a>
+        <a href="/" style="color:#9aa0b0;font-size:0.95rem;text-decoration:none">Tools</a>
+        <a href="/blog/" style="color:#9aa0b0;font-size:0.95rem;text-decoration:none">Blog</a>
+    </nav>
+
+    <div class="container">
+        <h1>E85 / E15 Fuel Finder</h1>
+        <p class="subtitle">Locate ethanol fuel stations near you and calculate blend ratios for performance driving.</p>
+
+        <div class="tabs">
+            <button class="tab active" data-tab="finder" onclick="switchTab('finder')">Station Finder</button>
+            <button class="tab" data-tab="calculator" onclick="switchTab('calculator')">Blend Calculator</button>
+        </div>
+
+        <!-- TAB 1: Station Finder -->
+        <div id="tab-finder" class="tab-content active">
+            <div class="search-bar">
+                <input type="text" id="location-input" placeholder="Enter city, zip code, or address..." aria-label="Location search">
+                <button class="btn" onclick="searchLocation()">Search</button>
+                <button class="btn btn-outline" onclick="useMyLocation()">Use My Location</button>
+            </div>
+
+            <div class="radius-control">
+                <label for="radius-slider">Search radius:</label>
+                <input type="range" id="radius-slider" min="5" max="50" value="25" oninput="updateRadius(this.value)">
+                <span class="radius-value" id="radius-display">25 mi</span>
+            </div>
+
+            <div id="map"></div>
+
+            <div id="station-results">
+                <div class="loading" id="initial-msg">
+                    <p style="color:#9aa0b0">Allow location access or search by city/zip to find E85 stations near you.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 2: Blend Calculator -->
+        <div id="tab-calculator" class="tab-content">
+
+            <!-- Blend Mix Calculator -->
+            <div class="calc-section">
+                <div class="card">
+                    <h2>Blend Mix Calculator</h2>
+                    <p style="color:#9aa0b0;font-size:0.9rem;margin-bottom:1rem">Enter how much E85 and pump gas you are mixing to see the resulting ethanol content and octane.</p>
+                    <div class="calc-grid">
+                        <div class="input-group">
+                            <label for="mix-e85">Gallons of E85</label>
+                            <input type="number" id="mix-e85" min="0" step="0.5" value="5" oninput="calcMix()">
+                        </div>
+                        <div class="input-group">
+                            <label for="mix-pump">Gallons of Pump Gas</label>
+                            <input type="number" id="mix-pump" min="0" step="0.5" value="10" oninput="calcMix()">
+                        </div>
+                        <div class="input-group">
+                            <label for="mix-e85-content">E85 Ethanol Content (%)</label>
+                            <input type="number" id="mix-e85-content" min="51" max="83" step="1" value="70" oninput="calcMix()">
+                        </div>
+                        <div class="input-group">
+                            <label for="mix-pump-octane">Pump Gas Octane</label>
+                            <select id="mix-pump-octane" onchange="calcMix()">
+                                <option value="87">87 (Regular E10)</option>
+                                <option value="89">89 (Mid-Grade E10)</option>
+                                <option value="91">91 (Premium E10)</option>
+                                <option value="93" selected>93 (Premium E10)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="result-box" id="mix-results">
+                        <div class="result-row">
+                            <span class="result-label">Total Volume</span>
+                            <span class="result-value" id="mix-total">15.0 gal</span>
+                        </div>
+                        <div class="result-row">
+                            <span class="result-label">Ethanol Content</span>
+                            <span class="result-value" id="mix-ethanol">E30</span>
+                        </div>
+                        <div class="result-row">
+                            <span class="result-label">Ethanol Percentage</span>
+                            <span class="result-value" id="mix-ethanol-pct">30.0%</span>
+                        </div>
+                        <div class="result-row">
+                            <span class="result-label">Estimated Octane</span>
+                            <span class="result-value" id="mix-octane">~97</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Target Blend Calculator -->
+            <div class="calc-section">
+                <div class="card">
+                    <h2>Target Blend Calculator</h2>
+                    <p style="color:#9aa0b0;font-size:0.9rem;margin-bottom:1rem">Enter your target ethanol percentage and tank size to see how much E85 and pump gas you need.</p>
+                    <div class="calc-grid">
+                        <div class="input-group">
+                            <label for="target-ethanol">Target Ethanol %</label>
+                            <input type="number" id="target-ethanol" min="10" max="83" step="1" value="30" oninput="calcTarget()">
+                        </div>
+                        <div class="input-group">
+                            <label for="target-tank">Tank Size (gallons)</label>
+                            <input type="number" id="target-tank" min="1" max="50" step="0.5" value="15" oninput="calcTarget()">
+                        </div>
+                        <div class="input-group">
+                            <label for="target-e85-content">E85 Ethanol Content (%)</label>
+                            <input type="number" id="target-e85-content" min="51" max="83" step="1" value="70" oninput="calcTarget()">
+                        </div>
+                        <div class="input-group">
+                            <label for="target-pump-octane">Pump Gas Octane</label>
+                            <select id="target-pump-octane" onchange="calcTarget()">
+                                <option value="87">87 (Regular E10)</option>
+                                <option value="89">89 (Mid-Grade E10)</option>
+                                <option value="91">91 (Premium E10)</option>
+                                <option value="93" selected>93 (Premium E10)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="result-box" id="target-results">
+                        <div class="result-row">
+                            <span class="result-label">E85 Needed</span>
+                            <span class="result-value" id="target-e85-gal">5.0 gal</span>
+                        </div>
+                        <div class="result-row">
+                            <span class="result-label">Pump Gas Needed</span>
+                            <span class="result-value" id="target-pump-gal">10.0 gal</span>
+                        </div>
+                        <div class="result-row">
+                            <span class="result-label">Estimated Octane</span>
+                            <span class="result-value" id="target-octane">~97</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Reference Table -->
+            <div class="calc-section">
+                <div class="card">
+                    <h2>Quick Reference: E85 + 93 Octane Mixes (10 gal tank)</h2>
+                    <div style="overflow-x:auto">
+                        <table class="ref-table">
+                            <thead>
+                                <tr>
+                                    <th>E85</th>
+                                    <th>93 Oct</th>
+                                    <th>Ethanol %</th>
+                                    <th>Blend Name</th>
+                                    <th>Est. Octane</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>1 gal</td><td>9 gal</td><td>16%</td><td>E16</td><td>~94</td></tr>
+                                <tr><td>2 gal</td><td>8 gal</td><td>22%</td><td>E22</td><td>~95</td></tr>
+                                <tr><td>3 gal</td><td>7 gal</td><td>28%</td><td>E28</td><td>~97</td></tr>
+                                <tr><td>4 gal</td><td>6 gal</td><td>34%</td><td>E34</td><td>~98</td></tr>
+                                <tr><td>5 gal</td><td>5 gal</td><td>40%</td><td>E40</td><td>~99</td></tr>
+                                <tr><td>6 gal</td><td>4 gal</td><td>46%</td><td>E46</td><td>~101</td></tr>
+                                <tr><td>7 gal</td><td>3 gal</td><td>52%</td><td>E52</td><td>~102</td></tr>
+                                <tr><td>8 gal</td><td>2 gal</td><td>58%</td><td>E58</td><td>~103</td></tr>
+                                <tr><td>9 gal</td><td>1 gal</td><td>64%</td><td>E64</td><td>~104</td></tr>
+                                <tr><td>10 gal</td><td>0 gal</td><td>70%</td><td>E70</td><td>~105</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p style="color:#9aa0b0;font-size:0.8rem;margin-top:0.75rem">* Assumes E85 at 70% ethanol content and pump gas at 10% ethanol (E10). Octane values are estimates.</p>
+                </div>
+            </div>
+
+            <!-- Important Notes -->
+            <div class="note-box">
+                <h3>Important Notes for Performance Drivers</h3>
+                <ul>
+                    <li>E85 ethanol content varies by season (51-83%). Use an ethanol content tester for precision -- do not assume 70% without verifying.</li>
+                    <li>Higher ethanol requires more fuel due to lower energy density. Expect roughly 3-5% more fuel consumption per 10% increase in ethanol content.</li>
+                    <li>Ensure your vehicle is tuned for your target ethanol blend. Running high ethanol on a stock tune can cause dangerously lean air/fuel ratios.</li>
+                    <li>Flex-fuel vehicles (FFVs) can safely run any blend from E0 to E85. Non-flex vehicles must have a proper ECU calibration from a qualified tuner.</li>
+                    <li>Ethanol is more corrosive than gasoline. Verify that your fuel system components (lines, injectors, fuel pump, seals) are ethanol-compatible before running high blends.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- FAQ Section -->
+        <div class="faq-section">
+            <h2>Frequently Asked Questions</h2>
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    What is E85?
+                    <span class="faq-arrow">&#9660;</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        E85 is a fuel blend containing 51-83% ethanol mixed with gasoline. The exact ethanol percentage varies by season and region. In summer, E85 typically contains around 70-83% ethanol, while winter blends may drop to 51-70% to help with cold starting. E85 is sold at specially labeled pumps at participating gas stations and is generally cheaper per gallon than regular gasoline, though it contains about 27% less energy per gallon.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    Can I run E85 in my car?
+                    <span class="faq-arrow">&#9660;</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        Only flex-fuel vehicles (FFVs) can safely run pure E85 without modifications. FFVs have ethanol sensors and engine calibrations that automatically adjust for any ethanol blend from E0 to E85. Non-flex-fuel vehicles can potentially run lower ethanol blends (such as E15-E30) with a proper ECU tune from a qualified tuner. Running high ethanol content on a stock tune in a non-flex vehicle risks dangerously lean air/fuel ratios, misfires, and potential engine damage. Always consult a professional tuner before increasing your ethanol content.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    What octane is E85?
+                    <span class="faq-arrow">&#9660;</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        E85 has an effective octane rating of approximately 100-105, depending on the actual ethanol content in the blend. This high octane rating is one of the main reasons performance enthusiasts use E85 -- it allows for more aggressive ignition timing and higher boost pressures on turbocharged engines without risking detonation (knock). Even partial E85 blends, such as E30 or E40, significantly raise the octane rating above what premium pump gas offers.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    Does E85 make more power?
+                    <span class="faq-arrow">&#9660;</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        E85 itself does not inherently produce more power, but its high octane rating (100-105) and charge-cooling effect allow engines to be tuned more aggressively. With a proper ethanol tune, turbocharged vehicles commonly see 5-15% power gains compared to a 93 octane tune, thanks to more ignition advance and the ability to run higher boost safely. Naturally aspirated engines typically see smaller gains of 2-5%. The trade-off is that E85 has about 27% less energy per gallon than gasoline, so fuel consumption increases by roughly 25-30%.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    How do I know the ethanol content of E85 at the pump?
+                    <span class="faq-arrow">&#9660;</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        The only reliable way to know the exact ethanol content is to use an ethanol content tester (also called a fuel composition sensor). These devices cost around $30-100 and measure the ethanol percentage directly from a small fuel sample. The pump label "E85" only guarantees the fuel contains between 51-83% ethanol per ASTM D5798 specifications. Many performance drivers test every fill-up and log the results, since ethanol content directly affects their tune's air/fuel ratio targets. Some stations display the current ethanol percentage on the pump, but this is not universal and may not always be current.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2026 Automated Insights LLC. Data provided by the U.S. Department of Energy Alternative Fuels Station Locator.
+    </footer>
+
+    <script>
+        // State
+        var map, markersGroup, userMarker;
+        var userLat = null, userLng = null;
+        var currentRadius = 25;
+        var stations = [];
+
+        // Tab switching
+        function switchTab(tab) {
+            document.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('active'); });
+            document.querySelectorAll('.tab-content').forEach(function(c) { c.classList.remove('active'); });
+            document.querySelector('[data-tab="' + tab + '"]').classList.add('active');
+            document.getElementById('tab-' + tab).classList.add('active');
+            if (tab === 'finder' && map) {
+                setTimeout(function() { map.invalidateSize(); }, 100);
+            }
+        }
+
+        // Initialize map
+        function initMap() {
+            map = L.map('map').setView([39.8283, -98.5795], 4);
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>',
+                subdomains: 'abcd',
+                maxZoom: 19
+            }).addTo(map);
+            markersGroup = L.layerGroup().addTo(map);
+        }
+
+        // Custom marker icon
+        function stationIcon(isBlender) {
+            var color = isBlender ? '#4caf50' : '#6c63ff';
+            var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="40" viewBox="0 0 28 40">'
+                + '<path d="M14 0C6.268 0 0 6.268 0 14c0 10.5 14 26 14 26s14-15.5 14-26C28 6.268 21.732 0 14 0z" fill="' + color + '"/>'
+                + '<circle cx="14" cy="14" r="7" fill="#fff" opacity="0.9"/>'
+                + '<text x="14" y="18" text-anchor="middle" font-size="10" font-weight="bold" fill="' + color + '">E</text>'
+                + '</svg>';
+            return L.icon({
+                iconUrl: 'data:image/svg+xml;base64,' + btoa(svg),
+                iconSize: [28, 40],
+                iconAnchor: [14, 40],
+                popupAnchor: [0, -40]
+            });
+        }
+
+        function userIcon() {
+            var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">'
+                + '<circle cx="10" cy="10" r="8" fill="#6c63ff" stroke="#fff" stroke-width="3"/>'
+                + '</svg>';
+            return L.icon({
+                iconUrl: 'data:image/svg+xml;base64,' + btoa(svg),
+                iconSize: [20, 20],
+                iconAnchor: [10, 10]
+            });
+        }
+
+        // Radius slider
+        function updateRadius(val) {
+            currentRadius = parseInt(val);
+            document.getElementById('radius-display').textContent = val + ' mi';
+            if (userLat !== null && userLng !== null) {
+                fetchStations(userLat, userLng);
+            }
+        }
+
+        // Geolocation
+        function useMyLocation() {
+            if (!navigator.geolocation) {
+                showError('Geolocation is not supported by your browser.');
+                return;
+            }
+            showLoading();
+            navigator.geolocation.getCurrentPosition(function(pos) {
+                userLat = pos.coords.latitude;
+                userLng = pos.coords.longitude;
+                fetchStations(userLat, userLng);
+            }, function(err) {
+                var msg = 'Unable to get your location. ';
+                if (err.code === 1) {
+                    msg += 'Location permission was denied. Try searching by city or zip code instead.';
+                } else if (err.code === 2) {
+                    msg += 'Location unavailable. Try searching by city or zip code.';
+                } else {
+                    msg += 'Request timed out. Try searching by city or zip code.';
+                }
+                showError(msg);
+            }, { enableHighAccuracy: false, timeout: 10000 });
+        }
+
+        // Location search via Nominatim
+        function searchLocation() {
+            var query = document.getElementById('location-input').value.trim();
+            if (!query) { return; }
+            showLoading();
+            fetch('https://nominatim.openstreetmap.org/search?format=json&q=' + encodeURIComponent(query) + '&limit=1&countrycodes=us')
+                .then(function(r) { return r.json(); })
+                .then(function(data) {
+                    if (data.length === 0) {
+                        showError('Location not found. Try a different city, zip code, or address.');
+                        return;
+                    }
+                    userLat = parseFloat(data[0].lat);
+                    userLng = parseFloat(data[0].lon);
+                    fetchStations(userLat, userLng);
+                })
+                .catch(function() {
+                    showError('Failed to search location. Check your connection and try again.');
+                });
+        }
+
+        // Enter key in search
+        document.getElementById('location-input').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') { searchLocation(); }
+        });
+
+        // Fetch stations from NREL AFDC API
+        function fetchStations(lat, lng) {
+            showLoading();
+            var url = 'https://developer.nrel.gov/api/alt-fuel-stations/v1.json'
+                + '?api_key=DEMO_KEY'
+                + '&fuel_type=E85'
+                + '&latitude=' + lat
+                + '&longitude=' + lng
+                + '&radius=' + currentRadius
+                + '&limit=20'
+                + '&status=E'
+                + '&access=public';
+
+            fetch(url)
+                .then(function(r) {
+                    if (!r.ok) { throw new Error('API returned status ' + r.status); }
+                    return r.json();
+                })
+                .then(function(data) {
+                    stations = data.fuel_stations || [];
+                    // Calculate distance for each
+                    stations.forEach(function(s) {
+                        s._distance = haversine(lat, lng, s.latitude, s.longitude);
+                    });
+                    stations.sort(function(a, b) { return a._distance - b._distance; });
+                    renderMap(lat, lng, stations);
+                    renderStationList(stations);
+                })
+                .catch(function(err) {
+                    showError('Failed to fetch station data. The API may be temporarily unavailable. Error: ' + err.message);
+                });
+        }
+
+        // Haversine distance in miles
+        function haversine(lat1, lon1, lat2, lon2) {
+            var R = 3959;
+            var dLat = (lat2 - lat1) * Math.PI / 180;
+            var dLon = (lon2 - lon1) * Math.PI / 180;
+            var a = Math.sin(dLat / 2) * Math.sin(dLat / 2)
+                + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180)
+                * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            return R * c;
+        }
+
+        // Render map markers
+        function renderMap(lat, lng, stationList) {
+            markersGroup.clearLayers();
+            if (userMarker) { map.removeLayer(userMarker); }
+
+            userMarker = L.marker([lat, lng], { icon: userIcon() }).addTo(map);
+            userMarker.bindPopup('<strong>Your Location</strong>');
+
+            stationList.forEach(function(s) {
+                var isBlender = s.e85_blender_pump === true;
+                var marker = L.marker([s.latitude, s.longitude], { icon: stationIcon(isBlender) });
+                var popup = '<div style="font-family:-apple-system,BlinkMacSystemFont,\'Segoe UI\',Roboto,sans-serif;min-width:180px">'
+                    + '<strong style="font-size:0.95rem">' + escHtml(s.station_name) + '</strong><br>'
+                    + '<span style="color:#666;font-size:0.85rem">' + escHtml(s.street_address) + '<br>'
+                    + escHtml(s.city) + ', ' + escHtml(s.state) + ' ' + escHtml(s.zip) + '</span><br>';
+                if (s.phone) {
+                    popup += '<span style="font-size:0.85rem">Phone: ' + escHtml(s.phone) + '</span><br>';
+                }
+                if (s.access_days_time) {
+                    popup += '<span style="font-size:0.85rem">Hours: ' + escHtml(s.access_days_time) + '</span><br>';
+                }
+                if (isBlender) {
+                    popup += '<span style="color:#4caf50;font-weight:600;font-size:0.85rem">Blender Pump Available</span><br>';
+                }
+                popup += '<a href="https://www.google.com/maps/dir/?api=1&destination='
+                    + s.latitude + ',' + s.longitude
+                    + '" target="_blank" rel="noopener" style="color:#6c63ff;font-size:0.85rem;font-weight:600">Get Directions</a>';
+                popup += '</div>';
+                marker.bindPopup(popup);
+                markersGroup.addLayer(marker);
+            });
+
+            if (stationList.length > 0) {
+                var allPoints = [[lat, lng]];
+                stationList.forEach(function(s) { allPoints.push([s.latitude, s.longitude]); });
+                map.fitBounds(allPoints, { padding: [40, 40] });
+            } else {
+                map.setView([lat, lng], 10);
+            }
+        }
+
+        // Render station list
+        function renderStationList(stationList) {
+            var container = document.getElementById('station-results');
+            if (stationList.length === 0) {
+                container.innerHTML = '<div class="error-msg">No E85 stations found within ' + currentRadius + ' miles. Try increasing the search radius.</div>';
+                return;
+            }
+
+            var html = '<p class="count-info">Found <strong>' + stationList.length + '</strong> E85 station'
+                + (stationList.length !== 1 ? 's' : '') + ' within ' + currentRadius + ' miles</p>'
+                + '<div class="station-list">';
+
+            stationList.forEach(function(s) {
+                var isBlender = s.e85_blender_pump === true;
+                html += '<div class="station-card">'
+                    + '<div class="station-info">'
+                    + '<div class="station-name">' + escHtml(s.station_name) + '</div>'
+                    + '<div class="station-address">' + escHtml(s.street_address) + ', ' + escHtml(s.city) + ', ' + escHtml(s.state) + ' ' + escHtml(s.zip) + '</div>'
+                    + '<div class="station-meta">';
+                if (s.phone) {
+                    html += '<span>Phone: ' + escHtml(s.phone) + '</span>';
+                }
+                if (s.access_days_time) {
+                    html += '<span>Hours: ' + escHtml(s.access_days_time) + '</span>';
+                }
+                if (isBlender) {
+                    html += '<span class="badge badge-green">Blender Pump</span>';
+                }
+                html += '<span class="badge">E85</span>';
+                html += '</div></div>'
+                    + '<div class="station-actions">'
+                    + '<span class="distance-badge">' + s._distance.toFixed(1) + ' mi</span>'
+                    + '<a class="directions-link" href="https://www.google.com/maps/dir/?api=1&destination='
+                    + s.latitude + ',' + s.longitude
+                    + '" target="_blank" rel="noopener">Get Directions &rarr;</a>'
+                    + '</div></div>';
+            });
+
+            html += '</div>';
+            container.innerHTML = html;
+        }
+
+        // Utilities
+        function escHtml(str) {
+            if (!str) { return ''; }
+            var div = document.createElement('div');
+            div.appendChild(document.createTextNode(str));
+            return div.innerHTML;
+        }
+
+        function showLoading() {
+            document.getElementById('station-results').innerHTML =
+                '<div class="loading"><div class="loading-spinner"></div><p>Searching for E85 stations...</p></div>';
+        }
+
+        function showError(msg) {
+            document.getElementById('station-results').innerHTML =
+                '<div class="error-msg">' + escHtml(msg) + '</div>';
+        }
+
+        // Blend Calculator
+        function calcMix() {
+            var e85Gal = parseFloat(document.getElementById('mix-e85').value) || 0;
+            var pumpGal = parseFloat(document.getElementById('mix-pump').value) || 0;
+            var e85Content = parseFloat(document.getElementById('mix-e85-content').value) || 70;
+            var pumpOctane = parseInt(document.getElementById('mix-pump-octane').value);
+
+            var total = e85Gal + pumpGal;
+            if (total <= 0) {
+                document.getElementById('mix-total').textContent = '0 gal';
+                document.getElementById('mix-ethanol').textContent = 'E0';
+                document.getElementById('mix-ethanol-pct').textContent = '0%';
+                document.getElementById('mix-octane').textContent = '--';
+                return;
+            }
+
+            var pumpEthanol = 10; // E10
+            var ethanolTotal = (e85Gal * e85Content + pumpGal * pumpEthanol) / total;
+
+            // Octane estimation: ethanol octane ~113, gasoline portion octane based on pump selection
+            // For the gasoline portion of the mix (non-ethanol), use pump octane as base
+            // Pure ethanol octane contribution ~113
+            var e85Octane = (e85Content / 100) * 113 + ((100 - e85Content) / 100) * 84;
+            var pumpOctaneEff = pumpOctane;
+            var blendOctane = (e85Gal * e85Octane + pumpGal * pumpOctaneEff) / total;
+
+            document.getElementById('mix-total').textContent = total.toFixed(1) + ' gal';
+            document.getElementById('mix-ethanol').textContent = 'E' + Math.round(ethanolTotal);
+            document.getElementById('mix-ethanol-pct').textContent = ethanolTotal.toFixed(1) + '%';
+            document.getElementById('mix-octane').textContent = '~' + Math.round(blendOctane);
+        }
+
+        function calcTarget() {
+            var targetEth = parseFloat(document.getElementById('target-ethanol').value) || 0;
+            var tankSize = parseFloat(document.getElementById('target-tank').value) || 0;
+            var e85Content = parseFloat(document.getElementById('target-e85-content').value) || 70;
+            var pumpOctane = parseInt(document.getElementById('target-pump-octane').value);
+
+            var pumpEthanol = 10;
+
+            // Solve: (e85Gal * e85Content + pumpGal * pumpEthanol) / tankSize = targetEth
+            // e85Gal + pumpGal = tankSize
+            // e85Gal * e85Content + (tankSize - e85Gal) * pumpEthanol = targetEth * tankSize
+            // e85Gal * (e85Content - pumpEthanol) = targetEth * tankSize - pumpEthanol * tankSize
+            var e85Gal = (targetEth - pumpEthanol) * tankSize / (e85Content - pumpEthanol);
+            var pumpGal = tankSize - e85Gal;
+
+            if (e85Gal < 0) { e85Gal = 0; pumpGal = tankSize; }
+            if (pumpGal < 0) { pumpGal = 0; e85Gal = tankSize; }
+
+            // Octane calc
+            var e85Octane = (e85Content / 100) * 113 + ((100 - e85Content) / 100) * 84;
+            var blendOctane = tankSize > 0 ? (e85Gal * e85Octane + pumpGal * pumpOctane) / tankSize : 0;
+
+            document.getElementById('target-e85-gal').textContent = e85Gal.toFixed(1) + ' gal';
+            document.getElementById('target-pump-gal').textContent = pumpGal.toFixed(1) + ' gal';
+            document.getElementById('target-octane').textContent = '~' + Math.round(blendOctane);
+        }
+
+        // FAQ toggle
+        function toggleFaq(btn) {
+            var item = btn.parentElement;
+            item.classList.toggle('open');
+        }
+
+        // Initialize
+        initMap();
+        calcMix();
+        calcTarget();
+
+        // Auto-request geolocation on load
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(pos) {
+                userLat = pos.coords.latitude;
+                userLng = pos.coords.longitude;
+                fetchStations(userLat, userLng);
+            }, function() {
+                // Silent fail -- user can manually search
+            }, { enableHighAccuracy: false, timeout: 10000 });
+        }
+    </script>
+</body>
+</html>
