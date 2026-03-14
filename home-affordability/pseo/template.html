@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{TITLE}} - Home Affordability Calculator</title>
+  <meta name="description" content="{{DESCRIPTION}}">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="canonical" href="{{CANONICAL}}">
+  <meta property="og:title" content="{{TITLE}} - Home Affordability Calculator">
+  <meta property="og:description" content="{{DESCRIPTION}}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{CANONICAL}}">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How much house can I afford making {{INCOME_FORMATTED}} a year?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Making {{INCOME_FORMATTED}} a year with {{MONTHLY_DEBT}} in monthly debt, you can afford a home up to {{MAX_PRICE_FORMATTED}}. This is based on the 28/36 rule with a 30-year mortgage at 7% interest, 20% down payment, 1.2% property tax, and $1,200/year homeowners insurance."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the 28/36 rule for home affordability?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The 28/36 rule states that your monthly housing costs should not exceed 28% of your gross monthly income (front-end ratio), and your total monthly debt payments should not exceed 36% of your gross monthly income (back-end ratio). Lenders use whichever limit is more restrictive."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the maximum monthly housing payment on a {{INCOME_FORMATTED}} salary?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "On a {{INCOME_FORMATTED}} salary, your maximum monthly housing payment under the 28% front-end rule is {{MAX_MONTHLY}}. If you have existing debt, the 36% back-end rule may reduce this amount further."
+        }
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://automated-insights.com/"},
+      {"@type": "ListItem", "position": 2, "name": "Home Affordability Calculator", "item": "https://automated-insights.com/home-affordability/"},
+      {"@type": "ListItem", "position": 3, "name": "{{TITLE}}"}
+    ]
+  }
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3434609691579834" crossorigin="anonymous"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: #0f1117;
+      color: #e8eaed;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    /* Breadcrumb */
+    .breadcrumb {
+      padding: 1rem 0 0;
+      font-size: 0.82rem;
+      color: #9aa0b0;
+    }
+    .breadcrumb a {
+      color: #9aa0b0;
+      text-decoration: none;
+    }
+    .breadcrumb a:hover {
+      color: #6c63ff;
+    }
+    .breadcrumb .sep {
+      margin: 0 0.4rem;
+      opacity: 0.5;
+    }
+
+    /* Hero answer */
+    .hero {
+      text-align: center;
+      padding: 2.5rem 1rem 2rem;
+    }
+    .hero h1 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #c4c8d4;
+      margin-bottom: 1.25rem;
+    }
+    .answer-box {
+      background: #1a1d27;
+      border: 2px solid #6c63ff;
+      border-radius: 12px;
+      padding: 2rem 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+    .answer-label {
+      display: block;
+      font-size: 0.85rem;
+      color: #9aa0b0;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.5rem;
+    }
+    .answer-value {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #6c63ff;
+      line-height: 1.2;
+    }
+    .answer-sub {
+      font-size: 0.9rem;
+      color: #9aa0b0;
+      margin-top: 0.75rem;
+    }
+
+    /* Assumptions */
+    .assumptions {
+      background: #1a1d27;
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .assumptions h2 {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #9aa0b0;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.75rem;
+    }
+    .assumptions-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem 1.5rem;
+    }
+    .assumption-item {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.88rem;
+    }
+    .assumption-item .label {
+      color: #9aa0b0;
+    }
+    .assumption-item .value {
+      color: #e8eaed;
+      font-weight: 500;
+    }
+
+    /* Breakdown */
+    .breakdown {
+      background: #1a1d27;
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .breakdown h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #c4c8d4;
+      margin-bottom: 1rem;
+    }
+    .steps {
+      font-size: 0.95rem;
+      color: #e8eaed;
+    }
+    .steps .step {
+      padding: 0.5rem 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      border-bottom: 1px solid #252836;
+    }
+    .steps .step:last-child {
+      border-bottom: none;
+    }
+    .steps .step-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.6rem;
+      height: 1.6rem;
+      border-radius: 50%;
+      background: #2e3345;
+      color: #6c63ff;
+      font-size: 0.78rem;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+    }
+    .steps code {
+      background: #252836;
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      font-family: "SF Mono", Monaco, Consolas, monospace;
+      font-size: 0.9rem;
+      color: #e8eaed;
+    }
+    .steps .highlight {
+      color: #6c63ff;
+      font-weight: 600;
+    }
+
+    /* Debt impact */
+    .debt-impact {
+      background: #1a1d27;
+      border: 1px solid #2e3345;
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .debt-impact h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #c4c8d4;
+      margin-bottom: 0.75rem;
+    }
+    .debt-impact p {
+      font-size: 0.9rem;
+      color: #9aa0b0;
+      line-height: 1.6;
+    }
+    .debt-impact .impact-highlight {
+      color: #ff6b6b;
+      font-weight: 600;
+    }
+
+    /* Quick table */
+    .quick-table {
+      margin-bottom: 1.5rem;
+    }
+    .quick-table h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #c4c8d4;
+      margin-bottom: 0.75rem;
+    }
+    .quick-table table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    .quick-table th {
+      text-align: left;
+      padding: 0.6rem 0.75rem;
+      background: #1a1d27;
+      color: #9aa0b0;
+      font-weight: 600;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      border-bottom: 2px solid #2e3345;
+    }
+    .quick-table td {
+      padding: 0.55rem 0.75rem;
+      border-bottom: 1px solid #252836;
+    }
+    .quick-table tr:hover td {
+      background: #1a1d27;
+    }
+    .quick-table .current-row td {
+      background: rgba(108, 99, 255, 0.08);
+      font-weight: 600;
+    }
+    .quick-table a {
+      color: #6c63ff;
+      text-decoration: none;
+    }
+    .quick-table a:hover {
+      text-decoration: underline;
+    }
+
+    /* Related calculations */
+    .related {
+      margin-bottom: 1.5rem;
+    }
+    .related h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #c4c8d4;
+      margin-bottom: 0.75rem;
+    }
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 0.5rem;
+    }
+    .related-grid a {
+      display: block;
+      padding: 0.6rem 0.85rem;
+      background: #1a1d27;
+      border: 1px solid #2e3345;
+      border-radius: 8px;
+      color: #e8eaed;
+      text-decoration: none;
+      font-size: 0.88rem;
+      transition: border-color 0.15s;
+    }
+    .related-grid a:hover {
+      border-color: #6c63ff;
+    }
+    .related-grid a .related-result {
+      color: #6c63ff;
+      font-weight: 600;
+    }
+
+    /* CTA */
+    .cta {
+      text-align: center;
+      padding: 2rem 1rem;
+      background: #1a1d27;
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+    }
+    .cta p {
+      color: #9aa0b0;
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+    .cta a {
+      display: inline-block;
+      padding: 0.7rem 1.8rem;
+      background: #6c63ff;
+      color: #fff;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background 0.15s;
+    }
+    .cta a:hover {
+      background: #5a52e0;
+    }
+
+    /* More tools */
+    .more-tools {
+      padding: 1.5rem 0;
+      border-top: 1px solid #2e3345;
+    }
+    .more-tools p {
+      font-size: 0.82rem;
+      color: #9aa0b0;
+      margin-bottom: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .tools-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .tools-row a {
+      display: inline-block;
+      padding: 0.4rem 0.85rem;
+      background: #1a1d27;
+      border: 1px solid #2e3345;
+      border-radius: 6px;
+      color: #e8eaed;
+      font-size: 0.82rem;
+      text-decoration: none;
+    }
+    .tools-row a:hover {
+      border-color: #6c63ff;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem 0;
+      color: #666b7a;
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 1.15rem; }
+      .answer-value { font-size: 2.2rem; }
+      .assumptions-grid { grid-template-columns: 1fr; }
+      .related-grid { grid-template-columns: 1fr 1fr; }
+      .quick-table { overflow-x: auto; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a><span class="sep">&rsaquo;</span>
+      <a href="/home-affordability/">Home Affordability Calculator</a><span class="sep">&rsaquo;</span>
+      <span>How Much House Making {{INCOME_FORMATTED}}</span>
+    </nav>
+
+    <div class="hero">
+      <h1>How Much House Can I Afford Making {{INCOME_FORMATTED}} a Year?</h1>
+      <div class="answer-box">
+        <span class="answer-label">Max Home Price</span>
+        <span class="answer-value">{{MAX_PRICE_FORMATTED}}</span>
+      </div>
+      <p class="answer-sub">Based on the 28/36 rule -- {{INCOME_FORMATTED}}/year income, {{MONTHLY_DEBT}}/month existing debt, 30-year mortgage at 7%</p>
+    </div>
+
+    <div class="assumptions">
+      <h2>Assumptions</h2>
+      <div class="assumptions-grid">
+        <div class="assumption-item">
+          <span class="label">Annual income</span>
+          <span class="value">{{INCOME_FORMATTED}}</span>
+        </div>
+        <div class="assumption-item">
+          <span class="label">Monthly debt</span>
+          <span class="value">{{MONTHLY_DEBT}}</span>
+        </div>
+        <div class="assumption-item">
+          <span class="label">Mortgage rate</span>
+          <span class="value">7.0% (30-yr fixed)</span>
+        </div>
+        <div class="assumption-item">
+          <span class="label">Down payment</span>
+          <span class="value">20%</span>
+        </div>
+        <div class="assumption-item">
+          <span class="label">Property tax</span>
+          <span class="value">1.2%/year</span>
+        </div>
+        <div class="assumption-item">
+          <span class="label">Insurance</span>
+          <span class="value">$1,200/year</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="breakdown">
+      <h2>How We Calculated This</h2>
+      <div class="steps">
+        <div class="step">
+          <span class="step-num">1</span>
+          <span>Gross monthly income: <code>{{INCOME_FORMATTED}} / 12 = {{GROSS_MONTHLY}}</code></span>
+        </div>
+        <div class="step">
+          <span class="step-num">2</span>
+          <span>Max housing payment (28% rule): <code>{{GROSS_MONTHLY}} x 0.28 = {{FRONT_END_MAX}}</code></span>
+        </div>
+        <div class="step">
+          <span class="step-num">3</span>
+          <span>Max total debt payment (36% rule): <code>{{GROSS_MONTHLY}} x 0.36 = {{BACK_END_MAX}}</code></span>
+        </div>
+        <div class="step">
+          <span class="step-num">4</span>
+          <span>Max housing after debt: <code>{{BACK_END_MAX}} - {{MONTHLY_DEBT}} = {{BACK_END_HOUSING}}</code></span>
+        </div>
+        <div class="step">
+          <span class="step-num">5</span>
+          <span>Effective max housing payment: <code>min({{FRONT_END_MAX}}, {{BACK_END_HOUSING}}) = <span class="highlight">{{MAX_MONTHLY}}</span></code></span>
+        </div>
+        <div class="step">
+          <span class="step-num">6</span>
+          <span>Subtract taxes and insurance: <code>{{MAX_MONTHLY}} - {{MONTHLY_TAX_INS}} = {{MAX_PI}}</code> for principal + interest</span>
+        </div>
+        <div class="step">
+          <span class="step-num">7</span>
+          <span>Max loan amount at 7% for 30 years: <code class="highlight">{{MAX_LOAN}}</code></span>
+        </div>
+        <div class="step">
+          <span class="step-num">8</span>
+          <span>Add 20% down payment: <code>{{MAX_LOAN}} / 0.80 = <span class="highlight">{{MAX_PRICE_FORMATTED}}</span></code></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="debt-impact">
+      <h2>How Debt Affects Your Home Buying Power</h2>
+      <p>
+        The 28/36 rule has two parts. The <strong>front-end ratio</strong> (28%) limits your housing payment
+        alone. The <strong>back-end ratio</strong> (36%) limits your total debt -- housing plus car loans,
+        student loans, credit cards, and other monthly obligations. With {{MONTHLY_DEBT}}/month in existing
+        debt on a {{INCOME_FORMATTED}} salary, your effective housing budget is
+        <span class="highlight">{{MAX_MONTHLY}}/month</span>, which supports a max home price of
+        <span class="highlight">{{MAX_PRICE_FORMATTED}}</span>.
+      </p>
+    </div>
+
+    <div class="quick-table">
+      <h2>Affordability at Different Income Levels</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Annual Income</th>
+            <th>Max Home Price (no debt)</th>
+            <th>Max Home Price ($500/mo debt)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><a href="/home-affordability/afford-house-40k">$40,000</a></td>
+            <td>$107,800</td>
+            <td><a href="/home-affordability/afford-house-40k-500debt">$13,300</a></td>
+          </tr>
+          <tr>
+            <td><a href="/home-affordability/afford-house-50k">$50,000</a></td>
+            <td>$151,000</td>
+            <td><a href="/home-affordability/afford-house-50k-500debt">$56,500</a></td>
+          </tr>
+          <tr>
+            <td><a href="/home-affordability/afford-house-60k">$60,000</a></td>
+            <td>$194,200</td>
+            <td><a href="/home-affordability/afford-house-60k-500debt">$99,700</a></td>
+          </tr>
+          <tr>
+            <td><a href="/home-affordability/afford-house-75k">$75,000</a></td>
+            <td>$259,000</td>
+            <td><a href="/home-affordability/afford-house-75k-500debt">$164,500</a></td>
+          </tr>
+          <tr>
+            <td><a href="/home-affordability/afford-house-80k">$80,000</a></td>
+            <td>$280,500</td>
+            <td><a href="/home-affordability/afford-house-80k-500debt">$186,100</a></td>
+          </tr>
+          <tr>
+            <td><a href="/home-affordability/afford-house-100k">$100,000</a></td>
+            <td>$366,900</td>
+            <td><a href="/home-affordability/afford-house-100k-500debt">$272,400</a></td>
+          </tr>
+          <tr>
+            <td><a href="/home-affordability/afford-house-120k">$120,000</a></td>
+            <td>$453,300</td>
+            <td><a href="/home-affordability/afford-house-120k-500debt">$358,800</a></td>
+          </tr>
+          <tr>
+            <td><a href="/home-affordability/afford-house-150k">$150,000</a></td>
+            <td>$583,000</td>
+            <td><a href="/home-affordability/afford-house-150k-500debt">$488,600</a></td>
+          </tr>
+          <tr>
+            <td><a href="/home-affordability/afford-house-200k">$200,000</a></td>
+            <td>$799,200</td>
+            <td><a href="/home-affordability/afford-house-200k-500debt">$704,700</a></td>
+          </tr>
+          <tr>
+            <td><a href="/home-affordability/afford-house-300k">$300,000</a></td>
+            <td>$1,231,500</td>
+            <td><a href="/home-affordability/afford-house-300k-500debt">$1,137,000</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="related">
+      <h2>Related Calculations</h2>
+      <div class="related-grid">
+        {{RELATED_LINKS}}
+      </div>
+    </div>
+
+    <div class="cta">
+      <p>Want to customize the interest rate, down payment, or other assumptions? Try the full calculator.</p>
+      <a href="/home-affordability/">Open Home Affordability Calculator</a>
+    </div>
+
+    <div class="more-tools">
+      <p>More Free Tools</p>
+      <div class="tools-row">
+        <a href="/">All Tools</a>
+        <a href="/mortgage-calc/">Mortgage Calculator</a>
+        <a href="/auto-loan-calc/">Auto Loan Calculator</a>
+        <a href="/compound-interest/">Compound Interest</a>
+        <a href="/percentage-calc/">Percentage Calculator</a>
+      </div>
+    </div>
+
+    <footer>
+      <p>&copy; 2026 Automated Insights LLC</p>
+    </footer>
+  </div>
+</body>
+</html>

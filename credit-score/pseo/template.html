@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{TITLE}} - Credit Score Guide</title>
+  <meta name="description" content="{{DESCRIPTION}}">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="canonical" href="{{CANONICAL}}">
+  <meta property="og:title" content="{{TITLE}} - Credit Score Guide">
+  <meta property="og:description" content="{{DESCRIPTION}}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{CANONICAL}}">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is {{SCORE}} a good credit score?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A credit score of {{SCORE}} is rated {{RATING}}. This falls within the {{RATING}} range on the FICO scale (300-850)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What APR can I get with a {{SCORE}} credit score?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "With a {{SCORE}} credit score, typical APRs are: Mortgage {{MORTGAGE_APR}}, Auto Loan {{AUTO_APR}}, Credit Card {{CARD_APR}}."
+        }
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://automated-insights.com/"},
+      {"@type": "ListItem", "position": 2, "name": "Credit Score Guide", "item": "https://automated-insights.com/credit-score/"},
+      {"@type": "ListItem", "position": 3, "name": "Is {{SCORE}} a Good Credit Score?"}
+    ]
+  }
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3434609691579834" crossorigin="anonymous"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: #0f1117;
+      color: #e8eaed;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    /* Breadcrumb */
+    .breadcrumb {
+      padding: 1rem 0 0;
+      font-size: 0.82rem;
+      color: #9aa0b0;
+    }
+    .breadcrumb a {
+      color: #9aa0b0;
+      text-decoration: none;
+    }
+    .breadcrumb a:hover {
+      color: #6c63ff;
+    }
+    .breadcrumb .sep {
+      margin: 0 0.4rem;
+      opacity: 0.5;
+    }
+
+    /* Hero answer */
+    .hero {
+      text-align: center;
+      padding: 2.5rem 1rem 2rem;
+    }
+    .hero h1 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #c4c8d4;
+      margin-bottom: 1.25rem;
+    }
+    .answer-box {
+      background: #1a1d27;
+      border: 2px solid {{COLOR}};
+      border-radius: 12px;
+      padding: 2rem 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+    .answer-label {
+      display: block;
+      font-size: 0.85rem;
+      color: #9aa0b0;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.5rem;
+    }
+    .answer-value {
+      font-size: 3rem;
+      font-weight: 700;
+      color: {{COLOR}};
+      line-height: 1.2;
+    }
+    .answer-rating {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: {{COLOR}};
+      margin-top: 0.25rem;
+    }
+
+    /* Gauge */
+    .gauge-container {
+      position: relative;
+      margin: 1rem 0 1.5rem;
+      padding: 0 0.5rem;
+    }
+    .gauge-bar {
+      height: 18px;
+      border-radius: 9px;
+      background: linear-gradient(to right, #e74c3c 0%, #e74c3c 18%, #e67e22 18%, #e67e22 34%, #f1c40f 34%, #f1c40f 52%, #2ecc71 52%, #2ecc71 73%, #27ae60 73%, #27ae60 100%);
+      position: relative;
+    }
+    .gauge-marker {
+      position: absolute;
+      top: -6px;
+      width: 4px;
+      height: 30px;
+      background: #fff;
+      border-radius: 2px;
+      transform: translateX(-50%);
+      box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+    }
+    .gauge-labels {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 0.4rem;
+      font-size: 0.7rem;
+      color: #666b7a;
+    }
+
+    /* Content card */
+    .card {
+      background: #1a1d27;
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .card h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #c4c8d4;
+      margin-bottom: 1rem;
+    }
+    .card p {
+      font-size: 0.9rem;
+      color: #9aa0b0;
+      line-height: 1.6;
+      margin-bottom: 0.75rem;
+    }
+    .card p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* APR table */
+    .apr-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .apr-table th,
+    .apr-table td {
+      padding: 0.6rem 0.75rem;
+      text-align: left;
+      border-bottom: 1px solid #2e3345;
+      font-size: 0.9rem;
+    }
+    .apr-table th {
+      color: #9aa0b0;
+      font-weight: 600;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .apr-table td:last-child {
+      color: #6c63ff;
+      font-weight: 600;
+      text-align: right;
+    }
+    .apr-table th:last-child {
+      text-align: right;
+    }
+    .apr-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* Tips list */
+    .tips-list {
+      list-style: none;
+      padding: 0;
+    }
+    .tips-list li {
+      padding: 0.5rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      font-size: 0.9rem;
+      color: #e8eaed;
+      border-bottom: 1px solid #252836;
+    }
+    .tips-list li:last-child {
+      border-bottom: none;
+    }
+    .tips-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.85rem;
+      width: 6px;
+      height: 6px;
+      background: #6c63ff;
+      border-radius: 50%;
+    }
+
+    /* FICO ranges */
+    .ranges-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .ranges-table th,
+    .ranges-table td {
+      padding: 0.5rem 0.75rem;
+      text-align: left;
+      border-bottom: 1px solid #2e3345;
+      font-size: 0.85rem;
+    }
+    .ranges-table th {
+      color: #9aa0b0;
+      font-weight: 600;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .ranges-table tr:last-child td {
+      border-bottom: none;
+    }
+    .ranges-table .range-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin-right: 0.5rem;
+      vertical-align: middle;
+    }
+    .ranges-table .active-row {
+      background: #252836;
+    }
+
+    /* Related calculations */
+    .related {
+      margin-bottom: 1.5rem;
+    }
+    .related h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #c4c8d4;
+      margin-bottom: 0.75rem;
+    }
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 0.5rem;
+    }
+    .related-grid a {
+      display: block;
+      padding: 0.6rem 0.85rem;
+      background: #1a1d27;
+      border: 1px solid #2e3345;
+      border-radius: 8px;
+      color: #e8eaed;
+      text-decoration: none;
+      font-size: 0.88rem;
+      transition: border-color 0.15s;
+    }
+    .related-grid a:hover {
+      border-color: #6c63ff;
+    }
+    .related-grid a .related-result {
+      color: #6c63ff;
+      font-weight: 600;
+    }
+
+    /* CTA */
+    .cta {
+      text-align: center;
+      padding: 2rem 1rem;
+      background: #1a1d27;
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+    }
+    .cta p {
+      color: #9aa0b0;
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+    .cta a {
+      display: inline-block;
+      padding: 0.7rem 1.8rem;
+      background: #6c63ff;
+      color: #fff;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background 0.15s;
+    }
+    .cta a:hover {
+      background: #5a52e0;
+    }
+
+    /* More tools */
+    .more-tools {
+      padding: 1.5rem 0;
+      border-top: 1px solid #2e3345;
+    }
+    .more-tools p {
+      font-size: 0.82rem;
+      color: #9aa0b0;
+      margin-bottom: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .tools-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .tools-row a {
+      display: inline-block;
+      padding: 0.4rem 0.85rem;
+      background: #1a1d27;
+      border: 1px solid #2e3345;
+      border-radius: 6px;
+      color: #e8eaed;
+      font-size: 0.82rem;
+      text-decoration: none;
+    }
+    .tools-row a:hover {
+      border-color: #6c63ff;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem 0;
+      color: #666b7a;
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 1.15rem; }
+      .answer-value { font-size: 2.2rem; }
+      .related-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <nav style="padding:1rem 1.5rem;border-bottom:1px solid #2e3345;display:flex;align-items:center;gap:1.5rem">
+    <a href="/" style="color:#6c63ff;font-weight:700;font-size:1.05rem;text-decoration:none">Automated Insights</a>
+    <a href="/" style="color:#9aa0b0;font-size:0.95rem;text-decoration:none">Tools</a>
+    <a href="/blog/" style="color:#9aa0b0;font-size:0.95rem;text-decoration:none">Blog</a>
+  </nav>
+
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a><span class="sep">&rsaquo;</span>
+      <a href="/credit-score/">Credit Score Guide</a><span class="sep">&rsaquo;</span>
+      <span>Is {{SCORE}} a Good Credit Score?</span>
+    </nav>
+
+    <div class="hero">
+      <h1>Is {{SCORE}} a Good Credit Score?</h1>
+      <div class="answer-box">
+        <span class="answer-label">Credit Rating</span>
+        <span class="answer-value">{{SCORE}}</span>
+        <div class="answer-rating">{{RATING}}</div>
+      </div>
+
+      <div class="gauge-container">
+        <div class="gauge-bar">
+          <div class="gauge-marker" id="gaugeMarker"></div>
+        </div>
+        <div class="gauge-labels">
+          <span>300</span>
+          <span>580</span>
+          <span>670</span>
+          <span>740</span>
+          <span>800</span>
+          <span>850</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- What this score means -->
+    <div class="card">
+      <h2>What a {{SCORE}} Credit Score Means</h2>
+      <p>A credit score of {{SCORE}} is considered <strong style="color:{{COLOR}}">{{RATING_LOWER}}</strong> on the FICO scoring model, which ranges from 300 to 850. Here is what that means for you as a borrower and how lenders typically view this score.</p>
+    </div>
+
+    <!-- APR table -->
+    <div class="card">
+      <h2>Typical APRs with a {{SCORE}} Credit Score</h2>
+      <table class="apr-table">
+        <thead>
+          <tr>
+            <th>Loan Type</th>
+            <th>Typical APR</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Mortgage (30-year fixed)</td>
+            <td>{{MORTGAGE_APR}}</td>
+          </tr>
+          <tr>
+            <td>Auto Loan (60-month new)</td>
+            <td>{{AUTO_APR}}</td>
+          </tr>
+          <tr>
+            <td>Credit Card</td>
+            <td>{{CARD_APR}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="margin-top:1rem;font-size:0.8rem;color:#666b7a">APR ranges are approximate and vary by lender, loan amount, and other factors. Rates shown are for illustration purposes.</p>
+    </div>
+
+    <!-- FICO ranges -->
+    <div class="card">
+      <h2>Where {{SCORE}} Falls on the FICO Scale</h2>
+      <table class="ranges-table" id="rangesTable">
+        <thead>
+          <tr>
+            <th>Range</th>
+            <th>Rating</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="range-dot" style="background:#e74c3c"></span>300-579</td>
+            <td>Poor</td>
+          </tr>
+          <tr>
+            <td><span class="range-dot" style="background:#e67e22"></span>580-669</td>
+            <td>Fair</td>
+          </tr>
+          <tr>
+            <td><span class="range-dot" style="background:#f1c40f"></span>670-739</td>
+            <td>Good</td>
+          </tr>
+          <tr>
+            <td><span class="range-dot" style="background:#2ecc71"></span>740-799</td>
+            <td>Very Good</td>
+          </tr>
+          <tr>
+            <td><span class="range-dot" style="background:#27ae60"></span>800-850</td>
+            <td>Exceptional</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- How to improve -->
+    <div class="card">
+      <h2>How to Improve From a {{SCORE}} Credit Score</h2>
+      <ul class="tips-list">
+        <li>Pay all bills on time -- payment history is 35% of your score</li>
+        <li>Keep credit card utilization below 30% of your limit</li>
+        <li>Avoid opening multiple new accounts in a short period</li>
+        <li>Keep older accounts open to maintain credit history length</li>
+        <li>Check your credit reports for errors at AnnualCreditReport.com</li>
+        <li>Consider a mix of credit types (cards, installment loans)</li>
+      </ul>
+    </div>
+
+    <!-- Related scores -->
+    <div class="related">
+      <h2>Related Credit Scores</h2>
+      <div class="related-grid">
+        {{RELATED_LINKS}}
+      </div>
+    </div>
+
+    <div class="cta">
+      <p>Look up any credit score with our full interactive guide.</p>
+      <a href="/credit-score/">Open Credit Score Guide</a>
+    </div>
+
+    <div class="more-tools">
+      <p>More Free Tools</p>
+      <div class="tools-row">
+        <a href="/">All Tools</a>
+        <a href="/mortgage-calc/">Mortgage Calculator</a>
+        <a href="/auto-loan-calc/">Auto Loan Calculator</a>
+        <a href="/home-affordability/">Home Affordability</a>
+        <a href="/interest-calculator/">Interest Calculator</a>
+      </div>
+    </div>
+
+    <footer>
+      <p>&copy; 2026 Automated Insights LLC</p>
+    </footer>
+  </div>
+
+  <script>
+    // Position gauge marker based on score
+    var score = {{SCORE}};
+    var pct = ((score - 300) / 550) * 100;
+    document.getElementById("gaugeMarker").style.left = pct + "%";
+
+    // Highlight active range row
+    var ranges = [[300,579],[580,669],[670,739],[740,799],[800,850]];
+    var rows = document.querySelectorAll("#rangesTable tbody tr");
+    for (var i = 0; i < ranges.length; i++) {
+      if (score >= ranges[i][0] && score <= ranges[i][1]) {
+        rows[i].classList.add("active-row");
+      }
+    }
+  </script>
+</body>
+</html>

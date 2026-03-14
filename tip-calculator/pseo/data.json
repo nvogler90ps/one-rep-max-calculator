@@ -1,0 +1,857 @@
+[
+  {
+    "bill": 10,
+    "tip_pct": 10
+  },
+  {
+    "bill": 10,
+    "tip_pct": 15
+  },
+  {
+    "bill": 10,
+    "tip_pct": 18
+  },
+  {
+    "bill": 10,
+    "tip_pct": 20
+  },
+  {
+    "bill": 10,
+    "tip_pct": 25
+  },
+  {
+    "bill": 15,
+    "tip_pct": 10
+  },
+  {
+    "bill": 15,
+    "tip_pct": 15
+  },
+  {
+    "bill": 15,
+    "tip_pct": 18
+  },
+  {
+    "bill": 15,
+    "tip_pct": 20
+  },
+  {
+    "bill": 15,
+    "tip_pct": 25
+  },
+  {
+    "bill": 20,
+    "tip_pct": 10
+  },
+  {
+    "bill": 20,
+    "tip_pct": 15
+  },
+  {
+    "bill": 20,
+    "tip_pct": 18
+  },
+  {
+    "bill": 20,
+    "tip_pct": 20
+  },
+  {
+    "bill": 20,
+    "tip_pct": 25
+  },
+  {
+    "bill": 25,
+    "tip_pct": 10
+  },
+  {
+    "bill": 25,
+    "tip_pct": 15
+  },
+  {
+    "bill": 25,
+    "tip_pct": 18
+  },
+  {
+    "bill": 25,
+    "tip_pct": 20
+  },
+  {
+    "bill": 25,
+    "tip_pct": 25
+  },
+  {
+    "bill": 30,
+    "tip_pct": 10
+  },
+  {
+    "bill": 30,
+    "tip_pct": 15
+  },
+  {
+    "bill": 30,
+    "tip_pct": 18
+  },
+  {
+    "bill": 30,
+    "tip_pct": 20
+  },
+  {
+    "bill": 30,
+    "tip_pct": 25
+  },
+  {
+    "bill": 35,
+    "tip_pct": 10
+  },
+  {
+    "bill": 35,
+    "tip_pct": 15
+  },
+  {
+    "bill": 35,
+    "tip_pct": 18
+  },
+  {
+    "bill": 35,
+    "tip_pct": 20
+  },
+  {
+    "bill": 35,
+    "tip_pct": 25
+  },
+  {
+    "bill": 40,
+    "tip_pct": 10
+  },
+  {
+    "bill": 40,
+    "tip_pct": 15
+  },
+  {
+    "bill": 40,
+    "tip_pct": 18
+  },
+  {
+    "bill": 40,
+    "tip_pct": 20
+  },
+  {
+    "bill": 40,
+    "tip_pct": 25
+  },
+  {
+    "bill": 45,
+    "tip_pct": 10
+  },
+  {
+    "bill": 45,
+    "tip_pct": 15
+  },
+  {
+    "bill": 45,
+    "tip_pct": 18
+  },
+  {
+    "bill": 45,
+    "tip_pct": 20
+  },
+  {
+    "bill": 45,
+    "tip_pct": 25
+  },
+  {
+    "bill": 50,
+    "tip_pct": 10
+  },
+  {
+    "bill": 50,
+    "tip_pct": 15
+  },
+  {
+    "bill": 50,
+    "tip_pct": 18
+  },
+  {
+    "bill": 50,
+    "tip_pct": 20
+  },
+  {
+    "bill": 50,
+    "tip_pct": 25
+  },
+  {
+    "bill": 55,
+    "tip_pct": 10
+  },
+  {
+    "bill": 55,
+    "tip_pct": 15
+  },
+  {
+    "bill": 55,
+    "tip_pct": 18
+  },
+  {
+    "bill": 55,
+    "tip_pct": 20
+  },
+  {
+    "bill": 55,
+    "tip_pct": 25
+  },
+  {
+    "bill": 60,
+    "tip_pct": 10
+  },
+  {
+    "bill": 60,
+    "tip_pct": 15
+  },
+  {
+    "bill": 60,
+    "tip_pct": 18
+  },
+  {
+    "bill": 60,
+    "tip_pct": 20
+  },
+  {
+    "bill": 60,
+    "tip_pct": 25
+  },
+  {
+    "bill": 65,
+    "tip_pct": 10
+  },
+  {
+    "bill": 65,
+    "tip_pct": 15
+  },
+  {
+    "bill": 65,
+    "tip_pct": 18
+  },
+  {
+    "bill": 65,
+    "tip_pct": 20
+  },
+  {
+    "bill": 65,
+    "tip_pct": 25
+  },
+  {
+    "bill": 70,
+    "tip_pct": 10
+  },
+  {
+    "bill": 70,
+    "tip_pct": 15
+  },
+  {
+    "bill": 70,
+    "tip_pct": 18
+  },
+  {
+    "bill": 70,
+    "tip_pct": 20
+  },
+  {
+    "bill": 70,
+    "tip_pct": 25
+  },
+  {
+    "bill": 75,
+    "tip_pct": 10
+  },
+  {
+    "bill": 75,
+    "tip_pct": 15
+  },
+  {
+    "bill": 75,
+    "tip_pct": 18
+  },
+  {
+    "bill": 75,
+    "tip_pct": 20
+  },
+  {
+    "bill": 75,
+    "tip_pct": 25
+  },
+  {
+    "bill": 80,
+    "tip_pct": 10
+  },
+  {
+    "bill": 80,
+    "tip_pct": 15
+  },
+  {
+    "bill": 80,
+    "tip_pct": 18
+  },
+  {
+    "bill": 80,
+    "tip_pct": 20
+  },
+  {
+    "bill": 80,
+    "tip_pct": 25
+  },
+  {
+    "bill": 85,
+    "tip_pct": 10
+  },
+  {
+    "bill": 85,
+    "tip_pct": 15
+  },
+  {
+    "bill": 85,
+    "tip_pct": 18
+  },
+  {
+    "bill": 85,
+    "tip_pct": 20
+  },
+  {
+    "bill": 85,
+    "tip_pct": 25
+  },
+  {
+    "bill": 90,
+    "tip_pct": 10
+  },
+  {
+    "bill": 90,
+    "tip_pct": 15
+  },
+  {
+    "bill": 90,
+    "tip_pct": 18
+  },
+  {
+    "bill": 90,
+    "tip_pct": 20
+  },
+  {
+    "bill": 90,
+    "tip_pct": 25
+  },
+  {
+    "bill": 95,
+    "tip_pct": 10
+  },
+  {
+    "bill": 95,
+    "tip_pct": 15
+  },
+  {
+    "bill": 95,
+    "tip_pct": 18
+  },
+  {
+    "bill": 95,
+    "tip_pct": 20
+  },
+  {
+    "bill": 95,
+    "tip_pct": 25
+  },
+  {
+    "bill": 100,
+    "tip_pct": 10
+  },
+  {
+    "bill": 100,
+    "tip_pct": 15
+  },
+  {
+    "bill": 100,
+    "tip_pct": 18
+  },
+  {
+    "bill": 100,
+    "tip_pct": 20
+  },
+  {
+    "bill": 100,
+    "tip_pct": 25
+  },
+  {
+    "bill": 110,
+    "tip_pct": 10
+  },
+  {
+    "bill": 110,
+    "tip_pct": 15
+  },
+  {
+    "bill": 110,
+    "tip_pct": 18
+  },
+  {
+    "bill": 110,
+    "tip_pct": 20
+  },
+  {
+    "bill": 110,
+    "tip_pct": 25
+  },
+  {
+    "bill": 120,
+    "tip_pct": 10
+  },
+  {
+    "bill": 120,
+    "tip_pct": 15
+  },
+  {
+    "bill": 120,
+    "tip_pct": 18
+  },
+  {
+    "bill": 120,
+    "tip_pct": 20
+  },
+  {
+    "bill": 120,
+    "tip_pct": 25
+  },
+  {
+    "bill": 130,
+    "tip_pct": 10
+  },
+  {
+    "bill": 130,
+    "tip_pct": 15
+  },
+  {
+    "bill": 130,
+    "tip_pct": 18
+  },
+  {
+    "bill": 130,
+    "tip_pct": 20
+  },
+  {
+    "bill": 130,
+    "tip_pct": 25
+  },
+  {
+    "bill": 140,
+    "tip_pct": 10
+  },
+  {
+    "bill": 140,
+    "tip_pct": 15
+  },
+  {
+    "bill": 140,
+    "tip_pct": 18
+  },
+  {
+    "bill": 140,
+    "tip_pct": 20
+  },
+  {
+    "bill": 140,
+    "tip_pct": 25
+  },
+  {
+    "bill": 150,
+    "tip_pct": 10
+  },
+  {
+    "bill": 150,
+    "tip_pct": 15
+  },
+  {
+    "bill": 150,
+    "tip_pct": 18
+  },
+  {
+    "bill": 150,
+    "tip_pct": 20
+  },
+  {
+    "bill": 150,
+    "tip_pct": 25
+  },
+  {
+    "bill": 175,
+    "tip_pct": 10
+  },
+  {
+    "bill": 175,
+    "tip_pct": 15
+  },
+  {
+    "bill": 175,
+    "tip_pct": 18
+  },
+  {
+    "bill": 175,
+    "tip_pct": 20
+  },
+  {
+    "bill": 175,
+    "tip_pct": 25
+  },
+  {
+    "bill": 200,
+    "tip_pct": 10
+  },
+  {
+    "bill": 200,
+    "tip_pct": 15
+  },
+  {
+    "bill": 200,
+    "tip_pct": 18
+  },
+  {
+    "bill": 200,
+    "tip_pct": 20
+  },
+  {
+    "bill": 200,
+    "tip_pct": 25
+  },
+  {
+    "bill": 250,
+    "tip_pct": 10
+  },
+  {
+    "bill": 250,
+    "tip_pct": 15
+  },
+  {
+    "bill": 250,
+    "tip_pct": 18
+  },
+  {
+    "bill": 250,
+    "tip_pct": 20
+  },
+  {
+    "bill": 250,
+    "tip_pct": 25
+  },
+  {
+    "bill": 300,
+    "tip_pct": 10
+  },
+  {
+    "bill": 300,
+    "tip_pct": 15
+  },
+  {
+    "bill": 300,
+    "tip_pct": 18
+  },
+  {
+    "bill": 300,
+    "tip_pct": 20
+  },
+  {
+    "bill": 300,
+    "tip_pct": 25
+  },
+  {
+    "bill": 400,
+    "tip_pct": 10
+  },
+  {
+    "bill": 400,
+    "tip_pct": 15
+  },
+  {
+    "bill": 400,
+    "tip_pct": 18
+  },
+  {
+    "bill": 400,
+    "tip_pct": 20
+  },
+  {
+    "bill": 400,
+    "tip_pct": 25
+  },
+  {
+    "bill": 500,
+    "tip_pct": 10
+  },
+  {
+    "bill": 500,
+    "tip_pct": 15
+  },
+  {
+    "bill": 500,
+    "tip_pct": 18
+  },
+  {
+    "bill": 500,
+    "tip_pct": 20
+  },
+  {
+    "bill": 500,
+    "tip_pct": 25
+  },
+  {
+    "bill": 50,
+    "tip_pct": 20,
+    "split": 2
+  },
+  {
+    "bill": 50,
+    "tip_pct": 20,
+    "split": 3
+  },
+  {
+    "bill": 50,
+    "tip_pct": 20,
+    "split": 4
+  },
+  {
+    "bill": 50,
+    "tip_pct": 15,
+    "split": 2
+  },
+  {
+    "bill": 50,
+    "tip_pct": 18,
+    "split": 2
+  },
+  {
+    "bill": 100,
+    "tip_pct": 20,
+    "split": 2
+  },
+  {
+    "bill": 100,
+    "tip_pct": 20,
+    "split": 3
+  },
+  {
+    "bill": 100,
+    "tip_pct": 20,
+    "split": 4
+  },
+  {
+    "bill": 100,
+    "tip_pct": 15,
+    "split": 2
+  },
+  {
+    "bill": 100,
+    "tip_pct": 15,
+    "split": 3
+  },
+  {
+    "bill": 100,
+    "tip_pct": 15,
+    "split": 4
+  },
+  {
+    "bill": 100,
+    "tip_pct": 18,
+    "split": 2
+  },
+  {
+    "bill": 100,
+    "tip_pct": 18,
+    "split": 3
+  },
+  {
+    "bill": 100,
+    "tip_pct": 25,
+    "split": 2
+  },
+  {
+    "bill": 100,
+    "tip_pct": 25,
+    "split": 3
+  },
+  {
+    "bill": 100,
+    "tip_pct": 25,
+    "split": 4
+  },
+  {
+    "bill": 75,
+    "tip_pct": 20,
+    "split": 2
+  },
+  {
+    "bill": 75,
+    "tip_pct": 20,
+    "split": 3
+  },
+  {
+    "bill": 75,
+    "tip_pct": 15,
+    "split": 2
+  },
+  {
+    "bill": 75,
+    "tip_pct": 18,
+    "split": 2
+  },
+  {
+    "bill": 150,
+    "tip_pct": 20,
+    "split": 2
+  },
+  {
+    "bill": 150,
+    "tip_pct": 20,
+    "split": 3
+  },
+  {
+    "bill": 150,
+    "tip_pct": 20,
+    "split": 4
+  },
+  {
+    "bill": 150,
+    "tip_pct": 15,
+    "split": 2
+  },
+  {
+    "bill": 150,
+    "tip_pct": 18,
+    "split": 2
+  },
+  {
+    "bill": 200,
+    "tip_pct": 20,
+    "split": 2
+  },
+  {
+    "bill": 200,
+    "tip_pct": 20,
+    "split": 3
+  },
+  {
+    "bill": 200,
+    "tip_pct": 20,
+    "split": 4
+  },
+  {
+    "bill": 200,
+    "tip_pct": 15,
+    "split": 2
+  },
+  {
+    "bill": 200,
+    "tip_pct": 18,
+    "split": 2
+  },
+  {
+    "bill": 60,
+    "tip_pct": 20,
+    "split": 2
+  },
+  {
+    "bill": 60,
+    "tip_pct": 20,
+    "split": 3
+  },
+  {
+    "bill": 80,
+    "tip_pct": 20,
+    "split": 2
+  },
+  {
+    "bill": 80,
+    "tip_pct": 20,
+    "split": 3
+  },
+  {
+    "bill": 120,
+    "tip_pct": 20,
+    "split": 2
+  },
+  {
+    "bill": 120,
+    "tip_pct": 20,
+    "split": 3
+  },
+  {
+    "bill": 40,
+    "tip_pct": 20,
+    "split": 2
+  },
+  {
+    "bill": 40,
+    "tip_pct": 15,
+    "split": 2
+  },
+  {
+    "bill": 250,
+    "tip_pct": 20,
+    "split": 2
+  },
+  {
+    "bill": 250,
+    "tip_pct": 20,
+    "split": 4
+  },
+  {
+    "bill": 300,
+    "tip_pct": 20,
+    "split": 2
+  },
+  {
+    "bill": 300,
+    "tip_pct": 20,
+    "split": 3
+  },
+  {
+    "bill": 300,
+    "tip_pct": 20,
+    "split": 4
+  },
+  {
+    "bill": 500,
+    "tip_pct": 20,
+    "split": 2
+  },
+  {
+    "bill": 500,
+    "tip_pct": 20,
+    "split": 4
+  },
+  {
+    "bill": 30,
+    "tip_pct": 20,
+    "split": 2
+  },
+  {
+    "bill": 30,
+    "tip_pct": 15,
+    "split": 2
+  },
+  {
+    "bill": 70,
+    "tip_pct": 20,
+    "split": 2
+  },
+  {
+    "bill": 90,
+    "tip_pct": 20,
+    "split": 2
+  },
+  {
+    "bill": 45,
+    "tip_pct": 18,
+    "split": 2
+  },
+  {
+    "bill": 55,
+    "tip_pct": 20,
+    "split": 2
+  }
+]

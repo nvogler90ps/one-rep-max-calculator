@@ -1,0 +1,1286 @@
+[
+  {
+    "principal": 5000,
+    "rate": 3,
+    "years": 5,
+    "compound": "monthly"
+  },
+  {
+    "principal": 5000,
+    "rate": 3,
+    "years": 10,
+    "compound": "monthly"
+  },
+  {
+    "principal": 5000,
+    "rate": 3,
+    "years": 15,
+    "compound": "monthly"
+  },
+  {
+    "principal": 5000,
+    "rate": 3,
+    "years": 20,
+    "compound": "monthly"
+  },
+  {
+    "principal": 5000,
+    "rate": 3,
+    "years": 30,
+    "compound": "monthly"
+  },
+  {
+    "principal": 5000,
+    "rate": 4,
+    "years": 5,
+    "compound": "monthly"
+  },
+  {
+    "principal": 5000,
+    "rate": 4,
+    "years": 10,
+    "compound": "monthly"
+  },
+  {
+    "principal": 5000,
+    "rate": 4,
+    "years": 15,
+    "compound": "monthly"
+  },
+  {
+    "principal": 5000,
+    "rate": 4,
+    "years": 20,
+    "compound": "monthly"
+  },
+  {
+    "principal": 5000,
+    "rate": 4,
+    "years": 30,
+    "compound": "monthly"
+  },
+  {
+    "principal": 5000,
+    "rate": 5,
+    "years": 5,
+    "compound": "monthly"
+  },
+  {
+    "principal": 5000,
+    "rate": 5,
+    "years": 10,
+    "compound": "monthly"
+  },
+  {
+    "principal": 5000,
+    "rate": 5,
+    "years": 15,
+    "compound": "monthly"
+  },
+  {
+    "principal": 5000,
+    "rate": 5,
+    "years": 20,
+    "compound": "monthly"
+  },
+  {
+    "principal": 5000,
+    "rate": 5,
+    "years": 30,
+    "compound": "monthly"
+  },
+  {
+    "principal": 5000,
+    "rate": 7,
+    "years": 5,
+    "compound": "monthly"
+  },
+  {
+    "principal": 5000,
+    "rate": 7,
+    "years": 10,
+    "compound": "monthly"
+  },
+  {
+    "principal": 5000,
+    "rate": 7,
+    "years": 15,
+    "compound": "monthly"
+  },
+  {
+    "principal": 5000,
+    "rate": 7,
+    "years": 20,
+    "compound": "monthly"
+  },
+  {
+    "principal": 5000,
+    "rate": 7,
+    "years": 30,
+    "compound": "monthly"
+  },
+  {
+    "principal": 5000,
+    "rate": 8,
+    "years": 5,
+    "compound": "monthly"
+  },
+  {
+    "principal": 5000,
+    "rate": 8,
+    "years": 10,
+    "compound": "monthly"
+  },
+  {
+    "principal": 5000,
+    "rate": 8,
+    "years": 15,
+    "compound": "monthly"
+  },
+  {
+    "principal": 5000,
+    "rate": 8,
+    "years": 20,
+    "compound": "monthly"
+  },
+  {
+    "principal": 5000,
+    "rate": 8,
+    "years": 30,
+    "compound": "monthly"
+  },
+  {
+    "principal": 5000,
+    "rate": 10,
+    "years": 5,
+    "compound": "monthly"
+  },
+  {
+    "principal": 5000,
+    "rate": 10,
+    "years": 10,
+    "compound": "monthly"
+  },
+  {
+    "principal": 5000,
+    "rate": 10,
+    "years": 15,
+    "compound": "monthly"
+  },
+  {
+    "principal": 5000,
+    "rate": 10,
+    "years": 20,
+    "compound": "monthly"
+  },
+  {
+    "principal": 5000,
+    "rate": 10,
+    "years": 30,
+    "compound": "monthly"
+  },
+  {
+    "principal": 5000,
+    "rate": 12,
+    "years": 5,
+    "compound": "monthly"
+  },
+  {
+    "principal": 5000,
+    "rate": 12,
+    "years": 10,
+    "compound": "monthly"
+  },
+  {
+    "principal": 5000,
+    "rate": 12,
+    "years": 15,
+    "compound": "monthly"
+  },
+  {
+    "principal": 5000,
+    "rate": 12,
+    "years": 20,
+    "compound": "monthly"
+  },
+  {
+    "principal": 5000,
+    "rate": 12,
+    "years": 30,
+    "compound": "monthly"
+  },
+  {
+    "principal": 10000,
+    "rate": 3,
+    "years": 5,
+    "compound": "monthly"
+  },
+  {
+    "principal": 10000,
+    "rate": 3,
+    "years": 10,
+    "compound": "monthly"
+  },
+  {
+    "principal": 10000,
+    "rate": 3,
+    "years": 15,
+    "compound": "monthly"
+  },
+  {
+    "principal": 10000,
+    "rate": 3,
+    "years": 20,
+    "compound": "monthly"
+  },
+  {
+    "principal": 10000,
+    "rate": 3,
+    "years": 30,
+    "compound": "monthly"
+  },
+  {
+    "principal": 10000,
+    "rate": 4,
+    "years": 5,
+    "compound": "monthly"
+  },
+  {
+    "principal": 10000,
+    "rate": 4,
+    "years": 10,
+    "compound": "monthly"
+  },
+  {
+    "principal": 10000,
+    "rate": 4,
+    "years": 15,
+    "compound": "monthly"
+  },
+  {
+    "principal": 10000,
+    "rate": 4,
+    "years": 20,
+    "compound": "monthly"
+  },
+  {
+    "principal": 10000,
+    "rate": 4,
+    "years": 30,
+    "compound": "monthly"
+  },
+  {
+    "principal": 10000,
+    "rate": 5,
+    "years": 5,
+    "compound": "monthly"
+  },
+  {
+    "principal": 10000,
+    "rate": 5,
+    "years": 10,
+    "compound": "monthly"
+  },
+  {
+    "principal": 10000,
+    "rate": 5,
+    "years": 15,
+    "compound": "monthly"
+  },
+  {
+    "principal": 10000,
+    "rate": 5,
+    "years": 20,
+    "compound": "monthly"
+  },
+  {
+    "principal": 10000,
+    "rate": 5,
+    "years": 30,
+    "compound": "monthly"
+  },
+  {
+    "principal": 10000,
+    "rate": 7,
+    "years": 5,
+    "compound": "monthly"
+  },
+  {
+    "principal": 10000,
+    "rate": 7,
+    "years": 10,
+    "compound": "monthly"
+  },
+  {
+    "principal": 10000,
+    "rate": 7,
+    "years": 15,
+    "compound": "monthly"
+  },
+  {
+    "principal": 10000,
+    "rate": 7,
+    "years": 20,
+    "compound": "monthly"
+  },
+  {
+    "principal": 10000,
+    "rate": 7,
+    "years": 30,
+    "compound": "monthly"
+  },
+  {
+    "principal": 10000,
+    "rate": 8,
+    "years": 5,
+    "compound": "monthly"
+  },
+  {
+    "principal": 10000,
+    "rate": 8,
+    "years": 10,
+    "compound": "monthly"
+  },
+  {
+    "principal": 10000,
+    "rate": 8,
+    "years": 15,
+    "compound": "monthly"
+  },
+  {
+    "principal": 10000,
+    "rate": 8,
+    "years": 20,
+    "compound": "monthly"
+  },
+  {
+    "principal": 10000,
+    "rate": 8,
+    "years": 30,
+    "compound": "monthly"
+  },
+  {
+    "principal": 10000,
+    "rate": 10,
+    "years": 5,
+    "compound": "monthly"
+  },
+  {
+    "principal": 10000,
+    "rate": 10,
+    "years": 10,
+    "compound": "monthly"
+  },
+  {
+    "principal": 10000,
+    "rate": 10,
+    "years": 15,
+    "compound": "monthly"
+  },
+  {
+    "principal": 10000,
+    "rate": 10,
+    "years": 20,
+    "compound": "monthly"
+  },
+  {
+    "principal": 10000,
+    "rate": 10,
+    "years": 30,
+    "compound": "monthly"
+  },
+  {
+    "principal": 10000,
+    "rate": 12,
+    "years": 5,
+    "compound": "monthly"
+  },
+  {
+    "principal": 10000,
+    "rate": 12,
+    "years": 10,
+    "compound": "monthly"
+  },
+  {
+    "principal": 10000,
+    "rate": 12,
+    "years": 15,
+    "compound": "monthly"
+  },
+  {
+    "principal": 10000,
+    "rate": 12,
+    "years": 20,
+    "compound": "monthly"
+  },
+  {
+    "principal": 10000,
+    "rate": 12,
+    "years": 30,
+    "compound": "monthly"
+  },
+  {
+    "principal": 25000,
+    "rate": 3,
+    "years": 5,
+    "compound": "monthly"
+  },
+  {
+    "principal": 25000,
+    "rate": 3,
+    "years": 10,
+    "compound": "monthly"
+  },
+  {
+    "principal": 25000,
+    "rate": 3,
+    "years": 15,
+    "compound": "monthly"
+  },
+  {
+    "principal": 25000,
+    "rate": 3,
+    "years": 20,
+    "compound": "monthly"
+  },
+  {
+    "principal": 25000,
+    "rate": 3,
+    "years": 30,
+    "compound": "monthly"
+  },
+  {
+    "principal": 25000,
+    "rate": 5,
+    "years": 5,
+    "compound": "monthly"
+  },
+  {
+    "principal": 25000,
+    "rate": 5,
+    "years": 10,
+    "compound": "monthly"
+  },
+  {
+    "principal": 25000,
+    "rate": 5,
+    "years": 15,
+    "compound": "monthly"
+  },
+  {
+    "principal": 25000,
+    "rate": 5,
+    "years": 20,
+    "compound": "monthly"
+  },
+  {
+    "principal": 25000,
+    "rate": 5,
+    "years": 30,
+    "compound": "monthly"
+  },
+  {
+    "principal": 25000,
+    "rate": 6,
+    "years": 5,
+    "compound": "monthly"
+  },
+  {
+    "principal": 25000,
+    "rate": 6,
+    "years": 10,
+    "compound": "monthly"
+  },
+  {
+    "principal": 25000,
+    "rate": 6,
+    "years": 15,
+    "compound": "monthly"
+  },
+  {
+    "principal": 25000,
+    "rate": 6,
+    "years": 20,
+    "compound": "monthly"
+  },
+  {
+    "principal": 25000,
+    "rate": 6,
+    "years": 30,
+    "compound": "monthly"
+  },
+  {
+    "principal": 25000,
+    "rate": 7,
+    "years": 5,
+    "compound": "monthly"
+  },
+  {
+    "principal": 25000,
+    "rate": 7,
+    "years": 10,
+    "compound": "monthly"
+  },
+  {
+    "principal": 25000,
+    "rate": 7,
+    "years": 15,
+    "compound": "monthly"
+  },
+  {
+    "principal": 25000,
+    "rate": 7,
+    "years": 20,
+    "compound": "monthly"
+  },
+  {
+    "principal": 25000,
+    "rate": 7,
+    "years": 30,
+    "compound": "monthly"
+  },
+  {
+    "principal": 25000,
+    "rate": 8,
+    "years": 5,
+    "compound": "monthly"
+  },
+  {
+    "principal": 25000,
+    "rate": 8,
+    "years": 10,
+    "compound": "monthly"
+  },
+  {
+    "principal": 25000,
+    "rate": 8,
+    "years": 15,
+    "compound": "monthly"
+  },
+  {
+    "principal": 25000,
+    "rate": 8,
+    "years": 20,
+    "compound": "monthly"
+  },
+  {
+    "principal": 25000,
+    "rate": 8,
+    "years": 30,
+    "compound": "monthly"
+  },
+  {
+    "principal": 25000,
+    "rate": 10,
+    "years": 5,
+    "compound": "monthly"
+  },
+  {
+    "principal": 25000,
+    "rate": 10,
+    "years": 10,
+    "compound": "monthly"
+  },
+  {
+    "principal": 25000,
+    "rate": 10,
+    "years": 15,
+    "compound": "monthly"
+  },
+  {
+    "principal": 25000,
+    "rate": 10,
+    "years": 20,
+    "compound": "monthly"
+  },
+  {
+    "principal": 25000,
+    "rate": 10,
+    "years": 30,
+    "compound": "monthly"
+  },
+  {
+    "principal": 50000,
+    "rate": 3,
+    "years": 5,
+    "compound": "monthly"
+  },
+  {
+    "principal": 50000,
+    "rate": 3,
+    "years": 10,
+    "compound": "monthly"
+  },
+  {
+    "principal": 50000,
+    "rate": 3,
+    "years": 15,
+    "compound": "monthly"
+  },
+  {
+    "principal": 50000,
+    "rate": 3,
+    "years": 20,
+    "compound": "monthly"
+  },
+  {
+    "principal": 50000,
+    "rate": 3,
+    "years": 30,
+    "compound": "monthly"
+  },
+  {
+    "principal": 50000,
+    "rate": 5,
+    "years": 5,
+    "compound": "monthly"
+  },
+  {
+    "principal": 50000,
+    "rate": 5,
+    "years": 10,
+    "compound": "monthly"
+  },
+  {
+    "principal": 50000,
+    "rate": 5,
+    "years": 15,
+    "compound": "monthly"
+  },
+  {
+    "principal": 50000,
+    "rate": 5,
+    "years": 20,
+    "compound": "monthly"
+  },
+  {
+    "principal": 50000,
+    "rate": 5,
+    "years": 30,
+    "compound": "monthly"
+  },
+  {
+    "principal": 50000,
+    "rate": 6,
+    "years": 5,
+    "compound": "monthly"
+  },
+  {
+    "principal": 50000,
+    "rate": 6,
+    "years": 10,
+    "compound": "monthly"
+  },
+  {
+    "principal": 50000,
+    "rate": 6,
+    "years": 15,
+    "compound": "monthly"
+  },
+  {
+    "principal": 50000,
+    "rate": 6,
+    "years": 20,
+    "compound": "monthly"
+  },
+  {
+    "principal": 50000,
+    "rate": 6,
+    "years": 30,
+    "compound": "monthly"
+  },
+  {
+    "principal": 50000,
+    "rate": 7,
+    "years": 5,
+    "compound": "monthly"
+  },
+  {
+    "principal": 50000,
+    "rate": 7,
+    "years": 10,
+    "compound": "monthly"
+  },
+  {
+    "principal": 50000,
+    "rate": 7,
+    "years": 15,
+    "compound": "monthly"
+  },
+  {
+    "principal": 50000,
+    "rate": 7,
+    "years": 20,
+    "compound": "monthly"
+  },
+  {
+    "principal": 50000,
+    "rate": 7,
+    "years": 30,
+    "compound": "monthly"
+  },
+  {
+    "principal": 50000,
+    "rate": 8,
+    "years": 5,
+    "compound": "monthly"
+  },
+  {
+    "principal": 50000,
+    "rate": 8,
+    "years": 10,
+    "compound": "monthly"
+  },
+  {
+    "principal": 50000,
+    "rate": 8,
+    "years": 15,
+    "compound": "monthly"
+  },
+  {
+    "principal": 50000,
+    "rate": 8,
+    "years": 20,
+    "compound": "monthly"
+  },
+  {
+    "principal": 50000,
+    "rate": 8,
+    "years": 30,
+    "compound": "monthly"
+  },
+  {
+    "principal": 50000,
+    "rate": 10,
+    "years": 5,
+    "compound": "monthly"
+  },
+  {
+    "principal": 50000,
+    "rate": 10,
+    "years": 10,
+    "compound": "monthly"
+  },
+  {
+    "principal": 50000,
+    "rate": 10,
+    "years": 15,
+    "compound": "monthly"
+  },
+  {
+    "principal": 50000,
+    "rate": 10,
+    "years": 20,
+    "compound": "monthly"
+  },
+  {
+    "principal": 50000,
+    "rate": 10,
+    "years": 30,
+    "compound": "monthly"
+  },
+  {
+    "principal": 100000,
+    "rate": 3,
+    "years": 5,
+    "compound": "monthly"
+  },
+  {
+    "principal": 100000,
+    "rate": 3,
+    "years": 10,
+    "compound": "monthly"
+  },
+  {
+    "principal": 100000,
+    "rate": 3,
+    "years": 15,
+    "compound": "monthly"
+  },
+  {
+    "principal": 100000,
+    "rate": 3,
+    "years": 20,
+    "compound": "monthly"
+  },
+  {
+    "principal": 100000,
+    "rate": 3,
+    "years": 30,
+    "compound": "monthly"
+  },
+  {
+    "principal": 100000,
+    "rate": 5,
+    "years": 5,
+    "compound": "monthly"
+  },
+  {
+    "principal": 100000,
+    "rate": 5,
+    "years": 10,
+    "compound": "monthly"
+  },
+  {
+    "principal": 100000,
+    "rate": 5,
+    "years": 15,
+    "compound": "monthly"
+  },
+  {
+    "principal": 100000,
+    "rate": 5,
+    "years": 20,
+    "compound": "monthly"
+  },
+  {
+    "principal": 100000,
+    "rate": 5,
+    "years": 30,
+    "compound": "monthly"
+  },
+  {
+    "principal": 100000,
+    "rate": 6,
+    "years": 5,
+    "compound": "monthly"
+  },
+  {
+    "principal": 100000,
+    "rate": 6,
+    "years": 10,
+    "compound": "monthly"
+  },
+  {
+    "principal": 100000,
+    "rate": 6,
+    "years": 15,
+    "compound": "monthly"
+  },
+  {
+    "principal": 100000,
+    "rate": 6,
+    "years": 20,
+    "compound": "monthly"
+  },
+  {
+    "principal": 100000,
+    "rate": 6,
+    "years": 30,
+    "compound": "monthly"
+  },
+  {
+    "principal": 100000,
+    "rate": 7,
+    "years": 5,
+    "compound": "monthly"
+  },
+  {
+    "principal": 100000,
+    "rate": 7,
+    "years": 10,
+    "compound": "monthly"
+  },
+  {
+    "principal": 100000,
+    "rate": 7,
+    "years": 15,
+    "compound": "monthly"
+  },
+  {
+    "principal": 100000,
+    "rate": 7,
+    "years": 20,
+    "compound": "monthly"
+  },
+  {
+    "principal": 100000,
+    "rate": 7,
+    "years": 30,
+    "compound": "monthly"
+  },
+  {
+    "principal": 100000,
+    "rate": 8,
+    "years": 5,
+    "compound": "monthly"
+  },
+  {
+    "principal": 100000,
+    "rate": 8,
+    "years": 10,
+    "compound": "monthly"
+  },
+  {
+    "principal": 100000,
+    "rate": 8,
+    "years": 15,
+    "compound": "monthly"
+  },
+  {
+    "principal": 100000,
+    "rate": 8,
+    "years": 20,
+    "compound": "monthly"
+  },
+  {
+    "principal": 100000,
+    "rate": 8,
+    "years": 30,
+    "compound": "monthly"
+  },
+  {
+    "principal": 100000,
+    "rate": 10,
+    "years": 5,
+    "compound": "monthly"
+  },
+  {
+    "principal": 100000,
+    "rate": 10,
+    "years": 10,
+    "compound": "monthly"
+  },
+  {
+    "principal": 100000,
+    "rate": 10,
+    "years": 15,
+    "compound": "monthly"
+  },
+  {
+    "principal": 100000,
+    "rate": 10,
+    "years": 20,
+    "compound": "monthly"
+  },
+  {
+    "principal": 100000,
+    "rate": 10,
+    "years": 30,
+    "compound": "monthly"
+  },
+  {
+    "principal": 25000,
+    "rate": 4,
+    "years": 10,
+    "compound": "monthly"
+  },
+  {
+    "principal": 25000,
+    "rate": 4,
+    "years": 20,
+    "compound": "monthly"
+  },
+  {
+    "principal": 25000,
+    "rate": 4,
+    "years": 30,
+    "compound": "monthly"
+  },
+  {
+    "principal": 50000,
+    "rate": 4,
+    "years": 10,
+    "compound": "monthly"
+  },
+  {
+    "principal": 50000,
+    "rate": 4,
+    "years": 20,
+    "compound": "monthly"
+  },
+  {
+    "principal": 50000,
+    "rate": 4,
+    "years": 30,
+    "compound": "monthly"
+  },
+  {
+    "principal": 100000,
+    "rate": 4,
+    "years": 10,
+    "compound": "monthly"
+  },
+  {
+    "principal": 100000,
+    "rate": 4,
+    "years": 20,
+    "compound": "monthly"
+  },
+  {
+    "principal": 100000,
+    "rate": 4,
+    "years": 30,
+    "compound": "monthly"
+  },
+  {
+    "principal": 1000,
+    "rate": 5,
+    "years": 5,
+    "compound": "monthly"
+  },
+  {
+    "principal": 1000,
+    "rate": 5,
+    "years": 10,
+    "compound": "monthly"
+  },
+  {
+    "principal": 1000,
+    "rate": 5,
+    "years": 20,
+    "compound": "monthly"
+  },
+  {
+    "principal": 1000,
+    "rate": 7,
+    "years": 5,
+    "compound": "monthly"
+  },
+  {
+    "principal": 1000,
+    "rate": 7,
+    "years": 10,
+    "compound": "monthly"
+  },
+  {
+    "principal": 1000,
+    "rate": 7,
+    "years": 20,
+    "compound": "monthly"
+  },
+  {
+    "principal": 1000,
+    "rate": 10,
+    "years": 5,
+    "compound": "monthly"
+  },
+  {
+    "principal": 1000,
+    "rate": 10,
+    "years": 10,
+    "compound": "monthly"
+  },
+  {
+    "principal": 1000,
+    "rate": 10,
+    "years": 20,
+    "compound": "monthly"
+  },
+  {
+    "principal": 2500,
+    "rate": 5,
+    "years": 5,
+    "compound": "monthly"
+  },
+  {
+    "principal": 2500,
+    "rate": 5,
+    "years": 10,
+    "compound": "monthly"
+  },
+  {
+    "principal": 2500,
+    "rate": 5,
+    "years": 20,
+    "compound": "monthly"
+  },
+  {
+    "principal": 2500,
+    "rate": 7,
+    "years": 5,
+    "compound": "monthly"
+  },
+  {
+    "principal": 2500,
+    "rate": 7,
+    "years": 10,
+    "compound": "monthly"
+  },
+  {
+    "principal": 2500,
+    "rate": 7,
+    "years": 20,
+    "compound": "monthly"
+  },
+  {
+    "principal": 2500,
+    "rate": 10,
+    "years": 5,
+    "compound": "monthly"
+  },
+  {
+    "principal": 2500,
+    "rate": 10,
+    "years": 10,
+    "compound": "monthly"
+  },
+  {
+    "principal": 2500,
+    "rate": 10,
+    "years": 20,
+    "compound": "monthly"
+  },
+  {
+    "principal": 7500,
+    "rate": 5,
+    "years": 5,
+    "compound": "monthly"
+  },
+  {
+    "principal": 7500,
+    "rate": 5,
+    "years": 10,
+    "compound": "monthly"
+  },
+  {
+    "principal": 7500,
+    "rate": 5,
+    "years": 20,
+    "compound": "monthly"
+  },
+  {
+    "principal": 7500,
+    "rate": 7,
+    "years": 5,
+    "compound": "monthly"
+  },
+  {
+    "principal": 7500,
+    "rate": 7,
+    "years": 10,
+    "compound": "monthly"
+  },
+  {
+    "principal": 7500,
+    "rate": 7,
+    "years": 20,
+    "compound": "monthly"
+  },
+  {
+    "principal": 7500,
+    "rate": 10,
+    "years": 5,
+    "compound": "monthly"
+  },
+  {
+    "principal": 7500,
+    "rate": 10,
+    "years": 10,
+    "compound": "monthly"
+  },
+  {
+    "principal": 7500,
+    "rate": 10,
+    "years": 20,
+    "compound": "monthly"
+  },
+  {
+    "principal": 15000,
+    "rate": 5,
+    "years": 5,
+    "compound": "monthly"
+  },
+  {
+    "principal": 15000,
+    "rate": 5,
+    "years": 10,
+    "compound": "monthly"
+  },
+  {
+    "principal": 15000,
+    "rate": 5,
+    "years": 20,
+    "compound": "monthly"
+  },
+  {
+    "principal": 15000,
+    "rate": 7,
+    "years": 5,
+    "compound": "monthly"
+  },
+  {
+    "principal": 15000,
+    "rate": 7,
+    "years": 10,
+    "compound": "monthly"
+  },
+  {
+    "principal": 15000,
+    "rate": 7,
+    "years": 20,
+    "compound": "monthly"
+  },
+  {
+    "principal": 15000,
+    "rate": 10,
+    "years": 5,
+    "compound": "monthly"
+  },
+  {
+    "principal": 15000,
+    "rate": 10,
+    "years": 10,
+    "compound": "monthly"
+  },
+  {
+    "principal": 15000,
+    "rate": 10,
+    "years": 20,
+    "compound": "monthly"
+  },
+  {
+    "principal": 20000,
+    "rate": 5,
+    "years": 5,
+    "compound": "monthly"
+  },
+  {
+    "principal": 20000,
+    "rate": 5,
+    "years": 10,
+    "compound": "monthly"
+  },
+  {
+    "principal": 20000,
+    "rate": 5,
+    "years": 20,
+    "compound": "monthly"
+  },
+  {
+    "principal": 20000,
+    "rate": 7,
+    "years": 5,
+    "compound": "monthly"
+  },
+  {
+    "principal": 20000,
+    "rate": 7,
+    "years": 10,
+    "compound": "monthly"
+  },
+  {
+    "principal": 20000,
+    "rate": 7,
+    "years": 20,
+    "compound": "monthly"
+  },
+  {
+    "principal": 20000,
+    "rate": 10,
+    "years": 5,
+    "compound": "monthly"
+  },
+  {
+    "principal": 20000,
+    "rate": 10,
+    "years": 10,
+    "compound": "monthly"
+  },
+  {
+    "principal": 20000,
+    "rate": 10,
+    "years": 20,
+    "compound": "monthly"
+  }
+]

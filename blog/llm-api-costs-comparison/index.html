@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM API Costs Compared: GPT-4 vs Claude vs Gemini in 2026</title>
+    <meta name="description" content="Compare LLM API pricing for GPT-4o, Claude 3.5 Sonnet, Gemini 1.5 Pro, and more. See cost breakdowns for chatbots, summarization, and code generation use cases.">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="canonical" href="https://automated-insights.com/blog/llm-api-costs-comparison/">
+    <meta property="og:title" content="LLM API Costs Compared: GPT-4 vs Claude vs Gemini in 2026">
+    <meta property="og:description" content="Compare LLM API pricing across OpenAI, Anthropic, and Google. Includes cost calculators for real-world use cases.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://automated-insights.com/blog/llm-api-costs-comparison/">
+    <meta property="article:published_time" content="2026-03-14">
+    <meta property="article:author" content="Nicholas Vogler">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "LLM API Costs Compared: GPT-4 vs Claude vs Gemini in 2026",
+        "author": { "@type": "Person", "name": "Nicholas Vogler" },
+        "datePublished": "2026-03-14",
+        "publisher": { "@type": "Organization", "name": "Automated Insights" },
+        "description": "Compare LLM API pricing for GPT-4o, Claude 3.5 Sonnet, Gemini 1.5 Pro, and more in 2026."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://automated-insights.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://automated-insights.com/blog/" },
+            { "@type": "ListItem", "position": 3, "name": "LLM API Costs Compared" }
+        ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Which LLM API is cheapest?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "For hosted APIs, Gemini 1.5 Flash is the cheapest option at $0.075 per million input tokens and $0.30 per million output tokens. GPT-4o-mini is a close second at $0.15/$0.60. For the absolute lowest cost, self-hosting an open-source model like Llama on your own infrastructure can reduce per-token costs below $0.05/1M tokens -- but you pay for the GPU hardware instead."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How much does it cost to run a chatbot?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "A customer support chatbot handling 1,000 conversations per day with an average of 4 exchanges each costs roughly $5-15/day using a budget model like GPT-4o-mini or Gemini Flash, or $50-150/day using a premium model like GPT-4o or Claude 3.5 Sonnet. The exact cost depends on conversation length, system prompt size, and whether you use conversation history."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Is GPT-4 worth the premium over cheaper models?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "It depends on the task. For complex reasoning, nuanced writing, and code generation, GPT-4o and Claude 3.5 Sonnet produce noticeably better results than budget models. For straightforward classification, extraction, and simple Q&A, cheaper models like GPT-4o-mini or Gemini Flash perform nearly as well at 5-10x lower cost. Many production systems use a tiered approach -- routing simple queries to cheap models and complex ones to premium models."
+                }
+            }
+        ]
+    }
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3434609691579834" crossorigin="anonymous"></script>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; background: #0f1117; color: #e8eaed; min-height: 100vh; display: flex; flex-direction: column; line-height: 1.7; }
+        a { color: #6c63ff; text-decoration: none; } a:hover { text-decoration: underline; }
+        nav { padding: 1rem 1.5rem; border-bottom: 1px solid #2e3345; display: flex; align-items: center; gap: 1.5rem; }
+        nav a { color: #9aa0b0; font-size: 0.95rem; transition: color 0.2s; } nav a:hover { color: #e8eaed; text-decoration: none; } nav .brand { color: #6c63ff; font-weight: 700; font-size: 1.05rem; }
+        .breadcrumb { max-width: 720px; margin: 1.5rem auto 0; padding: 0 1rem; font-size: 0.85rem; color: #9aa0b0; } .breadcrumb a { color: #9aa0b0; } .breadcrumb a:hover { color: #6c63ff; }
+        article { flex: 1; width: 100%; max-width: 720px; margin: 0 auto; padding: 2rem 1rem 3rem; }
+        .post-meta { color: #9aa0b0; font-size: 0.85rem; margin-bottom: 2rem; }
+        h1 { font-size: 2rem; font-weight: 700; margin-bottom: 0.75rem; line-height: 1.25; }
+        h2 { font-size: 1.4rem; font-weight: 600; margin: 2rem 0 0.75rem; color: #e8eaed; }
+        h3 { font-size: 1.1rem; font-weight: 600; margin: 1.5rem 0 0.5rem; }
+        p { margin-bottom: 1rem; color: #e8eaed; }
+        ul, ol { margin: 0 0 1rem 1.5rem; color: #e8eaed; } li { margin-bottom: 0.4rem; }
+        code { background: #1a1d27; border: 1px solid #2e3345; border-radius: 4px; padding: 0.15rem 0.4rem; font-size: 0.9em; }
+        pre { background: #1a1d27; border: 1px solid #2e3345; border-radius: 10px; padding: 1.5rem; margin: 1rem 0 1.5rem; overflow-x: auto; font-size: 0.9rem; line-height: 1.5; }
+        pre code { background: none; border: none; padding: 0; }
+        .formula-box { background: #1a1d27; border: 1px solid #2e3345; border-radius: 10px; padding: 1.5rem; margin: 1.5rem 0; text-align: center; font-size: 1.1rem; }
+        .cta-box { background: #1a1d27; border: 2px solid #6c63ff; border-radius: 10px; padding: 1.5rem; margin: 2rem 0; text-align: center; }
+        .cta-box h3 { color: #6c63ff; margin: 0 0 0.5rem; } .cta-box p { color: #9aa0b0; margin-bottom: 1rem; }
+        .cta-box a.btn { display: inline-block; background: #6c63ff; color: #fff; padding: 0.6rem 1.5rem; border-radius: 6px; font-weight: 600; transition: opacity 0.2s; } .cta-box a.btn:hover { opacity: 0.85; text-decoration: none; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem; }
+        th, td { padding: 0.6rem 0.8rem; text-align: left; border-bottom: 1px solid #2e3345; }
+        th { background: #1a1d27; color: #9aa0b0; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.03em; }
+        td { font-size: 0.95rem; }
+        footer { text-align: center; padding: 2rem 1rem; color: #9aa0b0; font-size: 0.85rem; border-top: 1px solid #2e3345; }
+        @media (max-width: 600px) { h1 { font-size: 1.5rem; } h2 { font-size: 1.2rem; } article { padding: 1.5rem 1rem 2rem; } table { font-size: 0.85rem; } th, td { padding: 0.4rem 0.5rem; } }
+    </style>
+</head>
+<body>
+    <nav><a href="/" class="brand">Automated Insights</a><a href="/">Tools</a><a href="/blog/">Blog</a></nav>
+
+    <div class="breadcrumb">
+        <a href="/">Home</a> / <a href="/blog/">Blog</a> / LLM API Costs Compared
+    </div>
+
+    <article>
+        <h1>LLM API Costs Compared: GPT-4 vs Claude vs Gemini in 2026</h1>
+        <div class="post-meta">By Nicholas Vogler -- March 14, 2026 -- 7 min read</div>
+
+        <p>Building with large language models in 2026 means choosing between a growing number of APIs, each with different pricing structures, capabilities, and trade-offs. Whether you are building a chatbot, summarizing documents, or generating code, the model you choose directly affects your monthly bill.</p>
+
+        <p>This guide compares current API pricing across the major providers, runs through real-world cost scenarios, and offers practical tips to keep your LLM spending under control.</p>
+
+        <h2>API Pricing Comparison Table</h2>
+
+        <p>All prices are per million tokens as of March 2026. Input tokens are what you send to the model (prompts, system instructions, context). Output tokens are what the model generates in response.</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Model</th>
+                    <th>Input/1M</th>
+                    <th>Output/1M</th>
+                    <th>Context</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>GPT-4o</td>
+                    <td>$2.50</td>
+                    <td>$10.00</td>
+                    <td>128K</td>
+                </tr>
+                <tr>
+                    <td>GPT-4o-mini</td>
+                    <td>$0.15</td>
+                    <td>$0.60</td>
+                    <td>128K</td>
+                </tr>
+                <tr>
+                    <td>Claude 3.5 Sonnet</td>
+                    <td>$3.00</td>
+                    <td>$15.00</td>
+                    <td>200K</td>
+                </tr>
+                <tr>
+                    <td>Claude 3 Haiku</td>
+                    <td>$0.25</td>
+                    <td>$1.25</td>
+                    <td>200K</td>
+                </tr>
+                <tr>
+                    <td>Gemini 1.5 Pro</td>
+                    <td>$1.25</td>
+                    <td>$5.00</td>
+                    <td>2M</td>
+                </tr>
+                <tr>
+                    <td>Gemini 1.5 Flash</td>
+                    <td>$0.075</td>
+                    <td>$0.30</td>
+                    <td>1M</td>
+                </tr>
+                <tr>
+                    <td>Llama 3.1 (self-hosted)*</td>
+                    <td>~$0.03</td>
+                    <td>~$0.10</td>
+                    <td>128K</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>*Llama self-hosted costs are estimates based on running on a single A100 GPU at typical cloud rates. Actual costs depend heavily on your infrastructure, batch size, and utilization rate.</p>
+
+        <h2>Understanding Token Pricing</h2>
+
+        <p>A token is roughly 3/4 of a word in English. A 1,000-word document is approximately 1,333 tokens. A typical chatbot exchange -- system prompt, user message, and model response -- runs 500-2,000 tokens total.</p>
+
+        <p>Two things to watch out for:</p>
+
+        <ul>
+            <li><strong>Output tokens cost more than input tokens.</strong> Most providers charge 3-5x more for output. This means tasks that generate long responses (creative writing, code generation) cost significantly more than tasks with short outputs (classification, yes/no answers).</li>
+            <li><strong>System prompts count as input tokens every time.</strong> A 2,000-token system prompt costs the same whether it is the first call or the millionth. At 1,000 calls per day with GPT-4o, a 2,000-token system prompt alone costs about $5/day in input tokens.</li>
+        </ul>
+
+        <h2>Real-World Cost Scenarios</h2>
+
+        <h3>Scenario 1: Customer Support Chatbot</h3>
+
+        <p>Assumptions: 1,000 conversations per day, average 4 exchanges per conversation, 500-token system prompt, 200-token user messages, 300-token responses.</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Model</th>
+                    <th>Daily Cost</th>
+                    <th>Monthly Cost</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>GPT-4o</td>
+                    <td>$22.00</td>
+                    <td>$660</td>
+                </tr>
+                <tr>
+                    <td>GPT-4o-mini</td>
+                    <td>$1.32</td>
+                    <td>$40</td>
+                </tr>
+                <tr>
+                    <td>Claude 3.5 Sonnet</td>
+                    <td>$30.60</td>
+                    <td>$918</td>
+                </tr>
+                <tr>
+                    <td>Claude 3 Haiku</td>
+                    <td>$2.10</td>
+                    <td>$63</td>
+                </tr>
+                <tr>
+                    <td>Gemini 1.5 Flash</td>
+                    <td>$0.50</td>
+                    <td>$15</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>For most customer support use cases, a budget model like GPT-4o-mini or Gemini Flash handles routine questions well. Reserve premium models for escalated or complex queries.</p>
+
+        <h3>Scenario 2: Document Summarization</h3>
+
+        <p>Assumptions: 500 documents per day, average 5,000 tokens per document, 200-token summary output.</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Model</th>
+                    <th>Daily Cost</th>
+                    <th>Monthly Cost</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>GPT-4o</td>
+                    <td>$7.25</td>
+                    <td>$218</td>
+                </tr>
+                <tr>
+                    <td>GPT-4o-mini</td>
+                    <td>$0.44</td>
+                    <td>$13</td>
+                </tr>
+                <tr>
+                    <td>Claude 3.5 Sonnet</td>
+                    <td>$9.00</td>
+                    <td>$270</td>
+                </tr>
+                <tr>
+                    <td>Gemini 1.5 Pro</td>
+                    <td>$3.63</td>
+                    <td>$109</td>
+                </tr>
+                <tr>
+                    <td>Gemini 1.5 Flash</td>
+                    <td>$0.22</td>
+                    <td>$7</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>Summarization is input-heavy, which favors models with low input token pricing. Gemini 1.5 Flash is the clear winner here. Its 1M context window also means you can process very long documents without chunking.</p>
+
+        <h3>Scenario 3: Code Generation</h3>
+
+        <p>Assumptions: 200 requests per day, 1,000-token prompts (code context + instruction), 800-token responses (generated code).</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Model</th>
+                    <th>Daily Cost</th>
+                    <th>Monthly Cost</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>GPT-4o</td>
+                    <td>$2.10</td>
+                    <td>$63</td>
+                </tr>
+                <tr>
+                    <td>Claude 3.5 Sonnet</td>
+                    <td>$3.00</td>
+                    <td>$90</td>
+                </tr>
+                <tr>
+                    <td>Gemini 1.5 Pro</td>
+                    <td>$1.05</td>
+                    <td>$32</td>
+                </tr>
+                <tr>
+                    <td>GPT-4o-mini</td>
+                    <td>$0.13</td>
+                    <td>$4</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>Code generation is one area where model quality matters a lot. Claude 3.5 Sonnet and GPT-4o produce noticeably better code than their budget counterparts, especially for complex logic and debugging. The premium may be worth it if bad code costs you developer time to fix.</p>
+
+        <h2>Tips to Reduce API Costs</h2>
+
+        <h3>1. Use prompt caching</h3>
+        <p>Both OpenAI and Anthropic offer prompt caching, which significantly reduces costs for repeated system prompts and context. If you send the same system prompt with every request, caching can cut your input costs by 50-90% on those cached tokens.</p>
+
+        <h3>2. Choose the right model for the task</h3>
+        <p>Not every task needs a frontier model. Simple classification, entity extraction, and template-based responses work well with GPT-4o-mini or Gemini Flash. Reserve premium models for tasks where quality directly impacts user experience or business outcomes.</p>
+
+        <h3>3. Minimize output tokens</h3>
+        <p>Output tokens cost 3-5x more than input tokens. Use clear instructions like "respond in under 100 words" or "return only the JSON object" to keep responses concise. Setting <code>max_tokens</code> in your API call also prevents runaway responses.</p>
+
+        <h3>4. Implement a model router</h3>
+        <p>Route requests to different models based on complexity. A simple classifier (which can itself be a cheap model) analyzes incoming queries and sends simple ones to a budget model and complex ones to a premium model. This can reduce costs by 60-80% with minimal quality impact.</p>
+
+        <h3>5. Batch when possible</h3>
+        <p>Most providers offer batch APIs at a 50% discount. If your workload is not latency-sensitive -- background processing, nightly summarization runs, bulk classification -- use batch endpoints to cut costs in half.</p>
+
+        <h3>6. Trim your context window</h3>
+        <p>Stuffing the entire conversation history into every request is expensive and usually unnecessary. Keep only the last 3-5 exchanges, or use a summarization step to compress older history. Each additional 1,000 tokens of context at GPT-4o rates costs $2.50 per million calls.</p>
+
+        <div class="cta-box">
+            <h3>Compare LLM Pricing Interactively</h3>
+            <p>Use our LLM pricing comparison tool to calculate costs for your specific use case with real-time pricing data.</p>
+            <a href="/llm-pricing/" class="btn">Open LLM Pricing Tool</a>
+        </div>
+
+        <h2>Frequently Asked Questions</h2>
+
+        <h3>Which LLM API is cheapest?</h3>
+        <p>For hosted APIs, Gemini 1.5 Flash is the cheapest at $0.075 per million input tokens and $0.30 per million output tokens. GPT-4o-mini is a close second at $0.15/$0.60. For the absolute lowest cost, self-hosting an open-source model like Llama on your own infrastructure can reduce per-token costs below $0.05/1M -- but you pay for the GPU hardware instead.</p>
+
+        <h3>How much does it cost to run a chatbot?</h3>
+        <p>A customer support chatbot handling 1,000 conversations per day with an average of 4 exchanges each costs roughly $1-15/day using a budget model like GPT-4o-mini or Gemini Flash, or $20-30/day using a premium model like GPT-4o or Claude 3.5 Sonnet. The exact cost depends on conversation length, system prompt size, and whether you include conversation history.</p>
+
+        <h3>Is GPT-4 worth the premium over cheaper models?</h3>
+        <p>It depends on the task. For complex reasoning, nuanced writing, and code generation, GPT-4o and Claude 3.5 Sonnet produce noticeably better results than budget models. For straightforward classification, extraction, and simple Q&A, cheaper models like GPT-4o-mini or Gemini Flash perform nearly as well at 5-10x lower cost. Many production systems use a tiered approach -- routing simple queries to cheap models and complex ones to premium models.</p>
+    </article>
+
+    <footer>&copy; 2026 Automated Insights LLC. All rights reserved.</footer>
+</body>
+</html>

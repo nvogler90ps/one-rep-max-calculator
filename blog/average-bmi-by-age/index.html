@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Average BMI by Age and Gender: Where Do You Stand?</title>
+    <meta name="description" content="See average BMI by age and gender based on CDC data. Compare your BMI to national averages for men and women across all age groups, and understand what the numbers mean.">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="canonical" href="https://automated-insights.com/blog/average-bmi-by-age/">
+    <meta property="og:title" content="Average BMI by Age and Gender: Where Do You Stand?">
+    <meta property="og:description" content="Average BMI data by age and gender from CDC/NHANES surveys. See how your BMI compares to national averages.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://automated-insights.com/blog/average-bmi-by-age/">
+    <meta property="article:published_time" content="2026-03-14">
+    <meta property="article:author" content="Nicholas Vogler">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Average BMI by Age and Gender: Where Do You Stand?",
+        "author": { "@type": "Person", "name": "Nicholas Vogler" },
+        "datePublished": "2026-03-14",
+        "publisher": { "@type": "Organization", "name": "Automated Insights" },
+        "description": "Average BMI data by age and gender based on CDC/NHANES data, with context on what the numbers mean."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://automated-insights.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://automated-insights.com/blog/" },
+            { "@type": "ListItem", "position": 3, "name": "Average BMI by Age and Gender" }
+        ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is the average BMI in America?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The average BMI for adults in the United States is approximately 29.8 for men and 29.6 for women, according to NHANES data. This puts the average American adult just below the obesity threshold of 30.0. Over 73% of U.S. adults are classified as overweight or obese by BMI standards."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Does BMI change with age?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes, BMI tends to increase from young adulthood through middle age, peaking around ages 50-59, then gradually declining after 60. This pattern is driven by decreased muscle mass, lower activity levels, and metabolic changes. The increase does not mean higher BMI is healthy at older ages -- the same BMI thresholds apply regardless of age."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Is BMI accurate for athletes?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "BMI is often inaccurate for muscular athletes because it cannot distinguish between muscle and fat. A lean, muscular person at 5'10\" and 210 lbs would have a BMI of 30.1, classifying them as obese despite having low body fat. For athletes, body fat percentage, waist-to-hip ratio, or DEXA scans provide more meaningful assessments."
+                }
+            }
+        ]
+    }
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3434609691579834" crossorigin="anonymous"></script>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: #0f1117;
+            color: #e8eaed;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            line-height: 1.7;
+        }
+
+        a { color: #6c63ff; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        nav {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid #2e3345;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        nav a { color: #9aa0b0; font-size: 0.95rem; transition: color 0.2s; }
+        nav a:hover { color: #e8eaed; text-decoration: none; }
+        nav .brand { color: #6c63ff; font-weight: 700; font-size: 1.05rem; }
+
+        .breadcrumb {
+            max-width: 720px;
+            margin: 1.5rem auto 0;
+            padding: 0 1rem;
+            font-size: 0.85rem;
+            color: #9aa0b0;
+        }
+
+        .breadcrumb a { color: #9aa0b0; }
+        .breadcrumb a:hover { color: #6c63ff; }
+
+        article {
+            flex: 1;
+            width: 100%;
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 2rem 1rem 3rem;
+        }
+
+        .post-meta {
+            color: #9aa0b0;
+            font-size: 0.85rem;
+            margin-bottom: 2rem;
+        }
+
+        h1 { font-size: 2rem; font-weight: 700; margin-bottom: 0.75rem; line-height: 1.25; }
+        h2 { font-size: 1.4rem; font-weight: 600; margin: 2rem 0 0.75rem; color: #e8eaed; }
+        h3 { font-size: 1.1rem; font-weight: 600; margin: 1.5rem 0 0.5rem; }
+        p { margin-bottom: 1rem; color: #e8eaed; }
+        ul, ol { margin: 0 0 1rem 1.5rem; color: #e8eaed; }
+        li { margin-bottom: 0.4rem; }
+
+        code {
+            background: #1a1d27;
+            border: 1px solid #2e3345;
+            border-radius: 4px;
+            padding: 0.15rem 0.4rem;
+            font-size: 0.9em;
+        }
+
+        .formula-box {
+            background: #1a1d27;
+            border: 1px solid #2e3345;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        .cta-box {
+            background: #1a1d27;
+            border: 2px solid #6c63ff;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .cta-box h3 { color: #6c63ff; margin: 0 0 0.5rem; }
+        .cta-box p { color: #9aa0b0; margin-bottom: 1rem; }
+
+        .cta-box a.btn {
+            display: inline-block;
+            background: #6c63ff;
+            color: #fff;
+            padding: 0.6rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: opacity 0.2s;
+        }
+
+        .cta-box a.btn:hover { opacity: 0.85; text-decoration: none; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0 1.5rem;
+        }
+
+        th, td {
+            padding: 0.6rem 0.8rem;
+            text-align: left;
+            border-bottom: 1px solid #2e3345;
+        }
+
+        th {
+            background: #1a1d27;
+            color: #9aa0b0;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        td { font-size: 0.95rem; }
+
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: #9aa0b0;
+            font-size: 0.85rem;
+            border-top: 1px solid #2e3345;
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 1.5rem; }
+            h2 { font-size: 1.2rem; }
+            article { padding: 1.5rem 1rem 2rem; }
+            table { font-size: 0.85rem; }
+            th, td { padding: 0.4rem 0.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/" class="brand">Automated Insights</a>
+        <a href="/">Tools</a>
+        <a href="/blog/">Blog</a>
+    </nav>
+
+    <div class="breadcrumb">
+        <a href="/">Home</a> / <a href="/blog/">Blog</a> / Average BMI by Age and Gender
+    </div>
+
+    <article>
+        <h1>Average BMI by Age and Gender: Where Do You Stand?</h1>
+        <div class="post-meta">By Nicholas Vogler -- March 14, 2026 -- 6 min read</div>
+
+        <p>Body Mass Index is one of the most widely used health screening tools in the world. Doctors, insurers, and researchers all rely on it to quickly categorize weight relative to height. But most people who look up their BMI want to know one thing: is my number normal?</p>
+
+        <p>This article presents average BMI data by age group and gender, drawn from the CDC's National Health and Nutrition Examination Survey (NHANES), and explains what those numbers actually mean for your health.</p>
+
+        <h2>How BMI Is Calculated</h2>
+
+        <p>BMI is a simple formula that divides your weight by the square of your height:</p>
+
+        <div class="formula-box">
+            <p><strong>BMI</strong> = Weight (kg) / Height (m)<sup>2</sup></p>
+            <p>Or in imperial units: Weight (lbs) x 703 / Height (inches)<sup>2</sup></p>
+        </div>
+
+        <p>For example, a person who is 5'10" (70 inches) and weighs 170 lbs has a BMI of (170 x 703) / (70 x 70) = 24.4. You can calculate yours instantly with our <a href="/bmi-calculator/">free BMI calculator</a>.</p>
+
+        <h2>BMI Categories</h2>
+
+        <p>The World Health Organization defines four primary BMI categories for adults:</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>BMI Range</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Underweight</td>
+                    <td>Below 18.5</td>
+                </tr>
+                <tr>
+                    <td>Normal weight</td>
+                    <td>18.5 - 24.9</td>
+                </tr>
+                <tr>
+                    <td>Overweight</td>
+                    <td>25.0 - 29.9</td>
+                </tr>
+                <tr>
+                    <td>Obese</td>
+                    <td>30.0 and above</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>These categories are the same for all adults regardless of age or gender. A BMI of 27 is classified as "overweight" whether you are 25 or 65.</p>
+
+        <h2>Average BMI by Age and Gender</h2>
+
+        <p>The following table shows average BMI values for U.S. adults by age group and sex, based on NHANES survey data collected by the CDC:</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Age Group</th>
+                    <th>Men (Avg BMI)</th>
+                    <th>Women (Avg BMI)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>20-29</td>
+                    <td>27.5</td>
+                    <td>28.4</td>
+                </tr>
+                <tr>
+                    <td>30-39</td>
+                    <td>29.0</td>
+                    <td>29.7</td>
+                </tr>
+                <tr>
+                    <td>40-49</td>
+                    <td>29.8</td>
+                    <td>30.2</td>
+                </tr>
+                <tr>
+                    <td>50-59</td>
+                    <td>30.2</td>
+                    <td>30.7</td>
+                </tr>
+                <tr>
+                    <td>60-69</td>
+                    <td>30.1</td>
+                    <td>30.4</td>
+                </tr>
+                <tr>
+                    <td>70+</td>
+                    <td>28.8</td>
+                    <td>29.1</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>A few patterns stand out. Average BMI increases steadily from the 20s through the 50s for both men and women. It peaks in the 50-59 age range, then declines modestly after 60. Women have a slightly higher average BMI than men in every age group.</p>
+
+        <p>The most striking takeaway: the average BMI for U.S. adults in nearly every age group falls in the overweight or obese range. The overall average is approximately 29.8 for men and 29.6 for women -- just below the obesity threshold of 30.</p>
+
+        <div class="cta-box">
+            <h3>Check Your BMI</h3>
+            <p>See exactly where you fall on the BMI scale with our free calculator. Takes 10 seconds.</p>
+            <a href="/bmi-calculator/" class="btn">Calculate Your BMI</a>
+        </div>
+
+        <h2>Average vs. Healthy: An Important Distinction</h2>
+
+        <p>It is easy to look at the averages above and conclude that a BMI of 29 must be fine since it is "normal" for your age group. But average and healthy are not the same thing.</p>
+
+        <p>The health risks associated with BMI are based on population-level research linking higher BMI values to increased rates of heart disease, type 2 diabetes, certain cancers, and all-cause mortality. These risk curves do not shift upward just because the average person is heavier. A BMI of 30 carries the same statistical health risks whether 10% or 70% of the population is at that level.</p>
+
+        <p>The "normal weight" range of 18.5-24.9 is associated with the lowest overall health risks in most studies. That has not changed even as the average American's BMI has climbed over the past several decades.</p>
+
+        <h2>Why BMI Increases with Age</h2>
+
+        <p>Several factors drive the upward trend in BMI through middle age:</p>
+
+        <ul>
+            <li><strong>Muscle loss (sarcopenia).</strong> Adults lose approximately 3-8% of their muscle mass per decade after age 30. Since muscle burns more calories at rest than fat, this reduces your basal metabolic rate over time.</li>
+            <li><strong>Decreased activity.</strong> Physical activity tends to decline with age due to career demands, family responsibilities, joint pain, and shifting priorities. The average 50-year-old burns significantly fewer calories through movement than the average 25-year-old.</li>
+            <li><strong>Hormonal changes.</strong> Declining testosterone in men and estrogen in women after midlife affect fat distribution and metabolism. Both sexes tend to accumulate more visceral (abdominal) fat with age.</li>
+            <li><strong>Metabolic slowdown.</strong> Basal metabolic rate decreases by roughly 1-2% per decade. If calorie intake stays the same while expenditure drops, weight gain is inevitable.</li>
+        </ul>
+
+        <p>The decline in BMI after age 60-70 is partly due to continued muscle loss (which reduces weight), reduced appetite, and survivorship bias -- people with very high BMIs are more likely to die earlier from obesity-related conditions.</p>
+
+        <h2>Limitations of BMI</h2>
+
+        <p>BMI is a useful screening tool, but it has well-documented blind spots:</p>
+
+        <ul>
+            <li><strong>It cannot distinguish muscle from fat.</strong> A bodybuilder with 8% body fat and a sedentary person with 35% body fat can have the same BMI. The formula treats all weight equally.</li>
+            <li><strong>It does not account for fat distribution.</strong> Visceral fat (around the organs) is far more dangerous than subcutaneous fat (under the skin). Two people with identical BMIs can have very different health risk profiles depending on where their fat is stored.</li>
+            <li><strong>It varies by ethnicity.</strong> Research shows that health risks associated with higher BMI begin at lower thresholds for people of Asian descent and at slightly higher thresholds for some Black populations.</li>
+            <li><strong>It is less reliable at the extremes of height.</strong> Very tall and very short people tend to get somewhat skewed BMI values.</li>
+        </ul>
+
+        <p>For a more complete picture, consider supplementing your BMI with a waist circumference measurement. A waist circumference above 40 inches for men or 35 inches for women is associated with increased health risks regardless of BMI.</p>
+
+        <h2>What You Can Do About Your BMI</h2>
+
+        <p>If your BMI is higher than you would like, the most effective approach is a moderate calorie deficit combined with resistance training. Use our <a href="/tdee-calculator/">TDEE calculator</a> to find your maintenance calories, then subtract 500 per day for roughly 1 pound of fat loss per week.</p>
+
+        <p>Resistance training is especially important because it counteracts the muscle loss that naturally occurs with age and during calorie deficits. Preserving muscle keeps your metabolic rate higher and improves body composition -- you can improve your health profile significantly even if your BMI does not change much, as long as you are replacing fat with muscle.</p>
+
+        <h2>The Bottom Line</h2>
+
+        <p>The average American adult has a BMI between 28 and 30, depending on age and gender. But average is not the same as optimal. The lowest health risks are still associated with a BMI in the 18.5-24.9 range. Check where you stand with our <a href="/bmi-calculator/">BMI calculator</a>, and if you want to improve your number, start by understanding your daily calorie needs with our <a href="/tdee-calculator/">TDEE calculator</a>.</p>
+
+        <h2>Frequently Asked Questions</h2>
+
+        <h3>What is the average BMI in America?</h3>
+        <p>The average BMI for adults in the United States is approximately 29.8 for men and 29.6 for women, according to NHANES data. This puts the average American adult just below the obesity threshold of 30.0. Over 73% of U.S. adults are classified as overweight or obese by BMI standards.</p>
+
+        <h3>Does BMI change with age?</h3>
+        <p>Yes, BMI tends to increase from young adulthood through middle age, peaking around ages 50-59, then gradually declining after 60. This pattern is driven by decreased muscle mass, lower activity levels, and metabolic changes. The increase does not mean higher BMI is healthy at older ages -- the same BMI thresholds apply regardless of age.</p>
+
+        <h3>Is BMI accurate for athletes?</h3>
+        <p>BMI is often inaccurate for muscular athletes because it cannot distinguish between muscle and fat. A lean, muscular person at 5'10" and 210 lbs would have a BMI of 30.1, classifying them as obese despite having low body fat. For athletes, body fat percentage, waist-to-hip ratio, or DEXA scans provide more meaningful assessments of health and fitness.</p>
+    </article>
+
+    <footer>
+        &copy; 2026 Automated Insights LLC. All rights reserved.
+    </footer>
+</body>
+</html>

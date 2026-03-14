@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compound Interest: The Math Behind Building Wealth</title>
+    <meta name="description" content="Learn the compound interest formula, the Rule of 72, and see how $10,000 grows at different rates. Understand the math that drives long-term wealth building.">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="canonical" href="https://automated-insights.com/blog/compound-interest-math-behind-wealth/">
+    <meta property="og:title" content="Compound Interest: The Math Behind Building Wealth">
+    <meta property="og:description" content="Learn the compound interest formula, the Rule of 72, and see how $10,000 grows at different rates over 10, 20, and 30 years.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://automated-insights.com/blog/compound-interest-math-behind-wealth/">
+    <meta property="article:published_time" content="2026-03-14">
+    <meta property="article:author" content="Nicholas Vogler">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3434609691579834" crossorigin="anonymous"></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Compound Interest: The Math Behind Building Wealth",
+        "author": { "@type": "Person", "name": "Nicholas Vogler" },
+        "datePublished": "2026-03-14",
+        "publisher": { "@type": "Organization", "name": "Automated Insights" },
+        "description": "Learn the compound interest formula, the Rule of 72, and see how $10,000 grows at different rates over time."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://automated-insights.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://automated-insights.com/blog/" },
+            { "@type": "ListItem", "position": 3, "name": "Compound Interest: The Math Behind Building Wealth" }
+        ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is the Rule of 72?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The Rule of 72 is a quick formula to estimate how long it takes for an investment to double. Divide 72 by your annual interest rate to get the approximate number of years. For example, at 8% interest, your money doubles in roughly 72 / 8 = 9 years."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How much will $10,000 grow in 20 years?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "It depends on the rate of return. At 5% compounded annually, $10,000 grows to about $26,533. At 7%, it reaches $38,697. At 10%, it grows to $67,275. The higher the rate and the longer the time horizon, the more dramatic the growth."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Does compound interest make you rich?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Compound interest is one of the most powerful tools for building wealth, but it requires time, consistency, and a reasonable rate of return. Starting early and making regular contributions dramatically accelerates growth. A person who invests $10,000 at age 25 with a 7% return will have over $149,000 by age 65 -- without adding a single dollar."
+                }
+            }
+        ]
+    }
+    </script>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; background: #0f1117; color: #e8eaed; min-height: 100vh; display: flex; flex-direction: column; line-height: 1.7; }
+        a { color: #6c63ff; text-decoration: none; } a:hover { text-decoration: underline; }
+        nav { padding: 1rem 1.5rem; border-bottom: 1px solid #2e3345; display: flex; align-items: center; gap: 1.5rem; }
+        nav a { color: #9aa0b0; font-size: 0.95rem; transition: color 0.2s; } nav a:hover { color: #e8eaed; text-decoration: none; } nav .brand { color: #6c63ff; font-weight: 700; font-size: 1.05rem; }
+        .breadcrumb { max-width: 720px; margin: 1.5rem auto 0; padding: 0 1rem; font-size: 0.85rem; color: #9aa0b0; } .breadcrumb a { color: #9aa0b0; } .breadcrumb a:hover { color: #6c63ff; }
+        article { flex: 1; width: 100%; max-width: 720px; margin: 0 auto; padding: 2rem 1rem 3rem; }
+        .post-meta { color: #9aa0b0; font-size: 0.85rem; margin-bottom: 2rem; }
+        h1 { font-size: 2rem; font-weight: 700; margin-bottom: 0.75rem; line-height: 1.25; }
+        h2 { font-size: 1.4rem; font-weight: 600; margin: 2rem 0 0.75rem; color: #e8eaed; }
+        h3 { font-size: 1.1rem; font-weight: 600; margin: 1.5rem 0 0.5rem; }
+        p { margin-bottom: 1rem; color: #e8eaed; }
+        ul, ol { margin: 0 0 1rem 1.5rem; color: #e8eaed; } li { margin-bottom: 0.4rem; }
+        code { background: #1a1d27; border: 1px solid #2e3345; border-radius: 4px; padding: 0.15rem 0.4rem; font-size: 0.9em; }
+        .formula-box { background: #1a1d27; border: 1px solid #2e3345; border-radius: 10px; padding: 1.5rem; margin: 1.5rem 0; text-align: center; font-size: 1.1rem; }
+        .cta-box { background: #1a1d27; border: 2px solid #6c63ff; border-radius: 10px; padding: 1.5rem; margin: 2rem 0; text-align: center; }
+        .cta-box h3 { color: #6c63ff; margin: 0 0 0.5rem; } .cta-box p { color: #9aa0b0; margin-bottom: 1rem; }
+        .cta-box a.btn { display: inline-block; background: #6c63ff; color: #fff; padding: 0.6rem 1.5rem; border-radius: 6px; font-weight: 600; transition: opacity 0.2s; } .cta-box a.btn:hover { opacity: 0.85; text-decoration: none; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem; }
+        th, td { padding: 0.6rem 0.8rem; text-align: left; border-bottom: 1px solid #2e3345; }
+        th { background: #1a1d27; color: #9aa0b0; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.03em; }
+        td { font-size: 0.95rem; }
+        footer { text-align: center; padding: 2rem 1rem; color: #9aa0b0; font-size: 0.85rem; border-top: 1px solid #2e3345; }
+        @media (max-width: 600px) { h1 { font-size: 1.5rem; } h2 { font-size: 1.2rem; } article { padding: 1.5rem 1rem 2rem; } table { font-size: 0.85rem; } th, td { padding: 0.4rem 0.5rem; } }
+    </style>
+</head>
+<body>
+    <nav><a href="/" class="brand">Automated Insights</a><a href="/">Tools</a><a href="/blog/">Blog</a></nav>
+    <div class="breadcrumb"><a href="/">Home</a> / <a href="/blog/">Blog</a> / Compound Interest: The Math Behind Building Wealth</div>
+    <article>
+        <h1>Compound Interest: The Math Behind Building Wealth</h1>
+        <div class="post-meta">By Nicholas Vogler - March 14, 2026 - 6 min read</div>
+
+        <p>Albert Einstein supposedly called compound interest the "eighth wonder of the world." Whether or not he actually said it, the math backs up the sentiment. Compound interest is the single most important concept in personal finance, and understanding the formula behind it gives you a concrete advantage when planning your financial future.</p>
+
+        <p>This article breaks down the compound interest formula, compares it to simple interest, explains the Rule of 72, and shows you exactly how different rates and time horizons change your results.</p>
+
+        <h2>The Compound Interest Formula</h2>
+
+        <p>The standard compound interest formula calculates the future value of an investment or loan:</p>
+
+        <div class="formula-box">
+            <strong>A = P(1 + r/n)<sup>nt</sup></strong>
+        </div>
+
+        <p>Where:</p>
+        <ul>
+            <li><strong>A</strong> = the future value of the investment (principal + interest earned)</li>
+            <li><strong>P</strong> = the principal (initial amount invested)</li>
+            <li><strong>r</strong> = the annual interest rate (as a decimal, so 7% = 0.07)</li>
+            <li><strong>n</strong> = the number of times interest compounds per year</li>
+            <li><strong>t</strong> = the number of years</li>
+        </ul>
+
+        <p>For example, if you invest $10,000 at 7% annual interest compounded monthly for 20 years:</p>
+        <ul>
+            <li>P = 10,000</li>
+            <li>r = 0.07</li>
+            <li>n = 12</li>
+            <li>t = 20</li>
+        </ul>
+        <p>A = 10,000 x (1 + 0.07/12)<sup>12 x 20</sup> = 10,000 x (1.005833)<sup>240</sup> = <strong>$40,387.39</strong></p>
+
+        <p>Your $10,000 turned into over $40,000 -- and you did not add a single dollar after the initial deposit. That is the power of compounding.</p>
+
+        <h2>Simple Interest vs. Compound Interest</h2>
+
+        <p>Simple interest only calculates interest on the original principal. The formula is straightforward: <code>A = P(1 + rt)</code>. Compound interest, by contrast, calculates interest on the principal plus all previously earned interest.</p>
+
+        <p>Here is what happens to $10,000 at 7% over 20 years with each method:</p>
+
+        <table>
+            <thead>
+                <tr><th>Method</th><th>Year 5</th><th>Year 10</th><th>Year 15</th><th>Year 20</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Simple Interest</td><td>$13,500</td><td>$17,000</td><td>$20,500</td><td>$24,000</td></tr>
+                <tr><td>Compound Interest</td><td>$14,026</td><td>$19,672</td><td>$27,590</td><td>$38,697</td></tr>
+                <tr><td>Difference</td><td>$526</td><td>$2,672</td><td>$7,090</td><td>$14,697</td></tr>
+            </tbody>
+        </table>
+
+        <p>The gap starts small but widens dramatically. After 20 years, compound interest delivers over 61% more than simple interest on the same deposit. This accelerating gap is what people mean when they say compound interest is "exponential."</p>
+
+        <h2>The Rule of 72</h2>
+
+        <p>The Rule of 72 is a mental math shortcut that tells you approximately how many years it takes for your money to double at a given interest rate. The formula is simple:</p>
+
+        <div class="formula-box">
+            <strong>Years to double = 72 / annual interest rate</strong>
+        </div>
+
+        <p>Quick examples:</p>
+        <ul>
+            <li>At 4% interest: 72 / 4 = <strong>18 years</strong> to double</li>
+            <li>At 6% interest: 72 / 6 = <strong>12 years</strong> to double</li>
+            <li>At 8% interest: 72 / 8 = <strong>9 years</strong> to double</li>
+            <li>At 10% interest: 72 / 10 = <strong>7.2 years</strong> to double</li>
+            <li>At 12% interest: 72 / 12 = <strong>6 years</strong> to double</li>
+        </ul>
+
+        <p>This rule is remarkably accurate for interest rates between 2% and 15%. It also works in reverse -- if you want to double your money in 10 years, you need roughly 72 / 10 = 7.2% annual returns.</p>
+
+        <h2>$10,000 Invested at Different Rates</h2>
+
+        <p>The table below shows the future value of a single $10,000 investment compounded annually at different rates over 10, 20, and 30 years. No additional contributions -- just one deposit and time.</p>
+
+        <table>
+            <thead>
+                <tr><th>Rate</th><th>10 Years</th><th>20 Years</th><th>30 Years</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>3%</td><td>$13,439</td><td>$18,061</td><td>$24,273</td></tr>
+                <tr><td>5%</td><td>$16,289</td><td>$26,533</td><td>$43,219</td></tr>
+                <tr><td>7%</td><td>$19,672</td><td>$38,697</td><td>$76,123</td></tr>
+                <tr><td>8%</td><td>$21,589</td><td>$46,610</td><td>$100,627</td></tr>
+                <tr><td>10%</td><td>$25,937</td><td>$67,275</td><td>$174,494</td></tr>
+                <tr><td>12%</td><td>$31,058</td><td>$96,463</td><td>$299,599</td></tr>
+            </tbody>
+        </table>
+
+        <p>The numbers at 30 years are striking. At 7% -- roughly the inflation-adjusted historical average of the S&P 500 -- your $10,000 becomes over $76,000. At 10%, it grows to nearly $175,000. Time is the most important variable in this equation.</p>
+
+        <h2>Compounding Frequency Matters</h2>
+
+        <p>The variable <code>n</code> in the formula represents how often interest compounds. More frequent compounding means slightly more growth, because earned interest starts earning its own interest sooner.</p>
+
+        <p>Here is $10,000 at 8% for 20 years with different compounding frequencies:</p>
+
+        <table>
+            <thead>
+                <tr><th>Frequency</th><th>n Value</th><th>Future Value</th><th>Total Interest</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Annually</td><td>1</td><td>$46,610</td><td>$36,610</td></tr>
+                <tr><td>Quarterly</td><td>4</td><td>$48,010</td><td>$38,010</td></tr>
+                <tr><td>Monthly</td><td>12</td><td>$48,886</td><td>$38,886</td></tr>
+                <tr><td>Daily</td><td>365</td><td>$49,530</td><td>$39,530</td></tr>
+            </tbody>
+        </table>
+
+        <p>Going from annual to daily compounding adds about $2,920 over 20 years on a $10,000 deposit. The difference is meaningful but not dramatic. What matters far more is your interest rate and time horizon. Compounding frequency is a secondary factor.</p>
+
+        <h2>When Compound Interest Works Against You</h2>
+
+        <p>Compound interest is not always your friend. When you carry debt -- especially high-interest credit card debt -- the same math that builds wealth works in reverse to erode it.</p>
+
+        <p>Consider a $5,000 credit card balance at 22% APR. If you make only the minimum payment (typically 2% of the balance or $25, whichever is greater), here is what happens:</p>
+
+        <ul>
+            <li>It takes over <strong>20 years</strong> to pay off the balance</li>
+            <li>You pay approximately <strong>$9,580 in total interest</strong></li>
+            <li>Your $5,000 purchase actually cost you <strong>$14,580</strong></li>
+        </ul>
+
+        <p>The same exponential growth that turns $10,000 into $76,000 over 30 years at 7% can turn a $5,000 debt into a $14,580 burden at 22%. The math is neutral -- it amplifies whatever direction your money is moving.</p>
+
+        <p>This is why financial advisors prioritize paying off high-interest debt before investing. A guaranteed 22% return (by eliminating 22% interest charges) beats any realistic investment return.</p>
+
+        <h2>Key Takeaways</h2>
+
+        <ul>
+            <li><strong>Start early.</strong> Time is the most powerful variable in the formula. Ten extra years of compounding can double or triple your final balance.</li>
+            <li><strong>Rate matters.</strong> Even a 1-2% difference in annual returns creates enormous gaps over decades.</li>
+            <li><strong>Kill high-interest debt first.</strong> Compound interest on debt destroys wealth faster than investments can build it.</li>
+            <li><strong>Compounding frequency is secondary.</strong> Focus on rate and time, not whether your account compounds daily vs. monthly.</li>
+            <li><strong>The Rule of 72 is your friend.</strong> Use it to quickly estimate doubling times for any rate of return.</li>
+        </ul>
+
+        <div class="cta-box">
+            <h3>Run Your Own Numbers</h3>
+            <p>See how your savings will grow with our free compound interest calculator.</p>
+            <a href="/interest-calculator/" class="btn">Open Interest Calculator</a>
+        </div>
+
+        <h2>Frequently Asked Questions</h2>
+
+        <h3>What is the Rule of 72?</h3>
+        <p>The Rule of 72 is a quick formula to estimate how long it takes for an investment to double. Divide 72 by your annual interest rate to get the approximate number of years. For example, at 8% interest, your money doubles in roughly 72 / 8 = 9 years. The rule is accurate for rates between about 2% and 15%.</p>
+
+        <h3>How much will $10,000 grow in 20 years?</h3>
+        <p>It depends on the rate of return. At 5% compounded annually, $10,000 grows to about $26,533. At 7%, it reaches $38,697. At 10%, it grows to $67,275. The higher the rate and the longer the time horizon, the more dramatic the growth. Use our <a href="/interest-calculator/">interest calculator</a> to model your specific scenario.</p>
+
+        <h3>Does compound interest make you rich?</h3>
+        <p>Compound interest is one of the most powerful tools for building wealth, but it requires time, consistency, and a reasonable rate of return. Starting early and making regular contributions dramatically accelerates growth. A person who invests $10,000 at age 25 with a 7% return will have over $149,000 by age 65 -- without adding a single dollar. Combined with regular contributions, compound interest can absolutely build significant wealth over a working career.</p>
+    </article>
+    <footer>&copy; 2026 Automated Insights LLC. All rights reserved.</footer>
+</body>
+</html>

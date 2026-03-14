@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{TITLE}} - Auto Loan Calculator</title>
+  <meta name="description" content="{{DESCRIPTION}}">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="canonical" href="{{CANONICAL}}">
+  <meta property="og:title" content="{{TITLE}} - Auto Loan Calculator">
+  <meta property="og:description" content="{{DESCRIPTION}}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{CANONICAL}}">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the monthly payment on a ${{AMOUNT_FORMATTED}} car loan at {{RATE}}% for {{TERM}} months?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The monthly payment on a ${{AMOUNT_FORMATTED}} auto loan at {{RATE}}% APR for {{TERM}} months is {{MONTHLY_PAYMENT}}. You will pay {{TOTAL_INTEREST}} in total interest, making the total cost of the loan {{TOTAL_COST}}."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much total interest will I pay on a ${{AMOUNT_FORMATTED}} car loan at {{RATE}}%?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "On a ${{AMOUNT_FORMATTED}} auto loan at {{RATE}}% APR for {{TERM}} months, you will pay {{TOTAL_INTEREST}} in total interest over the life of the loan. The total amount paid will be {{TOTAL_COST}}."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is {{RATE}}% a good interest rate for a car loan?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The average new car loan rate varies based on credit score and market conditions. Rates below 5% are generally considered good, while rates above 7% may indicate room for improvement. Check with multiple lenders and consider your credit score to find the best rate available to you."
+        }
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://automated-insights.com/"},
+      {"@type": "ListItem", "position": 2, "name": "Auto Loan Calculator", "item": "https://automated-insights.com/auto-loan-calc/"},
+      {"@type": "ListItem", "position": 3, "name": "Car Payment on ${{AMOUNT_FORMATTED}}"}
+    ]
+  }
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3434609691579834" crossorigin="anonymous"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: #0f1117;
+      color: #e8eaed;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    /* Breadcrumb */
+    .breadcrumb {
+      padding: 1rem 0 0;
+      font-size: 0.82rem;
+      color: #9aa0b0;
+    }
+    .breadcrumb a {
+      color: #9aa0b0;
+      text-decoration: none;
+    }
+    .breadcrumb a:hover {
+      color: #6c63ff;
+    }
+    .breadcrumb .sep {
+      margin: 0 0.4rem;
+      opacity: 0.5;
+    }
+
+    /* Hero answer */
+    .hero {
+      text-align: center;
+      padding: 2.5rem 1rem 2rem;
+    }
+    .hero h1 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #c4c8d4;
+      margin-bottom: 1.25rem;
+    }
+    .answer-box {
+      background: #1a1d27;
+      border: 2px solid #6c63ff;
+      border-radius: 12px;
+      padding: 2rem 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+    .answer-label {
+      display: block;
+      font-size: 0.85rem;
+      color: #9aa0b0;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.5rem;
+    }
+    .answer-value {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #6c63ff;
+      line-height: 1.2;
+    }
+    .answer-suffix {
+      display: block;
+      font-size: 1rem;
+      color: #9aa0b0;
+      margin-top: 0.3rem;
+    }
+
+    /* Loan summary */
+    .summary {
+      background: #1a1d27;
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .summary h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #c4c8d4;
+      margin-bottom: 1rem;
+    }
+    .summary-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .summary-item {
+      display: flex;
+      flex-direction: column;
+    }
+    .summary-item .label {
+      font-size: 0.78rem;
+      color: #9aa0b0;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.25rem;
+    }
+    .summary-item .value {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #e8eaed;
+    }
+    .summary-item .value.accent {
+      color: #6c63ff;
+    }
+
+    /* Comparison table */
+    .comparison {
+      margin-bottom: 2rem;
+    }
+    .comparison h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #c4c8d4;
+      margin-bottom: 0.75rem;
+    }
+    .comparison table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #1a1d27;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .comparison th,
+    .comparison td {
+      padding: 0.75rem 1rem;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+    .comparison th {
+      background: #252836;
+      color: #9aa0b0;
+      font-weight: 600;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .comparison td {
+      border-top: 1px solid #2e3345;
+      color: #e8eaed;
+    }
+    .comparison tr.active td {
+      background: rgba(108, 99, 255, 0.08);
+      color: #6c63ff;
+      font-weight: 600;
+    }
+
+    /* Related calculations */
+    .related {
+      margin-bottom: 2rem;
+    }
+    .related h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #c4c8d4;
+      margin-bottom: 0.75rem;
+    }
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 0.5rem;
+    }
+    .related-grid a {
+      display: block;
+      padding: 0.6rem 0.85rem;
+      background: #1a1d27;
+      border: 1px solid #2e3345;
+      border-radius: 8px;
+      color: #e8eaed;
+      text-decoration: none;
+      font-size: 0.88rem;
+      transition: border-color 0.15s;
+    }
+    .related-grid a:hover {
+      border-color: #6c63ff;
+    }
+    .related-grid a .related-result {
+      color: #6c63ff;
+      font-weight: 600;
+    }
+
+    /* CTA to main calculator */
+    .cta {
+      text-align: center;
+      padding: 2rem 1rem;
+      background: #1a1d27;
+      border-radius: 10px;
+      margin-bottom: 2rem;
+    }
+    .cta p {
+      color: #9aa0b0;
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+    .cta a {
+      display: inline-block;
+      padding: 0.7rem 1.8rem;
+      background: #6c63ff;
+      color: #fff;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background 0.15s;
+    }
+    .cta a:hover {
+      background: #5a52e0;
+    }
+
+    /* More tools */
+    .more-tools {
+      padding: 1.5rem 0;
+      border-top: 1px solid #2e3345;
+    }
+    .more-tools p {
+      font-size: 0.82rem;
+      color: #9aa0b0;
+      margin-bottom: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .tools-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .tools-row a {
+      display: inline-block;
+      padding: 0.4rem 0.85rem;
+      background: #1a1d27;
+      border: 1px solid #2e3345;
+      border-radius: 6px;
+      color: #e8eaed;
+      font-size: 0.82rem;
+      text-decoration: none;
+    }
+    .tools-row a:hover {
+      border-color: #6c63ff;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem 0;
+      color: #666b7a;
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 1.15rem; }
+      .answer-value { font-size: 2.2rem; }
+      .summary-grid { grid-template-columns: 1fr; }
+      .related-grid { grid-template-columns: 1fr 1fr; }
+      .comparison th,
+      .comparison td { padding: 0.6rem 0.65rem; font-size: 0.82rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a><span class="sep">&rsaquo;</span>
+      <a href="/auto-loan-calc/">Auto Loan Calculator</a><span class="sep">&rsaquo;</span>
+      <span>Car Payment on ${{AMOUNT_FORMATTED}}</span>
+    </nav>
+
+    <div class="hero">
+      <h1>Car Payment on ${{AMOUNT_FORMATTED}} at {{RATE}}% for {{TERM}} Months</h1>
+      <div class="answer-box">
+        <span class="answer-label">Monthly Payment</span>
+        <span class="answer-value">{{MONTHLY_PAYMENT}}</span>
+        <span class="answer-suffix">per month for {{TERM}} months</span>
+      </div>
+    </div>
+
+    <div class="summary">
+      <h2>Loan Summary</h2>
+      <div class="summary-grid">
+        <div class="summary-item">
+          <span class="label">Loan Amount</span>
+          <span class="value">${{AMOUNT_FORMATTED}}</span>
+        </div>
+        <div class="summary-item">
+          <span class="label">Interest Rate</span>
+          <span class="value">{{RATE}}% APR</span>
+        </div>
+        <div class="summary-item">
+          <span class="label">Loan Term</span>
+          <span class="value">{{TERM}} months</span>
+        </div>
+        <div class="summary-item">
+          <span class="label">Monthly Payment</span>
+          <span class="value accent">{{MONTHLY_PAYMENT}}</span>
+        </div>
+        <div class="summary-item">
+          <span class="label">Total Interest</span>
+          <span class="value">{{TOTAL_INTEREST}}</span>
+        </div>
+        <div class="summary-item">
+          <span class="label">Total Cost</span>
+          <span class="value">{{TOTAL_COST}}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="comparison">
+      <h2>${{AMOUNT_FORMATTED}} at {{RATE}}% -- Compare Loan Terms</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Term</th>
+            <th>Monthly Payment</th>
+            <th>Total Interest</th>
+            <th>Total Cost</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{COMPARISON_ROWS}}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="related">
+      <h2>Related Auto Loan Calculations</h2>
+      <div class="related-grid">
+        {{RELATED_LINKS}}
+      </div>
+    </div>
+
+    <div class="cta">
+      <p>Want to customize your loan amount, rate, or term? Try the full calculator.</p>
+      <a href="/auto-loan-calc/">Open Auto Loan Calculator</a>
+    </div>
+
+    <div class="more-tools">
+      <p>More Free Tools</p>
+      <div class="tools-row">
+        <a href="/">All Tools</a>
+        <a href="/mortgage-calc/">Mortgage Calculator</a>
+        <a href="/compound-interest-calc/">Compound Interest</a>
+        <a href="/percentage-calc/">Percentage Calculator</a>
+      </div>
+    </div>
+
+    <footer>
+      <p>&copy; 2026 Automated Insights LLC</p>
+    </footer>
+  </div>
+</body>
+</html>

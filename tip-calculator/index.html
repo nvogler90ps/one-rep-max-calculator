@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tip Calculator - Free Online Tip &amp; Split Bill Calculator</title>
+    <meta name="description" content="Free online tip calculator. Instantly calculate tip amount, total bill, and per-person split. Supports custom tip percentages and bill splitting for any group size.">
+    <link rel="canonical" href="https://automated-insights.com/tip-calculator/">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <meta property="og:title" content="Tip Calculator - Free Online Tip &amp; Split Bill Calculator">
+    <meta property="og:description" content="Free online tip calculator. Calculate tip amount, total bill, and per-person split instantly.">
+    <meta property="og:url" content="https://automated-insights.com/tip-calculator/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Automated Insights">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Tip Calculator - Free Online Tip &amp; Split Bill Calculator">
+    <meta name="twitter:description" content="Free online tip calculator. Calculate tip amount, total bill, and per-person split instantly.">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Tip Calculator",
+      "url": "https://automated-insights.com/tip-calculator/",
+      "description": "Free online tip calculator. Instantly calculate tip amount, total bill, and per-person split. Supports custom tip percentages and bill splitting for any group size.",
+      "applicationCategory": "UtilityApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How much should you tip at a restaurant?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In the United States, the standard tip at a restaurant is 15-20% of the pre-tax bill. For excellent service, 20-25% is common. For counter service or takeout, 10-15% is typical. Always tip on the pre-tax amount, not the total after tax."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you calculate a tip?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "To calculate a tip, multiply the bill amount by the tip percentage as a decimal. For example, a 20% tip on a $50 bill: $50 x 0.20 = $10.00 tip. The total bill would be $50 + $10 = $60. To split, divide the total by the number of people."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you split a bill with tip?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "To split a bill with tip: first calculate the tip on the full bill amount, add it to the bill to get the total, then divide the total by the number of people. For example, a $100 bill with 20% tip ($20) totals $120 -- split 4 ways, each person pays $30."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you tip on tax?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Etiquette experts recommend tipping on the pre-tax subtotal, not the after-tax total. The tax goes to the government, not the server. However, tipping on the full total including tax is also acceptable and makes the math simpler -- either approach is fine."
+          }
+        }
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://automated-insights.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Tip Calculator",
+          "item": "https://automated-insights.com/tip-calculator/"
+        }
+      ]
+    }
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3434609691579834" crossorigin="anonymous"></script>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: #0f1117;
+            color: #e8eaed;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 0 1rem 2rem;
+        }
+
+        header {
+            text-align: center;
+            padding: 2rem 0 1.5rem;
+        }
+        header h1 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #e8eaed;
+            margin-bottom: 0.4rem;
+        }
+        header .subtitle {
+            color: #9aa0b0;
+            font-size: 0.95rem;
+        }
+
+        .card {
+            background: #1a1d27;
+            border: 1px solid #2e3345;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card h2 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #c4c8d4;
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            font-size: 0.85rem;
+            color: #9aa0b0;
+            margin-bottom: 0.35rem;
+            font-weight: 500;
+        }
+
+        .input-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .input-row {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .input-prefix {
+            font-size: 1.1rem;
+            color: #9aa0b0;
+            font-weight: 600;
+        }
+
+        .input-suffix {
+            font-size: 1.1rem;
+            color: #9aa0b0;
+            font-weight: 600;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 0.65rem 0.85rem;
+            background: #252836;
+            border: 1px solid #2e3345;
+            border-radius: 8px;
+            color: #e8eaed;
+            font-size: 1.05rem;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.15s;
+            -moz-appearance: textfield;
+        }
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type="number"]:focus {
+            border-color: #6c63ff;
+        }
+
+        .presets {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-top: 0.5rem;
+        }
+
+        .preset-btn {
+            padding: 0.4rem 0.75rem;
+            background: #252836;
+            border: 1px solid #2e3345;
+            border-radius: 6px;
+            color: #e8eaed;
+            font-size: 0.85rem;
+            font-family: inherit;
+            cursor: pointer;
+            transition: border-color 0.15s, background 0.15s;
+        }
+        .preset-btn:hover {
+            border-color: #6c63ff;
+        }
+        .preset-btn.active {
+            background: #6c63ff;
+            border-color: #6c63ff;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .round-up {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.25rem;
+        }
+        .round-up input[type="checkbox"] {
+            width: 1.1rem;
+            height: 1.1rem;
+            accent-color: #6c63ff;
+            cursor: pointer;
+        }
+        .round-up label {
+            margin-bottom: 0;
+            font-size: 0.88rem;
+            color: #e8eaed;
+            cursor: pointer;
+        }
+
+        .results {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .result-item {
+            background: #252836;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+        }
+        .result-item.full {
+            grid-column: 1 / -1;
+        }
+        .result-label {
+            font-size: 0.78rem;
+            color: #9aa0b0;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 0.3rem;
+        }
+        .result-value {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #6c63ff;
+        }
+        .result-value.large {
+            font-size: 2.2rem;
+        }
+        .result-note {
+            font-size: 0.78rem;
+            color: #9aa0b0;
+            margin-top: 0.15rem;
+        }
+
+        .quick-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .quick-table th {
+            text-align: left;
+            font-size: 0.78rem;
+            color: #9aa0b0;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            padding: 0.5rem 0.75rem;
+            border-bottom: 1px solid #2e3345;
+            font-weight: 600;
+        }
+        .quick-table td {
+            padding: 0.55rem 0.75rem;
+            font-size: 0.92rem;
+            border-bottom: 1px solid rgba(46, 51, 69, 0.5);
+        }
+        .quick-table tr:last-child td {
+            border-bottom: none;
+        }
+        .quick-table .tip-col {
+            color: #6c63ff;
+            font-weight: 600;
+        }
+        .quick-table .highlight-row {
+            background: rgba(108, 99, 255, 0.08);
+        }
+
+        .faq-section {
+            margin-bottom: 1.5rem;
+        }
+        .faq-section h2 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #c4c8d4;
+            margin-bottom: 1rem;
+        }
+        .faq-item {
+            background: #1a1d27;
+            border: 1px solid #2e3345;
+            border-radius: 8px;
+            padding: 1rem 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+        .faq-item h3 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #e8eaed;
+            margin-bottom: 0.4rem;
+        }
+        .faq-item p {
+            font-size: 0.88rem;
+            color: #9aa0b0;
+            line-height: 1.5;
+        }
+
+        .pseo-links {
+            margin-bottom: 1.5rem;
+        }
+        .pseo-links h2 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #c4c8d4;
+            margin-bottom: 0.75rem;
+        }
+        .pseo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+            gap: 0.5rem;
+        }
+        .pseo-grid a {
+            display: block;
+            padding: 0.5rem 0.75rem;
+            background: #1a1d27;
+            border: 1px solid #2e3345;
+            border-radius: 8px;
+            color: #e8eaed;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: border-color 0.15s;
+        }
+        .pseo-grid a:hover {
+            border-color: #6c63ff;
+        }
+        .pseo-grid a .link-result {
+            color: #6c63ff;
+            font-weight: 600;
+        }
+
+        .more-tools {
+            padding: 1.5rem 0;
+            border-top: 1px solid #2e3345;
+        }
+        .more-tools p {
+            font-size: 0.82rem;
+            color: #9aa0b0;
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+        .tools-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .tools-row a {
+            display: inline-block;
+            padding: 0.4rem 0.85rem;
+            background: #1a1d27;
+            border: 1px solid #2e3345;
+            border-radius: 6px;
+            color: #e8eaed;
+            font-size: 0.82rem;
+            text-decoration: none;
+        }
+        .tools-row a:hover {
+            border-color: #6c63ff;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem 0;
+            color: #666b7a;
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 480px) {
+            header h1 { font-size: 1.3rem; }
+            .results { grid-template-columns: 1fr; }
+            .result-value.large { font-size: 1.8rem; }
+            .presets { gap: 0.3rem; }
+            .preset-btn { padding: 0.35rem 0.6rem; font-size: 0.8rem; }
+            .pseo-grid { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <nav style="padding:1rem 1.5rem;border-bottom:1px solid #2e3345;display:flex;align-items:center;gap:1.5rem">
+        <a href="/" style="color:#6c63ff;font-weight:700;font-size:1.05rem;text-decoration:none">Automated Insights</a>
+        <a href="/" style="color:#9aa0b0;font-size:0.95rem;text-decoration:none">Tools</a>
+        <a href="/blog/" style="color:#9aa0b0;font-size:0.95rem;text-decoration:none">Blog</a>
+    </nav>
+
+    <div class="container">
+        <header>
+            <h1>Tip Calculator</h1>
+            <p class="subtitle">Calculate tip amount, total bill, and per-person split instantly</p>
+        </header>
+
+        <div class="card">
+            <h2>Calculate Your Tip</h2>
+
+            <div class="input-group">
+                <label for="bill">Bill Amount</label>
+                <div class="input-row">
+                    <span class="input-prefix">$</span>
+                    <input type="number" id="bill" min="0" step="0.01" placeholder="0.00" inputmode="decimal">
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="tipPct">Tip Percentage</label>
+                <div class="input-row">
+                    <input type="number" id="tipPct" min="0" max="100" step="1" value="20" inputmode="decimal">
+                    <span class="input-suffix">%</span>
+                </div>
+                <div class="presets">
+                    <button class="preset-btn" data-tip="10">10%</button>
+                    <button class="preset-btn" data-tip="15">15%</button>
+                    <button class="preset-btn" data-tip="18">18%</button>
+                    <button class="preset-btn active" data-tip="20">20%</button>
+                    <button class="preset-btn" data-tip="22">22%</button>
+                    <button class="preset-btn" data-tip="25">25%</button>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="people">Split Between</label>
+                <div class="input-row">
+                    <input type="number" id="people" min="1" max="99" step="1" value="1" inputmode="numeric">
+                    <span class="input-suffix">people</span>
+                </div>
+            </div>
+
+            <div class="round-up">
+                <input type="checkbox" id="roundUp">
+                <label for="roundUp">Round up total to nearest dollar</label>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Results</h2>
+            <div class="results">
+                <div class="result-item">
+                    <div class="result-label">Tip Amount</div>
+                    <div class="result-value" id="tipAmount">$0.00</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Total</div>
+                    <div class="result-value" id="totalAmount">$0.00</div>
+                </div>
+            </div>
+            <div class="results" id="splitResults" style="display:none">
+                <div class="result-item full">
+                    <div class="result-label">Per Person</div>
+                    <div class="result-value large" id="perPerson">$0.00</div>
+                    <div class="result-note" id="perPersonNote"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" id="quickTableCard" style="display:none">
+            <h2>Quick Tip Reference</h2>
+            <table class="quick-table">
+                <thead>
+                    <tr>
+                        <th>Tip %</th>
+                        <th>Tip</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody id="quickTableBody">
+                </tbody>
+            </table>
+        </div>
+
+        <div class="pseo-links">
+            <h2>Common Tip Calculations</h2>
+            <div class="pseo-grid">
+                <a href="/tip-calculator/20-percent-tip-on-50/">20% on $50 <span class="link-result">= $10.00</span></a>
+                <a href="/tip-calculator/20-percent-tip-on-100/">20% on $100 <span class="link-result">= $20.00</span></a>
+                <a href="/tip-calculator/15-percent-tip-on-50/">15% on $50 <span class="link-result">= $7.50</span></a>
+                <a href="/tip-calculator/15-percent-tip-on-100/">15% on $100 <span class="link-result">= $15.00</span></a>
+                <a href="/tip-calculator/18-percent-tip-on-75/">18% on $75 <span class="link-result">= $13.50</span></a>
+                <a href="/tip-calculator/20-percent-tip-on-200/">20% on $200 <span class="link-result">= $40.00</span></a>
+                <a href="/tip-calculator/25-percent-tip-on-50/">25% on $50 <span class="link-result">= $12.50</span></a>
+                <a href="/tip-calculator/20-percent-tip-on-30/">20% on $30 <span class="link-result">= $6.00</span></a>
+                <a href="/tip-calculator/15-percent-tip-on-40/">15% on $40 <span class="link-result">= $6.00</span></a>
+                <a href="/tip-calculator/18-percent-tip-on-60/">18% on $60 <span class="link-result">= $10.80</span></a>
+                <a href="/tip-calculator/20-percent-tip-on-150/">20% on $150 <span class="link-result">= $30.00</span></a>
+                <a href="/tip-calculator/25-percent-tip-on-100/">25% on $100 <span class="link-result">= $25.00</span></a>
+            </div>
+        </div>
+
+        <div class="faq-section">
+            <h2>Tipping FAQs</h2>
+            <div class="faq-item">
+                <h3>How much should you tip at a restaurant?</h3>
+                <p>In the United States, the standard tip at a restaurant is 15-20% of the pre-tax bill. For excellent service, 20-25% is common. For counter service or takeout, 10-15% is typical. Always tip on the pre-tax amount, not the total after tax.</p>
+            </div>
+            <div class="faq-item">
+                <h3>How do you calculate a tip?</h3>
+                <p>To calculate a tip, multiply the bill amount by the tip percentage as a decimal. For example, a 20% tip on a $50 bill: $50 x 0.20 = $10.00 tip. The total bill would be $50 + $10 = $60. To split, divide the total by the number of people.</p>
+            </div>
+            <div class="faq-item">
+                <h3>How do you split a bill with tip?</h3>
+                <p>To split a bill with tip: first calculate the tip on the full bill amount, add it to the bill to get the total, then divide the total by the number of people. For example, a $100 bill with 20% tip ($20) totals $120 -- split 4 ways, each person pays $30.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Do you tip on tax?</h3>
+                <p>Etiquette experts recommend tipping on the pre-tax subtotal, not the after-tax total. The tax goes to the government, not the server. However, tipping on the full total including tax is also acceptable and makes the math simpler -- either approach is fine.</p>
+            </div>
+        </div>
+
+        <div class="more-tools">
+            <p>More Free Tools</p>
+            <div class="tools-row">
+                <a href="/">All Tools</a>
+                <a href="/percentage-calc/">Percentage Calculator</a>
+                <a href="/salary-calculator/">Salary Calculator</a>
+                <a href="/interest-calculator/">Interest Calculator</a>
+                <a href="/invoice-generator/">Invoice Generator</a>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2026 Automated Insights LLC</p>
+        </footer>
+    </div>
+
+    <script>
+    (function() {
+        var billInput = document.getElementById('bill');
+        var tipPctInput = document.getElementById('tipPct');
+        var peopleInput = document.getElementById('people');
+        var roundUpCheck = document.getElementById('roundUp');
+        var tipAmountEl = document.getElementById('tipAmount');
+        var totalAmountEl = document.getElementById('totalAmount');
+        var perPersonEl = document.getElementById('perPerson');
+        var perPersonNoteEl = document.getElementById('perPersonNote');
+        var splitResultsEl = document.getElementById('splitResults');
+        var quickTableCard = document.getElementById('quickTableCard');
+        var quickTableBody = document.getElementById('quickTableBody');
+        var presetBtns = document.querySelectorAll('.preset-btn');
+
+        function fmt(n) {
+            return '$' + n.toFixed(2);
+        }
+
+        function calculate() {
+            var bill = parseFloat(billInput.value) || 0;
+            var tipPct = parseFloat(tipPctInput.value) || 0;
+            var people = parseInt(peopleInput.value, 10) || 1;
+            if (people < 1) { people = 1; }
+
+            var tip = bill * (tipPct / 100);
+            var total = bill + tip;
+
+            if (roundUpCheck.checked && total > 0) {
+                total = Math.ceil(total);
+                tip = total - bill;
+            }
+
+            tipAmountEl.textContent = fmt(tip);
+            totalAmountEl.textContent = fmt(total);
+
+            if (people > 1) {
+                splitResultsEl.style.display = '';
+                var perP = total / people;
+                perPersonEl.textContent = fmt(perP);
+                perPersonNoteEl.textContent = fmt(total) + ' split ' + people + ' ways';
+            } else {
+                splitResultsEl.style.display = 'none';
+            }
+
+            updatePresetHighlight(tipPct);
+            updateQuickTable(bill);
+        }
+
+        function updatePresetHighlight(pct) {
+            for (var i = 0; i < presetBtns.length; i++) {
+                var btn = presetBtns[i];
+                if (parseInt(btn.getAttribute('data-tip'), 10) === Math.round(pct)) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            }
+        }
+
+        function updateQuickTable(bill) {
+            if (bill <= 0) {
+                quickTableCard.style.display = 'none';
+                return;
+            }
+            quickTableCard.style.display = '';
+            var pcts = [15, 18, 20, 22, 25];
+            var currentPct = Math.round(parseFloat(tipPctInput.value) || 0);
+            var html = '';
+            for (var i = 0; i < pcts.length; i++) {
+                var p = pcts[i];
+                var t = bill * (p / 100);
+                var tot = bill + t;
+                var isHighlight = (p === currentPct) ? ' class="highlight-row"' : '';
+                html += '<tr' + isHighlight + '>';
+                html += '<td>' + p + '%</td>';
+                html += '<td class="tip-col">' + fmt(t) + '</td>';
+                html += '<td>' + fmt(tot) + '</td>';
+                html += '</tr>';
+            }
+            quickTableBody.innerHTML = html;
+        }
+
+        for (var i = 0; i < presetBtns.length; i++) {
+            presetBtns[i].addEventListener('click', function() {
+                tipPctInput.value = this.getAttribute('data-tip');
+                calculate();
+            });
+        }
+
+        billInput.addEventListener('input', calculate);
+        tipPctInput.addEventListener('input', calculate);
+        peopleInput.addEventListener('input', calculate);
+        roundUpCheck.addEventListener('change', calculate);
+
+        calculate();
+    })();
+    </script>
+</body>
+</html>

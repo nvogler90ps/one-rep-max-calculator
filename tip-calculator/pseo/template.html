@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{TITLE}} - Tip Calculator</title>
+  <meta name="description" content="{{DESCRIPTION}}">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="canonical" href="{{CANONICAL}}">
+  <meta property="og:title" content="{{TITLE}} - Tip Calculator">
+  <meta property="og:description" content="{{DESCRIPTION}}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{CANONICAL}}">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is a {{TIP_PCT}}% tip on ${{BILL}}?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A {{TIP_PCT}}% tip on a ${{BILL}} bill is {{TIP_AMOUNT}}. The total bill including tip would be {{TOTAL}}. To calculate: ${{BILL}} x {{TIP_PCT}} / 100 = {{TIP_AMOUNT}}."
+        }
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://automated-insights.com/"},
+      {"@type": "ListItem", "position": 2, "name": "Tip Calculator", "item": "https://automated-insights.com/tip-calculator/"},
+      {"@type": "ListItem", "position": 3, "name": "{{TITLE}}"}
+    ]
+  }
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3434609691579834" crossorigin="anonymous"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: #0f1117;
+      color: #e8eaed;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    .breadcrumb {
+      padding: 1rem 0 0;
+      font-size: 0.82rem;
+      color: #9aa0b0;
+    }
+    .breadcrumb a {
+      color: #9aa0b0;
+      text-decoration: none;
+    }
+    .breadcrumb a:hover {
+      color: #6c63ff;
+    }
+    .breadcrumb .sep {
+      margin: 0 0.4rem;
+      opacity: 0.5;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 2.5rem 1rem 2rem;
+    }
+    .hero h1 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #c4c8d4;
+      margin-bottom: 1.25rem;
+    }
+    .answer-box {
+      background: #1a1d27;
+      border: 2px solid #6c63ff;
+      border-radius: 12px;
+      padding: 2rem 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+    .answer-label {
+      display: block;
+      font-size: 0.85rem;
+      color: #9aa0b0;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.5rem;
+    }
+    .answer-value {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #6c63ff;
+      line-height: 1.2;
+    }
+    .answer-sub {
+      font-size: 1rem;
+      color: #9aa0b0;
+      margin-top: 0.5rem;
+    }
+
+    .breakdown {
+      background: #1a1d27;
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .breakdown h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #c4c8d4;
+      margin-bottom: 1rem;
+    }
+    .steps {
+      font-size: 1.05rem;
+      color: #e8eaed;
+    }
+    .steps .step {
+      padding: 0.4rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .steps .step-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.6rem;
+      height: 1.6rem;
+      border-radius: 50%;
+      background: #2e3345;
+      color: #6c63ff;
+      font-size: 0.78rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .steps code {
+      background: #252836;
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      font-family: "SF Mono", Monaco, Consolas, monospace;
+      font-size: 0.95rem;
+      color: #e8eaed;
+    }
+    .steps .highlight {
+      color: #6c63ff;
+      font-weight: 600;
+    }
+
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 2rem;
+    }
+    .compare-section h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #c4c8d4;
+      margin-bottom: 0.75rem;
+    }
+    .compare-section {
+      margin-bottom: 2rem;
+    }
+    .compare-table th {
+      text-align: left;
+      font-size: 0.78rem;
+      color: #9aa0b0;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 0.5rem 0.75rem;
+      border-bottom: 1px solid #2e3345;
+      font-weight: 600;
+    }
+    .compare-table td {
+      padding: 0.55rem 0.75rem;
+      font-size: 0.92rem;
+      border-bottom: 1px solid rgba(46, 51, 69, 0.5);
+    }
+    .compare-table tr:last-child td {
+      border-bottom: none;
+    }
+    .compare-table .tip-col {
+      color: #6c63ff;
+      font-weight: 600;
+    }
+    .compare-table .highlight-row {
+      background: rgba(108, 99, 255, 0.08);
+    }
+
+    .related {
+      margin-bottom: 2rem;
+    }
+    .related h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #c4c8d4;
+      margin-bottom: 0.75rem;
+    }
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 0.5rem;
+    }
+    .related-grid a {
+      display: block;
+      padding: 0.6rem 0.85rem;
+      background: #1a1d27;
+      border: 1px solid #2e3345;
+      border-radius: 8px;
+      color: #e8eaed;
+      text-decoration: none;
+      font-size: 0.88rem;
+      transition: border-color 0.15s;
+    }
+    .related-grid a:hover {
+      border-color: #6c63ff;
+    }
+    .related-grid a .related-result {
+      color: #6c63ff;
+      font-weight: 600;
+    }
+
+    .cta {
+      text-align: center;
+      padding: 2rem 1rem;
+      background: #1a1d27;
+      border-radius: 10px;
+      margin-bottom: 2rem;
+    }
+    .cta p {
+      color: #9aa0b0;
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+    .cta a {
+      display: inline-block;
+      padding: 0.7rem 1.8rem;
+      background: #6c63ff;
+      color: #fff;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background 0.15s;
+    }
+    .cta a:hover {
+      background: #5a52e0;
+    }
+
+    .more-tools {
+      padding: 1.5rem 0;
+      border-top: 1px solid #2e3345;
+    }
+    .more-tools p {
+      font-size: 0.82rem;
+      color: #9aa0b0;
+      margin-bottom: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .tools-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .tools-row a {
+      display: inline-block;
+      padding: 0.4rem 0.85rem;
+      background: #1a1d27;
+      border: 1px solid #2e3345;
+      border-radius: 6px;
+      color: #e8eaed;
+      font-size: 0.82rem;
+      text-decoration: none;
+    }
+    .tools-row a:hover {
+      border-color: #6c63ff;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem 0;
+      color: #666b7a;
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 1.15rem; }
+      .answer-value { font-size: 2.2rem; }
+      .related-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <nav style="padding:1rem 1.5rem;border-bottom:1px solid #2e3345;display:flex;align-items:center;gap:1.5rem">
+    <a href="/" style="color:#6c63ff;font-weight:700;font-size:1.05rem;text-decoration:none">Automated Insights</a>
+    <a href="/" style="color:#9aa0b0;font-size:0.95rem;text-decoration:none">Tools</a>
+    <a href="/blog/" style="color:#9aa0b0;font-size:0.95rem;text-decoration:none">Blog</a>
+  </nav>
+
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a><span class="sep">&rsaquo;</span>
+      <a href="/tip-calculator/">Tip Calculator</a><span class="sep">&rsaquo;</span>
+      <span>{{TIP_PCT}}% Tip on ${{BILL}}</span>
+    </nav>
+
+    <div class="hero">
+      <h1>{{TIP_PCT}}% Tip on ${{BILL}}</h1>
+      <div class="answer-box">
+        <span class="answer-label">Tip Amount</span>
+        <span class="answer-value">{{TIP_AMOUNT}}</span>
+        <div class="answer-sub">Total with tip: {{TOTAL}}</div>
+      </div>
+    </div>
+
+    <div class="breakdown">
+      <h2>How to Calculate a {{TIP_PCT}}% Tip on ${{BILL}}</h2>
+      <div class="steps">
+        <div class="step">
+          <span class="step-num">1</span>
+          <span>Convert the percentage to a decimal: <code>{{TIP_PCT}} / 100 = {{DECIMAL}}</code></span>
+        </div>
+        <div class="step">
+          <span class="step-num">2</span>
+          <span>Multiply by the bill: <code>${{BILL}} x {{DECIMAL}} = <span class="highlight">{{TIP_AMOUNT}}</span></code></span>
+        </div>
+        <div class="step">
+          <span class="step-num">3</span>
+          <span>Add tip to bill: <code>${{BILL}} + {{TIP_AMOUNT}} = <span class="highlight">{{TOTAL}}</span></code></span>
+        </div>
+      </div>
+      <p style="margin-top: 1rem; font-size: 0.9rem; color: #9aa0b0;">
+        Formula: <code>Tip = ${{BILL}} x ({{TIP_PCT}} / 100) = {{TIP_AMOUNT}}</code>
+      </p>
+    </div>
+
+    <div class="compare-section">
+      <h2>Compare Tips on ${{BILL}}</h2>
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Tip %</th>
+            <th>Tip Amount</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{COMPARE_ROWS}}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="related">
+      <h2>Related Tip Calculations</h2>
+      <div class="related-grid">
+        {{RELATED_LINKS}}
+      </div>
+    </div>
+
+    <div class="cta">
+      <p>Need a custom tip amount or want to split the bill? Try the full calculator.</p>
+      <a href="/tip-calculator/">Open Tip Calculator</a>
+    </div>
+
+    <div class="more-tools">
+      <p>More Free Tools</p>
+      <div class="tools-row">
+        <a href="/">All Tools</a>
+        <a href="/percentage-calc/">Percentage Calculator</a>
+        <a href="/salary-calculator/">Salary Calculator</a>
+        <a href="/interest-calculator/">Interest Calculator</a>
+      </div>
+    </div>
+
+    <footer>
+      <p>&copy; 2026 Automated Insights LLC</p>
+    </footer>
+  </div>
+</body>
+</html>

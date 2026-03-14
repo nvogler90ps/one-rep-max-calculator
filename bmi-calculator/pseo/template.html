@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{TITLE}} - BMI Calculator</title>
+  <meta name="description" content="{{DESCRIPTION}}">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="canonical" href="{{CANONICAL}}">
+  <meta property="og:title" content="{{TITLE}} - BMI Calculator">
+  <meta property="og:description" content="{{DESCRIPTION}}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{CANONICAL}}">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the BMI for someone {{HEIGHT_DISPLAY}} weighing {{WEIGHT_LBS}} lbs?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The BMI for a person who is {{HEIGHT_DISPLAY}} and weighs {{WEIGHT_LBS}} lbs is {{BMI}}, which is classified as {{CATEGORY}}. BMI is calculated by dividing weight in kilograms by height in meters squared."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is a healthy weight for someone {{HEIGHT_DISPLAY}}?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A healthy weight for someone {{HEIGHT_DISPLAY}} is between {{HEALTHY_LOW}} lbs and {{HEALTHY_HIGH}} lbs, corresponding to a BMI between 18.5 and 24.9."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How is BMI calculated?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "BMI is calculated using the formula: BMI = (weight in pounds x 703) / (height in inches squared). For {{HEIGHT_DISPLAY}} and {{WEIGHT_LBS}} lbs: ({{WEIGHT_LBS}} x 703) / (height in inches)^2 = {{BMI}}."
+        }
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://automated-insights.com/"},
+      {"@type": "ListItem", "position": 2, "name": "BMI Calculator", "item": "https://automated-insights.com/bmi-calculator/"},
+      {"@type": "ListItem", "position": 3, "name": "BMI for {{HEIGHT_DISPLAY}} {{WEIGHT_LBS}} lbs"}
+    ]
+  }
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3434609691579834" crossorigin="anonymous"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: #0f1117;
+      color: #e8eaed;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    /* Breadcrumb */
+    .breadcrumb {
+      padding: 1rem 0 0;
+      font-size: 0.82rem;
+      color: #9aa0b0;
+    }
+    .breadcrumb a {
+      color: #9aa0b0;
+      text-decoration: none;
+    }
+    .breadcrumb a:hover {
+      color: #6c63ff;
+    }
+    .breadcrumb .sep {
+      margin: 0 0.4rem;
+      opacity: 0.5;
+    }
+
+    /* Hero answer */
+    .hero {
+      text-align: center;
+      padding: 2.5rem 1rem 2rem;
+    }
+    .hero h1 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #c4c8d4;
+      margin-bottom: 1.25rem;
+    }
+    .answer-box {
+      background: #1a1d27;
+      border: 2px solid #6c63ff;
+      border-radius: 12px;
+      padding: 2rem 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+    .answer-label {
+      display: block;
+      font-size: 0.85rem;
+      color: #9aa0b0;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.5rem;
+    }
+    .answer-value {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #6c63ff;
+      line-height: 1.2;
+    }
+    .answer-category {
+      display: inline-block;
+      margin-top: 0.75rem;
+      padding: 0.3rem 1rem;
+      border-radius: 20px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      background: {{CATEGORY_COLOR}}1a;
+      color: {{CATEGORY_COLOR}};
+      border: 1px solid {{CATEGORY_COLOR}}40;
+    }
+
+    /* BMI Scale */
+    .bmi-scale {
+      background: #1a1d27;
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .bmi-scale h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #c4c8d4;
+      margin-bottom: 1rem;
+    }
+    .scale-bar {
+      position: relative;
+      height: 28px;
+      border-radius: 14px;
+      overflow: hidden;
+      display: flex;
+      margin-bottom: 0.5rem;
+    }
+    .scale-segment {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.8);
+    }
+    .scale-segment.underweight { background: #3b82f6; flex: 18.5; }
+    .scale-segment.normal { background: #22c55e; flex: 6.4; }
+    .scale-segment.overweight { background: #f59e0b; flex: 5; }
+    .scale-segment.obese { background: #ef4444; flex: 10; }
+    .scale-marker {
+      position: absolute;
+      top: -6px;
+      transform: translateX(-50%);
+      width: 3px;
+      height: 40px;
+      background: #fff;
+      border-radius: 2px;
+      box-shadow: 0 0 6px rgba(255,255,255,0.5);
+    }
+    .scale-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.72rem;
+      color: #9aa0b0;
+      padding: 0 2px;
+    }
+
+    /* Calculation breakdown */
+    .breakdown {
+      background: #1a1d27;
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .breakdown h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #c4c8d4;
+      margin-bottom: 1rem;
+    }
+    .steps {
+      font-size: 1.05rem;
+      color: #e8eaed;
+    }
+    .steps .step {
+      padding: 0.4rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .steps .step-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.6rem;
+      height: 1.6rem;
+      border-radius: 50%;
+      background: #2e3345;
+      color: #6c63ff;
+      font-size: 0.78rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .steps code {
+      background: #252836;
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      font-family: "SF Mono", Monaco, Consolas, monospace;
+      font-size: 0.95rem;
+      color: #e8eaed;
+    }
+    .steps .highlight {
+      color: #6c63ff;
+      font-weight: 600;
+    }
+
+    /* Healthy weight range */
+    .healthy-range {
+      background: #1a1d27;
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .healthy-range h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #c4c8d4;
+      margin-bottom: 0.75rem;
+    }
+    .range-display {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      padding: 1rem;
+      background: #0f1117;
+      border: 1px solid #2e3345;
+      border-radius: 8px;
+      margin-bottom: 0.75rem;
+    }
+    .range-val {
+      text-align: center;
+    }
+    .range-val .label {
+      font-size: 0.75rem;
+      color: #9aa0b0;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .range-val .val {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #22c55e;
+    }
+    .range-dash {
+      font-size: 1.5rem;
+      color: #9aa0b0;
+    }
+    .range-note {
+      font-size: 0.85rem;
+      color: #9aa0b0;
+      text-align: center;
+    }
+
+    /* Related calculations */
+    .related {
+      margin-bottom: 2rem;
+    }
+    .related h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #c4c8d4;
+      margin-bottom: 0.75rem;
+    }
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 0.5rem;
+    }
+    .related-grid a {
+      display: block;
+      padding: 0.6rem 0.85rem;
+      background: #1a1d27;
+      border: 1px solid #2e3345;
+      border-radius: 8px;
+      color: #e8eaed;
+      text-decoration: none;
+      font-size: 0.88rem;
+      transition: border-color 0.15s;
+    }
+    .related-grid a:hover {
+      border-color: #6c63ff;
+    }
+    .related-grid a .related-result {
+      color: #6c63ff;
+      font-weight: 600;
+    }
+
+    /* CTA to main calculator */
+    .cta {
+      text-align: center;
+      padding: 2rem 1rem;
+      background: #1a1d27;
+      border-radius: 10px;
+      margin-bottom: 2rem;
+    }
+    .cta p {
+      color: #9aa0b0;
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+    .cta a {
+      display: inline-block;
+      padding: 0.7rem 1.8rem;
+      background: #6c63ff;
+      color: #fff;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background 0.15s;
+    }
+    .cta a:hover {
+      background: #5a52e0;
+    }
+
+    /* More tools */
+    .more-tools {
+      padding: 1.5rem 0;
+      border-top: 1px solid #2e3345;
+    }
+    .more-tools p {
+      font-size: 0.82rem;
+      color: #9aa0b0;
+      margin-bottom: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .tools-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .tools-row a {
+      display: inline-block;
+      padding: 0.4rem 0.85rem;
+      background: #1a1d27;
+      border: 1px solid #2e3345;
+      border-radius: 6px;
+      color: #e8eaed;
+      font-size: 0.82rem;
+      text-decoration: none;
+    }
+    .tools-row a:hover {
+      border-color: #6c63ff;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem 0;
+      color: #666b7a;
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 1.15rem; }
+      .answer-value { font-size: 2.2rem; }
+      .related-grid { grid-template-columns: 1fr 1fr; }
+      .range-display { flex-direction: column; gap: 0.5rem; }
+      .range-dash { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a><span class="sep">&rsaquo;</span>
+      <a href="/bmi-calculator/">BMI Calculator</a><span class="sep">&rsaquo;</span>
+      <span>BMI for {{HEIGHT_DISPLAY}} {{WEIGHT_LBS}} lbs</span>
+    </nav>
+
+    <div class="hero">
+      <h1>BMI for {{HEIGHT_DISPLAY}}, {{WEIGHT_LBS}} lbs</h1>
+      <div class="answer-box">
+        <span class="answer-label">Your BMI</span>
+        <span class="answer-value">{{BMI}}</span>
+        <br>
+        <span class="answer-category">{{CATEGORY}}</span>
+      </div>
+    </div>
+
+    <div class="bmi-scale">
+      <h2>Where You Fall on the BMI Scale</h2>
+      <div class="scale-bar">
+        <div class="scale-segment underweight">Under</div>
+        <div class="scale-segment normal">Normal</div>
+        <div class="scale-segment overweight">Over</div>
+        <div class="scale-segment obese">Obese</div>
+        <div class="scale-marker" id="bmiMarker"></div>
+      </div>
+      <div class="scale-labels">
+        <span>0</span>
+        <span>18.5</span>
+        <span>25</span>
+        <span>30</span>
+        <span>40</span>
+      </div>
+    </div>
+
+    <div class="breakdown">
+      <h2>How BMI {{BMI}} Was Calculated</h2>
+      <div class="steps">
+        <div class="step">
+          <span class="step-num">1</span>
+          <span>Convert height to inches: <code>{{HEIGHT_FT}} ft {{HEIGHT_IN}} in = {{HEIGHT_TOTAL_IN}} inches</code></span>
+        </div>
+        <div class="step">
+          <span class="step-num">2</span>
+          <span>Square the height: <code>{{HEIGHT_TOTAL_IN}} x {{HEIGHT_TOTAL_IN}} = {{HEIGHT_SQ}} in&sup2;</code></span>
+        </div>
+        <div class="step">
+          <span class="step-num">3</span>
+          <span>Multiply weight by 703: <code>{{WEIGHT_LBS}} x 703 = {{WEIGHT_X_703}}</code></span>
+        </div>
+        <div class="step">
+          <span class="step-num">4</span>
+          <span>Divide: <code>{{WEIGHT_X_703}} / {{HEIGHT_SQ}} = <span class="highlight">{{BMI}}</span></code></span>
+        </div>
+      </div>
+      <p style="margin-top: 1rem; font-size: 0.9rem; color: #9aa0b0;">
+        Formula: <code>BMI = (weight in lbs x 703) / (height in inches)&sup2;</code>
+      </p>
+    </div>
+
+    <div class="healthy-range">
+      <h2>Healthy Weight Range for {{HEIGHT_DISPLAY}}</h2>
+      <div class="range-display">
+        <div class="range-val">
+          <div class="label">Low</div>
+          <div class="val">{{HEALTHY_LOW}} lbs</div>
+        </div>
+        <div class="range-dash">--</div>
+        <div class="range-val">
+          <div class="label">High</div>
+          <div class="val">{{HEALTHY_HIGH}} lbs</div>
+        </div>
+      </div>
+      <p class="range-note">
+        A BMI between 18.5 and 24.9 is considered normal weight. For someone {{HEIGHT_DISPLAY}},
+        this corresponds to {{HEALTHY_LOW}} - {{HEALTHY_HIGH}} lbs.
+      </p>
+    </div>
+
+    <div class="related">
+      <h2>Related BMI Lookups</h2>
+      <div class="related-grid">
+        {{RELATED_LINKS}}
+      </div>
+    </div>
+
+    <div class="cta">
+      <p>Want to calculate BMI for different measurements? Try the full interactive calculator.</p>
+      <a href="/bmi-calculator/">Open BMI Calculator</a>
+    </div>
+
+    <div class="more-tools">
+      <p>More Free Tools</p>
+      <div class="tools-row">
+        <a href="/">All Tools</a>
+        <a href="/tdee-calculator/">TDEE Calculator</a>
+        <a href="/percentage-calc/">Percentage Calculator</a>
+        <a href="/compound-interest/">Compound Interest</a>
+      </div>
+    </div>
+
+    <footer>
+      <p>&copy; 2026 Automated Insights LLC</p>
+    </footer>
+  </div>
+
+  <script>
+    (function() {
+      var bmi = {{BMI}};
+      var marker = document.getElementById('bmiMarker');
+      if (marker) {
+        var pct = Math.min(Math.max(bmi / 40 * 100, 0), 100);
+        marker.style.left = pct + '%';
+      }
+    })();
+  </script>
+</body>
+</html>

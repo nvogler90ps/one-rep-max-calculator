@@ -1,0 +1,972 @@
+[
+  {
+    "amount": 20000,
+    "rate": 3.0,
+    "term": 36
+  },
+  {
+    "amount": 20000,
+    "rate": 3.0,
+    "term": 48
+  },
+  {
+    "amount": 20000,
+    "rate": 3.0,
+    "term": 60
+  },
+  {
+    "amount": 20000,
+    "rate": 3.0,
+    "term": 72
+  },
+  {
+    "amount": 20000,
+    "rate": 4.0,
+    "term": 36
+  },
+  {
+    "amount": 20000,
+    "rate": 4.0,
+    "term": 48
+  },
+  {
+    "amount": 20000,
+    "rate": 4.0,
+    "term": 60
+  },
+  {
+    "amount": 20000,
+    "rate": 4.0,
+    "term": 72
+  },
+  {
+    "amount": 20000,
+    "rate": 5.0,
+    "term": 36
+  },
+  {
+    "amount": 20000,
+    "rate": 5.0,
+    "term": 48
+  },
+  {
+    "amount": 20000,
+    "rate": 5.0,
+    "term": 60
+  },
+  {
+    "amount": 20000,
+    "rate": 5.0,
+    "term": 72
+  },
+  {
+    "amount": 20000,
+    "rate": 6.0,
+    "term": 36
+  },
+  {
+    "amount": 20000,
+    "rate": 6.0,
+    "term": 48
+  },
+  {
+    "amount": 20000,
+    "rate": 6.0,
+    "term": 60
+  },
+  {
+    "amount": 20000,
+    "rate": 6.0,
+    "term": 72
+  },
+  {
+    "amount": 20000,
+    "rate": 7.0,
+    "term": 36
+  },
+  {
+    "amount": 20000,
+    "rate": 7.0,
+    "term": 48
+  },
+  {
+    "amount": 20000,
+    "rate": 7.0,
+    "term": 60
+  },
+  {
+    "amount": 20000,
+    "rate": 7.0,
+    "term": 72
+  },
+  {
+    "amount": 20000,
+    "rate": 8.0,
+    "term": 36
+  },
+  {
+    "amount": 20000,
+    "rate": 8.0,
+    "term": 48
+  },
+  {
+    "amount": 20000,
+    "rate": 8.0,
+    "term": 60
+  },
+  {
+    "amount": 20000,
+    "rate": 8.0,
+    "term": 72
+  },
+  {
+    "amount": 20000,
+    "rate": 9.0,
+    "term": 36
+  },
+  {
+    "amount": 20000,
+    "rate": 9.0,
+    "term": 48
+  },
+  {
+    "amount": 20000,
+    "rate": 9.0,
+    "term": 60
+  },
+  {
+    "amount": 20000,
+    "rate": 9.0,
+    "term": 72
+  },
+  {
+    "amount": 25000,
+    "rate": 3.0,
+    "term": 36
+  },
+  {
+    "amount": 25000,
+    "rate": 3.0,
+    "term": 48
+  },
+  {
+    "amount": 25000,
+    "rate": 3.0,
+    "term": 60
+  },
+  {
+    "amount": 25000,
+    "rate": 3.0,
+    "term": 72
+  },
+  {
+    "amount": 25000,
+    "rate": 4.0,
+    "term": 36
+  },
+  {
+    "amount": 25000,
+    "rate": 4.0,
+    "term": 48
+  },
+  {
+    "amount": 25000,
+    "rate": 4.0,
+    "term": 60
+  },
+  {
+    "amount": 25000,
+    "rate": 4.0,
+    "term": 72
+  },
+  {
+    "amount": 25000,
+    "rate": 5.0,
+    "term": 36
+  },
+  {
+    "amount": 25000,
+    "rate": 5.0,
+    "term": 48
+  },
+  {
+    "amount": 25000,
+    "rate": 5.0,
+    "term": 60
+  },
+  {
+    "amount": 25000,
+    "rate": 5.0,
+    "term": 72
+  },
+  {
+    "amount": 25000,
+    "rate": 6.0,
+    "term": 36
+  },
+  {
+    "amount": 25000,
+    "rate": 6.0,
+    "term": 48
+  },
+  {
+    "amount": 25000,
+    "rate": 6.0,
+    "term": 60
+  },
+  {
+    "amount": 25000,
+    "rate": 6.0,
+    "term": 72
+  },
+  {
+    "amount": 25000,
+    "rate": 7.0,
+    "term": 36
+  },
+  {
+    "amount": 25000,
+    "rate": 7.0,
+    "term": 48
+  },
+  {
+    "amount": 25000,
+    "rate": 7.0,
+    "term": 60
+  },
+  {
+    "amount": 25000,
+    "rate": 7.0,
+    "term": 72
+  },
+  {
+    "amount": 25000,
+    "rate": 8.0,
+    "term": 36
+  },
+  {
+    "amount": 25000,
+    "rate": 8.0,
+    "term": 48
+  },
+  {
+    "amount": 25000,
+    "rate": 8.0,
+    "term": 60
+  },
+  {
+    "amount": 25000,
+    "rate": 8.0,
+    "term": 72
+  },
+  {
+    "amount": 25000,
+    "rate": 9.0,
+    "term": 36
+  },
+  {
+    "amount": 25000,
+    "rate": 9.0,
+    "term": 48
+  },
+  {
+    "amount": 25000,
+    "rate": 9.0,
+    "term": 60
+  },
+  {
+    "amount": 25000,
+    "rate": 9.0,
+    "term": 72
+  },
+  {
+    "amount": 30000,
+    "rate": 3.0,
+    "term": 36
+  },
+  {
+    "amount": 30000,
+    "rate": 3.0,
+    "term": 48
+  },
+  {
+    "amount": 30000,
+    "rate": 3.0,
+    "term": 60
+  },
+  {
+    "amount": 30000,
+    "rate": 3.0,
+    "term": 72
+  },
+  {
+    "amount": 30000,
+    "rate": 4.0,
+    "term": 36
+  },
+  {
+    "amount": 30000,
+    "rate": 4.0,
+    "term": 48
+  },
+  {
+    "amount": 30000,
+    "rate": 4.0,
+    "term": 60
+  },
+  {
+    "amount": 30000,
+    "rate": 4.0,
+    "term": 72
+  },
+  {
+    "amount": 30000,
+    "rate": 5.0,
+    "term": 36
+  },
+  {
+    "amount": 30000,
+    "rate": 5.0,
+    "term": 48
+  },
+  {
+    "amount": 30000,
+    "rate": 5.0,
+    "term": 60
+  },
+  {
+    "amount": 30000,
+    "rate": 5.0,
+    "term": 72
+  },
+  {
+    "amount": 30000,
+    "rate": 6.0,
+    "term": 36
+  },
+  {
+    "amount": 30000,
+    "rate": 6.0,
+    "term": 48
+  },
+  {
+    "amount": 30000,
+    "rate": 6.0,
+    "term": 60
+  },
+  {
+    "amount": 30000,
+    "rate": 6.0,
+    "term": 72
+  },
+  {
+    "amount": 30000,
+    "rate": 7.0,
+    "term": 36
+  },
+  {
+    "amount": 30000,
+    "rate": 7.0,
+    "term": 48
+  },
+  {
+    "amount": 30000,
+    "rate": 7.0,
+    "term": 60
+  },
+  {
+    "amount": 30000,
+    "rate": 7.0,
+    "term": 72
+  },
+  {
+    "amount": 30000,
+    "rate": 8.0,
+    "term": 36
+  },
+  {
+    "amount": 30000,
+    "rate": 8.0,
+    "term": 48
+  },
+  {
+    "amount": 30000,
+    "rate": 8.0,
+    "term": 60
+  },
+  {
+    "amount": 30000,
+    "rate": 8.0,
+    "term": 72
+  },
+  {
+    "amount": 30000,
+    "rate": 9.0,
+    "term": 36
+  },
+  {
+    "amount": 30000,
+    "rate": 9.0,
+    "term": 48
+  },
+  {
+    "amount": 30000,
+    "rate": 9.0,
+    "term": 60
+  },
+  {
+    "amount": 30000,
+    "rate": 9.0,
+    "term": 72
+  },
+  {
+    "amount": 35000,
+    "rate": 3.0,
+    "term": 36
+  },
+  {
+    "amount": 35000,
+    "rate": 3.0,
+    "term": 48
+  },
+  {
+    "amount": 35000,
+    "rate": 3.0,
+    "term": 60
+  },
+  {
+    "amount": 35000,
+    "rate": 3.0,
+    "term": 72
+  },
+  {
+    "amount": 35000,
+    "rate": 4.0,
+    "term": 36
+  },
+  {
+    "amount": 35000,
+    "rate": 4.0,
+    "term": 48
+  },
+  {
+    "amount": 35000,
+    "rate": 4.0,
+    "term": 60
+  },
+  {
+    "amount": 35000,
+    "rate": 4.0,
+    "term": 72
+  },
+  {
+    "amount": 35000,
+    "rate": 5.0,
+    "term": 36
+  },
+  {
+    "amount": 35000,
+    "rate": 5.0,
+    "term": 48
+  },
+  {
+    "amount": 35000,
+    "rate": 5.0,
+    "term": 60
+  },
+  {
+    "amount": 35000,
+    "rate": 5.0,
+    "term": 72
+  },
+  {
+    "amount": 35000,
+    "rate": 6.0,
+    "term": 36
+  },
+  {
+    "amount": 35000,
+    "rate": 6.0,
+    "term": 48
+  },
+  {
+    "amount": 35000,
+    "rate": 6.0,
+    "term": 60
+  },
+  {
+    "amount": 35000,
+    "rate": 6.0,
+    "term": 72
+  },
+  {
+    "amount": 35000,
+    "rate": 7.0,
+    "term": 36
+  },
+  {
+    "amount": 35000,
+    "rate": 7.0,
+    "term": 48
+  },
+  {
+    "amount": 35000,
+    "rate": 7.0,
+    "term": 60
+  },
+  {
+    "amount": 35000,
+    "rate": 7.0,
+    "term": 72
+  },
+  {
+    "amount": 35000,
+    "rate": 8.0,
+    "term": 36
+  },
+  {
+    "amount": 35000,
+    "rate": 8.0,
+    "term": 48
+  },
+  {
+    "amount": 35000,
+    "rate": 8.0,
+    "term": 60
+  },
+  {
+    "amount": 35000,
+    "rate": 8.0,
+    "term": 72
+  },
+  {
+    "amount": 35000,
+    "rate": 9.0,
+    "term": 36
+  },
+  {
+    "amount": 35000,
+    "rate": 9.0,
+    "term": 48
+  },
+  {
+    "amount": 35000,
+    "rate": 9.0,
+    "term": 60
+  },
+  {
+    "amount": 35000,
+    "rate": 9.0,
+    "term": 72
+  },
+  {
+    "amount": 40000,
+    "rate": 3.0,
+    "term": 36
+  },
+  {
+    "amount": 40000,
+    "rate": 3.0,
+    "term": 48
+  },
+  {
+    "amount": 40000,
+    "rate": 3.0,
+    "term": 60
+  },
+  {
+    "amount": 40000,
+    "rate": 3.0,
+    "term": 72
+  },
+  {
+    "amount": 40000,
+    "rate": 4.0,
+    "term": 36
+  },
+  {
+    "amount": 40000,
+    "rate": 4.0,
+    "term": 48
+  },
+  {
+    "amount": 40000,
+    "rate": 4.0,
+    "term": 60
+  },
+  {
+    "amount": 40000,
+    "rate": 4.0,
+    "term": 72
+  },
+  {
+    "amount": 40000,
+    "rate": 5.0,
+    "term": 36
+  },
+  {
+    "amount": 40000,
+    "rate": 5.0,
+    "term": 48
+  },
+  {
+    "amount": 40000,
+    "rate": 5.0,
+    "term": 60
+  },
+  {
+    "amount": 40000,
+    "rate": 5.0,
+    "term": 72
+  },
+  {
+    "amount": 40000,
+    "rate": 6.0,
+    "term": 36
+  },
+  {
+    "amount": 40000,
+    "rate": 6.0,
+    "term": 48
+  },
+  {
+    "amount": 40000,
+    "rate": 6.0,
+    "term": 60
+  },
+  {
+    "amount": 40000,
+    "rate": 6.0,
+    "term": 72
+  },
+  {
+    "amount": 40000,
+    "rate": 7.0,
+    "term": 36
+  },
+  {
+    "amount": 40000,
+    "rate": 7.0,
+    "term": 48
+  },
+  {
+    "amount": 40000,
+    "rate": 7.0,
+    "term": 60
+  },
+  {
+    "amount": 40000,
+    "rate": 7.0,
+    "term": 72
+  },
+  {
+    "amount": 40000,
+    "rate": 8.0,
+    "term": 36
+  },
+  {
+    "amount": 40000,
+    "rate": 8.0,
+    "term": 48
+  },
+  {
+    "amount": 40000,
+    "rate": 8.0,
+    "term": 60
+  },
+  {
+    "amount": 40000,
+    "rate": 8.0,
+    "term": 72
+  },
+  {
+    "amount": 40000,
+    "rate": 9.0,
+    "term": 36
+  },
+  {
+    "amount": 40000,
+    "rate": 9.0,
+    "term": 48
+  },
+  {
+    "amount": 40000,
+    "rate": 9.0,
+    "term": 60
+  },
+  {
+    "amount": 40000,
+    "rate": 9.0,
+    "term": 72
+  },
+  {
+    "amount": 10000,
+    "rate": 5.0,
+    "term": 48
+  },
+  {
+    "amount": 10000,
+    "rate": 5.0,
+    "term": 60
+  },
+  {
+    "amount": 10000,
+    "rate": 5.0,
+    "term": 72
+  },
+  {
+    "amount": 10000,
+    "rate": 6.0,
+    "term": 48
+  },
+  {
+    "amount": 10000,
+    "rate": 6.0,
+    "term": 60
+  },
+  {
+    "amount": 10000,
+    "rate": 6.0,
+    "term": 72
+  },
+  {
+    "amount": 10000,
+    "rate": 7.0,
+    "term": 48
+  },
+  {
+    "amount": 10000,
+    "rate": 7.0,
+    "term": 60
+  },
+  {
+    "amount": 10000,
+    "rate": 7.0,
+    "term": 72
+  },
+  {
+    "amount": 15000,
+    "rate": 5.0,
+    "term": 48
+  },
+  {
+    "amount": 15000,
+    "rate": 5.0,
+    "term": 60
+  },
+  {
+    "amount": 15000,
+    "rate": 5.0,
+    "term": 72
+  },
+  {
+    "amount": 15000,
+    "rate": 6.0,
+    "term": 48
+  },
+  {
+    "amount": 15000,
+    "rate": 6.0,
+    "term": 60
+  },
+  {
+    "amount": 15000,
+    "rate": 6.0,
+    "term": 72
+  },
+  {
+    "amount": 15000,
+    "rate": 7.0,
+    "term": 48
+  },
+  {
+    "amount": 15000,
+    "rate": 7.0,
+    "term": 60
+  },
+  {
+    "amount": 15000,
+    "rate": 7.0,
+    "term": 72
+  },
+  {
+    "amount": 45000,
+    "rate": 5.0,
+    "term": 48
+  },
+  {
+    "amount": 45000,
+    "rate": 5.0,
+    "term": 60
+  },
+  {
+    "amount": 45000,
+    "rate": 5.0,
+    "term": 72
+  },
+  {
+    "amount": 45000,
+    "rate": 6.0,
+    "term": 48
+  },
+  {
+    "amount": 45000,
+    "rate": 6.0,
+    "term": 60
+  },
+  {
+    "amount": 45000,
+    "rate": 6.0,
+    "term": 72
+  },
+  {
+    "amount": 45000,
+    "rate": 7.0,
+    "term": 48
+  },
+  {
+    "amount": 45000,
+    "rate": 7.0,
+    "term": 60
+  },
+  {
+    "amount": 45000,
+    "rate": 7.0,
+    "term": 72
+  },
+  {
+    "amount": 50000,
+    "rate": 5.0,
+    "term": 48
+  },
+  {
+    "amount": 50000,
+    "rate": 5.0,
+    "term": 60
+  },
+  {
+    "amount": 50000,
+    "rate": 5.0,
+    "term": 72
+  },
+  {
+    "amount": 50000,
+    "rate": 6.0,
+    "term": 48
+  },
+  {
+    "amount": 50000,
+    "rate": 6.0,
+    "term": 60
+  },
+  {
+    "amount": 50000,
+    "rate": 6.0,
+    "term": 72
+  },
+  {
+    "amount": 50000,
+    "rate": 7.0,
+    "term": 48
+  },
+  {
+    "amount": 50000,
+    "rate": 7.0,
+    "term": 60
+  },
+  {
+    "amount": 50000,
+    "rate": 7.0,
+    "term": 72
+  },
+  {
+    "amount": 55000,
+    "rate": 5.0,
+    "term": 48
+  },
+  {
+    "amount": 55000,
+    "rate": 5.0,
+    "term": 60
+  },
+  {
+    "amount": 55000,
+    "rate": 5.0,
+    "term": 72
+  },
+  {
+    "amount": 55000,
+    "rate": 6.0,
+    "term": 48
+  },
+  {
+    "amount": 55000,
+    "rate": 6.0,
+    "term": 60
+  },
+  {
+    "amount": 55000,
+    "rate": 6.0,
+    "term": 72
+  },
+  {
+    "amount": 55000,
+    "rate": 7.0,
+    "term": 48
+  },
+  {
+    "amount": 55000,
+    "rate": 7.0,
+    "term": 60
+  },
+  {
+    "amount": 55000,
+    "rate": 7.0,
+    "term": 72
+  },
+  {
+    "amount": 60000,
+    "rate": 5.0,
+    "term": 48
+  },
+  {
+    "amount": 60000,
+    "rate": 5.0,
+    "term": 60
+  },
+  {
+    "amount": 60000,
+    "rate": 5.0,
+    "term": 72
+  },
+  {
+    "amount": 60000,
+    "rate": 6.0,
+    "term": 48
+  },
+  {
+    "amount": 60000,
+    "rate": 6.0,
+    "term": 60
+  },
+  {
+    "amount": 60000,
+    "rate": 6.0,
+    "term": 72
+  },
+  {
+    "amount": 60000,
+    "rate": 7.0,
+    "term": 48
+  },
+  {
+    "amount": 60000,
+    "rate": 7.0,
+    "term": 60
+  },
+  {
+    "amount": 60000,
+    "rate": 7.0,
+    "term": 72
+  }
+]

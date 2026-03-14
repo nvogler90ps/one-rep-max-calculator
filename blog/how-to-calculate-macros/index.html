@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Calculate Your Macros for Weight Loss, Muscle Gain, or Maintenance</title>
+    <meta name="description" content="Learn how to calculate your macros step by step. Covers protein, carbs, and fat ratios for weight loss, muscle gain, and maintenance with example calculations and tables.">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="canonical" href="https://automated-insights.com/blog/how-to-calculate-macros/">
+    <meta property="og:title" content="How to Calculate Your Macros for Weight Loss, Muscle Gain, or Maintenance">
+    <meta property="og:description" content="Step-by-step guide to calculating your macronutrient targets based on your TDEE, body weight, and fitness goals.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://automated-insights.com/blog/how-to-calculate-macros/">
+    <meta property="article:published_time" content="2026-03-14">
+    <meta property="article:author" content="Nicholas Vogler">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "How to Calculate Your Macros for Weight Loss, Muscle Gain, or Maintenance",
+        "author": { "@type": "Person", "name": "Nicholas Vogler" },
+        "datePublished": "2026-03-14",
+        "publisher": { "@type": "Organization", "name": "Automated Insights" },
+        "description": "Learn how to calculate your macros step by step for weight loss, muscle gain, or maintenance."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://automated-insights.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://automated-insights.com/blog/" },
+            { "@type": "ListItem", "position": 3, "name": "How to Calculate Your Macros" }
+        ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "How many grams of protein do I need?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Most research supports 0.7-1.0 grams of protein per pound of body weight for people who exercise regularly. For a 170 lb person, that is 119-170 grams per day. If you are sedentary, 0.5-0.7 grams per pound is generally sufficient. Higher protein intake helps preserve muscle during weight loss and supports muscle growth during a surplus."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What macro ratio is best for weight loss?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "A common and effective macro ratio for weight loss is 40% protein, 30% carbs, and 30% fat. The higher protein percentage helps preserve lean muscle mass while in a calorie deficit. However, the total number of calories matters more than the exact ratio -- any split that keeps protein high and puts you in a deficit will work."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Should I count macros or just calories?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "For weight loss alone, a calorie deficit is what matters most. However, tracking macros gives you better control over body composition. Eating enough protein prevents muscle loss during a cut, adequate fat supports hormone function, and carbs fuel your workouts. If you are serious about fitness goals, tracking macros is worth the extra effort."
+                }
+            }
+        ]
+    }
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3434609691579834" crossorigin="anonymous"></script>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: #0f1117;
+            color: #e8eaed;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            line-height: 1.7;
+        }
+
+        a { color: #6c63ff; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        nav {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid #2e3345;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        nav a { color: #9aa0b0; font-size: 0.95rem; transition: color 0.2s; }
+        nav a:hover { color: #e8eaed; text-decoration: none; }
+        nav .brand { color: #6c63ff; font-weight: 700; font-size: 1.05rem; }
+
+        .breadcrumb {
+            max-width: 720px;
+            margin: 1.5rem auto 0;
+            padding: 0 1rem;
+            font-size: 0.85rem;
+            color: #9aa0b0;
+        }
+
+        .breadcrumb a { color: #9aa0b0; }
+        .breadcrumb a:hover { color: #6c63ff; }
+
+        article {
+            flex: 1;
+            width: 100%;
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 2rem 1rem 3rem;
+        }
+
+        .post-meta {
+            color: #9aa0b0;
+            font-size: 0.85rem;
+            margin-bottom: 2rem;
+        }
+
+        h1 { font-size: 2rem; font-weight: 700; margin-bottom: 0.75rem; line-height: 1.25; }
+        h2 { font-size: 1.4rem; font-weight: 600; margin: 2rem 0 0.75rem; color: #e8eaed; }
+        h3 { font-size: 1.1rem; font-weight: 600; margin: 1.5rem 0 0.5rem; }
+        p { margin-bottom: 1rem; color: #e8eaed; }
+        ul, ol { margin: 0 0 1rem 1.5rem; color: #e8eaed; }
+        li { margin-bottom: 0.4rem; }
+
+        code {
+            background: #1a1d27;
+            border: 1px solid #2e3345;
+            border-radius: 4px;
+            padding: 0.15rem 0.4rem;
+            font-size: 0.9em;
+        }
+
+        .formula-box {
+            background: #1a1d27;
+            border: 1px solid #2e3345;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        .cta-box {
+            background: #1a1d27;
+            border: 2px solid #6c63ff;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .cta-box h3 { color: #6c63ff; margin: 0 0 0.5rem; }
+        .cta-box p { color: #9aa0b0; margin-bottom: 1rem; }
+
+        .cta-box a.btn {
+            display: inline-block;
+            background: #6c63ff;
+            color: #fff;
+            padding: 0.6rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: opacity 0.2s;
+        }
+
+        .cta-box a.btn:hover { opacity: 0.85; text-decoration: none; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0 1.5rem;
+        }
+
+        th, td {
+            padding: 0.6rem 0.8rem;
+            text-align: left;
+            border-bottom: 1px solid #2e3345;
+        }
+
+        th {
+            background: #1a1d27;
+            color: #9aa0b0;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        td { font-size: 0.95rem; }
+
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: #9aa0b0;
+            font-size: 0.85rem;
+            border-top: 1px solid #2e3345;
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 1.5rem; }
+            h2 { font-size: 1.2rem; }
+            article { padding: 1.5rem 1rem 2rem; }
+            table { font-size: 0.85rem; }
+            th, td { padding: 0.4rem 0.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/" class="brand">Automated Insights</a>
+        <a href="/">Tools</a>
+        <a href="/blog/">Blog</a>
+    </nav>
+
+    <div class="breadcrumb">
+        <a href="/">Home</a> / <a href="/blog/">Blog</a> / How to Calculate Your Macros
+    </div>
+
+    <article>
+        <h1>How to Calculate Your Macros for Weight Loss, Muscle Gain, or Maintenance</h1>
+        <div class="post-meta">By Nicholas Vogler -- March 14, 2026 -- 7 min read</div>
+
+        <p>Counting calories tells you how much to eat. Counting macros tells you what to eat. If you want to lose fat without losing muscle, build lean mass, or just eat in a way that supports your activity level, understanding macronutrients is the next step beyond simple calorie counting.</p>
+
+        <p>This guide walks through the process step by step: what macros are, how to calculate your targets, and which ratios work best for different goals.</p>
+
+        <h2>What Are Macronutrients?</h2>
+
+        <p>Macronutrients -- macros for short -- are the three main categories of nutrients that provide calories in your diet. Each one plays a different role in your body and contains a different number of calories per gram:</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Macronutrient</th>
+                    <th>Calories per Gram</th>
+                    <th>Primary Role</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Protein</td>
+                    <td>4</td>
+                    <td>Builds and repairs muscle, supports immune function</td>
+                </tr>
+                <tr>
+                    <td>Carbohydrates</td>
+                    <td>4</td>
+                    <td>Primary energy source, fuels brain and muscles</td>
+                </tr>
+                <tr>
+                    <td>Fat</td>
+                    <td>9</td>
+                    <td>Hormone production, vitamin absorption, cell structure</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>Notice that fat has more than double the calories per gram compared to protein or carbs. This is why high-fat foods are calorie-dense -- a tablespoon of olive oil (14g of fat) has 126 calories, while the same weight in chicken breast (14g of protein) has only 56 calories.</p>
+
+        <h2>Step 1: Calculate Your TDEE</h2>
+
+        <p>Before you can set macro targets, you need to know how many total calories you should eat. This starts with your Total Daily Energy Expenditure (TDEE) -- the total number of calories you burn in a day including all activity.</p>
+
+        <p>The simplest way to estimate your TDEE is to use our <a href="/tdee-calculator/">free TDEE calculator</a>, which applies the Mifflin-St Jeor equation and adjusts for your activity level. As a rough guide, most moderately active adults fall between 2,000 and 3,000 calories per day.</p>
+
+        <p>Once you have your TDEE, adjust it based on your goal:</p>
+
+        <ul>
+            <li><strong>Weight loss:</strong> Subtract 500 calories (for about 1 lb/week loss)</li>
+            <li><strong>Muscle gain:</strong> Add 250-500 calories (lean bulk)</li>
+            <li><strong>Maintenance:</strong> Eat at your TDEE</li>
+        </ul>
+
+        <p>This adjusted number is your target calorie intake, and it becomes the foundation for your macro calculations.</p>
+
+        <h2>Step 2: Choose Your Macro Ratio</h2>
+
+        <p>A macro ratio is the percentage of your total calories that come from each macronutrient. Different goals call for different splits:</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Goal</th>
+                    <th>Protein</th>
+                    <th>Carbs</th>
+                    <th>Fat</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Weight Loss</td>
+                    <td>40%</td>
+                    <td>30%</td>
+                    <td>30%</td>
+                </tr>
+                <tr>
+                    <td>Muscle Gain</td>
+                    <td>30%</td>
+                    <td>45%</td>
+                    <td>25%</td>
+                </tr>
+                <tr>
+                    <td>Maintenance</td>
+                    <td>30%</td>
+                    <td>40%</td>
+                    <td>30%</td>
+                </tr>
+                <tr>
+                    <td>High-Protein Cut</td>
+                    <td>45%</td>
+                    <td>25%</td>
+                    <td>30%</td>
+                </tr>
+                <tr>
+                    <td>Endurance Athlete</td>
+                    <td>20%</td>
+                    <td>55%</td>
+                    <td>25%</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>These ratios are starting points, not rigid rules. The most important macro to get right is protein -- keeping it high enough to preserve muscle. After that, the split between carbs and fat is largely a matter of personal preference and how your body responds.</p>
+
+        <h2>Step 3: Convert Percentages to Grams</h2>
+
+        <p>Once you have your target calories and your chosen ratio, converting to grams is straightforward. Divide the calories from each macro by its calories-per-gram value.</p>
+
+        <div class="formula-box">
+            <p><strong>Protein grams</strong> = (Total calories x protein %) / 4</p>
+            <p><strong>Carb grams</strong> = (Total calories x carb %) / 4</p>
+            <p><strong>Fat grams</strong> = (Total calories x fat %) / 9</p>
+        </div>
+
+        <h2>Example: 170 lb Moderately Active Male</h2>
+
+        <p>Let's walk through a complete example. Say you are a 170 lb (77 kg) male, 5'9", age 30, who exercises 3-4 days per week. Your estimated TDEE is approximately 2,600 calories per day.</p>
+
+        <h3>Goal: Weight Loss (40/30/30)</h3>
+        <p>Target calories: 2,600 - 500 = <strong>2,100 calories/day</strong></p>
+        <ul>
+            <li><strong>Protein:</strong> 2,100 x 0.40 = 840 calories / 4 = <strong>210g</strong></li>
+            <li><strong>Carbs:</strong> 2,100 x 0.30 = 630 calories / 4 = <strong>158g</strong></li>
+            <li><strong>Fat:</strong> 2,100 x 0.30 = 630 calories / 9 = <strong>70g</strong></li>
+        </ul>
+
+        <h3>Goal: Muscle Gain (30/45/25)</h3>
+        <p>Target calories: 2,600 + 300 = <strong>2,900 calories/day</strong></p>
+        <ul>
+            <li><strong>Protein:</strong> 2,900 x 0.30 = 870 calories / 4 = <strong>218g</strong></li>
+            <li><strong>Carbs:</strong> 2,900 x 0.45 = 1,305 calories / 4 = <strong>326g</strong></li>
+            <li><strong>Fat:</strong> 2,900 x 0.25 = 725 calories / 9 = <strong>81g</strong></li>
+        </ul>
+
+        <div class="cta-box">
+            <h3>Calculate Your TDEE First</h3>
+            <p>Know your maintenance calories before setting macro targets. Our free calculator does the math for you.</p>
+            <a href="/tdee-calculator/" class="btn">Calculate Your TDEE</a>
+        </div>
+
+        <h2>Macro Grams at Common Calorie Levels</h2>
+
+        <p>Here is a quick reference table using the 40/30/30 (weight loss) split at different calorie targets:</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Daily Calories</th>
+                    <th>Protein (g)</th>
+                    <th>Carbs (g)</th>
+                    <th>Fat (g)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1,500</td>
+                    <td>150</td>
+                    <td>113</td>
+                    <td>50</td>
+                </tr>
+                <tr>
+                    <td>1,800</td>
+                    <td>180</td>
+                    <td>135</td>
+                    <td>60</td>
+                </tr>
+                <tr>
+                    <td>2,000</td>
+                    <td>200</td>
+                    <td>150</td>
+                    <td>67</td>
+                </tr>
+                <tr>
+                    <td>2,200</td>
+                    <td>220</td>
+                    <td>165</td>
+                    <td>73</td>
+                </tr>
+                <tr>
+                    <td>2,500</td>
+                    <td>250</td>
+                    <td>188</td>
+                    <td>83</td>
+                </tr>
+                <tr>
+                    <td>2,800</td>
+                    <td>280</td>
+                    <td>210</td>
+                    <td>93</td>
+                </tr>
+                <tr>
+                    <td>3,000</td>
+                    <td>300</td>
+                    <td>225</td>
+                    <td>100</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Minimum Macro Thresholds</h2>
+
+        <p>Regardless of which ratio you choose, there are minimum thresholds you should not go below:</p>
+
+        <ul>
+            <li><strong>Protein:</strong> At least 0.6g per pound of body weight. Going lower risks muscle loss, especially in a calorie deficit.</li>
+            <li><strong>Fat:</strong> At least 0.3g per pound of body weight, or roughly 20% of total calories. Fat is essential for hormone production -- too little can disrupt testosterone, estrogen, and thyroid function.</li>
+            <li><strong>Carbs:</strong> No strict minimum, but most people perform and feel better with at least 100-130g per day. Your brain alone uses about 120g of glucose daily.</li>
+        </ul>
+
+        <h2>Protein: The Most Important Macro</h2>
+
+        <p>If you only track one macronutrient, make it protein. Protein has the highest thermic effect of food -- your body burns about 20-30% of protein calories just digesting it, compared to 5-10% for carbs and 0-3% for fat. Protein also has the strongest effect on satiety, keeping you full longer.</p>
+
+        <p>For most people, a good protein target is:</p>
+
+        <ul>
+            <li><strong>Weight loss:</strong> 0.8-1.2g per pound of body weight</li>
+            <li><strong>Muscle gain:</strong> 0.7-1.0g per pound of body weight</li>
+            <li><strong>Maintenance:</strong> 0.6-0.8g per pound of body weight</li>
+        </ul>
+
+        <p>Higher protein targets during weight loss might seem counterintuitive, but research consistently shows that higher protein intake during a deficit preserves more lean mass. You want to lose fat, not muscle.</p>
+
+        <h2>Common Mistakes</h2>
+
+        <p>A few pitfalls to watch for when tracking macros:</p>
+
+        <ol>
+            <li><strong>Ignoring fiber.</strong> Fiber is a carbohydrate, but it is not fully digested. High-fiber foods keep you full and support gut health. Aim for 25-35g per day from whole foods.</li>
+            <li><strong>Obsessing over exact numbers.</strong> Hitting your targets within 5-10g on each macro is close enough. Consistency over weeks matters far more than precision on any single day.</li>
+            <li><strong>Cutting fat too low.</strong> Very low-fat diets (under 15% of calories) can tank your energy, mood, and hormonal health. Fat is not the enemy.</li>
+            <li><strong>Neglecting food quality.</strong> Macros are not the whole picture. 200g of carbs from oats and sweet potatoes will serve you better than 200g from candy, even though the macro numbers are the same.</li>
+        </ol>
+
+        <h2>BMI and Macros</h2>
+
+        <p>Your current <a href="/bmi-calculator/">BMI</a> can help inform which macro ratio to choose. If your BMI indicates you are overweight, a higher-protein, lower-carb split (like 40/30/30) tends to work well for fat loss while preserving muscle. If your BMI is in the normal range and you are training hard, a higher-carb split (like 30/45/25) supports workout performance and recovery.</p>
+
+        <h2>The Bottom Line</h2>
+
+        <p>Calculating macros comes down to three steps: find your TDEE with our <a href="/tdee-calculator/">TDEE calculator</a>, pick a macro ratio based on your goal, and convert percentages to grams. Start with protein -- set it high enough to protect muscle -- then split the remaining calories between carbs and fat based on what keeps you energized and consistent. Track your results for 2-3 weeks, then adjust. The best macro split is the one you can actually stick to.</p>
+
+        <h2>Frequently Asked Questions</h2>
+
+        <h3>How many grams of protein do I need?</h3>
+        <p>Most research supports 0.7-1.0 grams of protein per pound of body weight for people who exercise regularly. For a 170 lb person, that is 119-170 grams per day. If you are sedentary, 0.5-0.7 grams per pound is generally sufficient. Higher protein intake helps preserve muscle during weight loss and supports muscle growth during a surplus.</p>
+
+        <h3>What macro ratio is best for weight loss?</h3>
+        <p>A common and effective ratio for weight loss is 40% protein, 30% carbs, and 30% fat. The higher protein percentage helps preserve lean muscle mass while in a calorie deficit. That said, the total number of calories matters more than the exact ratio -- any split that keeps protein high and puts you in a deficit will produce results.</p>
+
+        <h3>Should I count macros or just calories?</h3>
+        <p>For weight loss alone, a calorie deficit is what matters most. However, tracking macros gives you better control over body composition. Eating enough protein prevents muscle loss during a cut, adequate fat supports hormone function, and carbs fuel your workouts. If you are serious about fitness goals beyond just the number on the scale, tracking macros is worth the extra effort.</p>
+    </article>
+
+    <footer>
+        &copy; 2026 Automated Insights LLC. All rights reserved.
+    </footer>
+</body>
+</html>

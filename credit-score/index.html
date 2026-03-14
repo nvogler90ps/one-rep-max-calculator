@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Credit Score Guide - Free Credit Score Lookup Tool</title>
+  <meta name="description" content="Free credit score guide and lookup tool. Enter your FICO score to see your rating, typical APRs for mortgages, auto loans, and credit cards, plus tips to improve.">
+  <meta name="keywords" content="credit score, FICO score, credit rating, credit score range, good credit score, credit score checker, APR by credit score">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="canonical" href="https://automated-insights.com/credit-score/">
+  <meta property="og:title" content="Credit Score Guide - Free Credit Score Lookup Tool">
+  <meta property="og:description" content="Enter your FICO score to see your rating, typical APRs, and tips to improve your credit.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://automated-insights.com/credit-score/">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Credit Score Guide",
+    "url": "https://automated-insights.com/credit-score/",
+    "description": "Free credit score guide and lookup tool. Enter your FICO score to see your rating, typical APRs for mortgages, auto loans, and credit cards, plus tips to improve.",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is a good credit score?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A good FICO credit score is 670 to 739. Scores of 740-799 are considered very good, and 800-850 are exceptional. About 67% of Americans have a good credit score or higher."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What factors affect my credit score?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Five factors determine your FICO score: payment history (35%), amounts owed (30%), length of credit history (15%), new credit inquiries (10%), and credit mix (10%). Payment history and amounts owed together account for 65% of your score."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How can I improve my credit score?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "To improve your credit score: pay all bills on time, keep credit utilization below 30%, avoid opening too many new accounts at once, keep old accounts open to maintain credit history length, and maintain a mix of credit types such as credit cards and installment loans."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What credit score do I need for a mortgage?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most conventional mortgages require a minimum credit score of 620. FHA loans may accept scores as low as 580 with a 3.5% down payment. For the best mortgage rates, aim for a score of 740 or higher."
+        }
+      }
+    ]
+  }
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3434609691579834" crossorigin="anonymous"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: #0f1117;
+      color: #e8eaed;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 1rem 2rem;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #e8eaed;
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #9aa0b0;
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+    }
+
+    .card {
+      background: #1a1d27;
+      border: 1px solid #2e3345;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .card h2 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #c4c8d4;
+      margin-bottom: 1rem;
+    }
+
+    .card h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #c4c8d4;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Input section */
+    .input-section {
+      text-align: center;
+    }
+
+    .input-section label {
+      display: block;
+      font-size: 0.95rem;
+      color: #9aa0b0;
+      margin-bottom: 0.75rem;
+    }
+
+    .score-input-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+    }
+
+    .score-input {
+      width: 140px;
+      padding: 0.75rem 1rem;
+      background: #252836;
+      border: 2px solid #2e3345;
+      border-radius: 8px;
+      color: #e8eaed;
+      font-size: 1.5rem;
+      font-weight: 700;
+      text-align: center;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    .score-input:focus {
+      border-color: #6c63ff;
+    }
+
+    .score-input::placeholder {
+      color: #555a6e;
+      font-weight: 400;
+      font-size: 1rem;
+    }
+
+    .lookup-btn {
+      padding: 0.75rem 1.5rem;
+      background: #6c63ff;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .lookup-btn:hover {
+      background: #5a52e0;
+    }
+
+    .score-range-hint {
+      font-size: 0.8rem;
+      color: #666b7a;
+      margin-top: 0.5rem;
+    }
+
+    /* Result section */
+    .result-section {
+      display: none;
+    }
+
+    .result-section.visible {
+      display: block;
+    }
+
+    .rating-display {
+      text-align: center;
+      padding: 1rem 0;
+    }
+
+    .rating-label {
+      font-size: 0.85rem;
+      color: #9aa0b0;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.25rem;
+    }
+
+    .rating-score {
+      font-size: 3rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .rating-name {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-top: 0.25rem;
+    }
+
+    .rating-desc {
+      font-size: 0.9rem;
+      color: #9aa0b0;
+      margin-top: 0.5rem;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Gauge */
+    .gauge-container {
+      position: relative;
+      margin: 1.5rem 0;
+      padding: 0 0.5rem;
+    }
+
+    .gauge-bar {
+      height: 20px;
+      border-radius: 10px;
+      background: linear-gradient(to right, #e74c3c 0%, #e74c3c 18%, #e67e22 18%, #e67e22 34%, #f1c40f 34%, #f1c40f 52%, #2ecc71 52%, #2ecc71 73%, #27ae60 73%, #27ae60 100%);
+      position: relative;
+    }
+
+    .gauge-marker {
+      position: absolute;
+      top: -8px;
+      width: 4px;
+      height: 36px;
+      background: #fff;
+      border-radius: 2px;
+      transform: translateX(-50%);
+      box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+      transition: left 0.4s ease;
+    }
+
+    .gauge-labels {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 0.5rem;
+      font-size: 0.72rem;
+      color: #666b7a;
+    }
+
+    .gauge-range-labels {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 0.25rem;
+      font-size: 0.68rem;
+      padding: 0 0.5rem;
+    }
+
+    .gauge-range-labels span {
+      text-align: center;
+      color: #9aa0b0;
+    }
+
+    /* APR table */
+    .apr-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .apr-table th,
+    .apr-table td {
+      padding: 0.6rem 0.75rem;
+      text-align: left;
+      border-bottom: 1px solid #2e3345;
+      font-size: 0.9rem;
+    }
+
+    .apr-table th {
+      color: #9aa0b0;
+      font-weight: 600;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .apr-table td:last-child {
+      color: #6c63ff;
+      font-weight: 600;
+      text-align: right;
+    }
+
+    .apr-table th:last-child {
+      text-align: right;
+    }
+
+    .apr-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* Score factors */
+    .factor-bar-container {
+      margin-bottom: 0.75rem;
+    }
+
+    .factor-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.88rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .factor-label span:first-child {
+      color: #e8eaed;
+    }
+
+    .factor-label span:last-child {
+      color: #6c63ff;
+      font-weight: 600;
+    }
+
+    .factor-bar {
+      height: 8px;
+      background: #252836;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .factor-bar-fill {
+      height: 100%;
+      background: #6c63ff;
+      border-radius: 4px;
+      transition: width 0.4s ease;
+    }
+
+    /* Tips */
+    .tips-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .tips-list li {
+      padding: 0.5rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      font-size: 0.9rem;
+      color: #e8eaed;
+      border-bottom: 1px solid #252836;
+    }
+
+    .tips-list li:last-child {
+      border-bottom: none;
+    }
+
+    .tips-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.85rem;
+      width: 6px;
+      height: 6px;
+      background: #6c63ff;
+      border-radius: 50%;
+    }
+
+    .tip-detail {
+      display: block;
+      font-size: 0.82rem;
+      color: #9aa0b0;
+      margin-top: 0.15rem;
+    }
+
+    /* FICO ranges table */
+    .ranges-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .ranges-table th,
+    .ranges-table td {
+      padding: 0.55rem 0.75rem;
+      text-align: left;
+      border-bottom: 1px solid #2e3345;
+      font-size: 0.88rem;
+    }
+
+    .ranges-table th {
+      color: #9aa0b0;
+      font-weight: 600;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .ranges-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .ranges-table .range-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin-right: 0.5rem;
+      vertical-align: middle;
+    }
+
+    .ranges-table .active-row {
+      background: #252836;
+    }
+
+    /* FAQ */
+    .faq-item {
+      border-bottom: 1px solid #2e3345;
+      padding: 1rem 0;
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+
+    .faq-item h3 {
+      font-size: 0.95rem;
+      color: #e8eaed;
+      margin-bottom: 0.4rem;
+    }
+
+    .faq-item p {
+      font-size: 0.88rem;
+      color: #9aa0b0;
+      line-height: 1.5;
+    }
+
+    /* More tools */
+    .more-tools {
+      padding: 1.5rem 0;
+      border-top: 1px solid #2e3345;
+    }
+
+    .more-tools p {
+      font-size: 0.82rem;
+      color: #9aa0b0;
+      margin-bottom: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .tools-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tools-row a {
+      display: inline-block;
+      padding: 0.4rem 0.85rem;
+      background: #1a1d27;
+      border: 1px solid #2e3345;
+      border-radius: 6px;
+      color: #e8eaed;
+      font-size: 0.82rem;
+      text-decoration: none;
+    }
+
+    .tools-row a:hover {
+      border-color: #6c63ff;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem 0;
+      color: #666b7a;
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 480px) {
+      h1 { font-size: 1.3rem; }
+      .rating-score { font-size: 2.2rem; }
+      .score-input { width: 110px; font-size: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+  <nav style="padding:1rem 1.5rem;border-bottom:1px solid #2e3345;display:flex;align-items:center;gap:1.5rem">
+    <a href="/" style="color:#6c63ff;font-weight:700;font-size:1.05rem;text-decoration:none">Automated Insights</a>
+    <a href="/" style="color:#9aa0b0;font-size:0.95rem;text-decoration:none">Tools</a>
+    <a href="/blog/" style="color:#9aa0b0;font-size:0.95rem;text-decoration:none">Blog</a>
+  </nav>
+
+  <div class="container" style="padding-top:1.5rem">
+    <h1>Credit Score Guide</h1>
+    <p class="subtitle">Enter your FICO score to see your rating, typical APRs, and tips to improve</p>
+
+    <!-- Input -->
+    <div class="card input-section">
+      <label for="scoreInput">Enter your credit score (300-850)</label>
+      <div class="score-input-row">
+        <input type="number" id="scoreInput" class="score-input" min="300" max="850" placeholder="700" aria-label="Credit score">
+        <button class="lookup-btn" onclick="lookupScore()">Look Up</button>
+      </div>
+      <p class="score-range-hint">FICO scores range from 300 to 850</p>
+    </div>
+
+    <!-- Result -->
+    <div id="resultSection" class="result-section">
+      <!-- Rating display -->
+      <div class="card">
+        <div class="rating-display">
+          <div class="rating-label">Your Credit Rating</div>
+          <div class="rating-score" id="ratingScore"></div>
+          <div class="rating-name" id="ratingName"></div>
+          <p class="rating-desc" id="ratingDesc"></p>
+        </div>
+
+        <div class="gauge-container">
+          <div class="gauge-bar">
+            <div class="gauge-marker" id="gaugeMarker"></div>
+          </div>
+          <div class="gauge-labels">
+            <span>300</span>
+            <span>580</span>
+            <span>670</span>
+            <span>740</span>
+            <span>800</span>
+            <span>850</span>
+          </div>
+          <div class="gauge-range-labels">
+            <span style="width:18%;color:#e74c3c">Poor</span>
+            <span style="width:16%;color:#e67e22">Fair</span>
+            <span style="width:18%;color:#f1c40f">Good</span>
+            <span style="width:21%;color:#2ecc71">Very Good</span>
+            <span style="width:27%;color:#27ae60">Exceptional</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- APR table -->
+      <div class="card">
+        <h2>Typical APRs for Your Score</h2>
+        <table class="apr-table">
+          <thead>
+            <tr>
+              <th>Loan Type</th>
+              <th>Typical APR</th>
+            </tr>
+          </thead>
+          <tbody id="aprTableBody">
+          </tbody>
+        </table>
+      </div>
+
+      <!-- What it means -->
+      <div class="card" id="meaningCard">
+      </div>
+    </div>
+
+    <!-- FICO Ranges reference -->
+    <div class="card">
+      <h2>FICO Score Ranges</h2>
+      <table class="ranges-table">
+        <thead>
+          <tr>
+            <th>Range</th>
+            <th>Rating</th>
+            <th>% of Consumers</th>
+          </tr>
+        </thead>
+        <tbody id="rangesTableBody">
+          <tr>
+            <td><span class="range-dot" style="background:#e74c3c"></span>300-579</td>
+            <td>Poor</td>
+            <td>16%</td>
+          </tr>
+          <tr>
+            <td><span class="range-dot" style="background:#e67e22"></span>580-669</td>
+            <td>Fair</td>
+            <td>17%</td>
+          </tr>
+          <tr>
+            <td><span class="range-dot" style="background:#f1c40f"></span>670-739</td>
+            <td>Good</td>
+            <td>21%</td>
+          </tr>
+          <tr>
+            <td><span class="range-dot" style="background:#2ecc71"></span>740-799</td>
+            <td>Very Good</td>
+            <td>25%</td>
+          </tr>
+          <tr>
+            <td><span class="range-dot" style="background:#27ae60"></span>800-850</td>
+            <td>Exceptional</td>
+            <td>21%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Score Factors -->
+    <div class="card">
+      <h2>What Makes Up Your FICO Score</h2>
+      <div class="factor-bar-container">
+        <div class="factor-label"><span>Payment History</span><span>35%</span></div>
+        <div class="factor-bar"><div class="factor-bar-fill" style="width:100%"></div></div>
+      </div>
+      <div class="factor-bar-container">
+        <div class="factor-label"><span>Amounts Owed</span><span>30%</span></div>
+        <div class="factor-bar"><div class="factor-bar-fill" style="width:85.7%"></div></div>
+      </div>
+      <div class="factor-bar-container">
+        <div class="factor-label"><span>Length of Credit History</span><span>15%</span></div>
+        <div class="factor-bar"><div class="factor-bar-fill" style="width:42.9%"></div></div>
+      </div>
+      <div class="factor-bar-container">
+        <div class="factor-label"><span>New Credit</span><span>10%</span></div>
+        <div class="factor-bar"><div class="factor-bar-fill" style="width:28.6%"></div></div>
+      </div>
+      <div class="factor-bar-container">
+        <div class="factor-label"><span>Credit Mix</span><span>10%</span></div>
+        <div class="factor-bar"><div class="factor-bar-fill" style="width:28.6%"></div></div>
+      </div>
+    </div>
+
+    <!-- Tips -->
+    <div class="card">
+      <h2>Tips to Improve Your Credit Score</h2>
+      <ul class="tips-list">
+        <li>
+          Pay every bill on time, every time
+          <span class="tip-detail">Payment history is the single largest factor (35%). Even one late payment can drop your score significantly. Set up autopay for at least the minimum due.</span>
+        </li>
+        <li>
+          Keep credit utilization below 30%
+          <span class="tip-detail">Try to use less than 30% of your available credit limit across all cards. Below 10% is even better. Request credit limit increases to lower your ratio.</span>
+        </li>
+        <li>
+          Do not close old credit cards
+          <span class="tip-detail">The length of your credit history matters. Closing old accounts shortens your average account age and reduces your total available credit.</span>
+        </li>
+        <li>
+          Limit hard inquiries
+          <span class="tip-detail">Each hard inquiry (from applying for credit) can lower your score by a few points. Space out applications and only apply when necessary.</span>
+        </li>
+        <li>
+          Diversify your credit mix
+          <span class="tip-detail">Having a mix of credit types (credit cards, auto loan, mortgage) can help your score. Do not open accounts solely for this purpose though.</span>
+        </li>
+        <li>
+          Check your credit reports for errors
+          <span class="tip-detail">Request free reports from AnnualCreditReport.com. Dispute any inaccuracies, which could be dragging your score down unfairly.</span>
+        </li>
+        <li>
+          Become an authorized user
+          <span class="tip-detail">Being added to a family member's old, well-managed credit card can boost your score by adding positive history to your report.</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- FAQ -->
+    <div class="card">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-item">
+        <h3>What is a good credit score?</h3>
+        <p>A good FICO credit score is 670 to 739. Scores of 740-799 are considered very good, and 800-850 are exceptional. About 67% of Americans have a good credit score or higher.</p>
+      </div>
+      <div class="faq-item">
+        <h3>What factors affect my credit score?</h3>
+        <p>Five factors determine your FICO score: payment history (35%), amounts owed (30%), length of credit history (15%), new credit inquiries (10%), and credit mix (10%). Payment history and amounts owed together account for 65% of your score.</p>
+      </div>
+      <div class="faq-item">
+        <h3>How often does my credit score change?</h3>
+        <p>Your credit score can change whenever new information is reported to the credit bureaus. This typically happens monthly when your creditors report your balances and payment activity. Significant changes like paying off a large balance or missing a payment can cause immediate shifts.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Does checking my own score lower it?</h3>
+        <p>No. Checking your own credit score is a "soft inquiry" and does not affect your score. Only "hard inquiries" from lenders when you apply for credit can lower your score, and typically only by a few points.</p>
+      </div>
+      <div class="faq-item">
+        <h3>What credit score do I need for a mortgage?</h3>
+        <p>Most conventional mortgages require a minimum score of 620. FHA loans may accept scores as low as 580 with a 3.5% down payment. For the best mortgage rates, aim for 740 or higher.</p>
+      </div>
+    </div>
+
+    <!-- More tools -->
+    <div class="more-tools">
+      <p>More Free Tools</p>
+      <div class="tools-row">
+        <a href="/">All Tools</a>
+        <a href="/mortgage-calc/">Mortgage Calculator</a>
+        <a href="/auto-loan-calc/">Auto Loan Calculator</a>
+        <a href="/home-affordability/">Home Affordability</a>
+        <a href="/interest-calculator/">Interest Calculator</a>
+        <a href="/salary-calculator/">Salary Calculator</a>
+      </div>
+    </div>
+
+    <footer>
+      <p>&copy; 2026 Automated Insights LLC</p>
+    </footer>
+  </div>
+
+  <script>
+    var scoreData = {
+      poor: {
+        name: "Poor",
+        color: "#e74c3c",
+        range: "300-579",
+        mortgageApr: "Not typically available",
+        autoApr: "12.0% - 18.0%",
+        cardApr: "24.0% - 36.0%",
+        desc: "A poor credit score suggests a history of credit difficulties. Lenders consider this high risk, and many loan products may not be available. Focus on rebuilding by making on-time payments and reducing outstanding debts.",
+        meaning: [
+          "Most conventional lenders will decline applications",
+          "Secured credit cards and credit-builder loans are your best options",
+          "You may need larger security deposits for utilities and rentals",
+          "Insurance premiums may be higher in states that use credit-based scoring",
+          "With consistent effort, you can move into the Fair range within 12-18 months"
+        ]
+      },
+      fair: {
+        name: "Fair",
+        color: "#e67e22",
+        range: "580-669",
+        mortgageApr: "6.5% - 8.0%",
+        autoApr: "8.0% - 14.0%",
+        cardApr: "20.0% - 28.0%",
+        desc: "A fair credit score means you are considered a subprime borrower. You can qualify for some loans but will pay higher interest rates than average. Consistent on-time payments and reducing debt can help you improve.",
+        meaning: [
+          "FHA mortgage loans are available (minimum 580 for 3.5% down payment)",
+          "Auto loans are available but at above-average interest rates",
+          "Most credit cards available will have higher APRs and lower limits",
+          "You may face higher security deposits or require a cosigner for some products",
+          "Moving to Good (670+) can save thousands in interest over time"
+        ]
+      },
+      good: {
+        name: "Good",
+        color: "#f1c40f",
+        range: "670-739",
+        mortgageApr: "5.5% - 6.5%",
+        autoApr: "5.5% - 8.0%",
+        cardApr: "16.0% - 22.0%",
+        desc: "A good credit score means you are near or slightly above the average for U.S. consumers. Most lenders consider this an acceptable score, and you will qualify for a wide variety of loan products at competitive rates.",
+        meaning: [
+          "Conventional mortgages are available at reasonable rates",
+          "Auto loans are widely available with competitive terms",
+          "You qualify for most rewards credit cards",
+          "Insurance premiums are generally average",
+          "Reaching Very Good (740+) can unlock the best available rates"
+        ]
+      },
+      veryGood: {
+        name: "Very Good",
+        color: "#2ecc71",
+        range: "740-799",
+        mortgageApr: "5.0% - 5.75%",
+        autoApr: "4.0% - 6.0%",
+        cardApr: "14.0% - 18.0%",
+        desc: "A very good credit score demonstrates a strong history of responsible credit management. You qualify for better-than-average rates from most lenders, and you have strong negotiating power.",
+        meaning: [
+          "You qualify for the best mortgage rates available to most consumers",
+          "Premium rewards credit cards with sign-up bonuses are available",
+          "Auto loan rates will be well below average",
+          "You have strong negotiating power with lenders",
+          "Maintaining this score is primarily about consistency"
+        ]
+      },
+      exceptional: {
+        name: "Exceptional",
+        color: "#27ae60",
+        range: "800-850",
+        mortgageApr: "4.75% - 5.25%",
+        autoApr: "3.5% - 5.0%",
+        cardApr: "12.0% - 16.0%",
+        desc: "An exceptional credit score is the highest tier. You are well above the national average and will receive the best rates and terms lenders offer. This score reflects a long history of excellent credit management.",
+        meaning: [
+          "You receive the absolute best interest rates and terms available",
+          "Virtually all credit products are available to you",
+          "Premium and luxury credit cards with top-tier rewards are accessible",
+          "You can often negotiate even better terms than advertised",
+          "Lenders actively compete for your business"
+        ]
+      }
+    };
+
+    function getRating(score) {
+      if (score < 580) { return scoreData.poor; }
+      if (score < 670) { return scoreData.fair; }
+      if (score < 740) { return scoreData.good; }
+      if (score < 800) { return scoreData.veryGood; }
+      return scoreData.exceptional;
+    }
+
+    function lookupScore() {
+      var input = document.getElementById("scoreInput");
+      var score = parseInt(input.value, 10);
+
+      if (isNaN(score) || score < 300 || score > 850) {
+        input.style.borderColor = "#e74c3c";
+        return;
+      }
+
+      input.style.borderColor = "#2e3345";
+      var rating = getRating(score);
+
+      // Show result section
+      var section = document.getElementById("resultSection");
+      section.classList.add("visible");
+
+      // Rating display
+      document.getElementById("ratingScore").textContent = score;
+      document.getElementById("ratingScore").style.color = rating.color;
+      document.getElementById("ratingName").textContent = rating.name;
+      document.getElementById("ratingName").style.color = rating.color;
+      document.getElementById("ratingDesc").textContent = rating.desc;
+
+      // Gauge marker
+      var pct = ((score - 300) / 550) * 100;
+      document.getElementById("gaugeMarker").style.left = pct + "%";
+
+      // APR table
+      var aprBody = document.getElementById("aprTableBody");
+      aprBody.innerHTML =
+        "<tr><td>Mortgage (30-year fixed)</td><td>" + rating.mortgageApr + "</td></tr>" +
+        "<tr><td>Auto Loan (60-month new)</td><td>" + rating.autoApr + "</td></tr>" +
+        "<tr><td>Credit Card</td><td>" + rating.cardApr + "</td></tr>";
+
+      // Meaning card
+      var meaningCard = document.getElementById("meaningCard");
+      var html = "<h2>What a " + score + " Credit Score Means</h2><ul class=\"tips-list\">";
+      for (var i = 0; i < rating.meaning.length; i++) {
+        html += "<li>" + rating.meaning[i] + "</li>";
+      }
+      html += "</ul>";
+      meaningCard.innerHTML = html;
+
+      // Highlight active range row
+      var rows = document.querySelectorAll("#rangesTableBody tr");
+      var ranges = ["poor", "fair", "good", "veryGood", "exceptional"];
+      var ratingKeys = Object.keys(scoreData);
+      for (var j = 0; j < rows.length; j++) {
+        if (scoreData[ratingKeys[j]] === rating) {
+          rows[j].classList.add("active-row");
+        } else {
+          rows[j].classList.remove("active-row");
+        }
+      }
+
+      // Scroll to result
+      section.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    // Allow Enter key
+    document.getElementById("scoreInput").addEventListener("keydown", function(e) {
+      if (e.key === "Enter") {
+        lookupScore();
+      }
+    });
+  </script>
+</body>
+</html>

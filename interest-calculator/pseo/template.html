@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{TITLE}} - Compound Interest Calculator</title>
+  <meta name="description" content="{{DESCRIPTION}}">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="canonical" href="{{CANONICAL}}">
+  <meta property="og:title" content="{{TITLE}} - Compound Interest Calculator">
+  <meta property="og:description" content="{{DESCRIPTION}}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{CANONICAL}}">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How much will ${{PRINCIPAL_FORMATTED}} grow at {{RATE}}% interest over {{YEARS}} years?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "${{PRINCIPAL_FORMATTED}} invested at {{RATE}}% annual interest compounded monthly will grow to ${{FINAL_BALANCE}} after {{YEARS}} years. You will earn ${{TOTAL_INTEREST}} in interest."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the compound interest formula?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The compound interest formula is A = P(1 + r/n)^(nt), where P is the principal (${{PRINCIPAL_FORMATTED}}), r is the annual rate ({{RATE}}%), n is the number of times interest compounds per year (12 for monthly), and t is the number of years ({{YEARS}})."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much interest does ${{PRINCIPAL_FORMATTED}} earn in {{YEARS}} years at {{RATE}}%?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "With monthly compounding, ${{PRINCIPAL_FORMATTED}} at {{RATE}}% annual interest earns ${{TOTAL_INTEREST}} in total interest over {{YEARS}} years, for a final balance of ${{FINAL_BALANCE}}."
+        }
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://automated-insights.com/"},
+      {"@type": "ListItem", "position": 2, "name": "Compound Interest Calculator", "item": "https://automated-insights.com/interest-calculator/"},
+      {"@type": "ListItem", "position": 3, "name": "${{PRINCIPAL_FORMATTED}} at {{RATE}}% for {{YEARS}} Years"}
+    ]
+  }
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3434609691579834" crossorigin="anonymous"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: #0f1117;
+      color: #e8eaed;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    /* Breadcrumb */
+    .breadcrumb {
+      padding: 1rem 0 0;
+      font-size: 0.82rem;
+      color: #9aa0b0;
+    }
+    .breadcrumb a {
+      color: #9aa0b0;
+      text-decoration: none;
+    }
+    .breadcrumb a:hover {
+      color: #6c63ff;
+    }
+    .breadcrumb .sep {
+      margin: 0 0.4rem;
+      opacity: 0.5;
+    }
+
+    /* Hero answer */
+    .hero {
+      text-align: center;
+      padding: 2.5rem 1rem 2rem;
+    }
+    .hero h1 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #c4c8d4;
+      margin-bottom: 1.25rem;
+    }
+    .answer-box {
+      background: #1a1d27;
+      border: 2px solid #6c63ff;
+      border-radius: 12px;
+      padding: 2rem 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+    .answer-label {
+      display: block;
+      font-size: 0.85rem;
+      color: #9aa0b0;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.5rem;
+    }
+    .answer-value {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #6c63ff;
+      line-height: 1.2;
+    }
+
+    /* Summary card */
+    .summary {
+      background: #1a1d27;
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .summary h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #c4c8d4;
+      margin-bottom: 1rem;
+    }
+    .summary-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .summary-item {
+      display: flex;
+      flex-direction: column;
+    }
+    .summary-item .label {
+      font-size: 0.78rem;
+      color: #9aa0b0;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.25rem;
+    }
+    .summary-item .value {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #e8eaed;
+    }
+    .summary-item .value.accent {
+      color: #6c63ff;
+    }
+
+    /* Year-by-year breakdown */
+    .breakdown {
+      background: #1a1d27;
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .breakdown h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #c4c8d4;
+      margin-bottom: 1rem;
+    }
+    .year-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+    .year-table th {
+      text-align: left;
+      padding: 0.5rem 0.75rem;
+      border-bottom: 2px solid #2e3345;
+      color: #9aa0b0;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-weight: 600;
+    }
+    .year-table td {
+      padding: 0.5rem 0.75rem;
+      border-bottom: 1px solid #2e3345;
+      color: #e8eaed;
+    }
+    .year-table tr:last-child td {
+      border-bottom: none;
+    }
+    .year-table .accent {
+      color: #6c63ff;
+      font-weight: 600;
+    }
+    .year-table .ellipsis td {
+      text-align: center;
+      color: #9aa0b0;
+      font-style: italic;
+      padding: 0.3rem 0.75rem;
+    }
+
+    /* Formula section */
+    .formula {
+      background: #1a1d27;
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .formula h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #c4c8d4;
+      margin-bottom: 1rem;
+    }
+    .formula-block {
+      background: #252836;
+      border-radius: 8px;
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+      text-align: center;
+      font-family: "SF Mono", Monaco, Consolas, monospace;
+      font-size: 1rem;
+      color: #e8eaed;
+      line-height: 1.8;
+    }
+    .formula-block .highlight {
+      color: #6c63ff;
+      font-weight: 600;
+    }
+    .steps {
+      font-size: 0.95rem;
+      color: #e8eaed;
+    }
+    .steps .step {
+      padding: 0.4rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .steps .step-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.6rem;
+      height: 1.6rem;
+      border-radius: 50%;
+      background: #2e3345;
+      color: #6c63ff;
+      font-size: 0.78rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .steps code {
+      background: #252836;
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      font-family: "SF Mono", Monaco, Consolas, monospace;
+      font-size: 0.9rem;
+      color: #e8eaed;
+    }
+
+    /* Related calculations */
+    .related {
+      margin-bottom: 2rem;
+    }
+    .related h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #c4c8d4;
+      margin-bottom: 0.75rem;
+    }
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 0.5rem;
+    }
+    .related-grid a {
+      display: block;
+      padding: 0.6rem 0.85rem;
+      background: #1a1d27;
+      border: 1px solid #2e3345;
+      border-radius: 8px;
+      color: #e8eaed;
+      text-decoration: none;
+      font-size: 0.88rem;
+      transition: border-color 0.15s;
+    }
+    .related-grid a:hover {
+      border-color: #6c63ff;
+    }
+    .related-grid a .related-result {
+      color: #6c63ff;
+      font-weight: 600;
+    }
+
+    /* CTA to main calculator */
+    .cta {
+      text-align: center;
+      padding: 2rem 1rem;
+      background: #1a1d27;
+      border-radius: 10px;
+      margin-bottom: 2rem;
+    }
+    .cta p {
+      color: #9aa0b0;
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+    .cta a {
+      display: inline-block;
+      padding: 0.7rem 1.8rem;
+      background: #6c63ff;
+      color: #fff;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background 0.15s;
+    }
+    .cta a:hover {
+      background: #5a52e0;
+    }
+
+    /* More tools */
+    .more-tools {
+      padding: 1.5rem 0;
+      border-top: 1px solid #2e3345;
+    }
+    .more-tools p {
+      font-size: 0.82rem;
+      color: #9aa0b0;
+      margin-bottom: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .tools-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .tools-row a {
+      display: inline-block;
+      padding: 0.4rem 0.85rem;
+      background: #1a1d27;
+      border: 1px solid #2e3345;
+      border-radius: 6px;
+      color: #e8eaed;
+      font-size: 0.82rem;
+      text-decoration: none;
+    }
+    .tools-row a:hover {
+      border-color: #6c63ff;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem 0;
+      color: #666b7a;
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 1.15rem; }
+      .answer-value { font-size: 2.2rem; }
+      .summary-grid { grid-template-columns: 1fr; }
+      .related-grid { grid-template-columns: 1fr 1fr; }
+      .year-table { font-size: 0.8rem; }
+      .year-table th, .year-table td { padding: 0.4rem 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a><span class="sep">&rsaquo;</span>
+      <a href="/interest-calculator/">Compound Interest Calculator</a><span class="sep">&rsaquo;</span>
+      <span>${{PRINCIPAL_FORMATTED}} at {{RATE}}% for {{YEARS}} Years</span>
+    </nav>
+
+    <div class="hero">
+      <h1>${{PRINCIPAL_FORMATTED}} at {{RATE}}% Interest for {{YEARS}} Years</h1>
+      <div class="answer-box">
+        <span class="answer-label">Final Balance</span>
+        <span class="answer-value">${{FINAL_BALANCE}}</span>
+      </div>
+    </div>
+
+    <div class="summary">
+      <h2>Investment Summary</h2>
+      <div class="summary-grid">
+        <div class="summary-item">
+          <span class="label">Principal</span>
+          <span class="value">${{PRINCIPAL_FORMATTED}}</span>
+        </div>
+        <div class="summary-item">
+          <span class="label">Annual Rate</span>
+          <span class="value">{{RATE}}%</span>
+        </div>
+        <div class="summary-item">
+          <span class="label">Time Period</span>
+          <span class="value">{{YEARS}} Years</span>
+        </div>
+        <div class="summary-item">
+          <span class="label">Compounding</span>
+          <span class="value">Monthly</span>
+        </div>
+        <div class="summary-item">
+          <span class="label">Total Interest Earned</span>
+          <span class="value accent">${{TOTAL_INTEREST}}</span>
+        </div>
+        <div class="summary-item">
+          <span class="label">Final Balance</span>
+          <span class="value accent">${{FINAL_BALANCE}}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="breakdown">
+      <h2>Year-by-Year Growth</h2>
+      <table class="year-table">
+        <thead>
+          <tr>
+            <th>Year</th>
+            <th>Balance</th>
+            <th>Interest Earned</th>
+            <th>Total Interest</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{YEAR_ROWS}}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="formula">
+      <h2>How This Was Calculated</h2>
+      <div class="formula-block">
+        A = P(1 + r/n)<sup>nt</sup><br>
+        A = {{PRINCIPAL}}(1 + {{RATE}}/100/12)<sup>12 x {{YEARS}}</sup><br>
+        A = <span class="highlight">${{FINAL_BALANCE}}</span>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <span class="step-num">1</span>
+          <span>Principal (P): <code>${{PRINCIPAL_FORMATTED}}</code></span>
+        </div>
+        <div class="step">
+          <span class="step-num">2</span>
+          <span>Annual rate (r): <code>{{RATE}}% = {{RATE_DECIMAL}}</code></span>
+        </div>
+        <div class="step">
+          <span class="step-num">3</span>
+          <span>Monthly rate: <code>{{RATE_DECIMAL}} / 12 = {{MONTHLY_RATE}}</code></span>
+        </div>
+        <div class="step">
+          <span class="step-num">4</span>
+          <span>Total periods: <code>12 x {{YEARS}} = {{TOTAL_PERIODS}}</code></span>
+        </div>
+        <div class="step">
+          <span class="step-num">5</span>
+          <span>Final balance: <code>{{PRINCIPAL}} x (1 + {{MONTHLY_RATE}})<sup>{{TOTAL_PERIODS}}</sup> = <span class="highlight">${{FINAL_BALANCE}}</span></code></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="related">
+      <h2>Related Calculations</h2>
+      <div class="related-grid">
+        {{RELATED_LINKS}}
+      </div>
+    </div>
+
+    <div class="cta">
+      <p>Want to adjust the numbers or add monthly contributions? Try the full calculator.</p>
+      <a href="/interest-calculator/">Open Compound Interest Calculator</a>
+    </div>
+
+    <div class="more-tools">
+      <p>More Free Tools</p>
+      <div class="tools-row">
+        <a href="/">All Tools</a>
+        <a href="/percentage-calc/">Percentage Calculator</a>
+        <a href="/mortgage-calculator/">Mortgage Calculator</a>
+        <a href="/date-calculator/">Date Calculator</a>
+      </div>
+    </div>
+
+    <footer>
+      <p>&copy; 2026 Automated Insights LLC</p>
+    </footer>
+  </div>
+</body>
+</html>

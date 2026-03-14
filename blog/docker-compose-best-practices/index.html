@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docker Compose Best Practices: 10 Rules for Production-Ready Configs</title>
+    <meta name="description" content="10 practical Docker Compose best practices with code examples. Learn version pinning, health checks, resource limits, secrets management, and more for production configs.">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="canonical" href="https://automated-insights.com/blog/docker-compose-best-practices/">
+    <meta property="og:title" content="Docker Compose Best Practices: 10 Rules for Production-Ready Configs">
+    <meta property="og:description" content="10 practical rules with bad vs good code examples to make your Docker Compose configs production-ready.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://automated-insights.com/blog/docker-compose-best-practices/">
+    <meta property="article:published_time" content="2026-03-14">
+    <meta property="article:author" content="Nicholas Vogler">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Docker Compose Best Practices: 10 Rules for Production-Ready Configs",
+        "author": { "@type": "Person", "name": "Nicholas Vogler" },
+        "datePublished": "2026-03-14",
+        "publisher": { "@type": "Organization", "name": "Automated Insights" },
+        "description": "10 practical Docker Compose best practices with code examples for production-ready configurations."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://automated-insights.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://automated-insights.com/blog/" },
+            { "@type": "ListItem", "position": 3, "name": "Docker Compose Best Practices" }
+        ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Should I use Docker Compose in production?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Docker Compose is suitable for production on single-server deployments, small teams, and applications that do not require multi-node orchestration. For simple web apps, internal tools, and small-to-medium workloads, Compose with proper health checks, resource limits, and restart policies is production-ready. For large-scale, multi-node deployments requiring auto-scaling and rolling updates across a cluster, Kubernetes or Docker Swarm is a better fit."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How do I manage secrets in Docker Compose?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Never put secrets directly in your docker-compose.yml or commit .env files with real credentials. Instead, use Docker secrets (which mount credentials as files in /run/secrets/), reference environment variables from your host, or use a secrets manager like HashiCorp Vault or AWS Secrets Manager. For development, .env files are fine -- just add them to .gitignore and use .env.example as a template."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What is the difference between depends_on and healthcheck?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "depends_on controls startup order -- it ensures container A starts before container B. However, it only waits for the container to start, not for the service inside to be ready. healthcheck defines how Docker tests whether the service inside a container is actually working. When you combine them with depends_on: condition: service_healthy, Docker will wait until the dependency's healthcheck passes before starting the dependent service."
+                }
+            }
+        ]
+    }
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3434609691579834" crossorigin="anonymous"></script>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; background: #0f1117; color: #e8eaed; min-height: 100vh; display: flex; flex-direction: column; line-height: 1.7; }
+        a { color: #6c63ff; text-decoration: none; } a:hover { text-decoration: underline; }
+        nav { padding: 1rem 1.5rem; border-bottom: 1px solid #2e3345; display: flex; align-items: center; gap: 1.5rem; }
+        nav a { color: #9aa0b0; font-size: 0.95rem; transition: color 0.2s; } nav a:hover { color: #e8eaed; text-decoration: none; } nav .brand { color: #6c63ff; font-weight: 700; font-size: 1.05rem; }
+        .breadcrumb { max-width: 720px; margin: 1.5rem auto 0; padding: 0 1rem; font-size: 0.85rem; color: #9aa0b0; } .breadcrumb a { color: #9aa0b0; } .breadcrumb a:hover { color: #6c63ff; }
+        article { flex: 1; width: 100%; max-width: 720px; margin: 0 auto; padding: 2rem 1rem 3rem; }
+        .post-meta { color: #9aa0b0; font-size: 0.85rem; margin-bottom: 2rem; }
+        h1 { font-size: 2rem; font-weight: 700; margin-bottom: 0.75rem; line-height: 1.25; }
+        h2 { font-size: 1.4rem; font-weight: 600; margin: 2rem 0 0.75rem; color: #e8eaed; }
+        h3 { font-size: 1.1rem; font-weight: 600; margin: 1.5rem 0 0.5rem; }
+        p { margin-bottom: 1rem; color: #e8eaed; }
+        ul, ol { margin: 0 0 1rem 1.5rem; color: #e8eaed; } li { margin-bottom: 0.4rem; }
+        code { background: #1a1d27; border: 1px solid #2e3345; border-radius: 4px; padding: 0.15rem 0.4rem; font-size: 0.9em; }
+        pre { background: #1a1d27; border: 1px solid #2e3345; border-radius: 10px; padding: 1.5rem; margin: 1rem 0 1.5rem; overflow-x: auto; font-size: 0.9rem; line-height: 1.5; }
+        pre code { background: none; border: none; padding: 0; }
+        .formula-box { background: #1a1d27; border: 1px solid #2e3345; border-radius: 10px; padding: 1.5rem; margin: 1.5rem 0; text-align: center; font-size: 1.1rem; }
+        .cta-box { background: #1a1d27; border: 2px solid #6c63ff; border-radius: 10px; padding: 1.5rem; margin: 2rem 0; text-align: center; }
+        .cta-box h3 { color: #6c63ff; margin: 0 0 0.5rem; } .cta-box p { color: #9aa0b0; margin-bottom: 1rem; }
+        .cta-box a.btn { display: inline-block; background: #6c63ff; color: #fff; padding: 0.6rem 1.5rem; border-radius: 6px; font-weight: 600; transition: opacity 0.2s; } .cta-box a.btn:hover { opacity: 0.85; text-decoration: none; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem; }
+        th, td { padding: 0.6rem 0.8rem; text-align: left; border-bottom: 1px solid #2e3345; }
+        th { background: #1a1d27; color: #9aa0b0; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.03em; }
+        td { font-size: 0.95rem; }
+        .example-label { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem; }
+        .example-bad .example-label { color: #ff6b6b; }
+        .example-good .example-label { color: #51cf66; }
+        footer { text-align: center; padding: 2rem 1rem; color: #9aa0b0; font-size: 0.85rem; border-top: 1px solid #2e3345; }
+        @media (max-width: 600px) { h1 { font-size: 1.5rem; } h2 { font-size: 1.2rem; } article { padding: 1.5rem 1rem 2rem; } table { font-size: 0.85rem; } th, td { padding: 0.4rem 0.5rem; } }
+    </style>
+</head>
+<body>
+    <nav><a href="/" class="brand">Automated Insights</a><a href="/">Tools</a><a href="/blog/">Blog</a></nav>
+
+    <div class="breadcrumb">
+        <a href="/">Home</a> / <a href="/blog/">Blog</a> / Docker Compose Best Practices
+    </div>
+
+    <article>
+        <h1>Docker Compose Best Practices: 10 Rules for Production-Ready Configs</h1>
+        <div class="post-meta">By Nicholas Vogler -- March 14, 2026 -- 7 min read</div>
+
+        <p>Docker Compose files start simple and accumulate complexity fast. A config that works fine in development can cause outages, data loss, and security vulnerabilities in production if you do not follow a few critical rules.</p>
+
+        <p>These 10 practices are drawn from real production failures. Each one includes a "bad" and "good" example so you can audit your own configs.</p>
+
+        <h2>1. Pin Image Versions -- Never Use "latest"</h2>
+
+        <p>The <code>latest</code> tag is a moving target. A <code>docker compose pull</code> on Tuesday might give you a completely different image than it did on Monday. This breaks reproducibility and can introduce breaking changes without warning.</p>
+
+        <div class="example-bad">
+            <p class="example-label">Bad</p>
+            <pre><code>services:
+  web:
+    image: nginx:latest</code></pre>
+        </div>
+
+        <div class="example-good">
+            <p class="example-label">Good</p>
+            <pre><code>services:
+  web:
+    image: nginx:1.25.4-alpine</code></pre>
+        </div>
+
+        <p>Always use a specific version tag. Include the OS variant (like <code>alpine</code>) for smaller, more secure images. When you want to upgrade, change the tag explicitly and test.</p>
+
+        <h2>2. Add Health Checks to Every Service</h2>
+
+        <p>Without health checks, Docker considers a container "healthy" the moment its process starts -- even if the application inside is still initializing, has crashed internally, or cannot reach its database.</p>
+
+        <div class="example-bad">
+            <p class="example-label">Bad</p>
+            <pre><code>services:
+  api:
+    image: myapp:2.1.0
+    depends_on:
+      - db</code></pre>
+        </div>
+
+        <div class="example-good">
+            <p class="example-label">Good</p>
+            <pre><code>services:
+  api:
+    image: myapp:2.1.0
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s</code></pre>
+        </div>
+
+        <p>The <code>start_period</code> gives your app time to initialize before Docker starts counting failures. Combined with <code>condition: service_healthy</code> on <code>depends_on</code>, this ensures services start in the right order and only when their dependencies are actually ready.</p>
+
+        <h2>3. Set Resource Limits</h2>
+
+        <p>A runaway process without memory limits can consume all available RAM and crash every other container on the host. CPU limits prevent one service from starving others.</p>
+
+        <div class="example-bad">
+            <p class="example-label">Bad</p>
+            <pre><code>services:
+  worker:
+    image: myworker:1.3.0</code></pre>
+        </div>
+
+        <div class="example-good">
+            <p class="example-label">Good</p>
+            <pre><code>services:
+  worker:
+    image: myworker:1.3.0
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 512M
+        reservations:
+          cpus: "0.25"
+          memory: 128M</code></pre>
+        </div>
+
+        <p>Reservations guarantee a minimum allocation. Limits cap the maximum. Set limits based on observed usage plus a safety margin -- not arbitrarily high values.</p>
+
+        <h2>4. Configure Logging Properly</h2>
+
+        <p>By default, Docker stores logs as JSON files with no size limit. A chatty application can fill your disk in hours.</p>
+
+        <div class="example-bad">
+            <p class="example-label">Bad</p>
+            <pre><code>services:
+  api:
+    image: myapp:2.1.0
+    # No logging config -- unbounded log files</code></pre>
+        </div>
+
+        <div class="example-good">
+            <p class="example-label">Good</p>
+            <pre><code>services:
+  api:
+    image: myapp:2.1.0
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"</code></pre>
+        </div>
+
+        <p>This caps each service at 30 MB of logs (3 files of 10 MB each). For production systems that need centralized logging, use the <code>syslog</code> or <code>fluentd</code> driver instead.</p>
+
+        <h2>5. Use Custom Networks</h2>
+
+        <p>The default bridge network allows every container to communicate with every other container. Custom networks provide isolation between service groups.</p>
+
+        <div class="example-bad">
+            <p class="example-label">Bad</p>
+            <pre><code>services:
+  web:
+    image: nginx:1.25.4-alpine
+  api:
+    image: myapp:2.1.0
+  db:
+    image: postgres:16.2-alpine
+# All on the default network -- web can reach db directly</code></pre>
+        </div>
+
+        <div class="example-good">
+            <p class="example-label">Good</p>
+            <pre><code>services:
+  web:
+    image: nginx:1.25.4-alpine
+    networks:
+      - frontend
+  api:
+    image: myapp:2.1.0
+    networks:
+      - frontend
+      - backend
+  db:
+    image: postgres:16.2-alpine
+    networks:
+      - backend
+
+networks:
+  frontend:
+  backend:</code></pre>
+        </div>
+
+        <p>Now the web server can only reach the API, and the database is only accessible from the API. This follows the principle of least privilege and limits the blast radius if any container is compromised.</p>
+
+        <h2>6. Never Put Secrets in the Compose File</h2>
+
+        <p>Secrets hardcoded in <code>docker-compose.yml</code> end up in version control. Environment variables in the compose file are visible to anyone with <code>docker inspect</code> access.</p>
+
+        <div class="example-bad">
+            <p class="example-label">Bad</p>
+            <pre><code>services:
+  db:
+    image: postgres:16.2-alpine
+    environment:
+      POSTGRES_PASSWORD: my_secret_password_123</code></pre>
+        </div>
+
+        <div class="example-good">
+            <p class="example-label">Good</p>
+            <pre><code>services:
+  db:
+    image: postgres:16.2-alpine
+    environment:
+      POSTGRES_PASSWORD_FILE: /run/secrets/db_password
+    secrets:
+      - db_password
+
+secrets:
+  db_password:
+    file: ./secrets/db_password.txt</code></pre>
+        </div>
+
+        <p>Docker secrets mount credentials as files inside the container at <code>/run/secrets/</code>. Most official database images support the <code>_FILE</code> suffix convention for reading credentials from files. Keep your secrets directory in <code>.gitignore</code> and use a <code>.env.example</code> to document required values.</p>
+
+        <h2>7. Use .env Files Correctly</h2>
+
+        <p>The <code>.env</code> file is for variable substitution in your compose file -- not for passing environment variables to containers. Keep these concerns separate.</p>
+
+        <div class="example-bad">
+            <p class="example-label">Bad</p>
+            <pre><code># .env committed to git with real values
+DB_HOST=prod-db.internal
+DB_PASSWORD=real_password</code></pre>
+        </div>
+
+        <div class="example-good">
+            <p class="example-label">Good</p>
+            <pre><code># .env.example committed to git (template)
+DB_HOST=localhost
+DB_PASSWORD=changeme
+
+# .env ignored by git (real values)
+# Created manually on each host</code></pre>
+        </div>
+
+        <p>Add <code>.env</code> to your <code>.gitignore</code>. Commit a <code>.env.example</code> with safe defaults so new developers know which variables are needed.</p>
+
+        <h2>8. Set Restart Policies</h2>
+
+        <p>Without a restart policy, a crashed container stays down until someone manually restarts it. In production, that might mean hours of downtime before anyone notices.</p>
+
+        <div class="example-bad">
+            <p class="example-label">Bad</p>
+            <pre><code>services:
+  api:
+    image: myapp:2.1.0
+    # No restart policy -- stays down after crash</code></pre>
+        </div>
+
+        <div class="example-good">
+            <p class="example-label">Good</p>
+            <pre><code>services:
+  api:
+    image: myapp:2.1.0
+    restart: unless-stopped</code></pre>
+        </div>
+
+        <p>Use <code>unless-stopped</code> for most services -- it restarts on crash and after host reboots, but respects manual <code>docker compose stop</code> commands. Use <code>on-failure</code> for batch jobs that should not restart after completing successfully. Avoid <code>always</code> unless you have a specific reason, as it restarts even after manual stops.</p>
+
+        <h2>9. Prefer "image" Over "build" in Production</h2>
+
+        <p>Building images on the production server means your deploy depends on build tools, source code, and network access to registries -- all potential points of failure. Build once, push to a registry, and pull the image in production.</p>
+
+        <div class="example-bad">
+            <p class="example-label">Bad</p>
+            <pre><code># Production compose file
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile</code></pre>
+        </div>
+
+        <div class="example-good">
+            <p class="example-label">Good</p>
+            <pre><code># Production compose file
+services:
+  api:
+    image: registry.example.com/myapp:2.1.0
+
+# Development compose file (docker-compose.override.yml)
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile</code></pre>
+        </div>
+
+        <p>Use <code>docker-compose.override.yml</code> for development-specific settings like <code>build</code>, volume mounts for hot reloading, and debug ports. Docker Compose merges the override file automatically.</p>
+
+        <h2>10. Use Named Volumes for Persistent Data</h2>
+
+        <p>Bind mounts (<code>./data:/var/lib/postgresql/data</code>) tie your data to a specific host path and can have permission issues across different operating systems. Named volumes are managed by Docker and work consistently.</p>
+
+        <div class="example-bad">
+            <p class="example-label">Bad</p>
+            <pre><code>services:
+  db:
+    image: postgres:16.2-alpine
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data</code></pre>
+        </div>
+
+        <div class="example-good">
+            <p class="example-label">Good</p>
+            <pre><code>services:
+  db:
+    image: postgres:16.2-alpine
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:</code></pre>
+        </div>
+
+        <p>Named volumes survive <code>docker compose down</code> (but not <code>docker compose down -v</code>). For backups, use <code>docker run --volumes-from</code> or a backup sidecar container rather than reaching into the host filesystem.</p>
+
+        <h2>Common Mistakes to Avoid</h2>
+
+        <ul>
+            <li><strong>Using <code>docker compose down -v</code> in production</strong> -- the <code>-v</code> flag deletes all named volumes, including your database. It is useful for development resets but catastrophic in production.</li>
+            <li><strong>Exposing ports unnecessarily</strong> -- use <code>expose</code> (container-to-container) instead of <code>ports</code> (host-exposed) for internal services. Your database should almost never be exposed on a host port.</li>
+            <li><strong>Ignoring the <code>.dockerignore</code> file</strong> -- without it, your build context includes everything in the directory, including <code>node_modules</code>, <code>.git</code>, and potentially secrets files. This slows builds and risks leaking sensitive files into images.</li>
+            <li><strong>Running containers as root</strong> -- most official images run as root by default. Add a <code>user</code> directive or set up a non-root user in your Dockerfile to limit the damage from container escapes.</li>
+            <li><strong>Not testing compose configs before deploying</strong> -- run <code>docker compose config</code> to validate your file and see the fully resolved configuration, including variable substitution and merge results.</li>
+        </ul>
+
+        <div class="cta-box">
+            <h3>Generate Docker Compose Configs</h3>
+            <p>Use our Docker Compose generator to build production-ready configurations with health checks, resource limits, and proper networking built in.</p>
+            <a href="/docker-compose-gen/" class="btn">Open Docker Compose Generator</a>
+        </div>
+
+        <h2>Frequently Asked Questions</h2>
+
+        <h3>Should I use Docker Compose in production?</h3>
+        <p>Docker Compose is suitable for production on single-server deployments, small teams, and applications that do not require multi-node orchestration. For simple web apps, internal tools, and small-to-medium workloads, Compose with proper health checks, resource limits, and restart policies is production-ready. For large-scale, multi-node deployments requiring auto-scaling and rolling updates across a cluster, Kubernetes or Docker Swarm is a better fit.</p>
+
+        <h3>How do I manage secrets in Docker Compose?</h3>
+        <p>Never put secrets directly in your <code>docker-compose.yml</code> or commit <code>.env</code> files with real credentials. Use Docker secrets (which mount credentials as files in <code>/run/secrets/</code>), reference environment variables from your host, or use a secrets manager like HashiCorp Vault or AWS Secrets Manager. For development, <code>.env</code> files are fine -- just add them to <code>.gitignore</code> and use <code>.env.example</code> as a template.</p>
+
+        <h3>What is the difference between depends_on and healthcheck?</h3>
+        <p><code>depends_on</code> controls startup order -- it ensures container A starts before container B. However, it only waits for the container to start, not for the service inside to be ready. <code>healthcheck</code> defines how Docker tests whether the service inside a container is actually working. When you combine them with <code>depends_on: condition: service_healthy</code>, Docker waits until the dependency's healthcheck passes before starting the dependent service.</p>
+    </article>
+
+    <footer>&copy; 2026 Automated Insights LLC. All rights reserved.</footer>
+</body>
+</html>

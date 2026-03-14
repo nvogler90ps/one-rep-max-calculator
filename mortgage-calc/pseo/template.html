@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{TITLE}} - Mortgage Calculator</title>
+  <meta name="description" content="{{DESCRIPTION}}">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="canonical" href="{{CANONICAL}}">
+  <meta property="og:title" content="{{TITLE}} - Mortgage Calculator">
+  <meta property="og:description" content="{{DESCRIPTION}}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{CANONICAL}}">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the monthly payment on a ${{AMOUNT_FORMATTED}} mortgage at {{RATE}}% for {{TERM}} years?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The monthly payment on a ${{AMOUNT_FORMATTED}} mortgage at {{RATE}}% interest for {{TERM}} years is {{MONTHLY_PAYMENT}}. Over the life of the loan, you will pay {{TOTAL_INTEREST}} in interest for a total cost of {{TOTAL_COST}}."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much interest will I pay on a ${{AMOUNT_FORMATTED}} mortgage at {{RATE}}%?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "On a ${{AMOUNT_FORMATTED}} mortgage at {{RATE}}% for {{TERM}} years, you will pay {{TOTAL_INTEREST}} in total interest over the life of the loan. In the first year alone, approximately {{FIRST_YEAR_INTEREST}} goes to interest and {{FIRST_YEAR_PRINCIPAL}} goes to principal."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the total cost of a ${{AMOUNT_FORMATTED}} mortgage at {{RATE}}%?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The total cost of a ${{AMOUNT_FORMATTED}} mortgage at {{RATE}}% over {{TERM}} years is {{TOTAL_COST}}, which includes the original loan amount plus {{TOTAL_INTEREST}} in interest."
+        }
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://automated-insights.com/"},
+      {"@type": "ListItem", "position": 2, "name": "Mortgage Calculator", "item": "https://automated-insights.com/mortgage-calc/"},
+      {"@type": "ListItem", "position": 3, "name": "{{TITLE}}"}
+    ]
+  }
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3434609691579834" crossorigin="anonymous"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: #0f1117;
+      color: #e8eaed;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    /* Breadcrumb */
+    .breadcrumb {
+      padding: 1rem 0 0;
+      font-size: 0.82rem;
+      color: #9aa0b0;
+    }
+    .breadcrumb a {
+      color: #9aa0b0;
+      text-decoration: none;
+    }
+    .breadcrumb a:hover {
+      color: #6c63ff;
+    }
+    .breadcrumb .sep {
+      margin: 0 0.4rem;
+      opacity: 0.5;
+    }
+
+    /* Hero answer */
+    .hero {
+      text-align: center;
+      padding: 2.5rem 1rem 2rem;
+    }
+    .hero h1 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #c4c8d4;
+      margin-bottom: 1.25rem;
+    }
+    .answer-box {
+      background: #1a1d27;
+      border: 2px solid #6c63ff;
+      border-radius: 12px;
+      padding: 2rem 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+    .answer-label {
+      display: block;
+      font-size: 0.85rem;
+      color: #9aa0b0;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.5rem;
+    }
+    .answer-value {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #6c63ff;
+      line-height: 1.2;
+    }
+    .answer-sub {
+      font-size: 0.95rem;
+      color: #9aa0b0;
+      margin-top: 0.5rem;
+    }
+
+    /* Loan details breakdown */
+    .breakdown {
+      background: #1a1d27;
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .breakdown h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #c4c8d4;
+      margin-bottom: 1rem;
+    }
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .detail-item {
+      padding: 0.75rem;
+      background: #252836;
+      border-radius: 8px;
+    }
+    .detail-label {
+      font-size: 0.78rem;
+      color: #9aa0b0;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.25rem;
+    }
+    .detail-value {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #e8eaed;
+    }
+    .detail-value.accent {
+      color: #6c63ff;
+    }
+
+    /* First year breakdown */
+    .first-year {
+      background: #1a1d27;
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .first-year h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #c4c8d4;
+      margin-bottom: 1rem;
+    }
+    .bar-container {
+      background: #252836;
+      border-radius: 8px;
+      height: 2rem;
+      display: flex;
+      overflow: hidden;
+      margin-bottom: 0.75rem;
+    }
+    .bar-interest {
+      background: #ff6b6b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #fff;
+      min-width: 2rem;
+    }
+    .bar-principal {
+      background: #6c63ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #fff;
+      min-width: 2rem;
+    }
+    .bar-legend {
+      display: flex;
+      gap: 1.5rem;
+      font-size: 0.85rem;
+    }
+    .bar-legend span {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .legend-dot.interest { background: #ff6b6b; }
+    .legend-dot.principal { background: #6c63ff; }
+
+    /* Comparison table */
+    .comparison {
+      background: #1a1d27;
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .comparison h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #c4c8d4;
+      margin-bottom: 1rem;
+    }
+    .comparison table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .comparison th, .comparison td {
+      text-align: left;
+      padding: 0.6rem 0.75rem;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #2e3345;
+    }
+    .comparison th {
+      color: #9aa0b0;
+      font-weight: 500;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .comparison td {
+      color: #e8eaed;
+    }
+    .comparison tr.current {
+      background: #252836;
+    }
+    .comparison tr.current td {
+      color: #6c63ff;
+      font-weight: 600;
+    }
+    .comparison a {
+      color: #e8eaed;
+      text-decoration: none;
+    }
+    .comparison a:hover {
+      color: #6c63ff;
+    }
+
+    /* Related calculations */
+    .related {
+      margin-bottom: 2rem;
+    }
+    .related h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #c4c8d4;
+      margin-bottom: 0.75rem;
+    }
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 0.5rem;
+    }
+    .related-grid a {
+      display: block;
+      padding: 0.6rem 0.85rem;
+      background: #1a1d27;
+      border: 1px solid #2e3345;
+      border-radius: 8px;
+      color: #e8eaed;
+      text-decoration: none;
+      font-size: 0.88rem;
+      transition: border-color 0.15s;
+    }
+    .related-grid a:hover {
+      border-color: #6c63ff;
+    }
+    .related-grid a .related-result {
+      color: #6c63ff;
+      font-weight: 600;
+    }
+
+    /* CTA to main calculator */
+    .cta {
+      text-align: center;
+      padding: 2rem 1rem;
+      background: #1a1d27;
+      border-radius: 10px;
+      margin-bottom: 2rem;
+    }
+    .cta p {
+      color: #9aa0b0;
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+    .cta a {
+      display: inline-block;
+      padding: 0.7rem 1.8rem;
+      background: #6c63ff;
+      color: #fff;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background 0.15s;
+    }
+    .cta a:hover {
+      background: #5a52e0;
+    }
+
+    /* More tools */
+    .more-tools {
+      padding: 1.5rem 0;
+      border-top: 1px solid #2e3345;
+    }
+    .more-tools p {
+      font-size: 0.82rem;
+      color: #9aa0b0;
+      margin-bottom: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .tools-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .tools-row a {
+      display: inline-block;
+      padding: 0.4rem 0.85rem;
+      background: #1a1d27;
+      border: 1px solid #2e3345;
+      border-radius: 6px;
+      color: #e8eaed;
+      font-size: 0.82rem;
+      text-decoration: none;
+    }
+    .tools-row a:hover {
+      border-color: #6c63ff;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem 0;
+      color: #666b7a;
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 1.15rem; }
+      .answer-value { font-size: 2.2rem; }
+      .detail-grid { grid-template-columns: 1fr; }
+      .related-grid { grid-template-columns: 1fr 1fr; }
+      .comparison th, .comparison td { padding: 0.5rem; font-size: 0.82rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a><span class="sep">&rsaquo;</span>
+      <a href="/mortgage-calc/">Mortgage Calculator</a><span class="sep">&rsaquo;</span>
+      <span>Mortgage Payment on ${{AMOUNT_FORMATTED}} at {{RATE}}%</span>
+    </nav>
+
+    <div class="hero">
+      <h1>Mortgage Payment on ${{AMOUNT_FORMATTED}} at {{RATE}}% for {{TERM}} Years</h1>
+      <div class="answer-box">
+        <span class="answer-label">Monthly Payment</span>
+        <span class="answer-value">{{MONTHLY_PAYMENT}}</span>
+        <p class="answer-sub">${{AMOUNT_FORMATTED}} loan at {{RATE}}% fixed rate, {{TERM}}-year term</p>
+      </div>
+    </div>
+
+    <div class="breakdown">
+      <h2>Loan Details</h2>
+      <div class="detail-grid">
+        <div class="detail-item">
+          <div class="detail-label">Loan Amount</div>
+          <div class="detail-value">${{AMOUNT_FORMATTED}}</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">Interest Rate</div>
+          <div class="detail-value">{{RATE}}%</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">Loan Term</div>
+          <div class="detail-value">{{TERM}} years</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">Monthly Payment</div>
+          <div class="detail-value accent">{{MONTHLY_PAYMENT}}</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">Total Interest</div>
+          <div class="detail-value">{{TOTAL_INTEREST}}</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">Total Cost</div>
+          <div class="detail-value">{{TOTAL_COST}}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="first-year">
+      <h2>First Year Payment Breakdown</h2>
+      <p style="font-size: 0.9rem; color: #9aa0b0; margin-bottom: 1rem;">
+        In the first year, most of your payment goes toward interest. Here is how your 12 monthly payments break down:
+      </p>
+      <div class="bar-container">
+        <div class="bar-interest" style="width: {{INTEREST_PERCENT}}%;">{{INTEREST_PERCENT}}%</div>
+        <div class="bar-principal" style="width: {{PRINCIPAL_PERCENT}}%;">{{PRINCIPAL_PERCENT}}%</div>
+      </div>
+      <div class="bar-legend">
+        <span><span class="legend-dot interest"></span> Interest: {{FIRST_YEAR_INTEREST}}</span>
+        <span><span class="legend-dot principal"></span> Principal: {{FIRST_YEAR_PRINCIPAL}}</span>
+      </div>
+    </div>
+
+    <div class="comparison">
+      <h2>${{AMOUNT_FORMATTED}} Mortgage at Different Rates</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Rate</th>
+            <th>Monthly Payment</th>
+            <th>Total Interest</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{COMPARISON_ROWS}}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="related">
+      <h2>Related Mortgage Calculations</h2>
+      <div class="related-grid">
+        {{RELATED_LINKS}}
+      </div>
+    </div>
+
+    <div class="cta">
+      <p>Want to calculate with different numbers? Try the full interactive calculator.</p>
+      <a href="/mortgage-calc/">Open Mortgage Calculator</a>
+    </div>
+
+    <div class="more-tools">
+      <p>More Free Tools</p>
+      <div class="tools-row">
+        <a href="/">All Tools</a>
+        <a href="/auto-loan-calc/">Auto Loan Calculator</a>
+        <a href="/home-affordability-calc/">Home Affordability</a>
+        <a href="/compound-interest-calc/">Compound Interest</a>
+        <a href="/percentage-calc/">Percentage Calculator</a>
+      </div>
+    </div>
+
+    <footer>
+      <p>&copy; 2026 Automated Insights LLC</p>
+    </footer>
+  </div>
+</body>
+</html>
