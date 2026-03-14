@@ -92,6 +92,13 @@ ${INJECT_JS}\\
 done
 echo "Theme injection complete."
 
+# ---------- favicons ----------
+for fav in favicon.svg favicon-32.png apple-touch-icon.png; do
+    if [ -f "$ROOT/site-homepage/$fav" ]; then
+        cp "$ROOT/site-homepage/$fav" "$SITE/$fav"
+    fi
+done
+
 # ---------- Cloudflare headers (speed + security) ----------
 if [ -f "$ROOT/site-homepage/_headers" ]; then
     cp "$ROOT/site-homepage/_headers" "$SITE/_headers"
