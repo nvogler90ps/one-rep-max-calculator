@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compound Interest Calculator & Loan Payment Calculator</title>
+  <meta name="description" content="Free compound interest calculator and loan payment calculator. See how your money grows with compound interest or calculate loan payments, amortization schedules, and interest savings from extra payments.">
+  <meta name="keywords" content="compound interest calculator, loan payment calculator, interest calculator, amortization schedule, loan payoff calculator, investment calculator, savings calculator">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="canonical" href="https://automated-insights.com/interest-calculator/">
+  <meta property="og:title" content="Compound Interest Calculator & Loan Payment Calculator">
+  <meta property="og:description" content="See how your money grows with compound interest or calculate loan payments with amortization schedules. Free, instant results.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://automated-insights.com/interest-calculator/">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Compound Interest Calculator & Loan Payment Calculator",
+    "url": "https://automated-insights.com/interest-calculator/",
+    "description": "Free compound interest calculator and loan payment calculator with year-by-year breakdown, amortization schedules, and extra payment analysis.",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is compound interest?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Compound interest is interest calculated on both the initial principal and the accumulated interest from previous periods. This means your money earns interest on interest, leading to exponential growth over time. The more frequently interest compounds, the faster your money grows."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the Rule of 72?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Rule of 72 is a quick way to estimate how long it takes for an investment to double. Simply divide 72 by the annual interest rate. For example, at 8% interest, your money doubles in approximately 72 / 8 = 9 years."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do extra payments affect a loan?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Extra payments reduce your loan principal faster, which means less interest accrues over the life of the loan. Even small extra payments can save thousands in interest and shave years off your loan term."
+        }
+      }
+    ]
+  }
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3434609691579834" crossorigin="anonymous"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: #0f1117;
+      color: #e8eaed;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 24px 16px 48px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .subtitle {
+      color: #9aa0b0;
+      font-size: 0.95rem;
+    }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 24px;
+      background: #1a1d27;
+      border-radius: 10px;
+      padding: 4px;
+    }
+
+    .tab {
+      flex: 1;
+      padding: 10px 16px;
+      border: none;
+      background: transparent;
+      color: #9aa0b0;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+
+    .tab:hover {
+      color: #e8eaed;
+    }
+
+    .tab.active {
+      background: #6c63ff;
+      color: #fff;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* Cards */
+    .card {
+      background: #1a1d27;
+      border: 1px solid #2e3345;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+
+    .card h2 {
+      font-size: 1.1rem;
+      margin-bottom: 16px;
+      font-weight: 600;
+    }
+
+    /* Form elements */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .form-group.full-width {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-size: 0.82rem;
+      color: #9aa0b0;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    input, select {
+      background: #0f1117;
+      border: 1px solid #2e3345;
+      border-radius: 8px;
+      padding: 10px 12px;
+      color: #e8eaed;
+      font-size: 0.95rem;
+      font-family: inherit;
+      transition: border-color 0.2s;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: #6c63ff;
+    }
+
+    select {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%239aa0b0' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 32px;
+    }
+
+    /* Results */
+    .results {
+      margin-top: 20px;
+    }
+
+    .result-hero {
+      text-align: center;
+      padding: 28px 16px;
+      background: linear-gradient(135deg, rgba(108, 99, 255, 0.15), rgba(108, 99, 255, 0.05));
+      border: 1px solid rgba(108, 99, 255, 0.3);
+      border-radius: 12px;
+      margin-bottom: 16px;
+    }
+
+    .result-hero-label {
+      font-size: 0.82rem;
+      color: #9aa0b0;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 4px;
+    }
+
+    .result-hero-value {
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: #6c63ff;
+      line-height: 1.2;
+    }
+
+    .result-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .result-stat {
+      background: #0f1117;
+      border: 1px solid #2e3345;
+      border-radius: 10px;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .result-stat-label {
+      font-size: 0.78rem;
+      color: #9aa0b0;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+
+    .result-stat-value {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #e8eaed;
+    }
+
+    .result-stat-value.green { color: #4ade80; }
+    .result-stat-value.blue { color: #60a5fa; }
+    .result-stat-value.orange { color: #fb923c; }
+    .result-stat-value.purple { color: #a78bfa; }
+
+    /* Compounding power visual */
+    .power-bar {
+      margin-top: 16px;
+    }
+
+    .power-bar-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: #9aa0b0;
+      margin-bottom: 6px;
+    }
+
+    .power-bar-track {
+      height: 28px;
+      background: #0f1117;
+      border-radius: 6px;
+      overflow: hidden;
+      display: flex;
+      border: 1px solid #2e3345;
+    }
+
+    .power-bar-contributions {
+      background: #60a5fa;
+      height: 100%;
+      transition: width 0.4s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: #fff;
+      min-width: 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .power-bar-interest {
+      background: #4ade80;
+      height: 100%;
+      transition: width 0.4s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: #0f1117;
+      min-width: 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .power-bar-legend {
+      display: flex;
+      gap: 16px;
+      margin-top: 8px;
+      font-size: 0.78rem;
+      color: #9aa0b0;
+    }
+
+    .power-bar-legend span::before {
+      content: '';
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 3px;
+      margin-right: 5px;
+      vertical-align: middle;
+    }
+
+    .legend-contributions::before { background: #60a5fa; }
+    .legend-interest::before { background: #4ade80; }
+
+    /* Extra payment savings */
+    .savings-card {
+      background: linear-gradient(135deg, rgba(74, 222, 128, 0.1), rgba(74, 222, 128, 0.03));
+      border: 1px solid rgba(74, 222, 128, 0.25);
+      border-radius: 10px;
+      padding: 16px;
+      margin-top: 12px;
+    }
+
+    .savings-card h3 {
+      font-size: 0.9rem;
+      color: #4ade80;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .savings-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+    }
+
+    .savings-item {
+      text-align: center;
+    }
+
+    .savings-item-label {
+      font-size: 0.72rem;
+      color: #9aa0b0;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .savings-item-value {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #4ade80;
+    }
+
+    /* Tables */
+    .table-toggle {
+      width: 100%;
+      background: #1a1d27;
+      border: 1px solid #2e3345;
+      border-radius: 10px;
+      padding: 14px 16px;
+      color: #e8eaed;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 16px;
+      font-family: inherit;
+    }
+
+    .table-toggle:hover {
+      border-color: #6c63ff;
+    }
+
+    .table-toggle .arrow {
+      transition: transform 0.2s;
+      font-size: 0.8rem;
+      color: #9aa0b0;
+    }
+
+    .table-toggle.open .arrow {
+      transform: rotate(180deg);
+    }
+
+    .table-wrapper {
+      display: none;
+      margin-top: 8px;
+      overflow-x: auto;
+      background: #1a1d27;
+      border: 1px solid #2e3345;
+      border-radius: 10px;
+    }
+
+    .table-wrapper.open {
+      display: block;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+    }
+
+    th {
+      background: #0f1117;
+      padding: 10px 12px;
+      text-align: right;
+      color: #9aa0b0;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-size: 0.72rem;
+      white-space: nowrap;
+      position: sticky;
+      top: 0;
+    }
+
+    th:first-child { text-align: left; border-radius: 10px 0 0 0; }
+    th:last-child { border-radius: 0 10px 0 0; }
+
+    td {
+      padding: 9px 12px;
+      text-align: right;
+      border-top: 1px solid #2e3345;
+      white-space: nowrap;
+    }
+
+    td:first-child {
+      text-align: left;
+      color: #9aa0b0;
+    }
+
+    tr:hover td {
+      background: rgba(108, 99, 255, 0.05);
+    }
+
+    /* Rule of 72 */
+    .rule72 {
+      margin-top: 20px;
+    }
+
+    .rule72 h2 {
+      font-size: 1rem;
+      margin-bottom: 8px;
+    }
+
+    .rule72 p {
+      color: #9aa0b0;
+      font-size: 0.88rem;
+      margin-bottom: 12px;
+    }
+
+    .rule72-formula {
+      background: #0f1117;
+      border: 1px solid #2e3345;
+      border-radius: 8px;
+      padding: 14px 16px;
+      text-align: center;
+      font-size: 1rem;
+      color: #6c63ff;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .rule72-result {
+      text-align: center;
+      color: #9aa0b0;
+      font-size: 0.88rem;
+    }
+
+    .rule72-result strong {
+      color: #e8eaed;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid #2e3345;
+    }
+
+    footer a {
+      color: #6c63ff;
+      text-decoration: none;
+      font-size: 0.85rem;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .result-hero-value {
+        font-size: 1.8rem;
+      }
+
+      .savings-grid {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .savings-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      h1 {
+        font-size: 1.3rem;
+      }
+
+      .result-stats {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Compound Interest Calculator & Loan Payment Calculator</h1>
+      <p class="subtitle">See how your money grows or calculate loan payments instantly</p>
+    </header>
+
+    <nav class="tabs" role="tablist">
+      <button class="tab active" role="tab" data-tab="compound" aria-selected="true">Compound Interest</button>
+      <button class="tab" role="tab" data-tab="loan" aria-selected="false">Loan Payment</button>
+    </nav>
+
+    <!-- Compound Interest Tab -->
+    <div class="tab-content active" id="tab-compound">
+      <div class="card">
+        <h2>Investment Details</h2>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="ci-principal">Initial Deposit ($)</label>
+            <input type="number" id="ci-principal" value="10000" min="0" step="100">
+          </div>
+          <div class="form-group">
+            <label for="ci-monthly">Monthly Contribution ($)</label>
+            <input type="number" id="ci-monthly" value="500" min="0" step="50">
+          </div>
+          <div class="form-group">
+            <label for="ci-rate">Interest Rate (%)</label>
+            <input type="number" id="ci-rate" value="7" min="0" max="100" step="0.1">
+          </div>
+          <div class="form-group">
+            <label for="ci-compound">Compounding Frequency</label>
+            <select id="ci-compound">
+              <option value="365">Daily</option>
+              <option value="12" selected>Monthly</option>
+              <option value="4">Quarterly</option>
+              <option value="1">Annually</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="ci-years">Time Period (Years)</label>
+            <input type="number" id="ci-years" value="20" min="1" max="100" step="1">
+          </div>
+        </div>
+      </div>
+
+      <div class="results" id="ci-results">
+        <div class="result-hero">
+          <div class="result-hero-label">Final Balance</div>
+          <div class="result-hero-value" id="ci-final">$0</div>
+        </div>
+
+        <div class="result-stats">
+          <div class="result-stat">
+            <div class="result-stat-label">Total Contributions</div>
+            <div class="result-stat-value blue" id="ci-contributions">$0</div>
+          </div>
+          <div class="result-stat">
+            <div class="result-stat-label">Total Interest Earned</div>
+            <div class="result-stat-value green" id="ci-interest">$0</div>
+          </div>
+        </div>
+
+        <div class="power-bar">
+          <div class="power-bar-label">
+            <span>The Power of Compounding</span>
+            <span id="ci-interest-pct">0% interest</span>
+          </div>
+          <div class="power-bar-track">
+            <div class="power-bar-contributions" id="ci-bar-contributions"></div>
+            <div class="power-bar-interest" id="ci-bar-interest"></div>
+          </div>
+          <div class="power-bar-legend">
+            <span class="legend-contributions">Contributions</span>
+            <span class="legend-interest">Interest Earned</span>
+          </div>
+        </div>
+      </div>
+
+      <button class="table-toggle" id="ci-table-toggle" type="button">
+        Year-by-Year Breakdown <span class="arrow">&#9660;</span>
+      </button>
+      <div class="table-wrapper" id="ci-table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Year</th>
+              <th>Contributions</th>
+              <th>Interest</th>
+              <th>Balance</th>
+            </tr>
+          </thead>
+          <tbody id="ci-table-body"></tbody>
+        </table>
+      </div>
+
+      <div class="card rule72">
+        <h2>The Rule of 72</h2>
+        <p>A quick way to estimate how many years it takes to double your money at a given interest rate.</p>
+        <div class="rule72-formula">Years to Double = 72 / Interest Rate</div>
+        <div class="rule72-result" id="rule72-result">
+          At <strong>7%</strong>, your money doubles in approximately <strong>10.3 years</strong>.
+        </div>
+      </div>
+    </div>
+
+    <!-- Loan Payment Tab -->
+    <div class="tab-content" id="tab-loan">
+      <div class="card">
+        <h2>Loan Details</h2>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="loan-amount">Loan Amount ($)</label>
+            <input type="number" id="loan-amount" value="250000" min="0" step="1000">
+          </div>
+          <div class="form-group">
+            <label for="loan-rate">Interest Rate (%)</label>
+            <input type="number" id="loan-rate" value="6.5" min="0" max="100" step="0.1">
+          </div>
+          <div class="form-group">
+            <label for="loan-term">Loan Term</label>
+            <input type="number" id="loan-term" value="30" min="1" max="600" step="1">
+          </div>
+          <div class="form-group">
+            <label for="loan-term-unit">Term Unit</label>
+            <select id="loan-term-unit">
+              <option value="years" selected>Years</option>
+              <option value="months">Months</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="loan-extra">Extra Payment ($/mo)</label>
+            <input type="number" id="loan-extra" value="0" min="0" step="50">
+          </div>
+        </div>
+      </div>
+
+      <div class="results" id="loan-results">
+        <div class="result-hero">
+          <div class="result-hero-label">Monthly Payment</div>
+          <div class="result-hero-value" id="loan-payment">$0</div>
+        </div>
+
+        <div class="result-stats">
+          <div class="result-stat">
+            <div class="result-stat-label">Total Paid</div>
+            <div class="result-stat-value blue" id="loan-total-paid">$0</div>
+          </div>
+          <div class="result-stat">
+            <div class="result-stat-label">Total Interest</div>
+            <div class="result-stat-value orange" id="loan-total-interest">$0</div>
+          </div>
+          <div class="result-stat">
+            <div class="result-stat-label">Payoff Date</div>
+            <div class="result-stat-value purple" id="loan-payoff-date">--</div>
+          </div>
+          <div class="result-stat" id="loan-effective-rate-stat">
+            <div class="result-stat-label">Interest-to-Principal</div>
+            <div class="result-stat-value" id="loan-effective-rate">--</div>
+          </div>
+        </div>
+
+        <div class="savings-card" id="loan-savings" style="display: none;">
+          <h3>Extra Payment Savings</h3>
+          <div class="savings-grid">
+            <div class="savings-item">
+              <div class="savings-item-label">New Payoff</div>
+              <div class="savings-item-value" id="loan-new-payoff">--</div>
+            </div>
+            <div class="savings-item">
+              <div class="savings-item-label">Months Saved</div>
+              <div class="savings-item-value" id="loan-months-saved">--</div>
+            </div>
+            <div class="savings-item">
+              <div class="savings-item-label">Interest Saved</div>
+              <div class="savings-item-value" id="loan-interest-saved">--</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button class="table-toggle" id="loan-table-toggle" type="button">
+        Amortization Schedule <span class="arrow">&#9660;</span>
+      </button>
+      <div class="table-wrapper" id="loan-table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Month</th>
+              <th>Payment</th>
+              <th>Principal</th>
+              <th>Interest</th>
+              <th>Balance</th>
+            </tr>
+          </thead>
+          <tbody id="loan-table-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <footer>
+      <a href="/">&larr; More free tools at Automated Insights</a>
+    </footer>
+  </div>
+
+  <script>
+    (function() {
+      'use strict';
+
+      // --- Utility ---
+      function fmt(n) {
+        if (n >= 1e6) {
+          return '$' + n.toLocaleString('en-US', { maximumFractionDigits: 0 });
+        }
+        return '$' + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      }
+
+      function fmtShort(n) {
+        return '$' + n.toLocaleString('en-US', { maximumFractionDigits: 0 });
+      }
+
+      function getVal(id) {
+        return parseFloat(document.getElementById(id).value) || 0;
+      }
+
+      // --- Tabs ---
+      var tabs = document.querySelectorAll('.tab');
+      tabs.forEach(function(tab) {
+        tab.addEventListener('click', function() {
+          tabs.forEach(function(t) {
+            t.classList.remove('active');
+            t.setAttribute('aria-selected', 'false');
+          });
+          tab.classList.add('active');
+          tab.setAttribute('aria-selected', 'true');
+          document.querySelectorAll('.tab-content').forEach(function(tc) {
+            tc.classList.remove('active');
+          });
+          document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
+        });
+      });
+
+      // --- Table toggles ---
+      function setupToggle(btnId, wrapperId) {
+        var btn = document.getElementById(btnId);
+        var wrapper = document.getElementById(wrapperId);
+        btn.addEventListener('click', function() {
+          btn.classList.toggle('open');
+          wrapper.classList.toggle('open');
+        });
+      }
+      setupToggle('ci-table-toggle', 'ci-table-wrapper');
+      setupToggle('loan-table-toggle', 'loan-table-wrapper');
+
+      // --- Compound Interest Calculation ---
+      function calcCompound() {
+        var P = getVal('ci-principal');
+        var PMT = getVal('ci-monthly');
+        var r = getVal('ci-rate') / 100;
+        var n = parseInt(document.getElementById('ci-compound').value);
+        var t = getVal('ci-years');
+
+        if (t <= 0) { t = 1; }
+
+        var rows = [];
+        var totalContributions = P;
+        var balance = P;
+        var ratePerPeriod = r / n;
+        var periodsPerYear = n;
+
+        // For monthly contributions, we add them monthly regardless of compounding
+        // We'll simulate month by month for accuracy
+        for (var year = 1; year <= t; year++) {
+          for (var month = 1; month <= 12; month++) {
+            // Add monthly contribution at start of month
+            balance += PMT;
+            totalContributions += PMT;
+
+            // Compound interest for this month
+            // How many compounding periods in a month?
+            if (n >= 12) {
+              // Daily or monthly: compound proportionally
+              var periodsInMonth = n / 12;
+              for (var p = 0; p < periodsInMonth; p++) {
+                balance *= (1 + ratePerPeriod);
+              }
+            } else {
+              // Quarterly or annual: compound at end of applicable months
+              // Quarterly: compound every 3 months (months 3, 6, 9, 12)
+              // Annual: compound at month 12
+              var monthsPerPeriod = 12 / n;
+              if (month % monthsPerPeriod === 0) {
+                balance *= (1 + ratePerPeriod);
+              }
+            }
+          }
+
+          var interestSoFar = balance - totalContributions;
+          rows.push({
+            year: year,
+            contributions: totalContributions,
+            interest: interestSoFar,
+            balance: balance
+          });
+        }
+
+        var totalInterest = balance - totalContributions;
+        var interestPct = balance > 0 ? (totalInterest / balance * 100) : 0;
+        var contribPct = balance > 0 ? (totalContributions / balance * 100) : 0;
+
+        document.getElementById('ci-final').textContent = fmt(balance);
+        document.getElementById('ci-contributions').textContent = fmtShort(totalContributions);
+        document.getElementById('ci-interest').textContent = fmtShort(totalInterest);
+        document.getElementById('ci-interest-pct').textContent = interestPct.toFixed(1) + '% from interest';
+
+        var barContrib = document.getElementById('ci-bar-contributions');
+        var barInterest = document.getElementById('ci-bar-interest');
+        barContrib.style.width = contribPct + '%';
+        barInterest.style.width = interestPct + '%';
+        barContrib.textContent = contribPct > 10 ? fmtShort(totalContributions) : '';
+        barInterest.textContent = interestPct > 10 ? fmtShort(totalInterest) : '';
+
+        // Table
+        var tbody = document.getElementById('ci-table-body');
+        tbody.innerHTML = '';
+        rows.forEach(function(row) {
+          var tr = document.createElement('tr');
+          tr.innerHTML = '<td>' + row.year + '</td>' +
+            '<td>' + fmtShort(row.contributions) + '</td>' +
+            '<td>' + fmtShort(row.interest) + '</td>' +
+            '<td>' + fmt(row.balance) + '</td>';
+          tbody.appendChild(tr);
+        });
+
+        // Rule of 72
+        var rate = getVal('ci-rate');
+        var rule72El = document.getElementById('rule72-result');
+        if (rate > 0) {
+          var yearsToDouble = 72 / rate;
+          rule72El.innerHTML = 'At <strong>' + rate + '%</strong>, your money doubles in approximately <strong>' + yearsToDouble.toFixed(1) + ' years</strong>.';
+        } else {
+          rule72El.innerHTML = 'Enter an interest rate above to see the result.';
+        }
+      }
+
+      // --- Loan Payment Calculation ---
+      function calcLoan() {
+        var principal = getVal('loan-amount');
+        var annualRate = getVal('loan-rate') / 100;
+        var termVal = getVal('loan-term');
+        var termUnit = document.getElementById('loan-term-unit').value;
+        var extra = getVal('loan-extra');
+
+        var totalMonths = termUnit === 'years' ? Math.round(termVal * 12) : Math.round(termVal);
+        if (totalMonths <= 0) { totalMonths = 1; }
+
+        var monthlyRate = annualRate / 12;
+        var monthlyPayment;
+
+        if (monthlyRate === 0) {
+          monthlyPayment = principal / totalMonths;
+        } else {
+          monthlyPayment = principal * (monthlyRate * Math.pow(1 + monthlyRate, totalMonths)) /
+            (Math.pow(1 + monthlyRate, totalMonths) - 1);
+        }
+
+        // Amortization without extra payments
+        var balanceNoExtra = principal;
+        var totalPaidNoExtra = 0;
+        var totalInterestNoExtra = 0;
+        var monthsNoExtra = 0;
+
+        for (var m = 0; m < totalMonths && balanceNoExtra > 0.005; m++) {
+          var intPmt = balanceNoExtra * monthlyRate;
+          var prinPmt = monthlyPayment - intPmt;
+          if (prinPmt > balanceNoExtra) {
+            prinPmt = balanceNoExtra;
+          }
+          totalPaidNoExtra += intPmt + prinPmt;
+          totalInterestNoExtra += intPmt;
+          balanceNoExtra -= prinPmt;
+          monthsNoExtra = m + 1;
+        }
+
+        // Amortization with extra payments
+        var balance = principal;
+        var totalPaid = 0;
+        var totalInterest = 0;
+        var months = 0;
+        var amortRows = [];
+
+        for (var i = 0; i < totalMonths * 2 && balance > 0.005; i++) {
+          var interestPmt = balance * monthlyRate;
+          var principalPmt = monthlyPayment - interestPmt + extra;
+          if (principalPmt > balance + interestPmt) {
+            principalPmt = balance;
+            totalPaid += balance + interestPmt;
+            totalInterest += interestPmt;
+            amortRows.push({
+              month: i + 1,
+              payment: (balance + interestPmt).toFixed(2),
+              principal: balance.toFixed(2),
+              interest: interestPmt.toFixed(2),
+              balance: 0
+            });
+            balance = 0;
+          } else {
+            var actualPrincipal = principalPmt;
+            if (actualPrincipal > balance) { actualPrincipal = balance; }
+            var actualPayment = actualPrincipal + interestPmt;
+            totalPaid += actualPayment;
+            totalInterest += interestPmt;
+            balance -= actualPrincipal;
+            amortRows.push({
+              month: i + 1,
+              payment: actualPayment.toFixed(2),
+              principal: actualPrincipal.toFixed(2),
+              interest: interestPmt.toFixed(2),
+              balance: Math.max(0, balance).toFixed(2)
+            });
+          }
+          months = i + 1;
+        }
+
+        // Payoff date
+        var now = new Date();
+        var payoffNoExtra = new Date(now.getFullYear(), now.getMonth() + monthsNoExtra, 1);
+        var payoffWithExtra = new Date(now.getFullYear(), now.getMonth() + months, 1);
+        var monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+        function fmtDate(d) {
+          return monthNames[d.getMonth()] + ' ' + d.getFullYear();
+        }
+
+        document.getElementById('loan-payment').textContent = fmt(monthlyPayment);
+        document.getElementById('loan-total-paid').textContent = fmtShort(totalPaid);
+        document.getElementById('loan-total-interest').textContent = fmtShort(totalInterest);
+        document.getElementById('loan-payoff-date').textContent = fmtDate(payoffWithExtra);
+
+        var interestRatio = principal > 0 ? ((totalInterest / principal) * 100).toFixed(1) + '%' : '--';
+        document.getElementById('loan-effective-rate').textContent = interestRatio;
+
+        // Extra payment savings
+        var savingsEl = document.getElementById('loan-savings');
+        if (extra > 0) {
+          savingsEl.style.display = 'block';
+          var monthsSaved = monthsNoExtra - months;
+          var interestSaved = totalInterestNoExtra - totalInterest;
+
+          document.getElementById('loan-new-payoff').textContent = fmtDate(payoffWithExtra);
+          document.getElementById('loan-months-saved').textContent = monthsSaved + ' mo';
+          document.getElementById('loan-interest-saved').textContent = fmtShort(interestSaved);
+        } else {
+          savingsEl.style.display = 'none';
+        }
+
+        // Amortization table
+        var tbody = document.getElementById('loan-table-body');
+        tbody.innerHTML = '';
+        amortRows.forEach(function(row) {
+          var tr = document.createElement('tr');
+          tr.innerHTML = '<td>' + row.month + '</td>' +
+            '<td>' + fmt(parseFloat(row.payment)) + '</td>' +
+            '<td>' + fmt(parseFloat(row.principal)) + '</td>' +
+            '<td>' + fmt(parseFloat(row.interest)) + '</td>' +
+            '<td>' + fmt(parseFloat(row.balance)) + '</td>';
+          tbody.appendChild(tr);
+        });
+      }
+
+      // --- Event Listeners ---
+      var ciInputs = ['ci-principal', 'ci-monthly', 'ci-rate', 'ci-compound', 'ci-years'];
+      ciInputs.forEach(function(id) {
+        document.getElementById(id).addEventListener('input', calcCompound);
+      });
+
+      var loanInputs = ['loan-amount', 'loan-rate', 'loan-term', 'loan-term-unit', 'loan-extra'];
+      loanInputs.forEach(function(id) {
+        document.getElementById(id).addEventListener('input', calcLoan);
+      });
+
+      // Initial calculations
+      calcCompound();
+      calcLoan();
+    })();
+  </script>
+</body>
+</html>

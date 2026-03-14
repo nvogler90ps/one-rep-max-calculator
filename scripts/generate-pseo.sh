@@ -483,6 +483,105 @@ print(html)
     generate_sitemap "$tool" "$outdir"
 }
 
+# ---------- unit-converter (Python-based) ----------
+generate_unit_converter() {
+    local tool="unit-converter"
+    local dir="$ROOT/$tool/pseo"
+    local outdir="$dir/pages"
+    local template="$dir/template.html"
+    local data="$dir/data.json"
+
+    [ -f "$data" ] || return 0
+    [ -f "$template" ] || return 0
+
+    rm -rf "$outdir"
+    mkdir -p "$outdir"
+
+    local count
+    count=$(DATA_FILE="$data" TEMPLATE_FILE="$template" OUT_DIR="$outdir" TOOL="$tool" DOMAIN="$DOMAIN" python3 << 'PYEOF'
+import json, os
+
+tool = os.environ["TOOL"]
+domain = os.environ["DOMAIN"]
+data = json.load(open(os.environ["DATA_FILE"]))
+template = open(os.environ["TEMPLATE_FILE"]).read()
+outdir = os.environ["OUT_DIR"]
+count = 0
+
+for item in data:
+    slug = item["slug"]
+    html = template
+    html = html.replace("{{slug}}", slug)
+    html = html.replace("{{from_value}}", str(item.get("from_value", 1)))
+    html = html.replace("{{to_value}}", str(item.get("to_value", "")))
+    html = html.replace("{{from_label}}", item.get("from_label", ""))
+    html = html.replace("{{to_label}}", item.get("to_label", ""))
+    html = html.replace("{{formula}}", item.get("formula", ""))
+
+    pagedir = os.path.join(outdir, slug)
+    os.makedirs(pagedir, exist_ok=True)
+    with open(os.path.join(pagedir, "index.html"), "w") as f:
+        f.write(html)
+    count += 1
+
+print(count)
+PYEOF
+)
+
+    echo "  $tool: generated $count pages"
+    TOTAL_PAGES=$((TOTAL_PAGES + count))
+    generate_sitemap "$tool" "$outdir"
+}
+
+# ---------- word-counter (Python-based) ----------
+generate_word_counter() {
+    local tool="word-counter"
+    local dir="$ROOT/$tool/pseo"
+    local outdir="$dir/pages"
+    local template="$dir/template.html"
+    local data="$dir/data.json"
+
+    [ -f "$data" ] || return 0
+    [ -f "$template" ] || return 0
+
+    rm -rf "$outdir"
+    mkdir -p "$outdir"
+
+    local count
+    count=$(DATA_FILE="$data" TEMPLATE_FILE="$template" OUT_DIR="$outdir" TOOL="$tool" DOMAIN="$DOMAIN" python3 << 'PYEOF'
+import json, os
+
+tool = os.environ["TOOL"]
+domain = os.environ["DOMAIN"]
+data = json.load(open(os.environ["DATA_FILE"]))
+template = open(os.environ["TEMPLATE_FILE"]).read()
+outdir = os.environ["OUT_DIR"]
+count = 0
+
+for item in data:
+    slug = item["slug"]
+    html = template
+    html = html.replace("{{slug}}", slug)
+    html = html.replace("{{title}}", item.get("title", ""))
+    html = html.replace("{{question}}", item.get("question", ""))
+    html = html.replace("{{answer}}", item.get("answer", ""))
+    html = html.replace("{{details_section}}", "")
+
+    pagedir = os.path.join(outdir, slug)
+    os.makedirs(pagedir, exist_ok=True)
+    with open(os.path.join(pagedir, "index.html"), "w") as f:
+        f.write(html)
+    count += 1
+
+print(count)
+PYEOF
+)
+
+    echo "  $tool: generated $count pages"
+    TOTAL_PAGES=$((TOTAL_PAGES + count))
+    generate_sitemap "$tool" "$outdir"
+}
+
 # ---------- sitemap generator ----------
 generate_sitemap() {
     local tool="$1"
@@ -523,6 +622,8 @@ for tool in "${PSEO_TOOLS[@]}"; do
         vbucks-calc) generate_vbucks_calc ;;
         date-calculator) generate_date_calculator ;;
         tdee-calculator) generate_tdee_calculator ;;
+        unit-converter) generate_unit_converter ;;
+        word-counter) generate_word_counter ;;
         *) echo "  $tool: no generator configured, skipping" ;;
     esac
 done

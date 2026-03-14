@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Timer - Free Online Countdown, Stopwatch & Pomodoro Timer</title>
+  <meta name="description" content="Free online timer with countdown, stopwatch, and Pomodoro modes. Set custom countdowns, track lap times, or boost productivity with the Pomodoro technique. No ads, no sign-up.">
+  <meta name="keywords" content="timer, countdown timer, stopwatch, pomodoro timer, online timer, free timer, lap timer, focus timer">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="canonical" href="https://automated-insights.com/timer/">
+  <meta property="og:title" content="Timer - Free Online Countdown, Stopwatch & Pomodoro Timer">
+  <meta property="og:description" content="Free online timer with countdown, stopwatch, and Pomodoro modes. Set custom countdowns, track lap times, or boost productivity with the Pomodoro technique.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://automated-insights.com/timer/">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Timer",
+    "url": "https://automated-insights.com/timer/",
+    "description": "Free online timer with countdown, stopwatch, and Pomodoro modes. Set custom countdowns, track lap times, or boost productivity with the Pomodoro technique.",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3434609691579834" crossorigin="anonymous"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0f1117;
+      --surface: #1a1d27;
+      --border: #2e3345;
+      --text: #e8eaed;
+      --text-muted: #9aa0b0;
+      --accent: #6c63ff;
+      --accent-hover: #5a52e0;
+      --danger: #ff6b6b;
+      --success: #51cf66;
+      --warning: #ffd43b;
+      --radius: 8px;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 24px 16px 48px;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      gap: 4px;
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 4px;
+      margin-bottom: 24px;
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 10px 8px;
+      border: none;
+      border-radius: 6px;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .tab-btn:hover {
+      color: var(--text);
+    }
+
+    .tab-btn.active {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .tab-panel {
+      display: none;
+    }
+
+    .tab-panel.active {
+      display: block;
+    }
+
+    /* Timer display */
+    .timer-display {
+      font-family: "SF Mono", "Fira Code", "Cascadia Code", "Consolas", monospace;
+      font-size: 4rem;
+      font-weight: 700;
+      text-align: center;
+      padding: 32px 16px;
+      letter-spacing: 2px;
+      color: var(--text);
+      user-select: none;
+    }
+
+    .timer-display.alarm {
+      animation: pulse 0.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes pulse {
+      from { color: var(--text); }
+      to { color: var(--danger); }
+    }
+
+    .timer-display .ms {
+      font-size: 2rem;
+      color: var(--text-muted);
+    }
+
+    /* Buttons */
+    .btn-row {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin: 16px 0;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 10px 24px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      color: var(--text);
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s;
+      min-width: 90px;
+    }
+
+    .btn:hover {
+      border-color: var(--accent);
+      background: rgba(108, 99, 255, 0.1);
+    }
+
+    .btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      border-color: var(--accent-hover);
+    }
+
+    .btn-danger {
+      border-color: var(--danger);
+      color: var(--danger);
+    }
+
+    .btn-danger:hover {
+      background: rgba(255, 107, 107, 0.1);
+    }
+
+    /* Presets */
+    .presets {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .preset-btn {
+      padding: 6px 14px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .preset-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* Countdown inputs */
+    .countdown-inputs {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .time-input-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .time-input-group label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .time-input-group input {
+      width: 72px;
+      padding: 10px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      color: var(--text);
+      font-size: 1.2rem;
+      text-align: center;
+      font-family: "SF Mono", "Fira Code", "Consolas", monospace;
+    }
+
+    .time-input-group input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .input-sep {
+      font-size: 1.5rem;
+      color: var(--text-muted);
+      padding-top: 18px;
+    }
+
+    /* Laps */
+    .laps-container {
+      max-height: 240px;
+      overflow-y: auto;
+      margin-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    .lap-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--border);
+      font-family: "SF Mono", "Fira Code", "Consolas", monospace;
+      font-size: 0.9rem;
+    }
+
+    .lap-item .lap-num {
+      color: var(--text-muted);
+    }
+
+    .lap-item .lap-split {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+
+    /* Pomodoro */
+    .pomo-config {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .pomo-field {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .pomo-field label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .pomo-field input {
+      padding: 8px 10px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      color: var(--text);
+      font-size: 1rem;
+      text-align: center;
+    }
+
+    .pomo-field input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .pomo-status {
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    .pomo-phase {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .pomo-phase.work { color: var(--danger); }
+    .pomo-phase.short-break { color: var(--success); }
+    .pomo-phase.long-break { color: var(--warning); }
+
+    .pomo-sessions {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      margin: 12px 0;
+    }
+
+    .pomo-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      transition: all 0.3s;
+    }
+
+    .pomo-dot.completed {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .pomo-dot.current {
+      border-color: var(--accent);
+      box-shadow: 0 0 8px rgba(108, 99, 255, 0.5);
+    }
+
+    /* Section */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 24px 16px;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      .timer-display {
+        font-size: 3rem;
+      }
+
+      .timer-display .ms {
+        font-size: 1.5rem;
+      }
+
+      .btn {
+        padding: 8px 16px;
+        min-width: 70px;
+        font-size: 0.85rem;
+      }
+
+      .time-input-group input {
+        width: 60px;
+      }
+
+      .pomo-config {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+    }
+
+    /* Scrollbar */
+    .laps-container::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .laps-container::-webkit-scrollbar-track {
+      background: var(--bg);
+    }
+
+    .laps-container::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Timer</h1>
+
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="countdown">Countdown</button>
+      <button class="tab-btn" data-tab="stopwatch">Stopwatch</button>
+      <button class="tab-btn" data-tab="pomodoro">Pomodoro</button>
+    </div>
+
+    <!-- Countdown -->
+    <div id="countdown" class="tab-panel active">
+      <div class="card">
+        <div class="presets">
+          <button class="preset-btn" data-minutes="1">1 min</button>
+          <button class="preset-btn" data-minutes="5">5 min</button>
+          <button class="preset-btn" data-minutes="10">10 min</button>
+          <button class="preset-btn" data-minutes="15">15 min</button>
+          <button class="preset-btn" data-minutes="25">25 min</button>
+          <button class="preset-btn" data-minutes="30">30 min</button>
+          <button class="preset-btn" data-minutes="60">60 min</button>
+        </div>
+
+        <div class="countdown-inputs" id="cd-inputs">
+          <div class="time-input-group">
+            <label>Hours</label>
+            <input type="number" id="cd-hours" min="0" max="99" value="0">
+          </div>
+          <span class="input-sep">:</span>
+          <div class="time-input-group">
+            <label>Minutes</label>
+            <input type="number" id="cd-minutes" min="0" max="59" value="5">
+          </div>
+          <span class="input-sep">:</span>
+          <div class="time-input-group">
+            <label>Seconds</label>
+            <input type="number" id="cd-seconds" min="0" max="59" value="0">
+          </div>
+        </div>
+
+        <div class="timer-display" id="cd-display">00:05:00</div>
+
+        <div class="btn-row">
+          <button class="btn btn-primary" id="cd-start">Start</button>
+          <button class="btn" id="cd-pause" disabled>Pause</button>
+          <button class="btn btn-danger" id="cd-reset">Reset</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stopwatch -->
+    <div id="stopwatch" class="tab-panel">
+      <div class="card">
+        <div class="timer-display" id="sw-display">00:00:00<span class="ms">.000</span></div>
+
+        <div class="btn-row">
+          <button class="btn btn-primary" id="sw-start">Start</button>
+          <button class="btn" id="sw-lap" disabled>Lap</button>
+          <button class="btn btn-danger" id="sw-reset" disabled>Reset</button>
+        </div>
+
+        <div class="laps-container" id="sw-laps"></div>
+      </div>
+    </div>
+
+    <!-- Pomodoro -->
+    <div id="pomodoro" class="tab-panel">
+      <div class="card">
+        <div class="pomo-config" id="pomo-config">
+          <div class="pomo-field">
+            <label>Work (min)</label>
+            <input type="number" id="pomo-work" min="1" max="120" value="25">
+          </div>
+          <div class="pomo-field">
+            <label>Short Break (min)</label>
+            <input type="number" id="pomo-short" min="1" max="30" value="5">
+          </div>
+          <div class="pomo-field">
+            <label>Long Break (min)</label>
+            <input type="number" id="pomo-long" min="1" max="60" value="15">
+          </div>
+          <div class="pomo-field">
+            <label>Sessions</label>
+            <input type="number" id="pomo-sessions" min="1" max="12" value="4">
+          </div>
+        </div>
+
+        <div class="pomo-status">
+          <div class="pomo-phase work" id="pomo-phase">Work</div>
+          <div class="pomo-sessions" id="pomo-dots"></div>
+        </div>
+
+        <div class="timer-display" id="pomo-display">25:00</div>
+
+        <div class="btn-row">
+          <button class="btn btn-primary" id="pomo-start">Start</button>
+          <button class="btn" id="pomo-pause" disabled>Pause</button>
+          <button class="btn btn-danger" id="pomo-reset">Reset</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <a href="/">Automated Insights</a> -- Free tools, no sign-up required.
+  </footer>
+
+  <script>
+    (function() {
+      'use strict';
+
+      const defaultTitle = 'Timer - Free Online Countdown, Stopwatch & Pomodoro Timer';
+
+      // --- Audio ---
+      let audioCtx = null;
+
+      function getAudioCtx() {
+        if (!audioCtx) {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        return audioCtx;
+      }
+
+      function playBeep(freq, duration, count) {
+        const ctx = getAudioCtx();
+        for (let i = 0; i < count; i++) {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.type = 'sine';
+          osc.frequency.value = freq;
+          const start = ctx.currentTime + i * (duration + 0.15);
+          gain.gain.setValueAtTime(0.3, start);
+          gain.gain.exponentialRampToValueAtTime(0.001, start + duration);
+          osc.start(start);
+          osc.stop(start + duration);
+        }
+      }
+
+      function playAlarm() {
+        playBeep(880, 0.2, 4);
+      }
+
+      function playShortBeep() {
+        playBeep(660, 0.15, 2);
+      }
+
+      // --- Tabs ---
+      const tabBtns = document.querySelectorAll('.tab-btn');
+      const tabPanels = document.querySelectorAll('.tab-panel');
+
+      tabBtns.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          const target = btn.dataset.tab;
+          tabBtns.forEach(function(b) { b.classList.remove('active'); });
+          tabPanels.forEach(function(p) { p.classList.remove('active'); });
+          btn.classList.add('active');
+          document.getElementById(target).classList.add('active');
+          document.title = defaultTitle;
+        });
+      });
+
+      // --- Countdown Timer ---
+      (function() {
+        const hoursInput = document.getElementById('cd-hours');
+        const minsInput = document.getElementById('cd-minutes');
+        const secsInput = document.getElementById('cd-seconds');
+        const display = document.getElementById('cd-display');
+        const startBtn = document.getElementById('cd-start');
+        const pauseBtn = document.getElementById('cd-pause');
+        const resetBtn = document.getElementById('cd-reset');
+        const inputsDiv = document.getElementById('cd-inputs');
+
+        let totalSeconds = 0;
+        let remaining = 0;
+        let interval = null;
+        let running = false;
+        let endTime = 0;
+        let alarmTimeout = null;
+
+        function padTwo(n) {
+          return n < 10 ? '0' + n : '' + n;
+        }
+
+        function formatTime(s) {
+          const h = Math.floor(s / 3600);
+          const m = Math.floor((s % 3600) / 60);
+          const sec = s % 60;
+          return padTwo(h) + ':' + padTwo(m) + ':' + padTwo(sec);
+        }
+
+        function updateDisplay() {
+          display.textContent = formatTime(remaining);
+          if (running) {
+            const m = Math.floor(remaining / 60);
+            const s = remaining % 60;
+            document.title = padTwo(m) + ':' + padTwo(s) + ' - Timer';
+          }
+        }
+
+        function getInputSeconds() {
+          const h = parseInt(hoursInput.value) || 0;
+          const m = parseInt(minsInput.value) || 0;
+          const s = parseInt(secsInput.value) || 0;
+          return h * 3600 + m * 60 + s;
+        }
+
+        function syncDisplayToInputs() {
+          remaining = getInputSeconds();
+          updateDisplay();
+        }
+
+        [hoursInput, minsInput, secsInput].forEach(function(inp) {
+          inp.addEventListener('input', syncDisplayToInputs);
+        });
+
+        // Presets
+        document.querySelectorAll('.preset-btn').forEach(function(btn) {
+          btn.addEventListener('click', function() {
+            if (running) { return; }
+            const mins = parseInt(btn.dataset.minutes);
+            hoursInput.value = 0;
+            minsInput.value = mins;
+            secsInput.value = 0;
+            syncDisplayToInputs();
+          });
+        });
+
+        function start() {
+          if (remaining <= 0) { return; }
+          totalSeconds = remaining;
+          endTime = Date.now() + remaining * 1000;
+          running = true;
+          display.classList.remove('alarm');
+
+          startBtn.disabled = true;
+          pauseBtn.disabled = false;
+          inputsDiv.style.opacity = '0.4';
+          inputsDiv.style.pointerEvents = 'none';
+
+          interval = setInterval(function() {
+            const diff = Math.ceil((endTime - Date.now()) / 1000);
+            remaining = Math.max(0, diff);
+            updateDisplay();
+            if (remaining <= 0) {
+              clearInterval(interval);
+              interval = null;
+              running = false;
+              display.classList.add('alarm');
+              playAlarm();
+              startBtn.disabled = false;
+              pauseBtn.disabled = true;
+              inputsDiv.style.opacity = '1';
+              inputsDiv.style.pointerEvents = 'auto';
+              document.title = '00:00 - Timer (Done!)';
+              alarmTimeout = setTimeout(function() {
+                display.classList.remove('alarm');
+                document.title = defaultTitle;
+              }, 5000);
+            }
+          }, 100);
+        }
+
+        function pause() {
+          if (!running) { return; }
+          clearInterval(interval);
+          interval = null;
+          running = false;
+          remaining = Math.max(0, Math.ceil((endTime - Date.now()) / 1000));
+          startBtn.disabled = false;
+          pauseBtn.disabled = true;
+          startBtn.textContent = 'Resume';
+          document.title = defaultTitle;
+        }
+
+        function reset() {
+          clearInterval(interval);
+          clearTimeout(alarmTimeout);
+          interval = null;
+          running = false;
+          display.classList.remove('alarm');
+          startBtn.disabled = false;
+          startBtn.textContent = 'Start';
+          pauseBtn.disabled = true;
+          inputsDiv.style.opacity = '1';
+          inputsDiv.style.pointerEvents = 'auto';
+          syncDisplayToInputs();
+          document.title = defaultTitle;
+        }
+
+        startBtn.addEventListener('click', function() {
+          start();
+          startBtn.textContent = 'Start';
+        });
+        pauseBtn.addEventListener('click', pause);
+        resetBtn.addEventListener('click', reset);
+      })();
+
+      // --- Stopwatch ---
+      (function() {
+        const display = document.getElementById('sw-display');
+        const startBtn = document.getElementById('sw-start');
+        const lapBtn = document.getElementById('sw-lap');
+        const resetBtn = document.getElementById('sw-reset');
+        const lapsDiv = document.getElementById('sw-laps');
+
+        let elapsed = 0;
+        let startTime = 0;
+        let interval = null;
+        let running = false;
+        let laps = [];
+        let lastLapTime = 0;
+
+        function padTwo(n) {
+          return n < 10 ? '0' + n : '' + n;
+        }
+
+        function padThree(n) {
+          if (n < 10) { return '00' + n; }
+          if (n < 100) { return '0' + n; }
+          return '' + n;
+        }
+
+        function formatMs(ms) {
+          const totalSec = Math.floor(ms / 1000);
+          const h = Math.floor(totalSec / 3600);
+          const m = Math.floor((totalSec % 3600) / 60);
+          const s = totalSec % 60;
+          const millis = ms % 1000;
+          return padTwo(h) + ':' + padTwo(m) + ':' + padTwo(s) + '.' + padThree(millis);
+        }
+
+        function updateDisplay() {
+          const current = elapsed + (running ? Date.now() - startTime : 0);
+          const totalSec = Math.floor(current / 1000);
+          const h = Math.floor(totalSec / 3600);
+          const m = Math.floor((totalSec % 3600) / 60);
+          const s = totalSec % 60;
+          const millis = current % 1000;
+          display.innerHTML = padTwo(h) + ':' + padTwo(m) + ':' + padTwo(s) + '<span class="ms">.' + padThree(millis) + '</span>';
+        }
+
+        function start() {
+          if (running) {
+            // Stop
+            elapsed += Date.now() - startTime;
+            running = false;
+            clearInterval(interval);
+            startBtn.textContent = 'Start';
+            startBtn.classList.add('btn-primary');
+            lapBtn.disabled = true;
+            return;
+          }
+          startTime = Date.now();
+          running = true;
+          startBtn.textContent = 'Stop';
+          startBtn.classList.remove('btn-primary');
+          lapBtn.disabled = false;
+          resetBtn.disabled = false;
+
+          interval = setInterval(updateDisplay, 37);
+        }
+
+        function lap() {
+          if (!running) { return; }
+          const current = elapsed + Date.now() - startTime;
+          const lapTime = current - lastLapTime;
+          lastLapTime = current;
+          laps.push({ total: current, lap: lapTime });
+          renderLaps();
+        }
+
+        function renderLaps() {
+          let html = '';
+          for (let i = laps.length - 1; i >= 0; i--) {
+            html += '<div class="lap-item">' +
+              '<span class="lap-num">Lap ' + (i + 1) + '</span>' +
+              '<span>' + formatMs(laps[i].lap) + '</span>' +
+              '<span class="lap-split">' + formatMs(laps[i].total) + '</span>' +
+              '</div>';
+          }
+          lapsDiv.innerHTML = html;
+        }
+
+        function reset() {
+          clearInterval(interval);
+          running = false;
+          elapsed = 0;
+          lastLapTime = 0;
+          laps = [];
+          startBtn.textContent = 'Start';
+          startBtn.classList.add('btn-primary');
+          lapBtn.disabled = true;
+          resetBtn.disabled = true;
+          lapsDiv.innerHTML = '';
+          updateDisplay();
+        }
+
+        startBtn.addEventListener('click', start);
+        lapBtn.addEventListener('click', lap);
+        resetBtn.addEventListener('click', reset);
+        updateDisplay();
+      })();
+
+      // --- Pomodoro ---
+      (function() {
+        const display = document.getElementById('pomo-display');
+        const phaseLabel = document.getElementById('pomo-phase');
+        const dotsDiv = document.getElementById('pomo-dots');
+        const startBtn = document.getElementById('pomo-start');
+        const pauseBtn = document.getElementById('pomo-pause');
+        const resetBtn = document.getElementById('pomo-reset');
+        const configDiv = document.getElementById('pomo-config');
+
+        const workInput = document.getElementById('pomo-work');
+        const shortInput = document.getElementById('pomo-short');
+        const longInput = document.getElementById('pomo-long');
+        const sessionsInput = document.getElementById('pomo-sessions');
+
+        let workMin = 25;
+        let shortMin = 5;
+        let longMin = 15;
+        let totalSessions = 4;
+
+        let currentSession = 1;
+        let phase = 'work'; // 'work', 'short-break', 'long-break'
+        let remaining = 0;
+        let endTime = 0;
+        let interval = null;
+        let running = false;
+        let started = false;
+
+        function padTwo(n) {
+          return n < 10 ? '0' + n : '' + n;
+        }
+
+        function formatTime(s) {
+          const m = Math.floor(s / 60);
+          const sec = s % 60;
+          return padTwo(m) + ':' + padTwo(sec);
+        }
+
+        function readConfig() {
+          workMin = Math.max(1, parseInt(workInput.value) || 25);
+          shortMin = Math.max(1, parseInt(shortInput.value) || 5);
+          longMin = Math.max(1, parseInt(longInput.value) || 15);
+          totalSessions = Math.max(1, parseInt(sessionsInput.value) || 4);
+        }
+
+        function renderDots() {
+          let html = '';
+          for (let i = 1; i <= totalSessions; i++) {
+            let cls = 'pomo-dot';
+            if (i < currentSession) {
+              cls += ' completed';
+            } else if (i === currentSession) {
+              cls += ' current';
+            }
+            html += '<div class="' + cls + '"></div>';
+          }
+          dotsDiv.innerHTML = html;
+        }
+
+        function updatePhaseLabel() {
+          phaseLabel.className = 'pomo-phase ' + phase;
+          if (phase === 'work') {
+            phaseLabel.textContent = 'Work - Session ' + currentSession + '/' + totalSessions;
+          } else if (phase === 'short-break') {
+            phaseLabel.textContent = 'Short Break';
+          } else {
+            phaseLabel.textContent = 'Long Break';
+          }
+        }
+
+        function updateDisplay() {
+          display.textContent = formatTime(remaining);
+          if (running) {
+            document.title = formatTime(remaining) + ' - ' + (phase === 'work' ? 'Work' : 'Break');
+          }
+        }
+
+        function initPhase() {
+          if (phase === 'work') {
+            remaining = workMin * 60;
+          } else if (phase === 'short-break') {
+            remaining = shortMin * 60;
+          } else {
+            remaining = longMin * 60;
+          }
+          updatePhaseLabel();
+          renderDots();
+          updateDisplay();
+        }
+
+        function transitionToNext() {
+          playAlarm();
+          if (phase === 'work') {
+            if (currentSession >= totalSessions) {
+              phase = 'long-break';
+            } else {
+              phase = 'short-break';
+            }
+          } else if (phase === 'short-break') {
+            currentSession++;
+            phase = 'work';
+          } else {
+            // Long break done, cycle complete - reset
+            currentSession = 1;
+            phase = 'work';
+          }
+          initPhase();
+          // Auto-start next phase
+          startTimer();
+        }
+
+        function startTimer() {
+          endTime = Date.now() + remaining * 1000;
+          running = true;
+          interval = setInterval(function() {
+            const diff = Math.ceil((endTime - Date.now()) / 1000);
+            remaining = Math.max(0, diff);
+            updateDisplay();
+            if (remaining <= 0) {
+              clearInterval(interval);
+              interval = null;
+              running = false;
+              transitionToNext();
+            }
+          }, 100);
+        }
+
+        function start() {
+          if (running) { return; }
+          if (!started) {
+            readConfig();
+            currentSession = 1;
+            phase = 'work';
+            initPhase();
+            started = true;
+            configDiv.style.opacity = '0.4';
+            configDiv.style.pointerEvents = 'none';
+          }
+          startBtn.disabled = true;
+          pauseBtn.disabled = false;
+          startTimer();
+        }
+
+        function pause() {
+          if (!running) { return; }
+          clearInterval(interval);
+          interval = null;
+          running = false;
+          remaining = Math.max(0, Math.ceil((endTime - Date.now()) / 1000));
+          startBtn.disabled = false;
+          startBtn.textContent = 'Resume';
+          pauseBtn.disabled = true;
+          document.title = defaultTitle;
+        }
+
+        function reset() {
+          clearInterval(interval);
+          interval = null;
+          running = false;
+          started = false;
+          startBtn.disabled = false;
+          startBtn.textContent = 'Start';
+          pauseBtn.disabled = true;
+          configDiv.style.opacity = '1';
+          configDiv.style.pointerEvents = 'auto';
+          readConfig();
+          currentSession = 1;
+          phase = 'work';
+          initPhase();
+          document.title = defaultTitle;
+        }
+
+        startBtn.addEventListener('click', function() {
+          start();
+          startBtn.textContent = 'Start';
+        });
+        pauseBtn.addEventListener('click', pause);
+        resetBtn.addEventListener('click', reset);
+
+        // Update display when config changes
+        [workInput, shortInput, longInput, sessionsInput].forEach(function(inp) {
+          inp.addEventListener('input', function() {
+            if (!started) {
+              readConfig();
+              currentSession = 1;
+              phase = 'work';
+              initPhase();
+            }
+          });
+        });
+
+        // Initialize
+        readConfig();
+        initPhase();
+      })();
+    })();
+  </script>
+</body>
+</html>

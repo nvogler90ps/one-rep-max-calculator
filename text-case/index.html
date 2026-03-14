@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Text Case Converter - Free Online Text Transform Tool</title>
+<meta name="description" content="Free online text case converter. Transform text to UPPERCASE, lowercase, Title Case, camelCase, snake_case, kebab-case, and more. No signup required.">
+<link rel="canonical" href="https://automated-insights.com/text-case/">
+<meta property="og:title" content="Text Case Converter - Free Online Text Transform Tool">
+<meta property="og:description" content="Free online text case converter. Transform text to UPPERCASE, lowercase, Title Case, camelCase, snake_case, kebab-case, and more.">
+<meta property="og:url" content="https://automated-insights.com/text-case/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Automated Insights">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Text Case Converter - Free Online Text Transform Tool">
+<meta name="twitter:description" content="Free online text case converter. Transform text to UPPERCASE, lowercase, Title Case, camelCase, snake_case, kebab-case, and more.">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3434609691579834" crossorigin="anonymous"></script>
+<style>
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #0f1117;
+  color: #e8eaed;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+  text-align: center;
+}
+
+.subtitle {
+  color: #9aa0b0;
+  text-align: center;
+  font-size: 0.95rem;
+  margin-bottom: 24px;
+}
+
+.textarea-wrap {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+textarea {
+  width: 100%;
+  min-height: 180px;
+  padding: 14px;
+  background: #1a1d27;
+  color: #e8eaed;
+  border: 1px solid #2e3345;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+textarea:focus {
+  border-color: #6c63ff;
+}
+
+.stats {
+  display: flex;
+  gap: 16px;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+  font-size: 0.85rem;
+  color: #9aa0b0;
+}
+
+.btn-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.btn {
+  padding: 10px 12px;
+  background: #1a1d27;
+  color: #e8eaed;
+  border: 1px solid #2e3345;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.btn:hover {
+  background: #252938;
+  border-color: #6c63ff;
+}
+
+.btn:active {
+  background: #2e3345;
+}
+
+.btn-copy {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  background: #6c63ff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+  margin-bottom: 32px;
+}
+
+.btn-copy:hover {
+  background: #5a52e0;
+}
+
+.btn-copy:active {
+  background: #4a43c0;
+}
+
+.info {
+  color: #9aa0b0;
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+.info h2 {
+  color: #e8eaed;
+  font-size: 1.2rem;
+  margin: 24px 0 8px;
+}
+
+.info p {
+  margin-bottom: 12px;
+}
+
+footer {
+  text-align: center;
+  color: #9aa0b0;
+  font-size: 0.8rem;
+  padding: 24px 0 16px;
+  border-top: 1px solid #2e3345;
+  margin-top: 32px;
+}
+
+footer a {
+  color: #6c63ff;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+  h1 { font-size: 1.35rem; }
+  .btn-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
+  textarea { min-height: 140px; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Text Case Converter</h1>
+  <p class="subtitle">Paste your text and click a button to transform it instantly.</p>
+
+  <div class="textarea-wrap">
+    <textarea id="textInput" placeholder="Type or paste your text here..." spellcheck="false"></textarea>
+  </div>
+
+  <div class="stats">
+    <span id="charCount">0 characters</span>
+    <span id="wordCount">0 words</span>
+    <span id="lineCount">0 lines</span>
+  </div>
+
+  <div class="btn-grid">
+    <button class="btn" onclick="convert('upper')">UPPERCASE</button>
+    <button class="btn" onclick="convert('lower')">lowercase</button>
+    <button class="btn" onclick="convert('title')">Title Case</button>
+    <button class="btn" onclick="convert('sentence')">Sentence case</button>
+    <button class="btn" onclick="convert('camel')">camelCase</button>
+    <button class="btn" onclick="convert('pascal')">PascalCase</button>
+    <button class="btn" onclick="convert('snake')">snake_case</button>
+    <button class="btn" onclick="convert('kebab')">kebab-case</button>
+    <button class="btn" onclick="convert('constant')">CONSTANT_CASE</button>
+    <button class="btn" onclick="convert('dot')">dot.case</button>
+    <button class="btn" onclick="convert('path')">path/case</button>
+    <button class="btn" onclick="convert('alternating')">aLtErNaTiNg</button>
+    <button class="btn" onclick="convert('reverse')">Reverse Text</button>
+    <button class="btn" onclick="convert('extraSpaces')">Remove Extra Spaces</button>
+    <button class="btn" onclick="convert('lineBreaks')">Remove Line Breaks</button>
+    <button class="btn" onclick="convert('sortAZ')">Sort Lines A-Z</button>
+    <button class="btn" onclick="convert('sortZA')">Sort Lines Z-A</button>
+    <button class="btn" onclick="convert('unique')">Unique Lines</button>
+  </div>
+
+  <button class="btn-copy" id="copyBtn" onclick="copyResult()">Copy to Clipboard</button>
+
+  <div class="info">
+    <h2>How to Use</h2>
+    <p>Paste or type text into the box above, then click any conversion button. The text updates in place so you can chain multiple transformations. Click "Copy to Clipboard" to grab the result.</p>
+
+    <h2>Available Conversions</h2>
+    <p><strong>UPPERCASE / lowercase</strong> -- Convert all letters to upper or lower case.</p>
+    <p><strong>Title Case</strong> -- Capitalize the first letter of every word.</p>
+    <p><strong>Sentence case</strong> -- Capitalize the first letter of each sentence.</p>
+    <p><strong>camelCase / PascalCase</strong> -- Join words with no separator; camelCase starts lowercase, PascalCase starts uppercase.</p>
+    <p><strong>snake_case / CONSTANT_CASE</strong> -- Join words with underscores, in lowercase or uppercase.</p>
+    <p><strong>kebab-case / dot.case / path/case</strong> -- Join words with hyphens, dots, or slashes.</p>
+    <p><strong>aLtErNaTiNg cAsE</strong> -- Alternate between lowercase and uppercase letters.</p>
+    <p><strong>Reverse Text</strong> -- Reverse the entire string character by character.</p>
+    <p><strong>Remove Extra Spaces / Line Breaks</strong> -- Clean up whitespace in your text.</p>
+    <p><strong>Sort / Unique Lines</strong> -- Sort lines alphabetically or remove duplicates.</p>
+  </div>
+
+  <footer>
+    <a href="/">Automated Insights</a>
+  </footer>
+</div>
+
+<script>
+var ta = document.getElementById('textInput');
+
+function updateStats() {
+  var text = ta.value;
+  var chars = text.length;
+  var words = text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
+  var lines = text === '' ? 0 : text.split('\n').length;
+  document.getElementById('charCount').textContent = chars + ' character' + (chars !== 1 ? 's' : '');
+  document.getElementById('wordCount').textContent = words + ' word' + (words !== 1 ? 's' : '');
+  document.getElementById('lineCount').textContent = lines + ' line' + (lines !== 1 ? 's' : '');
+}
+
+ta.addEventListener('input', updateStats);
+
+function splitWords(text) {
+  return text
+    .replace(/([a-z])([A-Z])/g, '$1 $2')
+    .replace(/[_\-./\\]+/g, ' ')
+    .trim()
+    .split(/\s+/)
+    .filter(function(w) { return w.length > 0; });
+}
+
+function toTitleCase(str) {
+  return str.replace(/\S+/g, function(word) {
+    return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+  });
+}
+
+function toSentenceCase(str) {
+  return str.toLowerCase().replace(/(^\s*|[.!?]\s+)(\w)/g, function(match, sep, char) {
+    return sep + char.toUpperCase();
+  });
+}
+
+function convert(type) {
+  var text = ta.value;
+  if (text === '') { return; }
+  var result = '';
+
+  switch (type) {
+    case 'upper':
+      result = text.toUpperCase();
+      break;
+    case 'lower':
+      result = text.toLowerCase();
+      break;
+    case 'title':
+      result = toTitleCase(text);
+      break;
+    case 'sentence':
+      result = toSentenceCase(text);
+      break;
+    case 'camel': {
+      var words = splitWords(text);
+      result = words.map(function(w, i) {
+        var low = w.toLowerCase();
+        return i === 0 ? low : low.charAt(0).toUpperCase() + low.slice(1);
+      }).join('');
+      break;
+    }
+    case 'pascal': {
+      var words = splitWords(text);
+      result = words.map(function(w) {
+        var low = w.toLowerCase();
+        return low.charAt(0).toUpperCase() + low.slice(1);
+      }).join('');
+      break;
+    }
+    case 'snake': {
+      var words = splitWords(text);
+      result = words.map(function(w) { return w.toLowerCase(); }).join('_');
+      break;
+    }
+    case 'kebab': {
+      var words = splitWords(text);
+      result = words.map(function(w) { return w.toLowerCase(); }).join('-');
+      break;
+    }
+    case 'constant': {
+      var words = splitWords(text);
+      result = words.map(function(w) { return w.toUpperCase(); }).join('_');
+      break;
+    }
+    case 'dot': {
+      var words = splitWords(text);
+      result = words.map(function(w) { return w.toLowerCase(); }).join('.');
+      break;
+    }
+    case 'path': {
+      var words = splitWords(text);
+      result = words.map(function(w) { return w.toLowerCase(); }).join('/');
+      break;
+    }
+    case 'alternating': {
+      var idx = 0;
+      result = '';
+      for (var i = 0; i < text.length; i++) {
+        var ch = text[i];
+        if (/[a-zA-Z]/.test(ch)) {
+          result += idx % 2 === 0 ? ch.toLowerCase() : ch.toUpperCase();
+          idx++;
+        } else {
+          result += ch;
+        }
+      }
+      break;
+    }
+    case 'reverse':
+      result = text.split('').reverse().join('');
+      break;
+    case 'extraSpaces':
+      result = text.split('\n').map(function(line) {
+        return line.replace(/\s+/g, ' ').trim();
+      }).join('\n');
+      break;
+    case 'lineBreaks':
+      result = text.replace(/\r?\n/g, ' ').replace(/\s+/g, ' ').trim();
+      break;
+    case 'sortAZ': {
+      var lines = text.split('\n');
+      lines.sort(function(a, b) { return a.localeCompare(b, undefined, { sensitivity: 'base' }); });
+      result = lines.join('\n');
+      break;
+    }
+    case 'sortZA': {
+      var lines = text.split('\n');
+      lines.sort(function(a, b) { return b.localeCompare(a, undefined, { sensitivity: 'base' }); });
+      result = lines.join('\n');
+      break;
+    }
+    case 'unique': {
+      var lines = text.split('\n');
+      var seen = {};
+      var unique = [];
+      for (var i = 0; i < lines.length; i++) {
+        if (!seen[lines[i]]) {
+          seen[lines[i]] = true;
+          unique.push(lines[i]);
+        }
+      }
+      result = unique.join('\n');
+      break;
+    }
+    default:
+      result = text;
+  }
+
+  ta.value = result;
+  updateStats();
+}
+
+function copyResult() {
+  var btn = document.getElementById('copyBtn');
+  if (ta.value === '') { return; }
+  navigator.clipboard.writeText(ta.value).then(function() {
+    btn.textContent = 'Copied!';
+    setTimeout(function() { btn.textContent = 'Copy to Clipboard'; }, 1500);
+  }).catch(function() {
+    ta.select();
+    document.execCommand('copy');
+    btn.textContent = 'Copied!';
+    setTimeout(function() { btn.textContent = 'Copy to Clipboard'; }, 1500);
+  });
+}
+
+updateStats();
+</script>
+</body>
+</html>

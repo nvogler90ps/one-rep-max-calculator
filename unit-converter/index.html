@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit Converter - Free Online Conversion Calculator</title>
+<meta name="description" content="Free online unit converter. Instantly convert length, weight, temperature, volume, speed, data, area, time, energy, and pressure units with formulas and reference tables.">
+<link rel="canonical" href="https://automated-insights.com/unit-converter/">
+<meta property="og:title" content="Unit Converter - Free Online Conversion Calculator">
+<meta property="og:description" content="Instantly convert between hundreds of units across 10 categories. Length, weight, temperature, volume, speed, data, area, time, energy, and pressure.">
+<meta property="og:url" content="https://automated-insights.com/unit-converter/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Automated Insights">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Unit Converter - Free Online Conversion Calculator">
+<meta name="twitter:description" content="Instantly convert between hundreds of units across 10 categories.">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3434609691579834" crossorigin="anonymous"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0f1117;--surface:#1a1d27;--border:#2e3345;--text:#e8eaed;--text-muted:#9aa0b0;--accent:#6c63ff;--accent-hover:#7f78ff;--radius:8px}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh}
+.container{max-width:800px;margin:0 auto;padding:20px}
+h1{font-size:1.5rem;text-align:center;margin-bottom:6px}
+.subtitle{text-align:center;color:var(--text-muted);font-size:0.9rem;margin-bottom:24px}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:24px;justify-content:center}
+.tab{background:var(--surface);border:1px solid var(--border);color:var(--text-muted);padding:8px 14px;border-radius:var(--radius);cursor:pointer;font-size:0.85rem;transition:all 0.2s}
+.tab:hover{border-color:var(--accent);color:var(--text)}
+.tab.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.converter{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:20px}
+.converter-row{display:flex;gap:12px;align-items:center;margin-bottom:16px}
+.converter-col{flex:1;display:flex;flex-direction:column;gap:6px}
+.converter-col label{font-size:0.8rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px}
+select,input[type="number"]{width:100%;background:var(--bg);border:1px solid var(--border);color:var(--text);padding:10px 12px;border-radius:var(--radius);font-size:1rem;outline:none;transition:border-color 0.2s}
+select:focus,input[type="number"]:focus{border-color:var(--accent)}
+input[type="number"]{-moz-appearance:textfield}
+input[type="number"]::-webkit-inner-spin-button,input[type="number"]::-webkit-outer-spin-button{-webkit-appearance:none}
+.swap-btn{background:var(--accent);border:none;color:#fff;width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:1.2rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:18px;transition:background 0.2s}
+.swap-btn:hover{background:var(--accent-hover)}
+.result-display{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:16px;text-align:center;margin-bottom:16px}
+.result-value{font-size:1.8rem;font-weight:700;color:var(--accent)}
+.result-label{font-size:0.85rem;color:var(--text-muted);margin-top:4px}
+.formula{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:12px 16px;font-size:0.85rem;color:var(--text-muted);text-align:center}
+.formula code{color:var(--accent);font-family:monospace}
+.ref-table{margin-top:20px}
+.ref-table h3{font-size:0.95rem;margin-bottom:12px;color:var(--text-muted)}
+.ref-table table{width:100%;border-collapse:collapse}
+.ref-table th,.ref-table td{padding:8px 12px;text-align:left;border-bottom:1px solid var(--border);font-size:0.85rem}
+.ref-table th{color:var(--text-muted);font-weight:600}
+.ref-table td{color:var(--text)}
+.ref-table tr:last-child td{border-bottom:none}
+footer{text-align:center;color:var(--text-muted);font-size:0.8rem;padding:24px 0 16px;border-top:1px solid var(--border);margin-top:32px}
+footer a{color:var(--accent);text-decoration:none}
+@media(max-width:600px){
+  .converter-row{flex-direction:column}
+  .swap-btn{margin:0 auto;transform:rotate(90deg)}
+  h1{font-size:1.2rem}
+  .result-value{font-size:1.4rem}
+  .tabs{gap:4px}
+  .tab{padding:6px 10px;font-size:0.78rem}
+}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Unit Converter</h1>
+<p class="subtitle">Free Online Conversion Calculator</p>
+
+<div class="tabs" id="tabs"></div>
+
+<div class="converter">
+  <div class="converter-row">
+    <div class="converter-col">
+      <label>From</label>
+      <select id="fromUnit"></select>
+      <input type="number" id="fromValue" value="1" step="any">
+    </div>
+    <button class="swap-btn" id="swapBtn" title="Swap units">&#8644;</button>
+    <div class="converter-col">
+      <label>To</label>
+      <select id="toUnit"></select>
+      <input type="number" id="toValue" readonly tabindex="-1" style="cursor:default;opacity:0.8">
+    </div>
+  </div>
+  <div class="result-display">
+    <div class="result-value" id="resultValue">--</div>
+    <div class="result-label" id="resultLabel"></div>
+  </div>
+  <div class="formula" id="formula"></div>
+</div>
+
+<div class="ref-table" id="refTable"></div>
+
+<footer>
+  <a href="https://automated-insights.com/">Automated Insights</a> &middot; Free tools for everyday calculations
+</footer>
+</div>
+
+<script>
+(function(){
+var categories = {
+  Length: {
+    units: {mm:"Millimeter",cm:"Centimeter",m:"Meter",km:"Kilometer","in":"Inch",ft:"Foot",yd:"Yard",mi:"Mile",nmi:"Nautical Mile"},
+    toBase: {mm:0.001,cm:0.01,m:1,km:1000,"in":0.0254,ft:0.3048,yd:0.9144,mi:1609.344,nmi:1852},
+    base:"m",
+    ref:[["1 inch","2.54 cm"],["1 foot","30.48 cm"],["1 yard","0.9144 m"],["1 mile","1.609 km"],["1 km","0.6214 miles"],["1 nautical mile","1.852 km"],["1 meter","3.281 feet"],["1 cm","0.3937 inches"]]
+  },
+  Weight: {
+    units: {mg:"Milligram",g:"Gram",kg:"Kilogram",oz:"Ounce",lb:"Pound",st:"Stone",ton:"Ton (US)",tonne:"Tonne (metric)"},
+    toBase: {mg:0.001,g:1,kg:1000,oz:28.3495,lb:453.592,st:6350.29,ton:907185,tonne:1000000},
+    base:"g",
+    ref:[["1 oz","28.35 g"],["1 lb","0.4536 kg"],["1 kg","2.205 lbs"],["1 stone","14 lbs"],["1 ton (US)","907.2 kg"],["1 tonne","2,205 lbs"],["1 kg","35.27 oz"],["100 g","3.527 oz"]]
+  },
+  Temperature: {
+    units: {C:"Celsius",F:"Fahrenheit",K:"Kelvin"},
+    special:true,
+    ref:[["0 C","32 F"],["100 C","212 F"],["37 C","98.6 F"],["0 F","-17.78 C"],["72 F","22.22 C"],["0 K","-273.15 C"],["273.15 K","0 C"],["373.15 K","100 C"]]
+  },
+  Volume: {
+    units: {ml:"Milliliter",l:"Liter",gal_us:"Gallon (US)",gal_uk:"Gallon (UK)",cup:"Cup",tbsp:"Tablespoon",tsp:"Teaspoon",fl_oz:"Fluid Ounce",pt:"Pint",qt:"Quart"},
+    toBase: {ml:1,l:1000,gal_us:3785.41,gal_uk:4546.09,cup:236.588,tbsp:14.7868,tsp:4.92892,fl_oz:29.5735,pt:473.176,qt:946.353},
+    base:"ml",
+    ref:[["1 cup","236.6 ml"],["1 gallon (US)","3.785 liters"],["1 liter","33.81 fl oz"],["1 tablespoon","3 teaspoons"],["1 pint","2 cups"],["1 quart","2 pints"],["1 gallon (UK)","4.546 liters"],["1 fl oz","29.57 ml"]]
+  },
+  Speed: {
+    units: {ms:"m/s",kmh:"km/h",mph:"mph",kn:"Knot",fts:"ft/s"},
+    toBase: {ms:1,kmh:0.277778,mph:0.44704,kn:0.514444,fts:0.3048},
+    base:"m/s",
+    ref:[["1 mph","1.609 km/h"],["1 km/h","0.6214 mph"],["1 knot","1.852 km/h"],["1 m/s","3.6 km/h"],["100 km/h","62.14 mph"],["60 mph","96.56 km/h"],["1 ft/s","0.3048 m/s"],["1 knot","1.151 mph"]]
+  },
+  Data: {
+    units: {bit:"Bit",byte:"Byte",KB:"Kilobyte",MB:"Megabyte",GB:"Gigabyte",TB:"Terabyte",PB:"Petabyte",Kbit:"Kilobit",Mbit:"Megabit",Gbit:"Gigabit"},
+    toBase: {bit:1,byte:8,KB:8000,MB:8e6,GB:8e9,TB:8e12,PB:8e15,Kbit:1000,Mbit:1e6,Gbit:1e9},
+    base:"bit",
+    ref:[["1 byte","8 bits"],["1 KB","1,000 bytes"],["1 MB","1,000 KB"],["1 GB","1,000 MB"],["1 TB","1,000 GB"],["1 PB","1,000 TB"],["1 Mbit","125 KB"],["1 Gbit","125 MB"]]
+  },
+  Area: {
+    units: {sqmm:"sq mm",sqcm:"sq cm",sqm:"sq m",sqkm:"sq km",sqin:"sq inch",sqft:"sq foot",sqyd:"sq yard",acre:"Acre",ha:"Hectare",sqmi:"sq mile"},
+    toBase: {sqmm:1e-6,sqcm:1e-4,sqm:1,sqkm:1e6,sqin:6.4516e-4,sqft:0.092903,sqyd:0.836127,acre:4046.86,ha:10000,sqmi:2.59e6},
+    base:"sq m",
+    ref:[["1 acre","43,560 sq ft"],["1 hectare","2.471 acres"],["1 sq mile","640 acres"],["1 sq km","247.1 acres"],["1 sq m","10.76 sq ft"],["1 sq yard","9 sq ft"],["1 sq foot","144 sq inches"],["1 hectare","10,000 sq m"]]
+  },
+  Time: {
+    units: {ms:"Millisecond",s:"Second",min:"Minute",h:"Hour",d:"Day",wk:"Week",mo:"Month (30d)",yr:"Year (365d)"},
+    toBase: {ms:0.001,s:1,min:60,h:3600,d:86400,wk:604800,mo:2592000,yr:31536000},
+    base:"s",
+    ref:[["1 minute","60 seconds"],["1 hour","3,600 seconds"],["1 day","24 hours"],["1 week","7 days"],["1 month","30 days"],["1 year","365 days"],["1 year","52.14 weeks"],["1 day","86,400 seconds"]]
+  },
+  Energy: {
+    units: {J:"Joule",cal:"Calorie",kcal:"Kilocalorie",kWh:"Kilowatt-hour",BTU:"BTU",eV:"Electronvolt"},
+    toBase: {J:1,cal:4.184,kcal:4184,kWh:3.6e6,BTU:1055.06,eV:1.602e-19},
+    base:"J",
+    ref:[["1 kcal","4,184 J"],["1 kWh","3,600,000 J"],["1 BTU","1,055 J"],["1 calorie","4.184 J"],["1 kcal","3.968 BTU"],["1 kWh","860 kcal"],["1 BTU","252 cal"],["1 eV","1.602e-19 J"]]
+  },
+  Pressure: {
+    units: {Pa:"Pascal",kPa:"Kilopascal",bar:"Bar",atm:"Atmosphere",psi:"PSI",mmHg:"mmHg",torr:"Torr"},
+    toBase: {Pa:1,kPa:1000,bar:100000,atm:101325,psi:6894.76,mmHg:133.322,torr:133.322},
+    base:"Pa",
+    ref:[["1 atm","101,325 Pa"],["1 bar","100,000 Pa"],["1 psi","6,894.76 Pa"],["1 atm","14.696 psi"],["1 bar","14.504 psi"],["1 atm","760 mmHg"],["1 torr","1 mmHg"],["1 kPa","0.145 psi"]]
+  }
+};
+
+var currentCat = "Length";
+var tabsEl = document.getElementById("tabs");
+var fromUnitEl = document.getElementById("fromUnit");
+var toUnitEl = document.getElementById("toUnit");
+var fromValueEl = document.getElementById("fromValue");
+var toValueEl = document.getElementById("toValue");
+var resultValueEl = document.getElementById("resultValue");
+var resultLabelEl = document.getElementById("resultLabel");
+var formulaEl = document.getElementById("formula");
+var refTableEl = document.getElementById("refTable");
+var swapBtn = document.getElementById("swapBtn");
+
+Object.keys(categories).forEach(function(name){
+  var btn = document.createElement("button");
+  btn.className = "tab";
+  btn.textContent = name;
+  btn.addEventListener("click", function(){ selectCategory(name); });
+  tabsEl.appendChild(btn);
+});
+
+function selectCategory(name){
+  currentCat = name;
+  var tabs = tabsEl.querySelectorAll(".tab");
+  tabs.forEach(function(t){ t.classList.toggle("active", t.textContent === name); });
+  var cat = categories[name];
+  fromUnitEl.innerHTML = "";
+  toUnitEl.innerHTML = "";
+  Object.keys(cat.units).forEach(function(key, i){
+    var o1 = document.createElement("option");
+    o1.value = key; o1.textContent = cat.units[key];
+    fromUnitEl.appendChild(o1);
+    var o2 = document.createElement("option");
+    o2.value = key; o2.textContent = cat.units[key];
+    toUnitEl.appendChild(o2);
+  });
+  if (toUnitEl.options.length > 1) {
+    toUnitEl.selectedIndex = 1;
+  }
+  fromValueEl.value = 1;
+  convert();
+  buildRefTable(cat);
+}
+
+function convertTemp(val, from, to){
+  if (from === to) { return val; }
+  var c;
+  if (from === "C") { c = val; }
+  else if (from === "F") { c = (val - 32) * 5/9; }
+  else { c = val - 273.15; }
+  if (to === "C") { return c; }
+  if (to === "F") { return c * 9/5 + 32; }
+  return c + 273.15;
+}
+
+function getTempFormula(from, to){
+  var formulas = {
+    "C-F": "F = C x 9/5 + 32",
+    "F-C": "C = (F - 32) x 5/9",
+    "C-K": "K = C + 273.15",
+    "K-C": "C = K - 273.15",
+    "F-K": "K = (F - 32) x 5/9 + 273.15",
+    "K-F": "F = (K - 273.15) x 9/5 + 32"
+  };
+  if (from === to) { return "Same unit"; }
+  return formulas[from + "-" + to] || "";
+}
+
+function formatNum(n){
+  if (n === 0) { return "0"; }
+  var abs = Math.abs(n);
+  if (abs >= 1e15 || (abs < 1e-6 && abs > 0)) {
+    return n.toExponential(6);
+  }
+  if (abs >= 1) {
+    return parseFloat(n.toPrecision(10)).toString();
+  }
+  return parseFloat(n.toPrecision(8)).toString();
+}
+
+function convert(){
+  var cat = categories[currentCat];
+  var from = fromUnitEl.value;
+  var to = toUnitEl.value;
+  var val = parseFloat(fromValueEl.value);
+  if (isNaN(val)) {
+    resultValueEl.textContent = "--";
+    resultLabelEl.textContent = "";
+    formulaEl.innerHTML = "";
+    toValueEl.value = "";
+    return;
+  }
+  var result;
+  if (cat.special) {
+    result = convertTemp(val, from, to);
+    formulaEl.innerHTML = "Formula: <code>" + getTempFormula(from, to) + "</code>";
+  } else {
+    var baseVal = val * cat.toBase[from];
+    result = baseVal / cat.toBase[to];
+    var factor = cat.toBase[from] / cat.toBase[to];
+    formulaEl.innerHTML = "Formula: <code>1 " + cat.units[from] + " = " + formatNum(factor) + " " + cat.units[to] + "</code>";
+  }
+  toValueEl.value = formatNum(result);
+  resultValueEl.textContent = formatNum(result);
+  resultLabelEl.textContent = formatNum(val) + " " + cat.units[from] + " = " + formatNum(result) + " " + cat.units[to];
+}
+
+function buildRefTable(cat){
+  if (!cat.ref || cat.ref.length === 0) {
+    refTableEl.innerHTML = "";
+    return;
+  }
+  var html = '<h3>Quick Reference</h3><table><thead><tr><th>From</th><th>To</th></tr></thead><tbody>';
+  cat.ref.forEach(function(r){
+    html += '<tr><td>' + r[0] + '</td><td>' + r[1] + '</td></tr>';
+  });
+  html += '</tbody></table>';
+  refTableEl.innerHTML = html;
+}
+
+swapBtn.addEventListener("click", function(){
+  var tmpIdx = fromUnitEl.selectedIndex;
+  fromUnitEl.selectedIndex = toUnitEl.selectedIndex;
+  toUnitEl.selectedIndex = tmpIdx;
+  convert();
+});
+
+fromValueEl.addEventListener("input", convert);
+fromUnitEl.addEventListener("change", convert);
+toUnitEl.addEventListener("change", convert);
+
+selectCategory("Length");
+})();
+</script>
+</body>
+</html>

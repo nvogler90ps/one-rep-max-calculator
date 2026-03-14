@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How Much House Can I Afford? - Free Home Affordability Calculator</title>
+  <meta name="description" content="Find out how much house you can afford based on your income, debts, and down payment. Uses the 28/36 rule to calculate conservative, recommended, and stretch home prices with full monthly payment breakdowns.">
+  <meta name="keywords" content="home affordability calculator, how much house can I afford, mortgage calculator, DTI calculator, 28/36 rule, home buying budget">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="canonical" href="https://automated-insights.com/home-affordability/">
+  <meta property="og:title" content="How Much House Can I Afford? - Free Home Affordability Calculator">
+  <meta property="og:description" content="Calculate your maximum home price based on income, debts, and down payment. See conservative, recommended, and stretch budgets with full payment breakdowns.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://automated-insights.com/home-affordability/">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Home Affordability Calculator",
+    "url": "https://automated-insights.com/home-affordability/",
+    "description": "Calculate how much house you can afford based on your income, debts, and down payment using the 28/36 DTI rule.",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3434609691579834" crossorigin="anonymous"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: #0f1117;
+      color: #e8eaed;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    a { color: #6c63ff; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+    header {
+      border-bottom: 1px solid #2e3345;
+      padding: 16px 0;
+      background: #1a1d27;
+    }
+    header .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    header .logo { font-size: 18px; font-weight: 700; color: #e8eaed; }
+    header nav a { color: #9aa0b0; margin-left: 20px; font-size: 14px; }
+    header nav a:hover { color: #e8eaed; text-decoration: none; }
+
+    .hero {
+      text-align: center;
+      padding: 48px 0 32px;
+    }
+    .hero h1 {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .hero p {
+      color: #9aa0b0;
+      font-size: 16px;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .main-grid {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 32px;
+      margin-bottom: 48px;
+    }
+
+    .card {
+      background: #1a1d27;
+      border: 1px solid #2e3345;
+      border-radius: 12px;
+      padding: 24px;
+    }
+    .card h2 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #2e3345;
+    }
+
+    .form-group { margin-bottom: 16px; }
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      color: #9aa0b0;
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+    .form-group .hint {
+      font-size: 11px;
+      color: #6b7280;
+      margin-top: 3px;
+    }
+
+    .input-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .input-wrap .prefix,
+    .input-wrap .suffix {
+      position: absolute;
+      color: #9aa0b0;
+      font-size: 14px;
+      pointer-events: none;
+    }
+    .input-wrap .prefix { left: 12px; }
+    .input-wrap .suffix { right: 12px; }
+
+    input[type="number"], select {
+      width: 100%;
+      background: #0f1117;
+      border: 1px solid #2e3345;
+      border-radius: 8px;
+      padding: 10px 12px;
+      color: #e8eaed;
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    input[type="number"]:focus, select:focus {
+      border-color: #6c63ff;
+    }
+    .input-wrap input.has-prefix { padding-left: 28px; }
+    .input-wrap input.has-suffix { padding-right: 28px; }
+
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    input[type="number"] { -moz-appearance: textfield; }
+
+    select { cursor: pointer; }
+    select option { background: #1a1d27; }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    /* Results */
+    .results-area { display: flex; flex-direction: column; gap: 24px; }
+
+    .hero-result {
+      text-align: center;
+      padding: 32px 24px;
+    }
+    .hero-result .label {
+      font-size: 14px;
+      color: #9aa0b0;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+    .hero-result .price {
+      font-size: 52px;
+      font-weight: 800;
+      color: #6c63ff;
+      line-height: 1.1;
+    }
+    .hero-result .sub {
+      font-size: 14px;
+      color: #9aa0b0;
+      margin-top: 8px;
+    }
+
+    .tier-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .tier-card {
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      border: 1px solid;
+    }
+    .tier-card.conservative {
+      background: rgba(34, 197, 94, 0.08);
+      border-color: rgba(34, 197, 94, 0.3);
+    }
+    .tier-card.recommended {
+      background: rgba(234, 179, 8, 0.08);
+      border-color: rgba(234, 179, 8, 0.3);
+    }
+    .tier-card.stretch {
+      background: rgba(249, 115, 22, 0.08);
+      border-color: rgba(249, 115, 22, 0.3);
+    }
+    .tier-card .tier-label {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+    .tier-card.conservative .tier-label { color: #22c55e; }
+    .tier-card.recommended .tier-label { color: #eab308; }
+    .tier-card.stretch .tier-label { color: #f97316; }
+
+    .tier-card .tier-price {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .tier-card.conservative .tier-price { color: #22c55e; }
+    .tier-card.recommended .tier-price { color: #eab308; }
+    .tier-card.stretch .tier-price { color: #f97316; }
+
+    .tier-card .tier-rule {
+      font-size: 12px;
+      color: #9aa0b0;
+      margin-bottom: 12px;
+    }
+    .tier-card .tier-monthly {
+      font-size: 13px;
+      color: #9aa0b0;
+      border-top: 1px solid #2e3345;
+      padding-top: 10px;
+      margin-top: 4px;
+    }
+    .tier-card .tier-monthly strong {
+      display: block;
+      font-size: 18px;
+      color: #e8eaed;
+      margin-top: 2px;
+    }
+
+    /* DTI gauge */
+    .dti-section { padding: 20px 24px; }
+    .dti-section h3 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+    .dti-bar-wrap { margin-bottom: 12px; }
+    .dti-bar-bg {
+      height: 28px;
+      border-radius: 14px;
+      overflow: hidden;
+      display: flex;
+      position: relative;
+    }
+    .dti-zone {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    .dti-zone.safe { background: rgba(34, 197, 94, 0.25); color: #22c55e; flex: 28; }
+    .dti-zone.moderate { background: rgba(234, 179, 8, 0.25); color: #eab308; flex: 8; }
+    .dti-zone.risky { background: rgba(249, 115, 22, 0.25); color: #f97316; flex: 14; }
+    .dti-zone.danger { background: rgba(239, 68, 68, 0.2); color: #ef4444; flex: 50; }
+
+    .dti-marker {
+      position: absolute;
+      top: -4px;
+      width: 3px;
+      height: 36px;
+      background: #e8eaed;
+      border-radius: 2px;
+      transition: left 0.3s ease;
+      z-index: 2;
+    }
+    .dti-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: #9aa0b0;
+      margin-top: 6px;
+    }
+    .dti-values {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .dti-val-box {
+      background: #0f1117;
+      border-radius: 8px;
+      padding: 12px;
+      text-align: center;
+    }
+    .dti-val-box .dti-val-label {
+      font-size: 11px;
+      color: #9aa0b0;
+      margin-bottom: 4px;
+    }
+    .dti-val-box .dti-val-num {
+      font-size: 22px;
+      font-weight: 700;
+    }
+    .dti-val-box .dti-val-num.safe { color: #22c55e; }
+    .dti-val-box .dti-val-num.moderate { color: #eab308; }
+    .dti-val-box .dti-val-num.risky { color: #f97316; }
+    .dti-val-box .dti-val-num.danger { color: #ef4444; }
+
+    /* Breakdown table */
+    .breakdown-section { padding: 20px 24px; }
+    .breakdown-section h3 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+    .breakdown-tabs {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 16px;
+      background: #0f1117;
+      border-radius: 8px;
+      padding: 3px;
+    }
+    .breakdown-tab {
+      flex: 1;
+      padding: 8px;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      color: #9aa0b0;
+      transition: all 0.2s;
+    }
+    .breakdown-tab.active {
+      background: #2e3345;
+      color: #e8eaed;
+    }
+    .breakdown-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid #2e334533;
+      font-size: 14px;
+    }
+    .breakdown-row:last-child { border-bottom: none; }
+    .breakdown-row .br-label { color: #9aa0b0; }
+    .breakdown-row .br-value { font-weight: 600; }
+    .breakdown-row .br-bar {
+      height: 4px;
+      border-radius: 2px;
+      margin-top: 6px;
+    }
+    .breakdown-total {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0 0;
+      border-top: 2px solid #2e3345;
+      font-size: 16px;
+      font-weight: 700;
+      margin-top: 4px;
+    }
+
+    /* Stacked bar chart for breakdown */
+    .stacked-bar-wrap { margin-bottom: 20px; }
+    .stacked-bar {
+      height: 20px;
+      border-radius: 10px;
+      overflow: hidden;
+      display: flex;
+    }
+    .stacked-bar span {
+      transition: flex 0.3s ease;
+      min-width: 2px;
+    }
+    .stacked-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 8px;
+    }
+    .stacked-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: #9aa0b0;
+    }
+    .stacked-legend-item .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .color-pi { background: #6c63ff; }
+    .color-tax { background: #22c55e; }
+    .color-ins { background: #eab308; }
+    .color-pmi { background: #f97316; }
+    .color-hoa { background: #ef4444; }
+
+    /* Rules section */
+    .rules-section {
+      margin-bottom: 48px;
+    }
+    .rules-section h2 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .rules-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .rule-card {
+      background: #1a1d27;
+      border: 1px solid #2e3345;
+      border-radius: 12px;
+      padding: 24px;
+    }
+    .rule-card h3 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #6c63ff;
+    }
+    .rule-card p {
+      font-size: 14px;
+      color: #9aa0b0;
+      line-height: 1.7;
+    }
+    .rule-card .rule-example {
+      margin-top: 12px;
+      background: #0f1117;
+      border-radius: 8px;
+      padding: 12px;
+      font-size: 13px;
+      color: #e8eaed;
+    }
+
+    footer {
+      border-top: 1px solid #2e3345;
+      padding: 24px 0;
+      text-align: center;
+      color: #9aa0b0;
+      font-size: 13px;
+    }
+
+    /* Responsive */
+    @media (max-width: 860px) {
+      .main-grid {
+        grid-template-columns: 1fr;
+      }
+      .tier-cards {
+        grid-template-columns: 1fr;
+      }
+      .rules-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero-result .price {
+        font-size: 40px;
+      }
+    }
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 24px; }
+      .hero-result .price { font-size: 32px; }
+      .tier-card .tier-price { font-size: 22px; }
+      .form-row { grid-template-columns: 1fr; }
+      .dti-values { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <a href="/" class="logo">Automated Insights</a>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/consulting/">Consulting</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <h1>How Much House Can I Afford?</h1>
+      <p>Enter your financial details to find your maximum home price, see monthly payment breakdowns, and understand how lenders evaluate your budget.</p>
+    </div>
+  </section>
+
+  <div class="container">
+    <div class="main-grid">
+      <!-- Inputs -->
+      <div class="card" id="inputs-card">
+        <h2>Your Finances</h2>
+
+        <div class="form-group">
+          <label for="income">Annual Gross Income</label>
+          <div class="input-wrap">
+            <span class="prefix">$</span>
+            <input type="number" id="income" class="has-prefix" value="85000" min="0" step="1000">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="debts">Monthly Debt Payments</label>
+          <div class="input-wrap">
+            <span class="prefix">$</span>
+            <input type="number" id="debts" class="has-prefix" value="400" min="0" step="50">
+          </div>
+          <div class="hint">Car loans, student loans, credit cards, etc.</div>
+        </div>
+
+        <div class="form-group">
+          <label for="downpayment">Down Payment</label>
+          <div class="input-wrap">
+            <span class="prefix">$</span>
+            <input type="number" id="downpayment" class="has-prefix" value="40000" min="0" step="1000">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="rate">Interest Rate</label>
+            <div class="input-wrap">
+              <input type="number" id="rate" class="has-suffix" value="6.75" min="0" max="15" step="0.125">
+              <span class="suffix">%</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="term">Loan Term</label>
+            <select id="term">
+              <option value="30" selected>30 years</option>
+              <option value="15">15 years</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="taxrate">Property Tax Rate</label>
+            <div class="input-wrap">
+              <input type="number" id="taxrate" class="has-suffix" value="1.1" min="0" max="5" step="0.1">
+              <span class="suffix">%</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="insurance">Homeowners Ins.</label>
+            <div class="input-wrap">
+              <span class="prefix">$</span>
+              <input type="number" id="insurance" class="has-prefix has-suffix" value="1800" min="0" step="100">
+              <span class="suffix">/yr</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="hoa">HOA Dues</label>
+            <div class="input-wrap">
+              <span class="prefix">$</span>
+              <input type="number" id="hoa" class="has-prefix has-suffix" value="0" min="0" step="25">
+              <span class="suffix">/mo</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="pmirate">PMI Rate</label>
+            <div class="input-wrap">
+              <input type="number" id="pmirate" class="has-suffix" value="0.5" min="0" max="3" step="0.1">
+              <span class="suffix">%</span>
+            </div>
+            <div class="hint">Applied if &lt;20% down</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results -->
+      <div class="results-area">
+        <div class="card hero-result">
+          <div class="label">Maximum Home Price</div>
+          <div class="price" id="hero-price">$0</div>
+          <div class="sub">Based on the 28% front-end DTI rule</div>
+        </div>
+
+        <div class="tier-cards">
+          <div class="tier-card conservative">
+            <div class="tier-label">Conservative</div>
+            <div class="tier-price" id="tier-conservative">$0</div>
+            <div class="tier-rule">25% of gross income</div>
+            <div class="tier-monthly">Monthly payment<strong id="tier-conservative-mo">$0</strong></div>
+          </div>
+          <div class="tier-card recommended">
+            <div class="tier-label">Recommended</div>
+            <div class="tier-price" id="tier-recommended">$0</div>
+            <div class="tier-rule">28% front-end DTI</div>
+            <div class="tier-monthly">Monthly payment<strong id="tier-recommended-mo">$0</strong></div>
+          </div>
+          <div class="tier-card stretch">
+            <div class="tier-label">Stretch</div>
+            <div class="tier-price" id="tier-stretch">$0</div>
+            <div class="tier-rule">36% back-end DTI</div>
+            <div class="tier-monthly">Monthly payment<strong id="tier-stretch-mo">$0</strong></div>
+          </div>
+        </div>
+
+        <!-- DTI Gauge -->
+        <div class="card dti-section">
+          <h3>Debt-to-Income Ratio</h3>
+          <div class="dti-bar-wrap">
+            <div class="dti-bar-bg" style="position:relative">
+              <div class="dti-zone safe">Safe</div>
+              <div class="dti-zone moderate">OK</div>
+              <div class="dti-zone risky">Risky</div>
+              <div class="dti-zone danger">Danger</div>
+              <div class="dti-marker" id="dti-marker-front"></div>
+              <div class="dti-marker" id="dti-marker-back" style="background:#f97316"></div>
+            </div>
+            <div class="dti-labels">
+              <span>0%</span>
+              <span>28%</span>
+              <span>36%</span>
+              <span>50%</span>
+              <span>100%</span>
+            </div>
+          </div>
+          <div class="dti-values">
+            <div class="dti-val-box">
+              <div class="dti-val-label">Front-End DTI (housing only)</div>
+              <div class="dti-val-num" id="dti-front">0%</div>
+            </div>
+            <div class="dti-val-box">
+              <div class="dti-val-label">Back-End DTI (housing + debts)</div>
+              <div class="dti-val-num" id="dti-back">0%</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Payment Breakdown -->
+        <div class="card breakdown-section">
+          <h3>Monthly Payment Breakdown</h3>
+          <div class="breakdown-tabs">
+            <button class="breakdown-tab active" data-tier="conservative">Conservative</button>
+            <button class="breakdown-tab" data-tier="recommended">Recommended</button>
+            <button class="breakdown-tab" data-tier="stretch">Stretch</button>
+          </div>
+          <div class="stacked-bar-wrap">
+            <div class="stacked-bar" id="stacked-bar"></div>
+            <div class="stacked-legend">
+              <div class="stacked-legend-item"><span class="dot color-pi"></span>Principal & Interest</div>
+              <div class="stacked-legend-item"><span class="dot color-tax"></span>Property Tax</div>
+              <div class="stacked-legend-item"><span class="dot color-ins"></span>Insurance</div>
+              <div class="stacked-legend-item" id="legend-pmi"><span class="dot color-pmi"></span>PMI</div>
+              <div class="stacked-legend-item" id="legend-hoa" style="display:none"><span class="dot color-hoa"></span>HOA</div>
+            </div>
+          </div>
+          <div id="breakdown-rows"></div>
+          <div class="breakdown-total">
+            <span>Total Monthly</span>
+            <span id="breakdown-total-val">$0</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rules of Thumb -->
+    <section class="rules-section">
+      <h2>Rules of Thumb for Home Buying</h2>
+      <div class="rules-grid">
+        <div class="rule-card">
+          <h3>The 28/36 Rule</h3>
+          <p>Most lenders want your housing costs (mortgage, taxes, insurance) to stay under <strong>28%</strong> of your gross monthly income (front-end ratio), and your total debt payments under <strong>36%</strong> (back-end ratio).</p>
+          <div class="rule-example">
+            On $85,000/yr income:<br>
+            28% = $1,983/mo max housing<br>
+            36% = $2,550/mo max total debt
+          </div>
+        </div>
+        <div class="rule-card">
+          <h3>The 3x Income Rule</h3>
+          <p>A simple guideline: your home price should be roughly <strong>3 times your annual gross income</strong>. This is a rough starting point -- your actual affordability depends on debts, rates, and down payment.</p>
+          <div class="rule-example">
+            On $85,000/yr income:<br>
+            3x = $255,000 home price<br>
+            Conservative but safe target
+          </div>
+        </div>
+        <div class="rule-card">
+          <h3>The 20% Down Payment</h3>
+          <p>Putting <strong>20% down</strong> lets you avoid Private Mortgage Insurance (PMI), which typically costs 0.3-1.5% of the loan annually. Less than 20% down means higher monthly payments.</p>
+          <div class="rule-example">
+            On a $300,000 home:<br>
+            20% down = $60,000<br>
+            PMI savings: ~$100-375/mo
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Automated Insights LLC. For informational purposes only -- not financial advice.</p>
+    </div>
+  </footer>
+
+  <script>
+    (function() {
+      const $ = id => document.getElementById(id);
+
+      const inputs = ['income', 'debts', 'downpayment', 'rate', 'term', 'taxrate', 'insurance', 'hoa', 'pmirate'];
+      let activeTier = 'recommended';
+
+      function getVals() {
+        return {
+          income: parseFloat($('income').value) || 0,
+          debts: parseFloat($('debts').value) || 0,
+          downpayment: parseFloat($('downpayment').value) || 0,
+          rate: (parseFloat($('rate').value) || 0) / 100,
+          term: parseInt($('term').value) || 30,
+          taxrate: (parseFloat($('taxrate').value) || 0) / 100,
+          insurance: parseFloat($('insurance').value) || 0,
+          hoa: parseFloat($('hoa').value) || 0,
+          pmirate: (parseFloat($('pmirate').value) || 0) / 100,
+        };
+      }
+
+      function fmt(n) {
+        return '$' + Math.round(n).toLocaleString('en-US');
+      }
+
+      function monthlyPI(loanAmount, annualRate, years) {
+        if (loanAmount <= 0) { return 0; }
+        if (annualRate <= 0) { return loanAmount / (years * 12); }
+        const r = annualRate / 12;
+        const n = years * 12;
+        return loanAmount * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+      }
+
+      // Given a max monthly housing payment, solve for home price
+      function solveHomePrice(maxMonthly, v) {
+        // Monthly housing = PI + tax + insurance + PMI + HOA
+        // PI = f(loanAmount, rate, term); loanAmount = homePrice - downpayment
+        // tax = homePrice * taxrate / 12
+        // insurance = v.insurance / 12
+        // PMI = if downpayment < 20% of homePrice then loanAmount * pmirate / 12 else 0
+        // HOA = v.hoa
+
+        // Available for PI + tax + PMI = maxMonthly - insurance/12 - hoa
+        const fixedMonthly = v.insurance / 12 + v.hoa;
+        const available = maxMonthly - fixedMonthly;
+        if (available <= 0) { return 0; }
+
+        // Iterative solver since PMI depends on LTV which depends on home price
+        let lo = 0, hi = 5000000;
+        for (let i = 0; i < 100; i++) {
+          const mid = (lo + hi) / 2;
+          const loan = Math.max(mid - v.downpayment, 0);
+          const pi = monthlyPI(loan, v.rate, v.term);
+          const tax = mid * v.taxrate / 12;
+          const ltv = mid > 0 ? loan / mid : 0;
+          const pmi = ltv > 0.8 ? loan * v.pmirate / 12 : 0;
+          const total = pi + tax + pmi;
+          if (total < available) {
+            lo = mid;
+          } else {
+            hi = mid;
+          }
+        }
+        return Math.max(Math.round(lo), 0);
+      }
+
+      function getBreakdown(homePrice, v) {
+        const loan = Math.max(homePrice - v.downpayment, 0);
+        const pi = monthlyPI(loan, v.rate, v.term);
+        const tax = homePrice * v.taxrate / 12;
+        const ins = v.insurance / 12;
+        const ltv = homePrice > 0 ? loan / homePrice : 0;
+        const pmi = ltv > 0.8 ? loan * v.pmirate / 12 : 0;
+        const hoa = v.hoa;
+        const total = pi + tax + ins + pmi + hoa;
+
+        // Split PI into principal and interest for first month
+        const monthlyRate = v.rate / 12;
+        const interestFirst = loan * monthlyRate;
+        const principalFirst = pi - interestFirst;
+
+        return { pi, tax, ins, pmi, hoa, total, principalFirst, interestFirst, loan };
+      }
+
+      function dtiClass(val) {
+        if (val <= 28) { return 'safe'; }
+        if (val <= 36) { return 'moderate'; }
+        if (val <= 50) { return 'risky'; }
+        return 'danger';
+      }
+
+      function calculate() {
+        const v = getVals();
+        const monthlyIncome = v.income / 12;
+        if (monthlyIncome <= 0) {
+          $('hero-price').textContent = '$0';
+          $('tier-conservative').textContent = '$0';
+          $('tier-recommended').textContent = '$0';
+          $('tier-stretch').textContent = '$0';
+          return;
+        }
+
+        // Conservative: 25% front-end
+        const maxHousing25 = monthlyIncome * 0.25;
+        const conservative = solveHomePrice(maxHousing25, v);
+
+        // Recommended: 28% front-end
+        const maxHousing28 = monthlyIncome * 0.28;
+        const recommended = solveHomePrice(maxHousing28, v);
+
+        // Stretch: 36% back-end (total housing + debts <= 36%)
+        const maxHousing36 = monthlyIncome * 0.36 - v.debts;
+        const stretch = solveHomePrice(Math.max(maxHousing36, 0), v);
+
+        $('hero-price').textContent = fmt(recommended);
+        $('tier-conservative').textContent = fmt(conservative);
+        $('tier-recommended').textContent = fmt(recommended);
+        $('tier-stretch').textContent = fmt(stretch);
+
+        // Monthly payments for each tier
+        const bdCon = getBreakdown(conservative, v);
+        const bdRec = getBreakdown(recommended, v);
+        const bdStr = getBreakdown(stretch, v);
+
+        $('tier-conservative-mo').textContent = fmt(bdCon.total);
+        $('tier-recommended-mo').textContent = fmt(bdRec.total);
+        $('tier-stretch-mo').textContent = fmt(bdStr.total);
+
+        // DTI at recommended level
+        const frontDTI = monthlyIncome > 0 ? (bdRec.total / monthlyIncome) * 100 : 0;
+        const backDTI = monthlyIncome > 0 ? ((bdRec.total + v.debts) / monthlyIncome) * 100 : 0;
+
+        $('dti-front').textContent = frontDTI.toFixed(1) + '%';
+        $('dti-back').textContent = backDTI.toFixed(1) + '%';
+        $('dti-front').className = 'dti-val-num ' + dtiClass(frontDTI);
+        $('dti-back').className = 'dti-val-num ' + dtiClass(backDTI);
+
+        // Position markers (bar covers 0-100%)
+        const frontPos = Math.min(frontDTI, 100);
+        const backPos = Math.min(backDTI, 100);
+        $('dti-marker-front').style.left = frontPos + '%';
+        $('dti-marker-back').style.left = backPos + '%';
+
+        // Render breakdown for active tier
+        renderBreakdown(activeTier, v, { conservative, recommended, stretch });
+      }
+
+      function renderBreakdown(tier, v, prices) {
+        const price = prices[tier];
+        const bd = getBreakdown(price, v);
+
+        // Stacked bar
+        const parts = [
+          { val: bd.pi, cls: 'color-pi' },
+          { val: bd.tax, cls: 'color-tax' },
+          { val: bd.ins, cls: 'color-ins' },
+        ];
+        if (bd.pmi > 0) { parts.push({ val: bd.pmi, cls: 'color-pmi' }); }
+        if (bd.hoa > 0) { parts.push({ val: bd.hoa, cls: 'color-hoa' }); }
+
+        $('stacked-bar').innerHTML = parts.map(p =>
+          '<span class="' + p.cls + '" style="flex:' + p.val + '"></span>'
+        ).join('');
+
+        $('legend-pmi').style.display = bd.pmi > 0 ? '' : 'none';
+        $('legend-hoa').style.display = bd.hoa > 0 ? '' : 'none';
+
+        // Rows
+        const rows = [
+          { label: 'Principal (first month)', value: bd.principalFirst },
+          { label: 'Interest (first month)', value: bd.interestFirst },
+          { label: 'Property Tax', value: bd.tax },
+          { label: 'Homeowners Insurance', value: bd.ins },
+        ];
+        if (bd.pmi > 0) { rows.push({ label: 'PMI', value: bd.pmi }); }
+        if (bd.hoa > 0) { rows.push({ label: 'HOA', value: bd.hoa }); }
+
+        $('breakdown-rows').innerHTML = rows.map(r =>
+          '<div class="breakdown-row"><span class="br-label">' + r.label + '</span><span class="br-value">' + fmt(r.value) + '</span></div>'
+        ).join('');
+
+        $('breakdown-total-val').textContent = fmt(bd.total);
+      }
+
+      // Tab switching
+      document.querySelectorAll('.breakdown-tab').forEach(tab => {
+        tab.addEventListener('click', function() {
+          document.querySelectorAll('.breakdown-tab').forEach(t => t.classList.remove('active'));
+          this.classList.add('active');
+          activeTier = this.dataset.tier;
+          calculate();
+        });
+      });
+
+      // Bind inputs
+      inputs.forEach(id => {
+        $(id).addEventListener('input', calculate);
+        $(id).addEventListener('change', calculate);
+      });
+
+      // Initial calculation
+      calculate();
+    })();
+  </script>
+</body>
+</html>

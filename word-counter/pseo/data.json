@@ -1,0 +1,495 @@
+[
+    {
+        "slug": "how-many-pages-is-250-words",
+        "title": "How Many Pages Is 250 Words?",
+        "question": "How many pages is 250 words?",
+        "answer": "250 words is approximately 0.5 pages single-spaced or 1 page double-spaced, using a standard 12pt font like Times New Roman or Arial with 1-inch margins.",
+        "words": 250,
+        "pages_single": 0.5,
+        "pages_double": 1,
+        "type": "words-to-pages"
+    },
+    {
+        "slug": "how-many-pages-is-500-words",
+        "title": "How Many Pages Is 500 Words?",
+        "question": "How many pages is 500 words?",
+        "answer": "500 words is approximately 1 page single-spaced or 2 pages double-spaced. This is a common length for short essays, blog posts, and college application responses.",
+        "words": 500,
+        "pages_single": 1,
+        "pages_double": 2,
+        "type": "words-to-pages"
+    },
+    {
+        "slug": "how-many-pages-is-750-words",
+        "title": "How Many Pages Is 750 Words?",
+        "question": "How many pages is 750 words?",
+        "answer": "750 words is approximately 1.5 pages single-spaced or 3 pages double-spaced. This is a typical length for opinion columns and short articles.",
+        "words": 750,
+        "pages_single": 1.5,
+        "pages_double": 3,
+        "type": "words-to-pages"
+    },
+    {
+        "slug": "how-many-pages-is-1000-words",
+        "title": "How Many Pages Is 1,000 Words?",
+        "question": "How many pages is 1,000 words?",
+        "answer": "1,000 words is approximately 2 pages single-spaced or 4 pages double-spaced. This is a standard length for blog posts, short essays, and news articles.",
+        "words": 1000,
+        "pages_single": 2,
+        "pages_double": 4,
+        "type": "words-to-pages"
+    },
+    {
+        "slug": "how-many-pages-is-1500-words",
+        "title": "How Many Pages Is 1,500 Words?",
+        "question": "How many pages is 1,500 words?",
+        "answer": "1,500 words is approximately 3 pages single-spaced or 6 pages double-spaced. This is a common length for in-depth blog posts and short research papers.",
+        "words": 1500,
+        "pages_single": 3,
+        "pages_double": 6,
+        "type": "words-to-pages"
+    },
+    {
+        "slug": "how-many-pages-is-2000-words",
+        "title": "How Many Pages Is 2,000 Words?",
+        "question": "How many pages is 2,000 words?",
+        "answer": "2,000 words is approximately 4 pages single-spaced or 8 pages double-spaced. This is typical for college essays, feature articles, and detailed blog posts.",
+        "words": 2000,
+        "pages_single": 4,
+        "pages_double": 8,
+        "type": "words-to-pages"
+    },
+    {
+        "slug": "how-many-pages-is-2500-words",
+        "title": "How Many Pages Is 2,500 Words?",
+        "question": "How many pages is 2,500 words?",
+        "answer": "2,500 words is approximately 5 pages single-spaced or 10 pages double-spaced. This is a common length for undergraduate research papers and long-form articles.",
+        "words": 2500,
+        "pages_single": 5,
+        "pages_double": 10,
+        "type": "words-to-pages"
+    },
+    {
+        "slug": "how-many-pages-is-3000-words",
+        "title": "How Many Pages Is 3,000 Words?",
+        "question": "How many pages is 3,000 words?",
+        "answer": "3,000 words is approximately 6 pages single-spaced or 12 pages double-spaced. This length is common for academic papers, detailed reports, and long-form journalism.",
+        "words": 3000,
+        "pages_single": 6,
+        "pages_double": 12,
+        "type": "words-to-pages"
+    },
+    {
+        "slug": "how-many-pages-is-4000-words",
+        "title": "How Many Pages Is 4,000 Words?",
+        "question": "How many pages is 4,000 words?",
+        "answer": "4,000 words is approximately 8 pages single-spaced or 16 pages double-spaced. This is typical for detailed academic papers and comprehensive guides.",
+        "words": 4000,
+        "pages_single": 8,
+        "pages_double": 16,
+        "type": "words-to-pages"
+    },
+    {
+        "slug": "how-many-pages-is-5000-words",
+        "title": "How Many Pages Is 5,000 Words?",
+        "question": "How many pages is 5,000 words?",
+        "answer": "5,000 words is approximately 10 pages single-spaced or 20 pages double-spaced. This length is common for graduate-level research papers and in-depth reports.",
+        "words": 5000,
+        "pages_single": 10,
+        "pages_double": 20,
+        "type": "words-to-pages"
+    },
+    {
+        "slug": "how-many-pages-is-7500-words",
+        "title": "How Many Pages Is 7,500 Words?",
+        "question": "How many pages is 7,500 words?",
+        "answer": "7,500 words is approximately 15 pages single-spaced or 30 pages double-spaced. This is typical for journal articles, thesis chapters, and long reports.",
+        "words": 7500,
+        "pages_single": 15,
+        "pages_double": 30,
+        "type": "words-to-pages"
+    },
+    {
+        "slug": "how-many-pages-is-10000-words",
+        "title": "How Many Pages Is 10,000 Words?",
+        "question": "How many pages is 10,000 words?",
+        "answer": "10,000 words is approximately 20 pages single-spaced or 40 pages double-spaced. This is typical for dissertations chapters, whitepapers, and comprehensive academic papers.",
+        "words": 10000,
+        "pages_single": 20,
+        "pages_double": 40,
+        "type": "words-to-pages"
+    },
+    {
+        "slug": "how-many-words-is-1-page",
+        "title": "How Many Words Is 1 Page?",
+        "question": "How many words is 1 page?",
+        "answer": "1 page contains approximately 500 words single-spaced or 250 words double-spaced, using a standard 12pt font with 1-inch margins.",
+        "pages": 1,
+        "words_single": 500,
+        "words_double": 250,
+        "type": "pages-to-words"
+    },
+    {
+        "slug": "how-many-words-is-2-pages",
+        "title": "How Many Words Is 2 Pages?",
+        "question": "How many words is 2 pages?",
+        "answer": "2 pages contain approximately 1,000 words single-spaced or 500 words double-spaced.",
+        "pages": 2,
+        "words_single": 1000,
+        "words_double": 500,
+        "type": "pages-to-words"
+    },
+    {
+        "slug": "how-many-words-is-3-pages",
+        "title": "How Many Words Is 3 Pages?",
+        "question": "How many words is 3 pages?",
+        "answer": "3 pages contain approximately 1,500 words single-spaced or 750 words double-spaced.",
+        "pages": 3,
+        "words_single": 1500,
+        "words_double": 750,
+        "type": "pages-to-words"
+    },
+    {
+        "slug": "how-many-words-is-5-pages",
+        "title": "How Many Words Is 5 Pages?",
+        "question": "How many words is 5 pages?",
+        "answer": "5 pages contain approximately 2,500 words single-spaced or 1,250 words double-spaced. This is a common assignment length for college essays.",
+        "pages": 5,
+        "words_single": 2500,
+        "words_double": 1250,
+        "type": "pages-to-words"
+    },
+    {
+        "slug": "how-many-words-is-10-pages",
+        "title": "How Many Words Is 10 Pages?",
+        "question": "How many words is 10 pages?",
+        "answer": "10 pages contain approximately 5,000 words single-spaced or 2,500 words double-spaced. This is typical for research papers and term papers.",
+        "pages": 10,
+        "words_single": 5000,
+        "words_double": 2500,
+        "type": "pages-to-words"
+    },
+    {
+        "slug": "how-many-words-is-15-pages",
+        "title": "How Many Words Is 15 Pages?",
+        "question": "How many words is 15 pages?",
+        "answer": "15 pages contain approximately 7,500 words single-spaced or 3,750 words double-spaced.",
+        "pages": 15,
+        "words_single": 7500,
+        "words_double": 3750,
+        "type": "pages-to-words"
+    },
+    {
+        "slug": "how-many-words-is-20-pages",
+        "title": "How Many Words Is 20 Pages?",
+        "question": "How many words is 20 pages?",
+        "answer": "20 pages contain approximately 10,000 words single-spaced or 5,000 words double-spaced. This length is common for thesis papers and long academic projects.",
+        "pages": 20,
+        "words_single": 10000,
+        "words_double": 5000,
+        "type": "pages-to-words"
+    },
+    {
+        "slug": "how-long-to-read-500-words",
+        "title": "How Long Does It Take to Read 500 Words?",
+        "question": "How long does it take to read 500 words?",
+        "answer": "It takes approximately 2 minutes to read 500 words at an average reading speed of 238 words per minute. Speaking 500 words aloud takes about 3 minutes and 20 seconds.",
+        "words": 500,
+        "reading_minutes": 2,
+        "speaking_minutes": 3.3,
+        "type": "reading-time"
+    },
+    {
+        "slug": "how-long-to-read-1000-words",
+        "title": "How Long Does It Take to Read 1,000 Words?",
+        "question": "How long does it take to read 1,000 words?",
+        "answer": "It takes approximately 4 minutes to read 1,000 words at an average reading speed of 238 words per minute. Speaking 1,000 words aloud takes about 6 minutes and 40 seconds.",
+        "words": 1000,
+        "reading_minutes": 4,
+        "speaking_minutes": 6.7,
+        "type": "reading-time"
+    },
+    {
+        "slug": "how-long-to-read-1500-words",
+        "title": "How Long Does It Take to Read 1,500 Words?",
+        "question": "How long does it take to read 1,500 words?",
+        "answer": "It takes approximately 6 minutes to read 1,500 words at an average reading speed of 238 words per minute. Speaking 1,500 words aloud takes about 10 minutes.",
+        "words": 1500,
+        "reading_minutes": 6,
+        "speaking_minutes": 10,
+        "type": "reading-time"
+    },
+    {
+        "slug": "how-long-to-read-2000-words",
+        "title": "How Long Does It Take to Read 2,000 Words?",
+        "question": "How long does it take to read 2,000 words?",
+        "answer": "It takes approximately 8 minutes to read 2,000 words at an average reading speed of 238 words per minute. Speaking 2,000 words aloud takes about 13 minutes and 20 seconds.",
+        "words": 2000,
+        "reading_minutes": 8,
+        "speaking_minutes": 13.3,
+        "type": "reading-time"
+    },
+    {
+        "slug": "how-long-to-read-3000-words",
+        "title": "How Long Does It Take to Read 3,000 Words?",
+        "question": "How long does it take to read 3,000 words?",
+        "answer": "It takes approximately 13 minutes to read 3,000 words at an average reading speed of 238 words per minute. Speaking 3,000 words aloud takes about 20 minutes.",
+        "words": 3000,
+        "reading_minutes": 13,
+        "speaking_minutes": 20,
+        "type": "reading-time"
+    },
+    {
+        "slug": "how-long-to-read-5000-words",
+        "title": "How Long Does It Take to Read 5,000 Words?",
+        "question": "How long does it take to read 5,000 words?",
+        "answer": "It takes approximately 21 minutes to read 5,000 words at an average reading speed of 238 words per minute. Speaking 5,000 words aloud takes about 33 minutes.",
+        "words": 5000,
+        "reading_minutes": 21,
+        "speaking_minutes": 33,
+        "type": "reading-time"
+    },
+    {
+        "slug": "how-long-to-read-10000-words",
+        "title": "How Long Does It Take to Read 10,000 Words?",
+        "question": "How long does it take to read 10,000 words?",
+        "answer": "It takes approximately 42 minutes to read 10,000 words at an average reading speed of 238 words per minute. Speaking 10,000 words aloud takes about 67 minutes.",
+        "words": 10000,
+        "reading_minutes": 42,
+        "speaking_minutes": 67,
+        "type": "reading-time"
+    },
+    {
+        "slug": "how-long-is-a-1-minute-speech",
+        "title": "How Many Words Is a 1 Minute Speech?",
+        "question": "How many words is a 1 minute speech?",
+        "answer": "A 1 minute speech contains approximately 150 words at an average speaking pace. For a slower, more deliberate pace, aim for 120-130 words.",
+        "minutes": 1,
+        "words": 150,
+        "type": "speech-length"
+    },
+    {
+        "slug": "how-long-is-a-2-minute-speech",
+        "title": "How Many Words Is a 2 Minute Speech?",
+        "question": "How many words is a 2 minute speech?",
+        "answer": "A 2 minute speech contains approximately 300 words at an average speaking pace.",
+        "minutes": 2,
+        "words": 300,
+        "type": "speech-length"
+    },
+    {
+        "slug": "how-long-is-a-3-minute-speech",
+        "title": "How Many Words Is a 3 Minute Speech?",
+        "question": "How many words is a 3 minute speech?",
+        "answer": "A 3 minute speech contains approximately 450 words at an average speaking pace. This is a common length for class presentations and short talks.",
+        "minutes": 3,
+        "words": 450,
+        "type": "speech-length"
+    },
+    {
+        "slug": "how-long-is-a-5-minute-speech",
+        "title": "How Many Words Is a 5 Minute Speech?",
+        "question": "How many words is a 5 minute speech?",
+        "answer": "A 5 minute speech contains approximately 750 words at an average speaking pace. This is a standard length for many presentation formats.",
+        "minutes": 5,
+        "words": 750,
+        "type": "speech-length"
+    },
+    {
+        "slug": "how-long-is-a-10-minute-speech",
+        "title": "How Many Words Is a 10 Minute Speech?",
+        "question": "How many words is a 10 minute speech?",
+        "answer": "A 10 minute speech contains approximately 1,500 words at an average speaking pace. TED talks are typically 10-18 minutes long.",
+        "minutes": 10,
+        "words": 1500,
+        "type": "speech-length"
+    },
+    {
+        "slug": "how-long-is-a-15-minute-speech",
+        "title": "How Many Words Is a 15 Minute Speech?",
+        "question": "How many words is a 15 minute speech?",
+        "answer": "A 15 minute speech contains approximately 2,250 words at an average speaking pace.",
+        "minutes": 15,
+        "words": 2250,
+        "type": "speech-length"
+    },
+    {
+        "slug": "how-long-is-a-20-minute-speech",
+        "title": "How Many Words Is a 20 Minute Speech?",
+        "question": "How many words is a 20 minute speech?",
+        "answer": "A 20 minute speech contains approximately 3,000 words at an average speaking pace. This is close to the length of a standard TED talk.",
+        "minutes": 20,
+        "words": 3000,
+        "type": "speech-length"
+    },
+    {
+        "slug": "how-long-is-a-30-minute-speech",
+        "title": "How Many Words Is a 30 Minute Speech?",
+        "question": "How many words is a 30 minute speech?",
+        "answer": "A 30 minute speech contains approximately 4,500 words at an average speaking pace. This is a common length for keynote presentations and lectures.",
+        "minutes": 30,
+        "words": 4500,
+        "type": "speech-length"
+    },
+    {
+        "slug": "how-many-words-is-500-characters",
+        "title": "How Many Words Is 500 Characters?",
+        "question": "How many words is 500 characters?",
+        "answer": "500 characters is approximately 80-100 words, depending on word length. The average English word is about 5 characters, plus a space between each word.",
+        "characters": 500,
+        "words_approx": "80-100",
+        "type": "characters-to-words"
+    },
+    {
+        "slug": "how-many-words-is-1000-characters",
+        "title": "How Many Words Is 1,000 Characters?",
+        "question": "How many words is 1,000 characters?",
+        "answer": "1,000 characters is approximately 160-200 words. This is roughly the length of a short paragraph or a detailed social media post.",
+        "characters": 1000,
+        "words_approx": "160-200",
+        "type": "characters-to-words"
+    },
+    {
+        "slug": "how-many-words-is-1500-characters",
+        "title": "How Many Words Is 1,500 Characters?",
+        "question": "How many words is 1,500 characters?",
+        "answer": "1,500 characters is approximately 240-300 words. This is about the length of a short cover letter or product description.",
+        "characters": 1500,
+        "words_approx": "240-300",
+        "type": "characters-to-words"
+    },
+    {
+        "slug": "how-many-words-is-2000-characters",
+        "title": "How Many Words Is 2,000 Characters?",
+        "question": "How many words is 2,000 characters?",
+        "answer": "2,000 characters is approximately 320-400 words. Many online application forms and comment fields use this as a character limit.",
+        "characters": 2000,
+        "words_approx": "320-400",
+        "type": "characters-to-words"
+    },
+    {
+        "slug": "how-many-words-is-2500-characters",
+        "title": "How Many Words Is 2,500 Characters?",
+        "question": "How many words is 2,500 characters?",
+        "answer": "2,500 characters is approximately 400-500 words, or about one single-spaced page.",
+        "characters": 2500,
+        "words_approx": "400-500",
+        "type": "characters-to-words"
+    },
+    {
+        "slug": "how-many-words-is-3000-characters",
+        "title": "How Many Words Is 3,000 Characters?",
+        "question": "How many words is 3,000 characters?",
+        "answer": "3,000 characters is approximately 480-600 words. This is a common limit for personal statements and short essays.",
+        "characters": 3000,
+        "words_approx": "480-600",
+        "type": "characters-to-words"
+    },
+    {
+        "slug": "how-many-words-is-5000-characters",
+        "title": "How Many Words Is 5,000 Characters?",
+        "question": "How many words is 5,000 characters?",
+        "answer": "5,000 characters is approximately 800-1,000 words, or about 2 single-spaced pages.",
+        "characters": 5000,
+        "words_approx": "800-1,000",
+        "type": "characters-to-words"
+    },
+    {
+        "slug": "how-many-characters-is-100-words",
+        "title": "How Many Characters Is 100 Words?",
+        "question": "How many characters is 100 words?",
+        "answer": "100 words is approximately 500-600 characters including spaces, or 400-500 characters without spaces.",
+        "words": 100,
+        "chars_with_spaces": "500-600",
+        "chars_without_spaces": "400-500",
+        "type": "words-to-characters"
+    },
+    {
+        "slug": "how-many-characters-is-250-words",
+        "title": "How Many Characters Is 250 Words?",
+        "question": "How many characters is 250 words?",
+        "answer": "250 words is approximately 1,250-1,500 characters including spaces, or 1,000-1,250 characters without spaces.",
+        "words": 250,
+        "chars_with_spaces": "1,250-1,500",
+        "chars_without_spaces": "1,000-1,250",
+        "type": "words-to-characters"
+    },
+    {
+        "slug": "how-many-characters-is-500-words",
+        "title": "How Many Characters Is 500 Words?",
+        "question": "How many characters is 500 words?",
+        "answer": "500 words is approximately 2,500-3,000 characters including spaces, or 2,000-2,500 characters without spaces.",
+        "words": 500,
+        "chars_with_spaces": "2,500-3,000",
+        "chars_without_spaces": "2,000-2,500",
+        "type": "words-to-characters"
+    },
+    {
+        "slug": "how-many-characters-is-1000-words",
+        "title": "How Many Characters Is 1,000 Words?",
+        "question": "How many characters is 1,000 words?",
+        "answer": "1,000 words is approximately 5,000-6,000 characters including spaces, or 4,000-5,000 characters without spaces.",
+        "words": 1000,
+        "chars_with_spaces": "5,000-6,000",
+        "chars_without_spaces": "4,000-5,000",
+        "type": "words-to-characters"
+    },
+    {
+        "slug": "twitter-character-limit",
+        "title": "What Is the Twitter (X) Character Limit?",
+        "question": "What is the Twitter (X) character limit?",
+        "answer": "Twitter (now X) has a 280-character limit for standard posts, which is approximately 45-55 words. Premium subscribers can post up to 25,000 characters.",
+        "platform": "Twitter/X",
+        "limit": 280,
+        "words_approx": "45-55",
+        "type": "platform-limit"
+    },
+    {
+        "slug": "instagram-caption-character-limit",
+        "title": "What Is the Instagram Caption Character Limit?",
+        "question": "What is the Instagram caption character limit?",
+        "answer": "Instagram captions have a 2,200-character limit, which is approximately 350-440 words. However, only the first 125 characters are visible before the 'more' button.",
+        "platform": "Instagram",
+        "limit": 2200,
+        "words_approx": "350-440",
+        "type": "platform-limit"
+    },
+    {
+        "slug": "linkedin-post-character-limit",
+        "title": "What Is the LinkedIn Post Character Limit?",
+        "question": "What is the LinkedIn post character limit?",
+        "answer": "LinkedIn posts have a 3,000-character limit, which is approximately 480-600 words. The first 140 characters are shown before the 'see more' button.",
+        "platform": "LinkedIn",
+        "limit": 3000,
+        "words_approx": "480-600",
+        "type": "platform-limit"
+    },
+    {
+        "slug": "sms-character-limit",
+        "title": "What Is the SMS Text Message Character Limit?",
+        "question": "What is the SMS character limit?",
+        "answer": "A single SMS message has a 160-character limit (approximately 25-30 words). Messages longer than 160 characters are split into multiple segments of 153 characters each.",
+        "platform": "SMS",
+        "limit": 160,
+        "words_approx": "25-30",
+        "type": "platform-limit"
+    },
+    {
+        "slug": "how-many-words-in-a-novel",
+        "title": "How Many Words Are in a Novel?",
+        "question": "How many words are in a novel?",
+        "answer": "A typical novel contains 70,000-100,000 words (140-200 single-spaced pages). Young adult novels are usually 50,000-80,000 words, while epic fantasy or literary fiction can exceed 120,000 words.",
+        "min_words": 70000,
+        "max_words": 100000,
+        "type": "reference"
+    },
+    {
+        "slug": "how-many-words-in-a-short-story",
+        "title": "How Many Words Are in a Short Story?",
+        "question": "How many words are in a short story?",
+        "answer": "A short story typically contains 1,000-7,500 words. Flash fiction is under 1,000 words, while a novelette ranges from 7,500-17,500 words, and a novella from 17,500-40,000 words.",
+        "min_words": 1000,
+        "max_words": 7500,
+        "type": "reference"
+    }
+]

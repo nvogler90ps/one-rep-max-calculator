@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Auto Loan Calculator - Free Car Payment Calculator</title>
+  <meta name="description" content="Calculate your monthly car payment instantly. Compare auto loan terms from 24 to 84 months, view amortization schedules, and estimate total interest costs.">
+  <meta name="keywords" content="auto loan calculator, car payment calculator, car loan calculator, monthly payment calculator, auto financing, vehicle loan, car finance calculator">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="canonical" href="https://automated-insights.com/auto-loan-calc/">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Auto Loan Calculator - Free Car Payment Calculator">
+  <meta property="og:description" content="Calculate your monthly car payment instantly. Compare auto loan terms from 24 to 84 months side by side.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://automated-insights.com/auto-loan-calc/">
+  <meta property="og:site_name" content="Automated Insights">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Auto Loan Calculator",
+    "description": "Calculate your monthly car payment instantly. Compare auto loan terms from 24 to 84 months, view amortization schedules, and estimate total interest costs.",
+    "url": "https://automated-insights.com/auto-loan-calc/",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How is a monthly car payment calculated?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Monthly car payments use the standard amortization formula: M = P * [r(1+r)^n] / [(1+r)^n - 1], where P is the loan amount, r is the monthly interest rate, and n is the number of monthly payments. The loan amount equals vehicle price minus down payment and trade-in value, plus sales tax."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is a good interest rate for a car loan?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Good auto loan rates vary by credit score and whether the car is new or used. New car rates typically range from 4-7% APR for good credit, while used car rates are usually 1-2% higher. Excellent credit (750+) can qualify for rates as low as 3-5%."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Should I choose a longer or shorter loan term?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Shorter loan terms (24-48 months) have higher monthly payments but save significantly on total interest. Longer terms (60-84 months) lower monthly payments but cost more overall. Use the comparison table to see the tradeoff for your specific loan amount."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3434609691579834" crossorigin="anonymous"></script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0f1117;
+      color: #e8eaed;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 24px 16px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    header p {
+      color: #9aa0b0;
+      font-size: 0.95rem;
+    }
+
+    .card {
+      background: #1a1d27;
+      border: 1px solid #2e3345;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+
+    .card h2 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: #e8eaed;
+    }
+
+    .input-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .input-group.full-width {
+      grid-column: 1 / -1;
+    }
+
+    .input-group label {
+      font-size: 0.85rem;
+      color: #9aa0b0;
+      font-weight: 500;
+    }
+
+    .input-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-wrap .prefix,
+    .input-wrap .suffix {
+      position: absolute;
+      color: #9aa0b0;
+      font-size: 0.9rem;
+      pointer-events: none;
+    }
+
+    .input-wrap .prefix { left: 12px; }
+    .input-wrap .suffix { right: 12px; }
+
+    .input-wrap input {
+      width: 100%;
+      padding: 10px 12px;
+      background: #0f1117;
+      border: 1px solid #2e3345;
+      border-radius: 8px;
+      color: #e8eaed;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .input-wrap input:focus {
+      border-color: #6c63ff;
+    }
+
+    .input-wrap input.has-prefix { padding-left: 28px; }
+    .input-wrap input.has-suffix { padding-right: 32px; }
+
+    /* Term selector buttons */
+    .term-buttons {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .term-btn {
+      flex: 1;
+      min-width: 60px;
+      padding: 10px 8px;
+      background: #0f1117;
+      border: 1px solid #2e3345;
+      border-radius: 8px;
+      color: #9aa0b0;
+      font-size: 0.85rem;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s;
+      font-weight: 500;
+    }
+
+    .term-btn:hover {
+      border-color: #6c63ff;
+      color: #e8eaed;
+    }
+
+    .term-btn.active {
+      background: #6c63ff;
+      border-color: #6c63ff;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    /* Results */
+    .results-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+    }
+
+    .result-item {
+      text-align: center;
+    }
+
+    .result-item.primary {
+      grid-column: 1 / -1;
+      margin-bottom: 8px;
+    }
+
+    .result-item .label {
+      font-size: 0.8rem;
+      color: #9aa0b0;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+
+    .result-item .value {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #e8eaed;
+    }
+
+    .result-item.primary .value {
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: #6c63ff;
+      line-height: 1.1;
+    }
+
+    .result-item.primary .label {
+      font-size: 0.9rem;
+      margin-bottom: 8px;
+    }
+
+    /* Comparison table */
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    .comparison-table th,
+    .comparison-table td {
+      padding: 10px 12px;
+      text-align: right;
+      border-bottom: 1px solid #2e3345;
+    }
+
+    .comparison-table th {
+      color: #9aa0b0;
+      font-weight: 500;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .comparison-table th:first-child,
+    .comparison-table td:first-child {
+      text-align: left;
+    }
+
+    .comparison-table tr.active-row {
+      background: rgba(108, 99, 255, 0.1);
+    }
+
+    .comparison-table tr.active-row td {
+      color: #6c63ff;
+      font-weight: 600;
+    }
+
+    /* Amortization */
+    .amort-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      padding: 4px 0;
+      user-select: none;
+    }
+
+    .amort-toggle h2 {
+      margin-bottom: 0;
+    }
+
+    .amort-toggle .chevron {
+      font-size: 1.2rem;
+      color: #9aa0b0;
+      transition: transform 0.2s;
+    }
+
+    .amort-toggle .chevron.open {
+      transform: rotate(180deg);
+    }
+
+    .amort-body {
+      display: none;
+      margin-top: 16px;
+    }
+
+    .amort-body.show {
+      display: block;
+    }
+
+    .amort-table-wrap {
+      max-height: 400px;
+      overflow-y: auto;
+      border-radius: 8px;
+    }
+
+    .amort-table-wrap::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .amort-table-wrap::-webkit-scrollbar-thumb {
+      background: #2e3345;
+      border-radius: 3px;
+    }
+
+    .amort-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+
+    .amort-table th {
+      position: sticky;
+      top: 0;
+      background: #1a1d27;
+      color: #9aa0b0;
+      font-weight: 500;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 8px 10px;
+      text-align: right;
+      border-bottom: 1px solid #2e3345;
+    }
+
+    .amort-table th:first-child {
+      text-align: center;
+    }
+
+    .amort-table td {
+      padding: 7px 10px;
+      text-align: right;
+      border-bottom: 1px solid rgba(46, 51, 69, 0.5);
+      color: #e8eaed;
+    }
+
+    .amort-table td:first-child {
+      text-align: center;
+      color: #9aa0b0;
+    }
+
+    /* Tip box */
+    .tip-box {
+      background: rgba(108, 99, 255, 0.08);
+      border: 1px solid rgba(108, 99, 255, 0.25);
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin-bottom: 20px;
+    }
+
+    .tip-box .tip-title {
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 6px;
+      color: #6c63ff;
+    }
+
+    .tip-box p {
+      font-size: 0.85rem;
+      color: #9aa0b0;
+      line-height: 1.5;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 32px 0 16px;
+      color: #9aa0b0;
+      font-size: 0.8rem;
+    }
+
+    footer a {
+      color: #6c63ff;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .input-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .results-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .results-grid .result-item:last-child {
+        grid-column: 1 / -1;
+      }
+
+      .result-item.primary .value {
+        font-size: 2.2rem;
+      }
+
+      .term-btn {
+        min-width: 50px;
+        padding: 8px 4px;
+        font-size: 0.8rem;
+      }
+
+      .comparison-table {
+        font-size: 0.8rem;
+      }
+
+      .comparison-table th,
+      .comparison-table td {
+        padding: 8px 6px;
+      }
+
+      header h1 {
+        font-size: 1.4rem;
+      }
+
+      .card {
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Auto Loan Calculator</h1>
+      <p>Calculate your monthly car payment and compare loan terms side by side</p>
+    </header>
+
+    <!-- Inputs -->
+    <div class="card">
+      <h2>Loan Details</h2>
+      <div class="input-grid">
+        <div class="input-group">
+          <label for="price">Vehicle Price</label>
+          <div class="input-wrap">
+            <span class="prefix">$</span>
+            <input type="number" id="price" class="has-prefix" value="35000" min="0" step="500">
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="downPayment">Down Payment</label>
+          <div class="input-wrap">
+            <span class="prefix">$</span>
+            <input type="number" id="downPayment" class="has-prefix" value="5000" min="0" step="500">
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="tradeIn">Trade-in Value</label>
+          <div class="input-wrap">
+            <span class="prefix">$</span>
+            <input type="number" id="tradeIn" class="has-prefix" value="0" min="0" step="500">
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="taxRate">Sales Tax Rate</label>
+          <div class="input-wrap">
+            <input type="number" id="taxRate" class="has-suffix" value="7" min="0" max="15" step="0.25">
+            <span class="suffix">%</span>
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="apr">Interest Rate (APR)</label>
+          <div class="input-wrap">
+            <input type="number" id="apr" class="has-suffix" value="6.5" min="0" max="30" step="0.1">
+            <span class="suffix">%</span>
+          </div>
+        </div>
+        <div class="input-group full-width">
+          <label>Loan Term</label>
+          <div class="term-buttons" id="termButtons">
+            <button class="term-btn" data-months="24">24 mo</button>
+            <button class="term-btn" data-months="36">36 mo</button>
+            <button class="term-btn" data-months="48">48 mo</button>
+            <button class="term-btn active" data-months="60">60 mo</button>
+            <button class="term-btn" data-months="72">72 mo</button>
+            <button class="term-btn" data-months="84">84 mo</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Results -->
+    <div class="card">
+      <h2>Your Estimated Payment</h2>
+      <div class="results-grid">
+        <div class="result-item primary">
+          <div class="label">Monthly Payment</div>
+          <div class="value" id="monthlyPayment">$0</div>
+        </div>
+        <div class="result-item">
+          <div class="label">Amount Financed</div>
+          <div class="value" id="amountFinanced">$0</div>
+        </div>
+        <div class="result-item">
+          <div class="label">Total Interest</div>
+          <div class="value" id="totalInterest">$0</div>
+        </div>
+        <div class="result-item">
+          <div class="label">Total Cost</div>
+          <div class="value" id="totalCost">$0</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tip -->
+    <div class="tip-box">
+      <div class="tip-title">New vs Used Car Rates</div>
+      <p>Used car loans typically carry interest rates 1-2% higher than new car loans. If you are financing a used vehicle, consider adjusting the APR upward. For example, if new car rates average 6.5%, used car rates may be around 7.5-8.5%. Your actual rate depends on credit score, loan term, and lender.</p>
+    </div>
+
+    <!-- Comparison Table -->
+    <div class="card">
+      <h2>Term Comparison</h2>
+      <div style="overflow-x: auto;">
+        <table class="comparison-table" id="comparisonTable">
+          <thead>
+            <tr>
+              <th>Term</th>
+              <th>Monthly</th>
+              <th>Total Interest</th>
+              <th>Total Cost</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Amortization -->
+    <div class="card">
+      <div class="amort-toggle" id="amortToggle">
+        <h2>Amortization Schedule</h2>
+        <span class="chevron" id="amortChevron">&#9660;</span>
+      </div>
+      <div class="amort-body" id="amortBody">
+        <div class="amort-table-wrap">
+          <table class="amort-table" id="amortTable">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Payment</th>
+                <th>Principal</th>
+                <th>Interest</th>
+                <th>Balance</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>Free auto loan calculator by <a href="https://automated-insights.com/">Automated Insights</a></p>
+      <p style="margin-top: 4px;">For informational purposes only. Not financial advice.</p>
+    </footer>
+  </div>
+
+  <script>
+    (function() {
+      var selectedTerm = 60;
+      var terms = [24, 36, 48, 60, 72, 84];
+
+      var priceEl = document.getElementById('price');
+      var downEl = document.getElementById('downPayment');
+      var tradeEl = document.getElementById('tradeIn');
+      var taxEl = document.getElementById('taxRate');
+      var aprEl = document.getElementById('apr');
+      var termBtns = document.querySelectorAll('.term-btn');
+
+      function getVal(el) {
+        var v = parseFloat(el.value);
+        return isNaN(v) ? 0 : v;
+      }
+
+      function fmt(n) {
+        return '$' + n.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+      }
+
+      function fmtWhole(n) {
+        return '$' + Math.round(n).toLocaleString('en-US');
+      }
+
+      function calcPayment(principal, aprPct, months) {
+        if (principal <= 0) { return { monthly: 0, totalInterest: 0, totalPaid: 0 }; }
+        if (aprPct <= 0) {
+          var m = principal / months;
+          return { monthly: m, totalInterest: 0, totalPaid: principal };
+        }
+        var r = (aprPct / 100) / 12;
+        var factor = Math.pow(1 + r, months);
+        var monthly = principal * (r * factor) / (factor - 1);
+        var totalPaid = monthly * months;
+        return {
+          monthly: monthly,
+          totalInterest: totalPaid - principal,
+          totalPaid: totalPaid
+        };
+      }
+
+      function update() {
+        var price = getVal(priceEl);
+        var down = getVal(downEl);
+        var trade = getVal(tradeEl);
+        var taxRate = getVal(taxEl);
+        var apr = getVal(aprEl);
+
+        var taxableAmount = Math.max(price - trade, 0);
+        var tax = taxableAmount * (taxRate / 100);
+        var amountFinanced = Math.max(price - down - trade + tax, 0);
+
+        // Main result
+        var res = calcPayment(amountFinanced, apr, selectedTerm);
+        document.getElementById('monthlyPayment').textContent = fmt(res.monthly);
+        document.getElementById('amountFinanced').textContent = fmtWhole(amountFinanced);
+        document.getElementById('totalInterest').textContent = fmtWhole(res.totalInterest);
+        document.getElementById('totalCost').textContent = fmtWhole(price + res.totalInterest + tax);
+
+        // Comparison table
+        var tbody = document.querySelector('#comparisonTable tbody');
+        tbody.innerHTML = '';
+        for (var i = 0; i < terms.length; i++) {
+          var t = terms[i];
+          var c = calcPayment(amountFinanced, apr, t);
+          var tr = document.createElement('tr');
+          if (t === selectedTerm) { tr.className = 'active-row'; }
+          tr.innerHTML =
+            '<td>' + t + ' months</td>' +
+            '<td>' + fmt(c.monthly) + '</td>' +
+            '<td>' + fmtWhole(c.totalInterest) + '</td>' +
+            '<td>' + fmtWhole(c.totalPaid) + '</td>';
+          tbody.appendChild(tr);
+        }
+
+        // Amortization schedule
+        var abody = document.querySelector('#amortTable tbody');
+        abody.innerHTML = '';
+        if (amountFinanced > 0 && selectedTerm > 0) {
+          var balance = amountFinanced;
+          var r = (apr / 100) / 12;
+          for (var m = 1; m <= selectedTerm; m++) {
+            var interest = balance * r;
+            var principal = res.monthly - interest;
+            if (m === selectedTerm) {
+              principal = balance;
+            }
+            balance = Math.max(balance - principal, 0);
+            var row = document.createElement('tr');
+            row.innerHTML =
+              '<td>' + m + '</td>' +
+              '<td>' + fmt(res.monthly) + '</td>' +
+              '<td>' + fmt(principal) + '</td>' +
+              '<td>' + fmt(interest) + '</td>' +
+              '<td>' + fmt(balance) + '</td>';
+            abody.appendChild(row);
+          }
+        }
+      }
+
+      // Term button click
+      termBtns.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          termBtns.forEach(function(b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          selectedTerm = parseInt(btn.getAttribute('data-months'));
+          update();
+        });
+      });
+
+      // Input change listeners
+      [priceEl, downEl, tradeEl, taxEl, aprEl].forEach(function(el) {
+        el.addEventListener('input', update);
+      });
+
+      // Amortization toggle
+      document.getElementById('amortToggle').addEventListener('click', function() {
+        var body = document.getElementById('amortBody');
+        var chev = document.getElementById('amortChevron');
+        body.classList.toggle('show');
+        chev.classList.toggle('open');
+      });
+
+      // Initial calculation
+      update();
+    })();
+  </script>
+</body>
+</html>
