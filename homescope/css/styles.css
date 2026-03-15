@@ -136,12 +136,18 @@ header {
 #search-btn:hover { background: #7b73ff; }
 
 .search-results {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 2rem);
   max-width: 600px;
-  margin: 0.35rem auto 0;
+  margin-top: 0.35rem;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 8px;
   overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  z-index: 200;
 }
 
 .search-results.hidden { display: none; }
@@ -448,22 +454,24 @@ header {
   left: 0.75rem;
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 0.65rem 0.85rem;
+  border-radius: 6px;
+  padding: 0.4rem 0.6rem;
   z-index: 50;
-  min-width: 140px;
-  max-width: 220px;
+  min-width: 120px;
+  max-width: 180px;
+  opacity: 0.85;
+  font-size: 0.7rem;
 }
 
 .legend.hidden { display: none; }
 
 .legend-section-title {
-  font-size: 0.68rem;
+  font-size: 0.58rem;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.04em;
   color: var(--text-muted);
-  margin-bottom: 0.35rem;
-  margin-top: 0.5rem;
+  margin-bottom: 0.2rem;
+  margin-top: 0.35rem;
 }
 
 .legend-section-title:first-child {
@@ -473,17 +481,17 @@ header {
 .legend-item {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 0.3rem;
-  font-size: 0.78rem;
+  gap: 0.35rem;
+  margin-bottom: 0.15rem;
+  font-size: 0.68rem;
   color: var(--text);
 }
 
 .legend-item:last-child { margin-bottom: 0; }
 
 .legend-swatch {
-  width: 14px;
-  height: 14px;
+  width: 10px;
+  height: 10px;
   border-radius: 3px;
   flex-shrink: 0;
 }

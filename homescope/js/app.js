@@ -60,11 +60,11 @@
   var map;
   var marker;
   var currentCoords = null;
-  var layerPanelOpen = false;
+  var layerPanelOpen = true;
 
   // Layer state: active flag, loading flag, cached bbox key
   var layers = {
-    flood: { active: true, loading: false },
+    flood: { active: false, loading: false },
     evac: { active: false, loading: false, cachedBbox: null },
     hud: { active: false, loading: false, cachedBbox: null },
     marinas: { active: false, loading: false, cachedBbox: null },
@@ -121,6 +121,8 @@
 
     map.on('load', function () {
       addFemaFloodLayer();
+      // Flood defaults to OFF - hide the layer on load
+      map.setLayoutProperty('fema-flood-layer', 'visibility', 'none');
       initLayerSources();
       updateLegend();
     });
@@ -629,7 +631,45 @@
   });
 
   function typeaheadSearch(query) {
-    // Use Nominatim for typeahead with viewbox constraint (bounded)
+    // Use Photon (Komoot) for typeahead - much better at partial address matching
+    var url = 'https://photon.komoot.io/api/' +
+      '?q=' + encodeURIComponent(query) +
+      '&lat=27.95&lon=-82.46&limit=6&lang=en' +
+      '&bbox=-83.5,27.0,-81.5,28.8';
+
+    fetch(url)
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (!data.features || data.features.length === 0) {
+          // Fallback to Nominatim if Photon returns nothing
+          typeaheadNominatim(query);
+          return;
+        }
+
+        var matches = data.features.map(function (f) {
+          var p = f.properties;
+          var parts = [];
+          if (p.housenumber) { parts.push(p.housenumber); }
+          if (p.street) { parts.push(p.street); }
+          var addrLine = parts.join(' ') || p.name || '';
+          var cityLine = [p.city || p.county, p.state].filter(Boolean).join(', ');
+          return {
+            displayName: [addrLine, cityLine].filter(Boolean).join(', '),
+            addrLine: addrLine,
+            cityLine: cityLine,
+            lat: f.geometry.coordinates[1],
+            lng: f.geometry.coordinates[0]
+          };
+        });
+
+        showAddressResults(matches);
+      })
+      .catch(function () {
+        typeaheadNominatim(query);
+      });
+  }
+
+  function typeaheadNominatim(query) {
     var url = API.nominatim +
       '?q=' + encodeURIComponent(query) +
       '&format=json&addressdetails=1&limit=5' +
