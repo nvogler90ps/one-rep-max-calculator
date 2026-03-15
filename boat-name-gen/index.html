@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boat Name Generator - Creative, Funny & Unique Boat Names | Automated Insights</title>
+    <meta name="description" content="Generate creative, funny, and unique boat names with our free generator. Adjust sliders for puns, style, and spiciness. Works for sailboats, yachts, pontoons, fishing boats, and more.">
+    <link rel="canonical" href="https://automated-insights.com/boat-name-gen/">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3434609691579834" crossorigin="anonymous"></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Boat Name Generator",
+        "url": "https://automated-insights.com/boat-name-gen/",
+        "description": "Generate creative, funny, and unique boat names. Adjust sliders for political leaning, offensiveness, trendiness, and pun level.",
+        "applicationCategory": "UtilityApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "author": {
+            "@type": "Organization",
+            "name": "Automated Insights",
+            "url": "https://automated-insights.com"
+        }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "How do I name my boat?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Choosing a boat name is a personal tradition. Consider what the boat means to you -- an escape, an adventure, a joke. Many owners pick names that reflect their personality, a favorite place, or a clever pun. Use a generator like this one to brainstorm ideas, then narrow down to the one that makes you smile every time you see it on the transom. Keep it short enough to fit the stern, and make sure it sounds good when spoken over the radio."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What are the most popular boat names?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "According to BoatUS registration data, perennial favorites include Serenity, Island Time, Nauti Girl, Seas the Day, Reel Therapy, and Second Wind. Puns dominate the top lists year after year, with fishing-themed names especially popular among smaller boats. Yacht owners tend toward more elegant names like Endeavour, Sapphire, or Infinity."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Is it bad luck to rename a boat?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Maritime superstition says yes -- renaming a boat without a proper ceremony angers Poseidon (or Neptune, depending on your tradition). The traditional denaming ceremony involves purging every trace of the old name, making an offering to the sea gods, and then christening the boat with its new name. In practice, many owners rename boats with no issues at all, but performing the ceremony is a fun tradition and a great excuse for a party at the dock."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How do I register a boat name?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "In the US, boat registration is handled by your state's Department of Motor Vehicles or Department of Natural Resources. Most states require registration for motorized vessels and issue a registration number (the HIN). The boat name itself is not formally registered at the state level -- only documented vessels (registered with the US Coast Guard) have their names checked for uniqueness. Coast Guard documentation is optional but required for vessels over 5 net tons used in commercial service or traveling internationally."
+                }
+            }
+        ]
+    }
+    </script>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+        a { color: #4f46e5; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .container { max-width: 800px; margin: 0 auto; padding: 2rem 1.5rem; }
+        h1 { font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem; }
+        .subtitle { color: #64748b; font-size: 1.1rem; margin-bottom: 2rem; }
+        .card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .card h2 { font-size: 1.15rem; font-weight: 700; margin-bottom: 1rem; }
+        .slider-group { margin-bottom: 1.25rem; }
+        .slider-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.4rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+        .slider-label .value {
+            background: #f1f5f9;
+            border-radius: 6px;
+            padding: 2px 10px;
+            font-size: 0.85rem;
+            color: #64748b;
+            font-weight: 500;
+        }
+        .slider-ends {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.78rem;
+            color: #94a3b8;
+            margin-top: 2px;
+        }
+        input[type="range"] {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: #e2e8f0;
+            outline: none;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #4f46e5;
+            cursor: pointer;
+            border: 2px solid #fff;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+        }
+        input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #4f46e5;
+            cursor: pointer;
+            border: 2px solid #fff;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+        }
+        select {
+            width: 100%;
+            padding: 0.6rem 0.75rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            background: #fff;
+            color: #1e293b;
+            cursor: pointer;
+        }
+        .btn-generate {
+            display: block;
+            width: 100%;
+            padding: 0.9rem;
+            background: #4f46e5;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+        .btn-generate:hover { background: #4338ca; }
+        .btn-more {
+            display: none;
+            width: 100%;
+            padding: 0.75rem;
+            background: #fff;
+            color: #4f46e5;
+            border: 2px solid #4f46e5;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: background 0.15s, color 0.15s;
+        }
+        .btn-more:hover { background: #4f46e5; color: #fff; }
+        .results { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 0.75rem; margin-top: 1.25rem; }
+        .name-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 1rem 0.75rem;
+            text-align: center;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: border-color 0.15s, box-shadow 0.15s;
+            user-select: none;
+            position: relative;
+        }
+        .name-card:hover {
+            border-color: #4f46e5;
+            box-shadow: 0 2px 8px rgba(79,70,229,0.12);
+        }
+        .name-card .tap-hint {
+            display: block;
+            font-size: 0.72rem;
+            font-weight: 400;
+            color: #94a3b8;
+            margin-top: 4px;
+        }
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #1e293b;
+            color: #fff;
+            padding: 0.6rem 1.5rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            opacity: 0;
+            transition: transform 0.3s, opacity 0.3s;
+            z-index: 1000;
+            pointer-events: none;
+        }
+        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+        .faq-item { margin-bottom: 1.25rem; }
+        .faq-item h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.3rem; }
+        .faq-item p { color: #64748b; font-size: 0.92rem; }
+        .cta-link {
+            display: block;
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: #f1f5f9;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        footer { text-align: center; padding: 2rem 1rem; color: #94a3b8; font-size: 0.82rem; }
+        @media (max-width: 500px) {
+            h1 { font-size: 1.5rem; }
+            .results { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <nav style="padding:1rem 1.5rem;border-bottom:1px solid #e2e8f0;display:flex;align-items:center;gap:1.5rem">
+        <a href="/" style="color:#4f46e5;font-weight:700;font-size:1.05rem;text-decoration:none">Automated Insights</a>
+        <a href="/" style="color:#64748b;font-size:0.95rem;text-decoration:none">Tools</a>
+        <a href="/blog/" style="color:#64748b;font-size:0.95rem;text-decoration:none">Blog</a>
+    </nav>
+
+    <div class="container">
+        <h1>Boat Name Generator</h1>
+        <p class="subtitle">Generate creative, funny, and unique boat names. Dial in your style with the sliders below.</p>
+
+        <div class="card">
+            <h2>Customize Your Vibe</h2>
+
+            <div class="slider-group">
+                <div class="slider-label">
+                    <span>Political Leaning</span>
+                    <span class="value" id="politicalVal">5</span>
+                </div>
+                <input type="range" id="political" min="1" max="10" value="5">
+                <div class="slider-ends"><span>Liberal</span><span>Conservative</span></div>
+            </div>
+
+            <div class="slider-group">
+                <div class="slider-label">
+                    <span>Offensiveness</span>
+                    <span class="value" id="offenseVal">3</span>
+                </div>
+                <input type="range" id="offense" min="1" max="10" value="3">
+                <div class="slider-ends"><span>Family Friendly</span><span>Spicy</span></div>
+            </div>
+
+            <div class="slider-group">
+                <div class="slider-label">
+                    <span>Style</span>
+                    <span class="value" id="styleVal">5</span>
+                </div>
+                <input type="range" id="style" min="1" max="10" value="5">
+                <div class="slider-ends"><span>Trendy</span><span>Classic</span></div>
+            </div>
+
+            <div class="slider-group">
+                <div class="slider-label">
+                    <span>Humor</span>
+                    <span class="value" id="humorVal">4</span>
+                </div>
+                <input type="range" id="humor" min="1" max="10" value="4">
+                <div class="slider-ends"><span>Maximum Puns</span><span>Dignified</span></div>
+            </div>
+
+            <div class="slider-group">
+                <div class="slider-label">
+                    <span>Boat Type</span>
+                </div>
+                <select id="boatType">
+                    <option value="any">Any</option>
+                    <option value="sailboat">Sailboat</option>
+                    <option value="powerboat">Powerboat</option>
+                    <option value="pontoon">Pontoon</option>
+                    <option value="fishing">Fishing Boat</option>
+                    <option value="yacht">Yacht</option>
+                    <option value="kayak">Kayak / Canoe</option>
+                </select>
+            </div>
+        </div>
+
+        <button class="btn-generate" id="generateBtn" onclick="generate()">Generate Names</button>
+
+        <div id="resultsArea" style="display:none">
+            <div class="card" style="margin-top:1.5rem">
+                <h2>Your Boat Names</h2>
+                <div class="results" id="results"></div>
+            </div>
+            <button class="btn-more" id="moreBtn" onclick="generate()">Generate More</button>
+        </div>
+
+        <div class="card" style="margin-top:1rem">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <h3>How do I name my boat?</h3>
+                <p>Choosing a boat name is a personal tradition. Consider what the boat means to you -- an escape, an adventure, a joke. Use this generator to brainstorm ideas, then pick the one that makes you smile every time you see it on the transom. Keep it short enough to fit the stern, and make sure it sounds good spoken over the radio.</p>
+            </div>
+            <div class="faq-item">
+                <h3>What are the most popular boat names?</h3>
+                <p>Perennial favorites include Serenity, Island Time, Nauti Girl, Seas the Day, Reel Therapy, and Second Wind. Puns dominate the top lists year after year, with fishing-themed names especially popular among smaller boats. Yacht owners tend toward more elegant names like Endeavour or Sapphire.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Is it bad luck to rename a boat?</h3>
+                <p>Maritime superstition says yes -- renaming a boat without a proper ceremony angers Poseidon. The traditional denaming ceremony involves purging every trace of the old name, making an offering to the sea gods, and christening the boat with its new name. Many owners rename boats with no issues, but the ceremony is a fun tradition and a great excuse for a dock party.</p>
+            </div>
+            <div class="faq-item">
+                <h3>How do I register a boat name?</h3>
+                <p>In the US, boat registration is handled by your state's DMV or Department of Natural Resources. The boat name itself is not formally registered at the state level -- only documented vessels (registered with the US Coast Guard) have their names checked for uniqueness. Coast Guard documentation is optional but required for vessels over 5 net tons used in commercial service or traveling internationally.</p>
+            </div>
+            <a class="cta-link" href="/marina-fuel/">Planning your next trip? Check marina fuel prices near you.</a>
+        </div>
+    </div>
+
+    <footer>Automated Insights LLC</footer>
+
+    <div class="toast" id="toast">Copied to clipboard!</div>
+
+    <script>
+    (function() {
+        // Wire up slider value displays
+        var sliders = ['political','offense','style','humor'];
+        sliders.forEach(function(id) {
+            var el = document.getElementById(id);
+            var val = document.getElementById(id + 'Val');
+            el.addEventListener('input', function() { val.textContent = el.value; });
+        });
+
+        // Name banks
+        var names = {
+            classic: [
+                "Sea Serenity","The Windward","Blue Horizon","Northern Star","Poseidon's Grace",
+                "Windchaser","Harbor Light","Mariner's Dream","Tidewater","Starboard",
+                "The Commodore","Nautical Dawn","Silver Wake","Second Wind","Morning Tide",
+                "Twilight Sail","The Helmsman","Compass Rose","Cape Dory","Sea Monarch",
+                "Tradewind","The Galleon","Fairhaven","Port Royal","Eventide",
+                "Seafarer","Windrose","The Quarterdeck","Bowline","High Tide",
+                "The Navigator","Stormwatch","Driftwood","Salt Breeze","Meridian",
+                "The Admiral","Kingfisher","Odyssey","Tranquil Seas","Sovereign Wind",
+                "Harbourmaster","Leeward","The Marlin","Sea Grace","Pacific Mist"
+            ],
+            trendy: [
+                "Aqua Vibes","Sea CEO","Vitamin Sea","Nauti Girl","Dock Holiday",
+                "Sail-ebrity","Wave Check","Hydro Flex","Salty But Sweet","Current Mood",
+                "No Wake Zone","Main Character","Boatiful","Salty Lashes","Ship Happens",
+                "Dockaholic","Send It","Living My Best Tide","That Boat Life","Yacht-a Yacht-a",
+                "Brunch on Board","Oat Milk Sea","Core Memory","Slay the Bay","Drip Ship",
+                "Big Boat Energy","Vibe Tide","Aesthetic Anchor","Plot Twist","Serene Queen",
+                "Salt and Sass","No Cap-tain","On Brand","Influencer's Escape","Basic Buoy",
+                "Zero Fox Given","Lake Effect","Full Send","Unbothered","Coastal Grandma"
+            ],
+            punny: [
+                "Knot Working","Seas the Day","Bow Movement","Unsinkable II","Ship Faced",
+                "Aquaholic","Cirrhosis of the River","Nauti by Nature","What's Up Dock","Sail La Vie",
+                "Row vs Wade","The Codfather","Pier Pressure","Buoy Oh Buoy","Living on a Pier",
+                "Fishful Thinking","Knot on Call","Ship for Brains","Yacht See Me Now","Anchor Management",
+                "A Salt Weapon","Moor or Less","Ferry Impressive","Stern Warning","Hull of a Time",
+                "Berth Control","Keel Me Now","Sea-duction","Mast Hysteria","Propel-er Head",
+                "Draft Dodger","Wake and Bake","Ship Outta Luck","Rudder Madness","Tiller Time",
+                "Dinghy Business","Shiver Me Timbers","The Poop Deck","Let That Sink In","Adrift and Confused",
+                "Ship Creek","In Deep Ship","Bow Knows","The Real Slim Shady Side","Cleat Freak"
+            ],
+            conservative: [
+                "Lady Liberty","Patriot's Pride","Old Glory","Freedom's Call","Eagle's Nest",
+                "Steadfast","Heritage","The Constitution","Stars & Stripes","Valor",
+                "Providence","American Dream","True North","Defender","Don't Tread on Me",
+                "Rough Rider","Arsenal","Iron Will","The Federalist","Liberty Bell",
+                "Minuteman","Frontier","Manifest Destiny","Spirit of '76","Lone Star",
+                "Grand Old Party","The Sentinel","Bonnie Blue","Gadsden's Pride","Righteous Wind",
+                "Homeland","Duty Calls","The Republic","Musket Ball","Second Amendment",
+                "Semper Fi","Foxhole","Betsy Ross","Mount Vernon","Bunker Hill"
+            ],
+            liberal: [
+                "Good Vibes Only","Coexist","Namaste on the Water","Free Spirit","Wanderlust",
+                "Rainbow Rider","Peaceful Protest","Flower Power","Kumbaya","Harmony",
+                "Solar Sailor","Green Wake","Ebb and Equality","Blue Wave","The Commune",
+                "Compassion Cruiser","Fair Winds for All","Hope Floats","Common Ground","Gentle Current",
+                "Sustainable Seas","Off the Grid","Karma Cruiser","Mindful Mariner","No Borders",
+                "Love Boat 2.0","Empathy Express","The Commune-ity","Organic Drift","Grateful Deadhead",
+                "Birkenstock Barge","Tie Dye Tide","Kombucha Cruiser","The Co-Op","Prius of the Sea",
+                "The Lobbyist","Change Maker","Progressive Wake","Utopia","Rising Tide"
+            ],
+            mild_offense: [
+                "Master Baiter","Wet Dream","Bow Job","Big Buoys","Tugger",
+                "Slim Shady's Dinghy","She Got the House","Divorce Settlement","Alimony Express","Midlife Crisis",
+                "College Fund","My Other Boat is a Yacht","Shark Bait Hoo Ha Ha","Son of a Beach","Morning Wood Cruiser",
+                "Wasted Seaman","Bikini Inspector","The Walk of Shame","Poop Deck Party","Ship Show Preview",
+                "Booty Call","Beer Can Island Express","Nauti Hottie","Liquid Courage","Floatin' and Gloatin'",
+                "The Other Woman","Trophy Wife","Deadbeat Dinghy","Sugar Daddy's Toy","My Wife Thinks I'm Fishing",
+                "Aqua-hol-ic","Regret Nothing","Hold My Beer","Bass to Mouth","Gone Squatchin'"
+            ],
+            high_offense: [
+                "Ship Show","Motorboatin'","Off the Hook","Liquid Asset","Tax Write-Off",
+                "Gone Overboard","Barely Legal","Seaward","Unsupervised","Bad Decisions",
+                "Buoyancy Compensator","Stern Piece","The Dirty Oar","Blow the Man Down","In Too Deep",
+                "Hull Breaker","Feeling Nauti","Rock the Boat","Knot Sober","Clam Digger",
+                "Pier Review Board","One Night Sand","Flotsam and Jetsam of Society","Wake of Destruction","No Regerts",
+                "Repo Man's Dream","Dumpster Diver","Captain Liability","Overboard and Overserved","The Enabler",
+                "Sinking Fund","The Hot Mess","Double D-eck","Pitching and Rolling","The Swinger",
+                "Full Mast","The Rear Admiral","Hard to Starboard","Going Down","Tug Life"
+            ],
+            fishing: [
+                "Reel Therapy","The Fish Whisperer","Hooked Up","Cast Away","Scale Model",
+                "Reel Nauti","Off the Hook","Gone Fishin'","The Lure","Net Worth",
+                "Bass Hole","Fin-esse","Reel Deal","Catchin' Dreams","The Bait Shop",
+                "Gill Trip","Line of Duty","Crappie Day","Tuna Turner","Walleye World",
+                "Musky Business","The Daily Catch","No Trout About It","Carp Diem","Perch Perfect",
+                "Tackle Box","Reel Quick","Trolling Motor","Fish and Tell","Hook Line and Sinker",
+                "Cod Almighty","Keeping It Reel","Fluke It","Bait and Switch","Sinker or Swim",
+                "The Angler","Trophy Hunter","The Chum Bucket","Fintastic","Catch of the Day"
+            ],
+            yacht: [
+                "Sovereign","Infinity","Crescendo","Elysium","Azure Dream",
+                "Opulence","Seraphina","Majesty","Tempest","Celestial",
+                "Riviera","Allegria","La Dolce Vita","Phantom","Eclipse",
+                "Zenith","Aurelius","Paradiso","Solstice","Grand Cru",
+                "Lumiere","Obsidian","Prestige","Endeavour","Sapphire",
+                "Amalfi","Belvedere","Champagne","Dominion","Elegance",
+                "Fortuna","Galleria","Ivory Tower","Jubilee","Kismet",
+                "Legacy","Montecarlo","Nirvana","Opus","Quintessence"
+            ],
+            pontoon: [
+                "Party Barge","Pontoon Queen","Floatin' and Bloatin'","Slow Ride","Lake Life",
+                "Tiki Time","The Sandbar","Pontoonery","Float On","Lazy River",
+                "Pontoon Platoon","The Lily Pad","Flat Bottom Girl","Dock and Roll","Barge of Honor",
+                "Sunday Funday","Cruisin' and Boozin'","The Floating Bar","Barely Movin'","Idle Hours",
+                "Deck Party","Pontoon Social Club","The Floater","Lake Mode","Shallow Hal",
+                "No Hurry","Flat Out Fun","Drift King","Barely Afloat","Sunset Chaser",
+                "Wake Maker","Toon Town","The Floating Couch","Slow Motion","The Easy Rider",
+                "Leisurely","Deck the Halls","The Barge","Pantooner","Still Paying For This"
+            ],
+            kayak: [
+                "Paddle Me This","The Tippy Canoe","Solo Mission","Current Events","Oar Else",
+                "Going with the Flow","Up a Creek","Yak Attack","Paddle Battle","Tiny Vessel",
+                "Stream of Consciousness","The Lone Paddler","Dip and Drift","Row Your Boat","Splash Decision",
+                "Meander","The Little Dipper","Glide Path","Shallow End","Puddle Jumper",
+                "Creek Freak","The Kayak Shack","Paddle Faster","Stroke of Genius","Still Waters",
+                "Upstream Battle","Eddy Steady","Rapid Transit","The Wet Exit","Canoe Believe It"
+            ],
+            sailboat: [
+                "Wind Therapy","Tacking Up","The Jib Joint","Main Sail Event","Close Hauled",
+                "Beam Reach","Windward Bound","Heel Yeah","Full Sail Ahead","The Spinnaker",
+                "Sheet Happens","Come About","Telltale Sign","In Irons","Running Free",
+                "Luffing Around","Broad Reach","The Halyard","Stay Sail Stay","Windjammer",
+                "Rigged and Ready","The Mast Appeal","Keel Over","Catamaran't Stop","Trimaran of Terror",
+                "Port Tack","Starboard Side","The Boom","Tack-tical Advantage","Winging It"
+            ],
+            powerboat: [
+                "Full Throttle","Turbo Tide","The Horsepower","Wake Destroyer","RPM Racer",
+                "Torque of the Town","Fuel Burner","Bow Rider","Speed Demon","The Gas Guzzler",
+                "Thrust Issues","Horse and Buggy","Fast and Curious","Blown Gasket","Rev Limiter",
+                "V8 Voyage","Churn and Burn","Rooster Tail","Holeshot","The Prop Job",
+                "Dead in the Water","Bilge Rat","Trim Tab","Planing Out","Knot Slow",
+                "WOT (Wide Open Throttle)","The Fuel Dock Regular","No Speed Limit","Running Hot","Cavitation Station"
+            ]
+        };
+
+        // Weighted random pick
+        function weightedPick(categories, count) {
+            // Build pool with weights
+            var pool = [];
+            categories.forEach(function(c) {
+                var list = names[c.name];
+                if (!list) { return; }
+                for (var i = 0; i < list.length; i++) {
+                    for (var w = 0; w < c.weight; w++) {
+                        pool.push(list[i]);
+                    }
+                }
+            });
+            // Shuffle and pick unique
+            var shuffled = pool.sort(function() { return Math.random() - 0.5; });
+            var picked = [];
+            var seen = {};
+            for (var i = 0; i < shuffled.length && picked.length < count; i++) {
+                if (!seen[shuffled[i]]) {
+                    seen[shuffled[i]] = true;
+                    picked.push(shuffled[i]);
+                }
+            }
+            return picked;
+        }
+
+        function showToast(msg) {
+            var t = document.getElementById('toast');
+            t.textContent = msg;
+            t.classList.add('show');
+            setTimeout(function() { t.classList.remove('show'); }, 1800);
+        }
+
+        function copyName(name) {
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(name).then(function() {
+                    showToast('Copied: ' + name);
+                });
+            } else {
+                // Fallback
+                var ta = document.createElement('textarea');
+                ta.value = name;
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                document.body.removeChild(ta);
+                showToast('Copied: ' + name);
+            }
+        }
+
+        window.generate = function() {
+            var political = parseInt(document.getElementById('political').value);
+            var offense = parseInt(document.getElementById('offense').value);
+            var style = parseInt(document.getElementById('style').value);
+            var humor = parseInt(document.getElementById('humor').value);
+            var boatType = document.getElementById('boatType').value;
+
+            var cats = [];
+
+            // Classic vs Trendy (style slider: 1=trendy, 10=classic)
+            cats.push({ name: 'classic', weight: style });
+            cats.push({ name: 'trendy', weight: 11 - style });
+
+            // Punny vs Serious (humor slider: 1=max puns, 10=dignified)
+            cats.push({ name: 'punny', weight: Math.max(1, 11 - humor) });
+
+            // Political leaning (1=liberal, 10=conservative)
+            if (political <= 4) {
+                cats.push({ name: 'liberal', weight: 5 - political });
+            } else if (political >= 7) {
+                cats.push({ name: 'conservative', weight: political - 5 });
+            }
+
+            // Offense level
+            if (offense >= 4 && offense <= 7) {
+                cats.push({ name: 'mild_offense', weight: offense - 2 });
+            } else if (offense >= 8) {
+                cats.push({ name: 'mild_offense', weight: 3 });
+                cats.push({ name: 'high_offense', weight: offense - 5 });
+            }
+
+            // Boat-type specific categories
+            if (boatType === 'fishing') {
+                cats.push({ name: 'fishing', weight: 6 });
+            } else if (boatType === 'yacht') {
+                cats.push({ name: 'yacht', weight: 6 });
+            } else if (boatType === 'pontoon') {
+                cats.push({ name: 'pontoon', weight: 6 });
+            } else if (boatType === 'kayak') {
+                cats.push({ name: 'kayak', weight: 6 });
+            } else if (boatType === 'sailboat') {
+                cats.push({ name: 'sailboat', weight: 6 });
+            } else if (boatType === 'powerboat') {
+                cats.push({ name: 'powerboat', weight: 6 });
+            } else {
+                // "any" -- add a small weight for all type-specific
+                cats.push({ name: 'fishing', weight: 1 });
+                cats.push({ name: 'yacht', weight: 1 });
+                cats.push({ name: 'pontoon', weight: 1 });
+                cats.push({ name: 'kayak', weight: 1 });
+                cats.push({ name: 'sailboat', weight: 1 });
+                cats.push({ name: 'powerboat', weight: 1 });
+            }
+
+            var picked = weightedPick(cats, 8);
+
+            var resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '';
+            picked.forEach(function(name) {
+                var card = document.createElement('div');
+                card.className = 'name-card';
+                card.innerHTML = name + '<span class="tap-hint">tap to copy</span>';
+                card.addEventListener('click', function() { copyName(name); });
+                resultsDiv.appendChild(card);
+            });
+
+            document.getElementById('resultsArea').style.display = 'block';
+            document.getElementById('moreBtn').style.display = 'block';
+
+            // Scroll results into view
+            document.getElementById('resultsArea').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        };
+    })();
+    </script>
+</body>
+</html>

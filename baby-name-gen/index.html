@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Baby Name Generator - Find the Perfect Name | Automated Insights</title>
+<meta name="description" content="Find the perfect baby name with personality-based filtering. Browse 500+ names by gender, style, origin, popularity, and vibe. Save your favorites and share with your partner.">
+<link rel="canonical" href="https://automated-insights.com/baby-name-gen/">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3434609691579834" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Baby Name Generator",
+  "url": "https://automated-insights.com/baby-name-gen/",
+  "description": "Find the perfect baby name with personality-based filtering. Browse 500+ names by gender, style, origin, popularity, and vibe.",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do I choose a baby name?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Start by considering what matters most to you: family traditions, cultural heritage, how the name sounds with your last name, and the meaning behind it. Use filters like our generator to narrow down options by style (classic vs. trendy), length, origin, and vibe. Make a shortlist with your partner and try saying each name out loud, imagining calling it across a playground. Check initials and common nicknames too."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are the most popular baby names in 2026?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For boys, Liam, Noah, Oliver, and Mateo continue to top the charts. For girls, Olivia, Emma, Amelia, and Luna remain extremely popular. Gender-neutral names like Avery, Riley, and Rowan are trending strongly. Nature-inspired names (Willow, River, Sage) and short punchy names (Kai, Wren, Knox) are also rising fast."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Should I pick a unique or common name?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Both have advantages. Common names are easy to spell and pronounce, and your child won't have to constantly correct people. Unique names help your child stand out and feel special. A good middle ground is choosing a name that is recognizable but not in the top 20 -- familiar enough to be easy but uncommon enough to feel distinctive. Our uniqueness slider helps you find that sweet spot."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if my partner and I disagree on names?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "This is extremely common. Try having each partner independently create a list of 10-15 names, then compare for overlaps. Use a tool like this generator to browse together and save favorites -- you might discover styles you both like that you hadn't considered. Some couples use a veto system: each person gets a set number of vetoes, no questions asked. Remember that compromise often leads to the best choices."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does the meaning of a name matter?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "That is a personal decision. Many parents find deep satisfaction in choosing a name with a meaningful origin -- for example, naming a child 'Felix' (meaning 'happy') or 'Amara' (meaning 'grace'). Others prioritize how the name sounds over its etymology. There is no wrong approach. Our generator shows the origin and meaning of every name so you can factor it in if you choose."
+      }
+    }
+  ]
+}
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f8fafc;color:#1e293b;line-height:1.6}
+a{text-decoration:none}
+.container{max-width:1100px;margin:0 auto;padding:1.5rem}
+h1{font-size:1.8rem;font-weight:700;margin-bottom:0.5rem}
+.subtitle{color:#64748b;margin-bottom:2rem;font-size:1.05rem}
+.controls{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1.5rem;margin-bottom:1.5rem}
+.control-row{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.25rem}
+@media(max-width:640px){.control-row{grid-template-columns:1fr}}
+.control-group{display:flex;flex-direction:column;gap:0.4rem}
+.control-group label{font-weight:600;font-size:0.9rem;color:#1e293b}
+.control-group .hint{font-size:0.78rem;color:#64748b;margin-top:-0.2rem}
+.slider-labels{display:flex;justify-content:space-between;font-size:0.75rem;color:#64748b}
+input[type="range"]{width:100%;accent-color:#4f46e5;height:6px;cursor:pointer}
+select{padding:0.5rem;border:1px solid #e2e8f0;border-radius:8px;font-size:0.9rem;background:#fff;color:#1e293b;cursor:pointer}
+.gender-btns{display:flex;gap:0.5rem}
+.gender-btn{padding:0.5rem 1.2rem;border:1px solid #e2e8f0;border-radius:8px;background:#fff;cursor:pointer;font-size:0.9rem;color:#64748b;transition:all 0.15s}
+.gender-btn.active{background:#4f46e5;color:#fff;border-color:#4f46e5}
+.generate-btn{display:block;width:100%;padding:0.85rem;background:#4f46e5;color:#fff;border:none;border-radius:10px;font-size:1.05rem;font-weight:600;cursor:pointer;transition:background 0.15s;margin-top:0.5rem}
+.generate-btn:hover{background:#4338ca}
+.results{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem;margin-bottom:1.5rem}
+.name-card{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:1.25rem;cursor:pointer;transition:all 0.15s;position:relative}
+.name-card:hover{border-color:#4f46e5;box-shadow:0 2px 8px rgba(79,70,229,0.1)}
+.name-card.favorited{border-color:#ef4444}
+.name-card .heart{position:absolute;top:0.75rem;right:0.75rem;font-size:1.1rem;color:#cbd5e1;transition:color 0.15s}
+.name-card.favorited .heart{color:#ef4444}
+.name-card .name-text{font-size:1.4rem;font-weight:700;color:#1e293b;margin-bottom:0.3rem}
+.name-card .origin-text{font-size:0.82rem;color:#64748b;margin-bottom:0.5rem}
+.pop-badge{display:inline-block;padding:0.15rem 0.6rem;border-radius:20px;font-size:0.72rem;font-weight:600}
+.pop-1{background:#f0fdf4;color:#15803d}
+.pop-2{background:#ecfdf5;color:#059669}
+.pop-3{background:#fefce8;color:#a16207}
+.pop-4{background:#fef2f2;color:#dc2626}
+.pop-5{background:#fef2f2;color:#dc2626}
+.more-btn{display:block;width:100%;padding:0.75rem;background:#fff;color:#4f46e5;border:1px solid #4f46e5;border-radius:10px;font-size:0.95rem;font-weight:600;cursor:pointer;transition:all 0.15s;margin-bottom:2rem}
+.more-btn:hover{background:#4f46e5;color:#fff}
+.favorites-section{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;margin-bottom:2rem}
+.fav-header{display:flex;justify-content:space-between;align-items:center;cursor:pointer;user-select:none}
+.fav-header h2{font-size:1.1rem;font-weight:700}
+.fav-count{background:#4f46e5;color:#fff;padding:0.1rem 0.55rem;border-radius:20px;font-size:0.78rem;font-weight:600;margin-left:0.5rem}
+.fav-toggle{color:#64748b;font-size:0.85rem}
+.fav-body{margin-top:1rem}
+.fav-body.collapsed{display:none}
+.fav-list{display:flex;flex-wrap:wrap;gap:0.5rem}
+.fav-chip{display:inline-flex;align-items:center;gap:0.4rem;background:#f1f5f9;border:1px solid #e2e8f0;border-radius:20px;padding:0.35rem 0.75rem;font-size:0.85rem;font-weight:500}
+.fav-chip .remove{cursor:pointer;color:#94a3b8;font-weight:700;font-size:0.9rem}
+.fav-chip .remove:hover{color:#ef4444}
+.clear-all{background:none;border:none;color:#ef4444;font-size:0.82rem;cursor:pointer;font-weight:600;margin-top:0.75rem}
+.clear-all:hover{text-decoration:underline}
+.faq{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1.5rem;margin-bottom:2rem}
+.faq h2{font-size:1.2rem;font-weight:700;margin-bottom:1rem}
+.faq-item{border-bottom:1px solid #e2e8f0;padding:0.85rem 0;cursor:pointer}
+.faq-item:last-child{border-bottom:none}
+.faq-q{font-weight:600;font-size:0.95rem;display:flex;justify-content:space-between;align-items:center}
+.faq-a{color:#64748b;font-size:0.9rem;margin-top:0.5rem;display:none;line-height:1.7}
+.faq-item.open .faq-a{display:block}
+.faq-arrow{transition:transform 0.2s;color:#94a3b8}
+.faq-item.open .faq-arrow{transform:rotate(180deg)}
+.empty-state{text-align:center;padding:3rem 1rem;color:#94a3b8;font-size:1rem}
+footer{text-align:center;padding:2rem 1rem;color:#94a3b8;font-size:0.82rem;border-top:1px solid #e2e8f0}
+</style>
+</head>
+<body>
+<nav style="padding:1rem 1.5rem;border-bottom:1px solid #e2e8f0;display:flex;align-items:center;gap:1.5rem">
+    <a href="/" style="color:#4f46e5;font-weight:700;font-size:1.05rem;text-decoration:none">Automated Insights</a>
+    <a href="/" style="color:#64748b;font-size:0.95rem;text-decoration:none">Tools</a>
+    <a href="/blog/" style="color:#64748b;font-size:0.95rem;text-decoration:none">Blog</a>
+</nav>
+
+<div class="container">
+<h1>Baby Name Generator</h1>
+<p class="subtitle">Find the perfect name for your little one. Adjust the filters below and discover names that match your style.</p>
+
+<div class="controls">
+<div class="control-group" style="margin-bottom:1.25rem">
+<label>Gender</label>
+<div class="gender-btns">
+<button class="gender-btn active" data-val="any" onclick="setGender(this)">Any</button>
+<button class="gender-btn" data-val="m" onclick="setGender(this)">Boy</button>
+<button class="gender-btn" data-val="f" onclick="setGender(this)">Girl</button>
+<button class="gender-btn" data-val="n" onclick="setGender(this)">Gender Neutral</button>
+</div>
+</div>
+
+<div class="control-row">
+<div class="control-group">
+<label>Trendy vs Classic</label>
+<input type="range" id="trendy" min="1" max="10" value="5">
+<div class="slider-labels"><span>Ultra-trendy</span><span>Timeless classic</span></div>
+</div>
+<div class="control-group">
+<label>Unique vs Common</label>
+<input type="range" id="unique" min="1" max="10" value="5">
+<div class="slider-labels"><span>One of a kind</span><span>Everyone knows it</span></div>
+</div>
+</div>
+
+<div class="control-row">
+<div class="control-group">
+<label>Name Length</label>
+<input type="range" id="length" min="1" max="10" value="5">
+<div class="slider-labels"><span>Short (1-4 letters)</span><span>Long (8+ letters)</span></div>
+</div>
+<div class="control-group">
+<label>Vibe</label>
+<input type="range" id="vibe" min="1" max="10" value="5">
+<div class="slider-labels"><span>Strong / Bold</span><span>Soft / Gentle</span></div>
+</div>
+</div>
+
+<div class="control-row">
+<div class="control-group">
+<label>Earthy vs Elegant</label>
+<input type="range" id="earthy" min="1" max="10" value="5">
+<div class="slider-labels"><span>Nature / Outdoorsy</span><span>Royal / Sophisticated</span></div>
+</div>
+<div class="control-group">
+<label>Cultural Influence</label>
+<select id="culture">
+<option value="any">Any</option>
+<option value="english">English / American</option>
+<option value="irish">Irish / Scottish</option>
+<option value="french">French</option>
+<option value="italian">Italian</option>
+<option value="spanish">Spanish / Latin</option>
+<option value="greek">Greek</option>
+<option value="hebrew">Hebrew / Biblical</option>
+<option value="arabic">Arabic</option>
+<option value="indian">Indian / Sanskrit</option>
+<option value="japanese">Japanese</option>
+<option value="african">African</option>
+<option value="scandinavian">Scandinavian / Norse</option>
+</select>
+</div>
+</div>
+
+<div class="control-row">
+<div class="control-group">
+<label>Starting Letter</label>
+<select id="startLetter">
+<option value="any">Any</option>
+</select>
+</div>
+<div class="control-group"></div>
+</div>
+
+<button class="generate-btn" onclick="findNames()">Find Names</button>
+</div>
+
+<div id="resultsArea"></div>
+<button class="more-btn" id="moreBtn" style="display:none" onclick="generateMore()">Generate More</button>
+
+<div class="favorites-section" id="favSection" style="display:none">
+<div class="fav-header" onclick="toggleFavs()">
+<h2>Favorites <span class="fav-count" id="favCount">0</span></h2>
+<span class="fav-toggle" id="favToggle">Hide</span>
+</div>
+<div class="fav-body" id="favBody">
+<div class="fav-list" id="favList"></div>
+<button class="clear-all" onclick="clearFavs()">Clear All</button>
+</div>
+</div>
+
+<div class="faq">
+<h2>Frequently Asked Questions</h2>
+<div class="faq-item" onclick="toggleFaq(this)">
+<div class="faq-q">How do I choose a baby name? <span class="faq-arrow">&#9660;</span></div>
+<div class="faq-a">Start by considering what matters most to you: family traditions, cultural heritage, how the name sounds with your last name, and the meaning behind it. Use filters like our generator to narrow down options by style (classic vs. trendy), length, origin, and vibe. Make a shortlist with your partner and try saying each name out loud, imagining calling it across a playground. Check initials and common nicknames too.</div>
+</div>
+<div class="faq-item" onclick="toggleFaq(this)">
+<div class="faq-q">What are the most popular baby names in 2026? <span class="faq-arrow">&#9660;</span></div>
+<div class="faq-a">For boys, Liam, Noah, Oliver, and Mateo continue to top the charts. For girls, Olivia, Emma, Amelia, and Luna remain extremely popular. Gender-neutral names like Avery, Riley, and Rowan are trending strongly. Nature-inspired names (Willow, River, Sage) and short punchy names (Kai, Wren, Knox) are also rising fast.</div>
+</div>
+<div class="faq-item" onclick="toggleFaq(this)">
+<div class="faq-q">Should I pick a unique or common name? <span class="faq-arrow">&#9660;</span></div>
+<div class="faq-a">Both have advantages. Common names are easy to spell and pronounce, and your child will not have to constantly correct people. Unique names help your child stand out and feel special. A good middle ground is choosing a name that is recognizable but not in the top 20 -- familiar enough to be easy but uncommon enough to feel distinctive. Our uniqueness slider helps you find that sweet spot.</div>
+</div>
+<div class="faq-item" onclick="toggleFaq(this)">
+<div class="faq-q">What if my partner and I disagree on names? <span class="faq-arrow">&#9660;</span></div>
+<div class="faq-a">This is extremely common. Try having each partner independently create a list of 10-15 names, then compare for overlaps. Use a tool like this generator to browse together and save favorites -- you might discover styles you both like that you had not considered. Some couples use a veto system: each person gets a set number of vetoes, no questions asked. Remember that compromise often leads to the best choices.</div>
+</div>
+<div class="faq-item" onclick="toggleFaq(this)">
+<div class="faq-q">Does the meaning of a name matter? <span class="faq-arrow">&#9660;</span></div>
+<div class="faq-a">That is a personal decision. Many parents find deep satisfaction in choosing a name with a meaningful origin -- for example, naming a child "Felix" (meaning "happy") or "Amara" (meaning "grace"). Others prioritize how the name sounds over its etymology. There is no wrong approach. Our generator shows the origin and meaning of every name so you can factor it in if you choose.</div>
+</div>
+</div>
+</div>
+
+<footer>Baby Name Generator by Automated Insights</footer>
+
+<script>
+// Populate starting letter dropdown
+(function(){
+var sel=document.getElementById('startLetter');
+for(var i=65;i<=90;i++){
+var o=document.createElement('option');
+o.value=String.fromCharCode(i);
+o.textContent=String.fromCharCode(i);
+sel.appendChild(o);
+}
+})();
+
+// Name database: {n:name, g:gender(m/f/n), o:origin, m:meaning, p:popularity(1-5), vibe(1-10 strong-soft), t:trendy(1-10 trendy-classic), u:unique(1-10 unique-common), e:earthy(1-10 earthy-elegant), c:cultural}
+var NAMES=[
+// BOY - Classic/Traditional
+{n:"James",g:"m",o:"Hebrew",m:"Supplanter",p:5,vibe:4,t:9,u:9,e:6,c:"english"},
+{n:"William",g:"m",o:"Germanic",m:"Resolute protector",p:5,vibe:4,t:9,u:9,e:7,c:"english"},
+{n:"Henry",g:"m",o:"Germanic",m:"Ruler of the home",p:4,vibe:5,t:8,u:8,e:7,c:"english"},
+{n:"Edward",g:"m",o:"Old English",m:"Wealthy guardian",p:3,vibe:5,t:9,u:7,e:8,c:"english"},
+{n:"Charles",g:"m",o:"Germanic",m:"Free man",p:4,vibe:5,t:9,u:8,e:8,c:"english"},
+{n:"Thomas",g:"m",o:"Aramaic",m:"Twin",p:4,vibe:5,t:9,u:8,e:6,c:"english"},
+{n:"Benjamin",g:"m",o:"Hebrew",m:"Son of the right hand",p:4,vibe:5,t:8,u:8,e:6,c:"hebrew"},
+{n:"Alexander",g:"m",o:"Greek",m:"Defender of the people",p:4,vibe:3,t:8,u:7,e:8,c:"greek"},
+{n:"Theodore",g:"m",o:"Greek",m:"Gift of God",p:4,vibe:6,t:7,u:7,e:7,c:"greek"},
+{n:"Samuel",g:"m",o:"Hebrew",m:"God has heard",p:4,vibe:5,t:9,u:8,e:6,c:"hebrew"},
+{n:"Arthur",g:"m",o:"Celtic",m:"Bear king",p:3,vibe:4,t:9,u:6,e:7,c:"english"},
+{n:"George",g:"m",o:"Greek",m:"Farmer",p:3,vibe:5,t:9,u:7,e:5,c:"english"},
+{n:"Frederick",g:"m",o:"Germanic",m:"Peaceful ruler",p:2,vibe:5,t:10,u:5,e:8,c:"english"},
+{n:"Joseph",g:"m",o:"Hebrew",m:"He will add",p:4,vibe:5,t:9,u:9,e:6,c:"hebrew"},
+{n:"Daniel",g:"m",o:"Hebrew",m:"God is my judge",p:5,vibe:5,t:8,u:9,e:6,c:"hebrew"},
+{n:"Robert",g:"m",o:"Germanic",m:"Bright fame",p:3,vibe:4,t:10,u:8,e:6,c:"english"},
+{n:"David",g:"m",o:"Hebrew",m:"Beloved",p:4,vibe:4,t:9,u:9,e:6,c:"hebrew"},
+{n:"Michael",g:"m",o:"Hebrew",m:"Who is like God",p:4,vibe:4,t:9,u:9,e:6,c:"hebrew"},
+{n:"Andrew",g:"m",o:"Greek",m:"Manly, brave",p:4,vibe:4,t:8,u:8,e:6,c:"english"},
+{n:"Matthew",g:"m",o:"Hebrew",m:"Gift of God",p:4,vibe:5,t:8,u:8,e:6,c:"hebrew"},
+{n:"Nicholas",g:"m",o:"Greek",m:"Victory of the people",p:3,vibe:5,t:8,u:7,e:7,c:"greek"},
+{n:"Christopher",g:"m",o:"Greek",m:"Bearer of Christ",p:3,vibe:4,t:9,u:7,e:6,c:"greek"},
+{n:"Patrick",g:"m",o:"Latin",m:"Nobleman",p:3,vibe:4,t:8,u:7,e:6,c:"irish"},
+{n:"Richard",g:"m",o:"Germanic",m:"Strong ruler",p:3,vibe:3,t:10,u:7,e:7,c:"english"},
+{n:"Philip",g:"m",o:"Greek",m:"Lover of horses",p:2,vibe:5,t:9,u:6,e:7,c:"greek"},
+{n:"Stephen",g:"m",o:"Greek",m:"Crown, wreath",p:3,vibe:5,t:9,u:7,e:6,c:"greek"},
+{n:"Peter",g:"m",o:"Greek",m:"Rock, stone",p:3,vibe:4,t:9,u:7,e:5,c:"greek"},
+{n:"Edmund",g:"m",o:"Old English",m:"Prosperous protector",p:2,vibe:5,t:10,u:4,e:8,c:"english"},
+{n:"Albert",g:"m",o:"Germanic",m:"Noble and bright",p:2,vibe:5,t:10,u:5,e:7,c:"english"},
+{n:"Francis",g:"m",o:"Latin",m:"Frenchman, free",p:2,vibe:6,t:9,u:5,e:7,c:"english"},
+// BOY - Trendy/Modern
+{n:"Liam",g:"m",o:"Irish",m:"Strong-willed warrior",p:5,vibe:4,t:2,u:10,e:5,c:"irish"},
+{n:"Noah",g:"m",o:"Hebrew",m:"Rest, comfort",p:5,vibe:6,t:2,u:10,e:5,c:"hebrew"},
+{n:"Aiden",g:"m",o:"Irish",m:"Little fire",p:4,vibe:5,t:2,u:9,e:4,c:"irish"},
+{n:"Jayden",g:"m",o:"Modern American",m:"Thankful",p:4,vibe:5,t:1,u:9,e:4,c:"english"},
+{n:"Mason",g:"m",o:"English",m:"Stone worker",p:4,vibe:3,t:2,u:9,e:4,c:"english"},
+{n:"Logan",g:"m",o:"Scottish",m:"Little hollow",p:4,vibe:4,t:2,u:9,e:4,c:"irish"},
+{n:"Carter",g:"m",o:"English",m:"Cart driver",p:4,vibe:4,t:2,u:8,e:4,c:"english"},
+{n:"Grayson",g:"m",o:"English",m:"Son of the steward",p:4,vibe:5,t:2,u:8,e:6,c:"english"},
+{n:"Kai",g:"m",o:"Hawaiian",m:"Sea",p:4,vibe:4,t:1,u:7,e:3,c:"japanese"},
+{n:"Milo",g:"m",o:"Germanic",m:"Gracious, soldier",p:3,vibe:7,t:2,u:6,e:5,c:"english"},
+{n:"Asher",g:"m",o:"Hebrew",m:"Happy, blessed",p:4,vibe:6,t:2,u:7,e:5,c:"hebrew"},
+{n:"Beckett",g:"m",o:"English",m:"Bee cottage",p:3,vibe:4,t:1,u:5,e:5,c:"english"},
+{n:"Rowan",g:"m",o:"Irish",m:"Little red one",p:3,vibe:6,t:2,u:6,e:3,c:"irish"},
+{n:"Finn",g:"m",o:"Irish",m:"Fair, white",p:4,vibe:5,t:2,u:7,e:4,c:"irish"},
+{n:"Declan",g:"m",o:"Irish",m:"Full of goodness",p:3,vibe:4,t:3,u:6,e:5,c:"irish"},
+{n:"Silas",g:"m",o:"Latin",m:"Wood, forest",p:3,vibe:5,t:3,u:5,e:4,c:"english"},
+{n:"Ezra",g:"m",o:"Hebrew",m:"Helper",p:4,vibe:6,t:2,u:7,e:5,c:"hebrew"},
+{n:"Atlas",g:"m",o:"Greek",m:"Bearer of the heavens",p:3,vibe:3,t:1,u:4,e:5,c:"greek"},
+{n:"Jasper",g:"m",o:"Persian",m:"Treasurer, bringer of treasure",p:3,vibe:6,t:3,u:5,e:4,c:"english"},
+{n:"Axel",g:"m",o:"Scandinavian",m:"Father of peace",p:3,vibe:2,t:2,u:5,e:4,c:"scandinavian"},
+{n:"Zion",g:"m",o:"Hebrew",m:"Highest point",p:3,vibe:3,t:1,u:5,e:5,c:"hebrew"},
+{n:"Bodhi",g:"m",o:"Sanskrit",m:"Awakening, enlightenment",p:3,vibe:7,t:1,u:4,e:2,c:"indian"},
+{n:"Knox",g:"m",o:"Scottish",m:"Round hill",p:3,vibe:2,t:1,u:5,e:4,c:"irish"},
+{n:"Rhett",g:"m",o:"Dutch",m:"Advice, counsel",p:3,vibe:3,t:2,u:5,e:5,c:"english"},
+{n:"Oliver",g:"m",o:"Latin",m:"Olive tree",p:5,vibe:6,t:3,u:10,e:4,c:"english"},
+{n:"Elijah",g:"m",o:"Hebrew",m:"My God is Yahweh",p:5,vibe:5,t:3,u:9,e:6,c:"hebrew"},
+{n:"Leo",g:"m",o:"Latin",m:"Lion",p:4,vibe:5,t:2,u:8,e:5,c:"italian"},
+{n:"Miles",g:"m",o:"Latin",m:"Soldier",p:3,vibe:5,t:3,u:7,e:5,c:"english"},
+{n:"Weston",g:"m",o:"English",m:"From the western town",p:3,vibe:4,t:2,u:5,e:4,c:"english"},
+{n:"Brooks",g:"m",o:"English",m:"Small stream",p:3,vibe:5,t:2,u:5,e:3,c:"english"},
+// BOY - Nature/Earthy
+{n:"River",g:"m",o:"English",m:"Flowing water",p:3,vibe:6,t:2,u:5,e:1,c:"english"},
+{n:"Forest",g:"m",o:"English",m:"Woodland",p:2,vibe:6,t:3,u:4,e:1,c:"english"},
+{n:"Stone",g:"m",o:"English",m:"Rock, stone",p:1,vibe:2,t:3,u:2,e:1,c:"english"},
+{n:"Wolf",g:"m",o:"Germanic",m:"Wolf",p:2,vibe:1,t:3,u:3,e:1,c:"english"},
+{n:"Sage",g:"m",o:"Latin",m:"Wise, herb",p:3,vibe:7,t:2,u:5,e:1,c:"english"},
+{n:"Orion",g:"m",o:"Greek",m:"Rising in the sky, hunter",p:3,vibe:4,t:2,u:4,e:3,c:"greek"},
+{n:"Phoenix",g:"m",o:"Greek",m:"Mythical bird reborn from fire",p:3,vibe:3,t:1,u:4,e:3,c:"greek"},
+{n:"Cliff",g:"m",o:"English",m:"Cliff, steep rock face",p:2,vibe:3,t:8,u:4,e:1,c:"english"},
+{n:"Reed",g:"m",o:"English",m:"Red-haired, tall grass",p:2,vibe:5,t:5,u:4,e:1,c:"english"},
+{n:"Sterling",g:"m",o:"English",m:"Genuine, of high quality",p:2,vibe:4,t:5,u:4,e:6,c:"english"},
+{n:"Glen",g:"m",o:"Scottish",m:"Narrow valley",p:2,vibe:5,t:8,u:5,e:2,c:"irish"},
+{n:"Heath",g:"m",o:"English",m:"Moorland, heather",p:2,vibe:4,t:6,u:4,e:1,c:"english"},
+{n:"Clay",g:"m",o:"English",m:"Earth, clay",p:2,vibe:3,t:5,u:4,e:1,c:"english"},
+{n:"Flint",g:"m",o:"English",m:"Hard quartz rock",p:2,vibe:2,t:4,u:3,e:1,c:"english"},
+{n:"Ridge",g:"m",o:"English",m:"Mountain ridge",p:2,vibe:3,t:4,u:3,e:1,c:"english"},
+{n:"Cove",g:"m",o:"English",m:"Sheltered bay",p:1,vibe:6,t:2,u:2,e:1,c:"english"},
+{n:"Ash",g:"m",o:"English",m:"Ash tree",p:2,vibe:4,t:3,u:4,e:1,c:"english"},
+{n:"Linden",g:"m",o:"English",m:"Linden tree",p:1,vibe:6,t:3,u:2,e:2,c:"english"},
+{n:"Cedar",g:"m",o:"English",m:"Cedar tree",p:2,vibe:5,t:2,u:3,e:1,c:"english"},
+{n:"Birch",g:"m",o:"English",m:"Birch tree",p:1,vibe:5,t:4,u:2,e:1,c:"english"},
+// BOY - Strong/Bold
+{n:"Magnus",g:"m",o:"Latin",m:"Great, mighty",p:2,vibe:2,t:5,u:3,e:7,c:"scandinavian"},
+{n:"Thor",g:"m",o:"Norse",m:"Thunder",p:2,vibe:1,t:4,u:4,e:3,c:"scandinavian"},
+{n:"Gunnar",g:"m",o:"Norse",m:"Bold warrior",p:2,vibe:1,t:5,u:3,e:4,c:"scandinavian"},
+{n:"Rex",g:"m",o:"Latin",m:"King",p:2,vibe:2,t:6,u:4,e:5,c:"english"},
+{n:"Maverick",g:"m",o:"English",m:"Independent, nonconformist",p:3,vibe:2,t:1,u:5,e:4,c:"english"},
+{n:"Titan",g:"m",o:"Greek",m:"Powerful giant",p:2,vibe:1,t:1,u:3,e:5,c:"greek"},
+{n:"Valor",g:"m",o:"Latin",m:"Bravery, courage",p:1,vibe:2,t:1,u:2,e:5,c:"english"},
+{n:"Kane",g:"m",o:"Irish",m:"Warrior, tribute",p:2,vibe:2,t:4,u:5,e:4,c:"irish"},
+{n:"Ryker",g:"m",o:"Danish",m:"Strength",p:3,vibe:2,t:1,u:5,e:4,c:"scandinavian"},
+{n:"Jagger",g:"m",o:"English",m:"Carter, peddler",p:2,vibe:2,t:1,u:3,e:4,c:"english"},
+{n:"Zander",g:"m",o:"Greek",m:"Defender of mankind",p:3,vibe:3,t:2,u:5,e:4,c:"greek"},
+{n:"Blaze",g:"m",o:"English",m:"Flame, fire",p:2,vibe:1,t:1,u:3,e:3,c:"english"},
+{n:"Brock",g:"m",o:"English",m:"Badger",p:2,vibe:2,t:5,u:4,e:3,c:"english"},
+{n:"Conrad",g:"m",o:"Germanic",m:"Bold counsel",p:2,vibe:3,t:7,u:4,e:6,c:"english"},
+{n:"Gage",g:"m",o:"French",m:"Pledge, oath",p:2,vibe:2,t:3,u:4,e:4,c:"french"},
+{n:"Lance",g:"m",o:"French",m:"Land, spear",p:2,vibe:2,t:7,u:5,e:5,c:"french"},
+// BOY - Soft/Gentle
+{n:"Eliot",g:"m",o:"English",m:"The Lord is my God",p:2,vibe:7,t:5,u:5,e:6,c:"english"},
+{n:"Felix",g:"m",o:"Latin",m:"Happy, fortunate",p:3,vibe:7,t:4,u:6,e:6,c:"italian"},
+{n:"Julian",g:"m",o:"Latin",m:"Youthful",p:3,vibe:7,t:5,u:7,e:7,c:"english"},
+{n:"Sebastian",g:"m",o:"Greek",m:"Venerable, revered",p:4,vibe:7,t:4,u:7,e:8,c:"english"},
+{n:"Adrian",g:"m",o:"Latin",m:"From Hadria",p:3,vibe:6,t:5,u:6,e:7,c:"italian"},
+{n:"Emilio",g:"m",o:"Italian",m:"Rival, eager",p:2,vibe:7,t:3,u:4,e:7,c:"italian"},
+{n:"Luca",g:"m",o:"Italian",m:"Bringer of light",p:4,vibe:7,t:2,u:7,e:6,c:"italian"},
+{n:"Owen",g:"m",o:"Welsh",m:"Young warrior",p:4,vibe:6,t:4,u:8,e:5,c:"irish"},
+{n:"Arlo",g:"m",o:"English",m:"Fortified hill",p:3,vibe:7,t:2,u:5,e:4,c:"english"},
+{n:"Hugo",g:"m",o:"Germanic",m:"Mind, intellect",p:3,vibe:7,t:3,u:5,e:6,c:"french"},
+{n:"Elliot",g:"m",o:"English",m:"The Lord is my God",p:3,vibe:7,t:4,u:6,e:6,c:"english"},
+{n:"Emmett",g:"m",o:"English",m:"Universal, truth",p:3,vibe:6,t:4,u:5,e:5,c:"english"},
+{n:"Noel",g:"m",o:"French",m:"Christmas",p:2,vibe:7,t:6,u:5,e:6,c:"french"},
+{n:"Theo",g:"m",o:"Greek",m:"Gift of God",p:3,vibe:7,t:2,u:6,e:5,c:"greek"},
+// BOY - Cultural variety
+{n:"Mateo",g:"m",o:"Spanish",m:"Gift of God",p:5,vibe:6,t:2,u:8,e:5,c:"spanish"},
+{n:"Kieran",g:"m",o:"Irish",m:"Little dark one",p:2,vibe:5,t:4,u:5,e:5,c:"irish"},
+{n:"Soren",g:"m",o:"Scandinavian",m:"Stern, severe",p:2,vibe:5,t:3,u:3,e:5,c:"scandinavian"},
+{n:"Ravi",g:"m",o:"Sanskrit",m:"Sun",p:2,vibe:5,t:5,u:4,e:4,c:"indian"},
+{n:"Kenji",g:"m",o:"Japanese",m:"Strong, vigorous second son",p:2,vibe:4,t:4,u:3,e:5,c:"japanese"},
+{n:"Dmitri",g:"m",o:"Russian",m:"Follower of Demeter",p:2,vibe:4,t:6,u:3,e:6,c:"english"},
+{n:"Hassan",g:"m",o:"Arabic",m:"Handsome, good",p:3,vibe:4,t:6,u:5,e:5,c:"arabic"},
+{n:"Kwame",g:"m",o:"Akan",m:"Born on Saturday",p:1,vibe:4,t:5,u:2,e:4,c:"african"},
+{n:"Pierre",g:"m",o:"French",m:"Rock, stone",p:2,vibe:5,t:7,u:4,e:7,c:"french"},
+{n:"Nikolai",g:"m",o:"Russian",m:"Victory of the people",p:2,vibe:4,t:5,u:3,e:6,c:"english"},
+{n:"Elio",g:"m",o:"Italian",m:"Sun",p:2,vibe:7,t:2,u:3,e:6,c:"italian"},
+{n:"Callum",g:"m",o:"Scottish",m:"Dove",p:3,vibe:5,t:3,u:5,e:5,c:"irish"},
+{n:"Idris",g:"m",o:"Welsh",m:"Ardent lord",p:2,vibe:4,t:3,u:3,e:6,c:"arabic"},
+{n:"Akira",g:"m",o:"Japanese",m:"Bright, clear",p:2,vibe:5,t:3,u:3,e:5,c:"japanese"},
+{n:"Santiago",g:"m",o:"Spanish",m:"Saint James",p:3,vibe:4,t:3,u:5,e:6,c:"spanish"},
+{n:"Bjorn",g:"m",o:"Norse",m:"Bear",p:2,vibe:2,t:5,u:3,e:3,c:"scandinavian"},
+{n:"Rafael",g:"m",o:"Hebrew",m:"God has healed",p:3,vibe:5,t:4,u:6,e:7,c:"spanish"},
+{n:"Marco",g:"m",o:"Italian",m:"Warlike",p:3,vibe:4,t:5,u:6,e:5,c:"italian"},
+{n:"Arjun",g:"m",o:"Sanskrit",m:"Bright, shining",p:2,vibe:4,t:4,u:3,e:5,c:"indian"},
+{n:"Tariq",g:"m",o:"Arabic",m:"Morning star",p:2,vibe:3,t:5,u:3,e:5,c:"arabic"},
+{n:"Dante",g:"m",o:"Italian",m:"Enduring",p:3,vibe:4,t:4,u:5,e:7,c:"italian"},
+{n:"Henrik",g:"m",o:"Scandinavian",m:"Ruler of the home",p:2,vibe:4,t:5,u:3,e:5,c:"scandinavian"},
+{n:"Yusuf",g:"m",o:"Arabic",m:"God increases",p:2,vibe:5,t:6,u:3,e:5,c:"arabic"},
+{n:"Hiroshi",g:"m",o:"Japanese",m:"Generous, prosperous",p:1,vibe:6,t:6,u:2,e:6,c:"japanese"},
+{n:"Oisin",g:"m",o:"Irish",m:"Little deer",p:1,vibe:6,t:4,u:2,e:4,c:"irish"},
+{n:"Enrique",g:"m",o:"Spanish",m:"Ruler of the home",p:2,vibe:4,t:6,u:4,e:6,c:"spanish"},
+{n:"Takeshi",g:"m",o:"Japanese",m:"Fierce warrior",p:1,vibe:3,t:5,u:2,e:5,c:"japanese"},
+{n:"Amir",g:"m",o:"Arabic",m:"Prince, commander",p:3,vibe:4,t:4,u:5,e:6,c:"arabic"},
+{n:"Devraj",g:"m",o:"Sanskrit",m:"King of gods",p:1,vibe:3,t:5,u:1,e:7,c:"indian"},
+{n:"Kofi",g:"m",o:"Akan",m:"Born on Friday",p:1,vibe:5,t:5,u:2,e:3,c:"african"},
+{n:"Lachlan",g:"m",o:"Scottish",m:"Land of lakes",p:2,vibe:5,t:4,u:3,e:4,c:"irish"},
+{n:"Enzo",g:"m",o:"Italian",m:"Ruler of the home",p:3,vibe:4,t:2,u:5,e:5,c:"italian"},
+{n:"Cyrus",g:"m",o:"Persian",m:"Sun, throne",p:2,vibe:3,t:5,u:3,e:7,c:"english"},
+{n:"Thiago",g:"m",o:"Portuguese",m:"Supplanter",p:2,vibe:5,t:2,u:3,e:5,c:"spanish"},
+// BOY - Unique/Unusual
+{n:"Caspian",g:"m",o:"English",m:"Of the Caspian Sea",p:1,vibe:5,t:2,u:2,e:5,c:"english"},
+{n:"Dashiell",g:"m",o:"French",m:"Page boy",p:1,vibe:5,t:3,u:1,e:7,c:"french"},
+{n:"Oberon",g:"m",o:"English",m:"Noble, bearlike",p:1,vibe:5,t:5,u:1,e:8,c:"english"},
+{n:"Peregrine",g:"m",o:"Latin",m:"Traveler, pilgrim",p:1,vibe:6,t:6,u:1,e:7,c:"english"},
+{n:"Lysander",g:"m",o:"Greek",m:"Liberator",p:1,vibe:6,t:6,u:1,e:8,c:"greek"},
+{n:"Stellan",g:"m",o:"Scandinavian",m:"Calm, peaceful",p:1,vibe:6,t:3,u:2,e:5,c:"scandinavian"},
+{n:"Theron",g:"m",o:"Greek",m:"Hunter",p:1,vibe:3,t:5,u:2,e:5,c:"greek"},
+{n:"Zephyr",g:"m",o:"Greek",m:"West wind",p:1,vibe:7,t:2,u:1,e:3,c:"greek"},
+{n:"Cosimo",g:"m",o:"Italian",m:"Order, beauty",p:1,vibe:6,t:5,u:1,e:8,c:"italian"},
+{n:"Leander",g:"m",o:"Greek",m:"Lion man",p:1,vibe:6,t:5,u:1,e:7,c:"greek"},
+{n:"Evander",g:"m",o:"Greek",m:"Good man",p:1,vibe:6,t:4,u:2,e:7,c:"greek"},
+{n:"Alaric",g:"m",o:"Germanic",m:"Ruler of all",p:1,vibe:3,t:6,u:1,e:8,c:"english"},
+{n:"Percival",g:"m",o:"French",m:"Pierce the veil",p:1,vibe:5,t:8,u:1,e:9,c:"french"},
+{n:"Cassius",g:"m",o:"Latin",m:"Hollow, empty",p:1,vibe:4,t:5,u:2,e:8,c:"english"},
+{n:"Florian",g:"m",o:"Latin",m:"Flowering, flourishing",p:1,vibe:7,t:5,u:2,e:6,c:"french"},
+{n:"Ambrose",g:"m",o:"Greek",m:"Immortal",p:1,vibe:6,t:7,u:2,e:8,c:"english"},
+{n:"Ignatius",g:"m",o:"Latin",m:"Fiery one",p:1,vibe:4,t:8,u:1,e:8,c:"english"},
+{n:"Dorian",g:"m",o:"Greek",m:"Of the sea",p:2,vibe:6,t:5,u:3,e:7,c:"greek"},
+{n:"Rafferty",g:"m",o:"Irish",m:"Abundance, prosperity",p:1,vibe:5,t:3,u:2,e:5,c:"irish"},
+{n:"Bartholomew",g:"m",o:"Aramaic",m:"Son of Talmai",p:1,vibe:5,t:10,u:1,e:9,c:"english"},
+// BOY - Additional to reach 180+
+{n:"Jack",g:"m",o:"English",m:"God is gracious",p:5,vibe:4,t:7,u:10,e:4,c:"english"},
+{n:"Ethan",g:"m",o:"Hebrew",m:"Strong, firm",p:5,vibe:4,t:4,u:9,e:5,c:"hebrew"},
+{n:"Lucas",g:"m",o:"Latin",m:"Bringer of light",p:5,vibe:5,t:3,u:9,e:5,c:"english"},
+{n:"Jacob",g:"m",o:"Hebrew",m:"Supplanter",p:4,vibe:4,t:7,u:9,e:5,c:"hebrew"},
+{n:"Ryan",g:"m",o:"Irish",m:"Little king",p:4,vibe:4,t:6,u:9,e:5,c:"irish"},
+{n:"Nathan",g:"m",o:"Hebrew",m:"He gave",p:3,vibe:5,t:6,u:7,e:5,c:"hebrew"},
+{n:"Caleb",g:"m",o:"Hebrew",m:"Faithful, bold",p:3,vibe:4,t:5,u:7,e:5,c:"hebrew"},
+{n:"Isaac",g:"m",o:"Hebrew",m:"He will laugh",p:3,vibe:5,t:7,u:7,e:6,c:"hebrew"},
+{n:"Gabriel",g:"m",o:"Hebrew",m:"God is my strength",p:4,vibe:6,t:6,u:7,e:7,c:"hebrew"},
+{n:"Nolan",g:"m",o:"Irish",m:"Renowned, noble",p:3,vibe:5,t:3,u:6,e:5,c:"irish"},
+{n:"Oscar",g:"m",o:"Irish",m:"Deer friend",p:3,vibe:5,t:5,u:6,e:5,c:"irish"},
+{n:"Vincent",g:"m",o:"Latin",m:"Conquering",p:2,vibe:4,t:7,u:5,e:7,c:"french"},
+{n:"Marcus",g:"m",o:"Latin",m:"Warlike",p:3,vibe:3,t:7,u:6,e:6,c:"english"},
+{n:"Tobias",g:"m",o:"Hebrew",m:"God is good",p:2,vibe:6,t:5,u:4,e:6,c:"hebrew"},
+{n:"Ivan",g:"m",o:"Russian",m:"God is gracious",p:2,vibe:3,t:6,u:4,e:5,c:"english"},
+{n:"Victor",g:"m",o:"Latin",m:"Conqueror",p:2,vibe:3,t:7,u:5,e:6,c:"english"},
+{n:"Dominic",g:"m",o:"Latin",m:"Of the Lord",p:3,vibe:4,t:6,u:6,e:6,c:"italian"},
+{n:"Grant",g:"m",o:"French",m:"Great, large",p:2,vibe:3,t:7,u:5,e:5,c:"english"},
+{n:"Wesley",g:"m",o:"English",m:"Western meadow",p:2,vibe:5,t:6,u:5,e:4,c:"english"},
+{n:"Wyatt",g:"m",o:"English",m:"Brave in war",p:4,vibe:3,t:3,u:7,e:4,c:"english"},
+{n:"Harrison",g:"m",o:"English",m:"Son of Harry",p:3,vibe:4,t:4,u:6,e:6,c:"english"},
+{n:"Jude",g:"m",o:"Hebrew",m:"Praised",p:3,vibe:5,t:3,u:5,e:5,c:"hebrew"},
+{n:"August",g:"m",o:"Latin",m:"Great, magnificent",p:2,vibe:6,t:3,u:4,e:7,c:"english"},
+{n:"Graham",g:"m",o:"English",m:"Gravelly homestead",p:2,vibe:5,t:6,u:5,e:6,c:"english"},
+{n:"Bennett",g:"m",o:"Latin",m:"Blessed",p:3,vibe:5,t:3,u:5,e:6,c:"english"},
+{n:"Maxwell",g:"m",o:"Scottish",m:"Great stream",p:2,vibe:4,t:5,u:5,e:6,c:"english"},
+{n:"Simon",g:"m",o:"Hebrew",m:"He has heard",p:2,vibe:5,t:7,u:6,e:5,c:"hebrew"},
+{n:"Ronan",g:"m",o:"Irish",m:"Little seal",p:2,vibe:5,t:3,u:4,e:4,c:"irish"},
+{n:"Amos",g:"m",o:"Hebrew",m:"Carried by God",p:1,vibe:5,t:7,u:3,e:4,c:"hebrew"},
+{n:"Cedric",g:"m",o:"English",m:"Chief, war leader",p:1,vibe:5,t:8,u:3,e:7,c:"english"},
+// GIRL - Classic/Traditional
+{n:"Elizabeth",g:"f",o:"Hebrew",m:"Pledged to God",p:4,vibe:6,t:10,u:8,e:8,c:"english"},
+{n:"Catherine",g:"f",o:"Greek",m:"Pure",p:3,vibe:6,t:9,u:7,e:8,c:"english"},
+{n:"Margaret",g:"f",o:"Greek",m:"Pearl",p:2,vibe:5,t:10,u:6,e:7,c:"english"},
+{n:"Charlotte",g:"f",o:"French",m:"Free woman",p:5,vibe:6,t:7,u:9,e:8,c:"french"},
+{n:"Eleanor",g:"f",o:"French",m:"Bright, shining one",p:3,vibe:6,t:8,u:6,e:8,c:"french"},
+{n:"Victoria",g:"f",o:"Latin",m:"Victory",p:3,vibe:5,t:8,u:7,e:9,c:"english"},
+{n:"Alice",g:"f",o:"Germanic",m:"Noble, exalted",p:3,vibe:7,t:8,u:7,e:6,c:"english"},
+{n:"Grace",g:"f",o:"Latin",m:"Grace, elegance",p:4,vibe:8,t:8,u:8,e:7,c:"english"},
+{n:"Helen",g:"f",o:"Greek",m:"Bright, shining light",p:2,vibe:6,t:10,u:6,e:6,c:"greek"},
+{n:"Anna",g:"f",o:"Hebrew",m:"Grace, favor",p:4,vibe:7,t:8,u:8,e:6,c:"english"},
+{n:"Mary",g:"f",o:"Hebrew",m:"Beloved, wished-for child",p:3,vibe:7,t:10,u:8,e:6,c:"hebrew"},
+{n:"Jane",g:"f",o:"English",m:"God is gracious",p:3,vibe:6,t:10,u:7,e:5,c:"english"},
+{n:"Rose",g:"f",o:"Latin",m:"Rose flower",p:3,vibe:8,t:8,u:7,e:4,c:"english"},
+{n:"Sophia",g:"f",o:"Greek",m:"Wisdom",p:5,vibe:7,t:5,u:10,e:8,c:"greek"},
+{n:"Isabelle",g:"f",o:"French",m:"Pledged to God",p:4,vibe:7,t:6,u:8,e:8,c:"french"},
+{n:"Josephine",g:"f",o:"Hebrew",m:"God will increase",p:2,vibe:6,t:8,u:5,e:8,c:"french"},
+{n:"Claire",g:"f",o:"French",m:"Clear, bright",p:3,vibe:7,t:7,u:7,e:7,c:"french"},
+{n:"Madeline",g:"f",o:"French",m:"High tower",p:3,vibe:7,t:7,u:7,e:7,c:"french"},
+{n:"Caroline",g:"f",o:"French",m:"Free woman",p:3,vibe:6,t:8,u:7,e:7,c:"french"},
+{n:"Abigail",g:"f",o:"Hebrew",m:"Father's joy",p:4,vibe:6,t:7,u:8,e:6,c:"hebrew"},
+{n:"Lillian",g:"f",o:"Latin",m:"Lily flower",p:3,vibe:7,t:7,u:7,e:6,c:"english"},
+{n:"Beatrice",g:"f",o:"Latin",m:"She who brings happiness",p:2,vibe:6,t:8,u:4,e:8,c:"italian"},
+{n:"Audrey",g:"f",o:"English",m:"Noble strength",p:3,vibe:6,t:7,u:7,e:7,c:"english"},
+{n:"Clara",g:"f",o:"Latin",m:"Bright, clear",p:3,vibe:7,t:7,u:6,e:7,c:"english"},
+{n:"Frances",g:"f",o:"Latin",m:"Free one",p:2,vibe:6,t:9,u:4,e:7,c:"english"},
+{n:"Vivienne",g:"f",o:"French",m:"Alive, lively",p:2,vibe:7,t:5,u:4,e:9,c:"french"},
+{n:"Adelaide",g:"f",o:"Germanic",m:"Noble natured",p:2,vibe:7,t:7,u:4,e:8,c:"english"},
+{n:"Harriet",g:"f",o:"English",m:"Ruler of the home",p:2,vibe:5,t:9,u:4,e:6,c:"english"},
+{n:"Dorothy",g:"f",o:"Greek",m:"Gift of God",p:2,vibe:6,t:10,u:4,e:6,c:"english"},
+{n:"Louisa",g:"f",o:"Germanic",m:"Renowned warrior",p:2,vibe:7,t:8,u:4,e:7,c:"english"},
+// GIRL - Trendy/Modern
+{n:"Olivia",g:"f",o:"Latin",m:"Olive tree",p:5,vibe:7,t:3,u:10,e:6,c:"english"},
+{n:"Emma",g:"f",o:"Germanic",m:"Universal, whole",p:5,vibe:7,t:4,u:10,e:6,c:"english"},
+{n:"Aria",g:"f",o:"Italian",m:"Air, song",p:4,vibe:8,t:1,u:8,e:7,c:"italian"},
+{n:"Luna",g:"f",o:"Latin",m:"Moon",p:4,vibe:7,t:1,u:8,e:4,c:"spanish"},
+{n:"Willow",g:"f",o:"English",m:"Willow tree",p:4,vibe:8,t:2,u:7,e:1,c:"english"},
+{n:"Harper",g:"f",o:"English",m:"Harp player",p:4,vibe:4,t:1,u:8,e:5,c:"english"},
+{n:"Isla",g:"f",o:"Scottish",m:"Island",p:4,vibe:7,t:2,u:7,e:5,c:"irish"},
+{n:"Paisley",g:"f",o:"Scottish",m:"Church, cemetery",p:3,vibe:7,t:1,u:6,e:4,c:"irish"},
+{n:"Wren",g:"f",o:"English",m:"Small songbird",p:3,vibe:6,t:2,u:5,e:2,c:"english"},
+{n:"Nova",g:"f",o:"Latin",m:"New, star",p:3,vibe:5,t:1,u:5,e:4,c:"english"},
+{n:"Juniper",g:"f",o:"Latin",m:"Juniper tree",p:3,vibe:7,t:1,u:4,e:1,c:"english"},
+{n:"Everly",g:"f",o:"English",m:"Wild boar in woodland",p:3,vibe:7,t:1,u:5,e:5,c:"english"},
+{n:"Ivy",g:"f",o:"English",m:"Ivy plant, fidelity",p:4,vibe:7,t:2,u:7,e:2,c:"english"},
+{n:"Briar",g:"f",o:"English",m:"Thorny patch",p:2,vibe:5,t:1,u:4,e:2,c:"english"},
+{n:"Sutton",g:"f",o:"English",m:"From the southern homestead",p:2,vibe:4,t:1,u:3,e:5,c:"english"},
+{n:"Kennedy",g:"f",o:"Irish",m:"Helmeted chief",p:3,vibe:4,t:2,u:6,e:5,c:"irish"},
+{n:"Sloane",g:"f",o:"Irish",m:"Raider",p:2,vibe:4,t:1,u:4,e:6,c:"irish"},
+{n:"Harley",g:"f",o:"English",m:"Hare meadow",p:3,vibe:4,t:2,u:6,e:3,c:"english"},
+{n:"Riley",g:"f",o:"Irish",m:"Courageous, valiant",p:4,vibe:5,t:2,u:8,e:4,c:"irish"},
+{n:"Ellie",g:"f",o:"English",m:"Bright, shining",p:4,vibe:8,t:3,u:8,e:5,c:"english"},
+{n:"Layla",g:"f",o:"Arabic",m:"Night",p:4,vibe:7,t:2,u:7,e:6,c:"arabic"},
+{n:"Scarlett",g:"f",o:"English",m:"Red, scarlet",p:4,vibe:4,t:2,u:7,e:7,c:"english"},
+{n:"Penelope",g:"f",o:"Greek",m:"Weaver",p:4,vibe:7,t:3,u:7,e:8,c:"greek"},
+{n:"Chloe",g:"f",o:"Greek",m:"Blooming, young green shoot",p:4,vibe:7,t:4,u:8,e:5,c:"greek"},
+{n:"Mila",g:"f",o:"Slavic",m:"Gracious, dear",p:4,vibe:7,t:2,u:7,e:6,c:"english"},
+// GIRL - Nature/Earthy
+{n:"Fern",g:"f",o:"English",m:"Fern plant",p:2,vibe:7,t:4,u:4,e:1,c:"english"},
+{n:"Hazel",g:"f",o:"English",m:"Hazel tree",p:3,vibe:7,t:4,u:6,e:1,c:"english"},
+{n:"Daisy",g:"f",o:"English",m:"Day's eye flower",p:3,vibe:8,t:5,u:7,e:2,c:"english"},
+{n:"Violet",g:"f",o:"Latin",m:"Purple flower",p:3,vibe:7,t:5,u:6,e:3,c:"english"},
+{n:"Iris",g:"f",o:"Greek",m:"Rainbow",p:3,vibe:7,t:5,u:5,e:4,c:"greek"},
+{n:"Lily",g:"f",o:"English",m:"Lily flower, purity",p:4,vibe:8,t:5,u:8,e:3,c:"english"},
+{n:"Flora",g:"f",o:"Latin",m:"Flower, goddess of spring",p:2,vibe:7,t:6,u:4,e:3,c:"italian"},
+{n:"Meadow",g:"f",o:"English",m:"Field of grass",p:2,vibe:8,t:2,u:3,e:1,c:"english"},
+{n:"Aurora",g:"f",o:"Latin",m:"Dawn",p:3,vibe:7,t:3,u:6,e:5,c:"english"},
+{n:"Clover",g:"f",o:"English",m:"Clover plant",p:2,vibe:7,t:2,u:3,e:1,c:"english"},
+{n:"Autumn",g:"f",o:"English",m:"Fall season",p:3,vibe:7,t:4,u:6,e:1,c:"english"},
+{n:"Summer",g:"f",o:"English",m:"Summer season",p:3,vibe:7,t:4,u:6,e:2,c:"english"},
+{n:"Rain",g:"f",o:"English",m:"Rainfall",p:1,vibe:7,t:3,u:3,e:1,c:"english"},
+{n:"Skye",g:"f",o:"Scottish",m:"Sky, Isle of Skye",p:2,vibe:7,t:3,u:4,e:1,c:"irish"},
+{n:"Coral",g:"f",o:"English",m:"Sea coral",p:2,vibe:7,t:5,u:3,e:2,c:"english"},
+{n:"Stella",g:"f",o:"Latin",m:"Star",p:3,vibe:6,t:4,u:6,e:5,c:"italian"},
+{n:"Poppy",g:"f",o:"English",m:"Poppy flower",p:3,vibe:8,t:3,u:5,e:2,c:"english"},
+{n:"Dahlia",g:"f",o:"Scandinavian",m:"Valley, dahlia flower",p:2,vibe:7,t:3,u:4,e:4,c:"scandinavian"},
+{n:"Magnolia",g:"f",o:"Latin",m:"Magnolia tree",p:2,vibe:7,t:3,u:3,e:4,c:"english"},
+{n:"Marigold",g:"f",o:"English",m:"Golden flower",p:1,vibe:7,t:5,u:2,e:2,c:"english"},
+{n:"Primrose",g:"f",o:"English",m:"First rose",p:1,vibe:8,t:6,u:2,e:4,c:"english"},
+// GIRL - Strong/Bold
+{n:"Athena",g:"f",o:"Greek",m:"Goddess of wisdom and war",p:3,vibe:3,t:3,u:5,e:7,c:"greek"},
+{n:"Freya",g:"f",o:"Norse",m:"Noble woman",p:3,vibe:4,t:3,u:5,e:5,c:"scandinavian"},
+{n:"Valentina",g:"f",o:"Latin",m:"Strong, healthy",p:3,vibe:5,t:3,u:5,e:8,c:"spanish"},
+{n:"Xena",g:"f",o:"Greek",m:"Hospitable, stranger",p:1,vibe:2,t:3,u:2,e:4,c:"greek"},
+{n:"Raven",g:"f",o:"English",m:"Raven bird",p:2,vibe:3,t:3,u:4,e:3,c:"english"},
+{n:"Artemis",g:"f",o:"Greek",m:"Goddess of the hunt",p:2,vibe:3,t:3,u:3,e:6,c:"greek"},
+{n:"Sable",g:"f",o:"English",m:"Black",p:1,vibe:4,t:3,u:2,e:6,c:"english"},
+{n:"Juno",g:"f",o:"Latin",m:"Queen of the heavens",p:2,vibe:3,t:4,u:3,e:7,c:"english"},
+{n:"Zara",g:"f",o:"Arabic",m:"Blooming flower, princess",p:3,vibe:4,t:2,u:5,e:7,c:"arabic"},
+{n:"Thea",g:"f",o:"Greek",m:"Goddess, divine",p:2,vibe:5,t:3,u:4,e:5,c:"greek"},
+{n:"Kira",g:"f",o:"Russian",m:"Leader of the people",p:3,vibe:3,t:3,u:5,e:5,c:"english"},
+{n:"Astrid",g:"f",o:"Norse",m:"Divine beauty",p:2,vibe:3,t:4,u:4,e:6,c:"scandinavian"},
+{n:"Elektra",g:"f",o:"Greek",m:"Shining, bright",p:1,vibe:2,t:3,u:2,e:7,c:"greek"},
+{n:"Matilda",g:"f",o:"Germanic",m:"Battle-mighty",p:2,vibe:4,t:7,u:4,e:6,c:"english"},
+{n:"Brielle",g:"f",o:"French",m:"God is my strength",p:3,vibe:5,t:2,u:5,e:6,c:"french"},
+{n:"Valerie",g:"f",o:"Latin",m:"Strong, brave",p:3,vibe:5,t:7,u:6,e:6,c:"french"},
+// GIRL - Soft/Gentle
+{n:"Eloise",g:"f",o:"French",m:"Healthy, wide",p:3,vibe:8,t:5,u:5,e:8,c:"french"},
+{n:"Genevieve",g:"f",o:"French",m:"Woman of the people",p:2,vibe:8,t:6,u:4,e:9,c:"french"},
+{n:"Rosalie",g:"f",o:"French",m:"Rose garden",p:2,vibe:9,t:5,u:4,e:7,c:"french"},
+{n:"Seraphina",g:"f",o:"Hebrew",m:"Fiery, burning ones (angels)",p:1,vibe:9,t:4,u:2,e:9,c:"hebrew"},
+{n:"Celeste",g:"f",o:"Latin",m:"Heavenly",p:2,vibe:8,t:5,u:4,e:8,c:"french"},
+{n:"Delphine",g:"f",o:"French",m:"Dolphin, from Delphi",p:1,vibe:8,t:6,u:2,e:8,c:"french"},
+{n:"Amelie",g:"f",o:"French",m:"Hardworking, industrious",p:3,vibe:8,t:3,u:5,e:7,c:"french"},
+{n:"Evangeline",g:"f",o:"Greek",m:"Bearer of good news",p:2,vibe:9,t:5,u:3,e:8,c:"english"},
+{n:"Ophelia",g:"f",o:"Greek",m:"Help, aid",p:2,vibe:8,t:5,u:3,e:9,c:"greek"},
+{n:"Cordelia",g:"f",o:"Latin",m:"Heart, daughter of the sea",p:1,vibe:8,t:6,u:2,e:9,c:"english"},
+{n:"Arabella",g:"f",o:"Latin",m:"Yielding to prayer",p:2,vibe:8,t:4,u:3,e:9,c:"english"},
+{n:"Juliette",g:"f",o:"French",m:"Youthful",p:2,vibe:8,t:6,u:4,e:9,c:"french"},
+{n:"Annalise",g:"f",o:"German",m:"Graced with God's bounty",p:2,vibe:8,t:4,u:4,e:7,c:"english"},
+{n:"Mirabelle",g:"f",o:"French",m:"Wonderful, admirable",p:1,vibe:9,t:5,u:2,e:8,c:"french"},
+// GIRL - Cultural
+{n:"Sienna",g:"f",o:"Italian",m:"Reddish brown, from Siena",p:3,vibe:6,t:3,u:5,e:5,c:"italian"},
+{n:"Maeve",g:"f",o:"Irish",m:"She who intoxicates",p:3,vibe:4,t:3,u:5,e:5,c:"irish"},
+{n:"Esme",g:"f",o:"French",m:"Beloved, esteemed",p:3,vibe:7,t:3,u:4,e:6,c:"french"},
+{n:"Lucia",g:"f",o:"Italian",m:"Light",p:3,vibe:7,t:4,u:5,e:7,c:"italian"},
+{n:"Amara",g:"f",o:"Igbo",m:"Grace",p:3,vibe:6,t:2,u:4,e:6,c:"african"},
+{n:"Sakura",g:"f",o:"Japanese",m:"Cherry blossom",p:2,vibe:8,t:3,u:3,e:3,c:"japanese"},
+{n:"Priya",g:"f",o:"Sanskrit",m:"Beloved",p:2,vibe:7,t:5,u:3,e:5,c:"indian"},
+{n:"Leila",g:"f",o:"Arabic",m:"Night, dark beauty",p:3,vibe:7,t:4,u:5,e:6,c:"arabic"},
+{n:"Ingrid",g:"f",o:"Norse",m:"Beautiful, beloved",p:2,vibe:4,t:7,u:4,e:5,c:"scandinavian"},
+{n:"Niamh",g:"f",o:"Irish",m:"Bright, radiant",p:2,vibe:7,t:4,u:3,e:5,c:"irish"},
+{n:"Chiara",g:"f",o:"Italian",m:"Light, clear",p:2,vibe:7,t:4,u:3,e:7,c:"italian"},
+{n:"Paloma",g:"f",o:"Spanish",m:"Dove",p:2,vibe:7,t:4,u:3,e:5,c:"spanish"},
+{n:"Saoirse",g:"f",o:"Irish",m:"Freedom",p:2,vibe:5,t:3,u:3,e:5,c:"irish"},
+{n:"Aiko",g:"f",o:"Japanese",m:"Beloved child",p:1,vibe:8,t:5,u:2,e:5,c:"japanese"},
+{n:"Anaya",g:"f",o:"Sanskrit",m:"Caring, compassionate",p:2,vibe:7,t:2,u:4,e:5,c:"indian"},
+{n:"Fatima",g:"f",o:"Arabic",m:"Captivating, one who abstains",p:3,vibe:5,t:7,u:5,e:5,c:"arabic"},
+{n:"Nadia",g:"f",o:"Arabic",m:"Tender, delicate",p:3,vibe:7,t:5,u:5,e:6,c:"arabic"},
+{n:"Carmen",g:"f",o:"Spanish",m:"Garden, song",p:2,vibe:5,t:7,u:5,e:6,c:"spanish"},
+{n:"Giulia",g:"f",o:"Italian",m:"Youthful",p:2,vibe:7,t:5,u:3,e:7,c:"italian"},
+{n:"Yuki",g:"f",o:"Japanese",m:"Snow, happiness",p:1,vibe:7,t:4,u:2,e:4,c:"japanese"},
+{n:"Ines",g:"f",o:"Spanish",m:"Pure, holy",p:2,vibe:7,t:5,u:3,e:6,c:"spanish"},
+{n:"Brigid",g:"f",o:"Irish",m:"Exalted one",p:1,vibe:4,t:8,u:2,e:5,c:"irish"},
+{n:"Kiana",g:"f",o:"Hawaiian",m:"Divine",p:2,vibe:6,t:3,u:3,e:5,c:"english"},
+{n:"Maren",g:"f",o:"Latin",m:"Sea",p:2,vibe:6,t:3,u:3,e:4,c:"scandinavian"},
+{n:"Nia",g:"f",o:"Welsh",m:"Purpose, brightness",p:2,vibe:6,t:3,u:3,e:4,c:"african"},
+{n:"Liora",g:"f",o:"Hebrew",m:"My light",p:1,vibe:8,t:3,u:2,e:7,c:"hebrew"},
+{n:"Leilani",g:"f",o:"Hawaiian",m:"Heavenly flower",p:2,vibe:7,t:2,u:3,e:4,c:"english"},
+{n:"Yara",g:"f",o:"Arabic",m:"Small butterfly",p:2,vibe:7,t:3,u:3,e:4,c:"arabic"},
+// GIRL - Unique/Unusual
+{n:"Calliope",g:"f",o:"Greek",m:"Beautiful voice",p:1,vibe:7,t:4,u:1,e:8,c:"greek"},
+{n:"Persephone",g:"f",o:"Greek",m:"Bringer of death",p:1,vibe:6,t:5,u:1,e:8,c:"greek"},
+{n:"Ottilie",g:"f",o:"Germanic",m:"Prosperous in battle",p:1,vibe:7,t:6,u:1,e:7,c:"french"},
+{n:"Thessaly",g:"f",o:"Greek",m:"Region of Greece",p:1,vibe:6,t:4,u:1,e:7,c:"greek"},
+{n:"Elowen",g:"f",o:"Cornish",m:"Elm tree",p:1,vibe:8,t:3,u:1,e:3,c:"english"},
+{n:"Seren",g:"f",o:"Welsh",m:"Star",p:1,vibe:8,t:4,u:2,e:4,c:"english"},
+{n:"Vesper",g:"f",o:"Latin",m:"Evening star",p:1,vibe:5,t:4,u:1,e:6,c:"english"},
+{n:"Isolde",g:"f",o:"Welsh",m:"Ice ruler",p:1,vibe:6,t:7,u:1,e:8,c:"english"},
+{n:"Romilly",g:"f",o:"French",m:"From Romilly",p:1,vibe:7,t:5,u:1,e:7,c:"french"},
+{n:"Xiomara",g:"f",o:"Spanish",m:"Ready for battle",p:1,vibe:4,t:3,u:1,e:5,c:"spanish"},
+{n:"Eulalia",g:"f",o:"Greek",m:"Well-spoken",p:1,vibe:8,t:7,u:1,e:8,c:"greek"},
+{n:"Ottilia",g:"f",o:"Germanic",m:"Wealthy",p:1,vibe:7,t:7,u:1,e:7,c:"english"},
+{n:"Cosette",g:"f",o:"French",m:"Little thing",p:1,vibe:8,t:6,u:2,e:8,c:"french"},
+{n:"Zinnia",g:"f",o:"Latin",m:"Zinnia flower",p:1,vibe:7,t:3,u:2,e:3,c:"english"},
+{n:"Wisteria",g:"f",o:"English",m:"Wisteria vine",p:1,vibe:8,t:4,u:1,e:5,c:"english"},
+{n:"Jessamine",g:"f",o:"Persian",m:"Jasmine flower",p:1,vibe:8,t:6,u:1,e:5,c:"english"},
+{n:"Sapphira",g:"f",o:"Hebrew",m:"Beautiful, sapphire",p:1,vibe:7,t:5,u:1,e:8,c:"hebrew"},
+{n:"Ondine",g:"f",o:"French",m:"Little wave",p:1,vibe:8,t:5,u:1,e:6,c:"french"},
+// GIRL - Additional to reach 180+
+{n:"Amelia",g:"f",o:"Germanic",m:"Industrious, striving",p:5,vibe:7,t:4,u:9,e:7,c:"english"},
+{n:"Evelyn",g:"f",o:"English",m:"Wished-for child",p:4,vibe:7,t:5,u:8,e:7,c:"english"},
+{n:"Hannah",g:"f",o:"Hebrew",m:"Grace, favor",p:4,vibe:6,t:7,u:8,e:5,c:"hebrew"},
+{n:"Natalie",g:"f",o:"Latin",m:"Born on Christmas Day",p:3,vibe:6,t:6,u:7,e:6,c:"french"},
+{n:"Naomi",g:"f",o:"Hebrew",m:"Pleasantness",p:3,vibe:7,t:5,u:6,e:6,c:"hebrew"},
+{n:"Sarah",g:"f",o:"Hebrew",m:"Princess",p:4,vibe:6,t:8,u:9,e:6,c:"hebrew"},
+{n:"Emily",g:"f",o:"Latin",m:"Industrious, eager",p:4,vibe:7,t:6,u:9,e:5,c:"english"},
+{n:"Rachel",g:"f",o:"Hebrew",m:"Ewe, gentle",p:3,vibe:6,t:8,u:7,e:5,c:"hebrew"},
+{n:"Rebecca",g:"f",o:"Hebrew",m:"To tie, to bind",p:3,vibe:5,t:8,u:7,e:6,c:"hebrew"},
+{n:"Diana",g:"f",o:"Latin",m:"Divine, goddess of the moon",p:3,vibe:5,t:7,u:6,e:7,c:"english"},
+{n:"Lydia",g:"f",o:"Greek",m:"From Lydia, noble one",p:2,vibe:7,t:7,u:5,e:6,c:"greek"},
+{n:"Phoebe",g:"f",o:"Greek",m:"Bright, shining",p:2,vibe:7,t:5,u:5,e:5,c:"greek"},
+{n:"Nora",g:"f",o:"Irish",m:"Honor, light",p:3,vibe:7,t:4,u:7,e:5,c:"irish"},
+{n:"Elena",g:"f",o:"Greek",m:"Bright, shining light",p:3,vibe:7,t:4,u:6,e:7,c:"spanish"},
+{n:"Gabriella",g:"f",o:"Hebrew",m:"God is my strength",p:3,vibe:7,t:5,u:6,e:8,c:"italian"},
+{n:"Camille",g:"f",o:"French",m:"Young ceremonial attendant",p:2,vibe:7,t:5,u:5,e:8,c:"french"},
+{n:"Margot",g:"f",o:"French",m:"Pearl",p:2,vibe:5,t:5,u:4,e:7,c:"french"},
+{n:"Elise",g:"f",o:"French",m:"Pledged to God",p:3,vibe:7,t:6,u:6,e:7,c:"french"},
+{n:"Vera",g:"f",o:"Russian",m:"Faith, truth",p:2,vibe:5,t:7,u:4,e:5,c:"english"},
+{n:"Daphne",g:"f",o:"Greek",m:"Laurel tree",p:2,vibe:7,t:5,u:4,e:5,c:"greek"},
+{n:"Cecilia",g:"f",o:"Latin",m:"Blind, heavenly",p:2,vibe:7,t:7,u:5,e:8,c:"italian"},
+{n:"Imogen",g:"f",o:"Celtic",m:"Maiden",p:2,vibe:7,t:5,u:3,e:7,c:"english"},
+{n:"Tamsin",g:"f",o:"English",m:"Twin",p:1,vibe:5,t:5,u:2,e:5,c:"english"},
+{n:"Helena",g:"f",o:"Greek",m:"Bright, shining light",p:2,vibe:6,t:7,u:5,e:7,c:"greek"},
+{n:"Sylvie",g:"f",o:"French",m:"From the forest",p:2,vibe:7,t:4,u:3,e:5,c:"french"},
+{n:"Anastasia",g:"f",o:"Greek",m:"Resurrection",p:2,vibe:7,t:6,u:4,e:9,c:"greek"},
+{n:"Bianca",g:"f",o:"Italian",m:"White, pure",p:2,vibe:6,t:5,u:4,e:7,c:"italian"},
+{n:"Colette",g:"f",o:"French",m:"People of victory",p:2,vibe:7,t:6,u:3,e:8,c:"french"},
+{n:"Fiona",g:"f",o:"Irish",m:"White, fair",p:3,vibe:6,t:5,u:6,e:5,c:"irish"},
+{n:"Greta",g:"f",o:"Germanic",m:"Pearl",p:2,vibe:5,t:6,u:4,e:5,c:"scandinavian"},
+{n:"Lena",g:"f",o:"Greek",m:"Light, bright",p:3,vibe:7,t:4,u:6,e:5,c:"english"},
+{n:"Mabel",g:"f",o:"Latin",m:"Lovable",p:2,vibe:7,t:7,u:4,e:5,c:"english"},
+{n:"Thalia",g:"f",o:"Greek",m:"To flourish, bloom",p:1,vibe:7,t:4,u:2,e:7,c:"greek"},
+{n:"Willa",g:"f",o:"Germanic",m:"Resolute protector",p:2,vibe:7,t:4,u:4,e:4,c:"english"},
+{n:"Adeline",g:"f",o:"Germanic",m:"Noble",p:3,vibe:7,t:5,u:5,e:7,c:"french"},
+{n:"Cora",g:"f",o:"Greek",m:"Maiden",p:3,vibe:6,t:5,u:5,e:5,c:"english"},
+{n:"Lila",g:"f",o:"Arabic",m:"Night",p:3,vibe:8,t:3,u:5,e:5,c:"arabic"},
+{n:"Maisie",g:"f",o:"Scottish",m:"Pearl",p:2,vibe:8,t:3,u:4,e:4,c:"irish"},
+{n:"Ruby",g:"f",o:"Latin",m:"Red gemstone",p:4,vibe:6,t:4,u:7,e:4,c:"english"},
+{n:"Sadie",g:"f",o:"Hebrew",m:"Princess",p:3,vibe:7,t:4,u:5,e:4,c:"english"},
+{n:"Tessa",g:"f",o:"Greek",m:"Harvester",p:3,vibe:6,t:4,u:5,e:5,c:"english"},
+{n:"Zoe",g:"f",o:"Greek",m:"Life",p:4,vibe:6,t:3,u:7,e:5,c:"greek"},
+{n:"Alma",g:"f",o:"Latin",m:"Nourishing, soul",p:2,vibe:6,t:7,u:4,e:5,c:"spanish"},
+{n:"Petra",g:"f",o:"Greek",m:"Rock, stone",p:1,vibe:4,t:6,u:3,e:5,c:"greek"},
+{n:"Soraya",g:"f",o:"Persian",m:"Princess, rich",p:1,vibe:7,t:4,u:2,e:7,c:"arabic"},
+{n:"Catalina",g:"f",o:"Spanish",m:"Pure",p:2,vibe:6,t:4,u:4,e:7,c:"spanish"},
+{n:"Alina",g:"f",o:"Slavic",m:"Bright, beautiful",p:3,vibe:7,t:3,u:5,e:6,c:"english"},
+{n:"Miriam",g:"f",o:"Hebrew",m:"Wished-for child",p:2,vibe:6,t:8,u:4,e:6,c:"hebrew"},
+{n:"Rosemary",g:"f",o:"Latin",m:"Dew of the sea",p:2,vibe:7,t:8,u:4,e:3,c:"english"},
+{n:"Simone",g:"f",o:"French",m:"She has heard",p:2,vibe:5,t:6,u:4,e:7,c:"french"},
+{n:"Winona",g:"f",o:"Native American",m:"Firstborn daughter",p:1,vibe:6,t:6,u:2,e:4,c:"english"},
+{n:"Elara",g:"f",o:"Greek",m:"Bright, shining",p:1,vibe:7,t:2,u:2,e:6,c:"greek"},
+{n:"Saskia",g:"f",o:"Dutch",m:"Saxon woman",p:1,vibe:5,t:5,u:2,e:6,c:"scandinavian"},
+// BOY - Additional batch 2
+{n:"Archer",g:"m",o:"English",m:"Bowman",p:3,vibe:3,t:2,u:5,e:4,c:"english"},
+{n:"Barrett",g:"m",o:"Germanic",m:"Bear strength",p:2,vibe:3,t:4,u:4,e:5,c:"english"},
+{n:"Callahan",g:"m",o:"Irish",m:"Bright-headed",p:1,vibe:4,t:3,u:2,e:5,c:"irish"},
+{n:"Desmond",g:"m",o:"Irish",m:"Gracious defender",p:2,vibe:4,t:7,u:4,e:6,c:"irish"},
+{n:"Emeric",g:"m",o:"Germanic",m:"Powerful ruler",p:1,vibe:5,t:5,u:2,e:7,c:"french"},
+{n:"Fletcher",g:"m",o:"English",m:"Arrow maker",p:2,vibe:4,t:4,u:4,e:4,c:"english"},
+{n:"Gideon",g:"m",o:"Hebrew",m:"Feller of trees, mighty warrior",p:2,vibe:3,t:6,u:4,e:5,c:"hebrew"},
+{n:"Holden",g:"m",o:"English",m:"Hollow valley",p:2,vibe:5,t:3,u:4,e:4,c:"english"},
+{n:"Jaspar",g:"m",o:"Persian",m:"Bringer of treasure",p:1,vibe:6,t:5,u:2,e:5,c:"english"},
+{n:"Killian",g:"m",o:"Irish",m:"Church, strife",p:2,vibe:3,t:3,u:4,e:5,c:"irish"},
+{n:"Leopold",g:"m",o:"Germanic",m:"Bold people",p:1,vibe:5,t:8,u:2,e:9,c:"english"},
+{n:"Montgomery",g:"m",o:"French",m:"Man power",p:1,vibe:5,t:8,u:1,e:9,c:"english"},
+{n:"Niles",g:"m",o:"English",m:"Champion",p:1,vibe:6,t:7,u:3,e:7,c:"english"},
+{n:"Orlando",g:"m",o:"Italian",m:"Renowned throughout the land",p:2,vibe:5,t:6,u:4,e:7,c:"italian"},
+{n:"Prescott",g:"m",o:"English",m:"Priest's cottage",p:1,vibe:5,t:7,u:2,e:7,c:"english"},
+{n:"Quincy",g:"m",o:"French",m:"Fifth",p:1,vibe:5,t:6,u:2,e:6,c:"french"},
+{n:"Sullivan",g:"m",o:"Irish",m:"Dark-eyed one",p:2,vibe:5,t:4,u:4,e:6,c:"irish"},
+{n:"Tristan",g:"m",o:"Celtic",m:"Sorrowful, bold",p:3,vibe:6,t:5,u:5,e:7,c:"english"},
+{n:"Ulric",g:"m",o:"English",m:"Wolf ruler",p:1,vibe:2,t:7,u:1,e:6,c:"english"},
+{n:"Vernon",g:"m",o:"French",m:"Alder grove",p:1,vibe:5,t:9,u:3,e:5,c:"english"},
+{n:"Wallace",g:"m",o:"Scottish",m:"Foreigner, stranger",p:1,vibe:4,t:9,u:3,e:5,c:"irish"},
+{n:"Xavier",g:"m",o:"Basque",m:"New house, bright",p:3,vibe:4,t:4,u:5,e:6,c:"spanish"},
+{n:"Yosef",g:"m",o:"Hebrew",m:"God will add",p:1,vibe:5,t:7,u:2,e:5,c:"hebrew"},
+{n:"Zane",g:"m",o:"Hebrew",m:"God is gracious",p:3,vibe:3,t:3,u:5,e:4,c:"english"},
+{n:"Crew",g:"m",o:"English",m:"Group, team",p:2,vibe:3,t:1,u:3,e:4,c:"english"},
+{n:"Banks",g:"m",o:"English",m:"River bank",p:1,vibe:3,t:1,u:2,e:4,c:"english"},
+{n:"Hendrix",g:"m",o:"Germanic",m:"Ruler of the home",p:2,vibe:3,t:1,u:3,e:5,c:"english"},
+{n:"Cormac",g:"m",o:"Irish",m:"Charioteer",p:1,vibe:3,t:5,u:2,e:4,c:"irish"},
+{n:"Ansel",g:"m",o:"Germanic",m:"God's protection",p:1,vibe:6,t:4,u:2,e:5,c:"english"},
+{n:"Mercer",g:"m",o:"French",m:"Merchant",p:1,vibe:5,t:5,u:2,e:6,c:"english"},
+// GENDER NEUTRAL
+{n:"Avery",g:"n",o:"English",m:"Ruler of elves",p:4,vibe:6,t:3,u:7,e:5,c:"english"},
+{n:"Jordan",g:"n",o:"Hebrew",m:"To flow down",p:3,vibe:4,t:6,u:7,e:5,c:"hebrew"},
+{n:"Morgan",g:"n",o:"Welsh",m:"Sea circle",p:3,vibe:5,t:6,u:7,e:5,c:"english"},
+{n:"Quinn",g:"n",o:"Irish",m:"Wise, counsel",p:3,vibe:5,t:3,u:6,e:5,c:"irish"},
+{n:"Emery",g:"n",o:"Germanic",m:"Brave, powerful",p:3,vibe:6,t:2,u:5,e:5,c:"english"},
+{n:"Finley",g:"n",o:"Irish",m:"Fair-haired hero",p:3,vibe:6,t:3,u:5,e:5,c:"irish"},
+{n:"Charlie",g:"n",o:"Germanic",m:"Free man",p:4,vibe:6,t:4,u:8,e:4,c:"english"},
+{n:"Alex",g:"n",o:"Greek",m:"Defender of the people",p:4,vibe:4,t:5,u:8,e:5,c:"english"},
+{n:"Sam",g:"n",o:"Hebrew",m:"God has heard",p:4,vibe:5,t:6,u:8,e:4,c:"english"},
+{n:"Taylor",g:"n",o:"English",m:"Tailor",p:3,vibe:5,t:5,u:7,e:5,c:"english"},
+{n:"Casey",g:"n",o:"Irish",m:"Vigilant, watchful",p:3,vibe:5,t:5,u:6,e:4,c:"irish"},
+{n:"Jamie",g:"n",o:"Hebrew",m:"Supplanter",p:3,vibe:6,t:5,u:7,e:4,c:"english"},
+{n:"Skyler",g:"n",o:"Dutch",m:"Scholar, shelter",p:3,vibe:6,t:2,u:5,e:3,c:"english"},
+{n:"Dakota",g:"n",o:"Native American",m:"Friendly one, ally",p:2,vibe:4,t:4,u:5,e:3,c:"english"},
+{n:"Reese",g:"n",o:"Welsh",m:"Ardent, fiery",p:3,vibe:5,t:3,u:5,e:5,c:"english"},
+{n:"Blair",g:"n",o:"Scottish",m:"Plain, field",p:2,vibe:5,t:5,u:4,e:6,c:"irish"},
+{n:"Cameron",g:"n",o:"Scottish",m:"Crooked nose",p:3,vibe:4,t:5,u:7,e:5,c:"irish"},
+{n:"Hayden",g:"n",o:"English",m:"Heather-grown hill",p:3,vibe:5,t:3,u:6,e:4,c:"english"},
+{n:"Parker",g:"n",o:"English",m:"Park keeper",p:3,vibe:4,t:2,u:6,e:4,c:"english"},
+{n:"Spencer",g:"n",o:"English",m:"Steward, dispenser",p:2,vibe:5,t:5,u:5,e:6,c:"english"},
+{n:"Remi",g:"n",o:"French",m:"Oarsman",p:2,vibe:6,t:2,u:4,e:5,c:"french"},
+{n:"Marlowe",g:"n",o:"English",m:"Driftwood",p:2,vibe:6,t:2,u:3,e:6,c:"english"},
+{n:"Ellis",g:"n",o:"Welsh",m:"Benevolent",p:2,vibe:6,t:4,u:4,e:5,c:"english"},
+{n:"Emerson",g:"n",o:"English",m:"Son of Emery",p:3,vibe:5,t:3,u:5,e:5,c:"english"},
+{n:"Lennox",g:"n",o:"Scottish",m:"Elm grove",p:2,vibe:4,t:2,u:4,e:5,c:"irish"},
+{n:"Bellamy",g:"n",o:"French",m:"Beautiful friend",p:1,vibe:6,t:2,u:2,e:7,c:"french"},
+{n:"Justice",g:"n",o:"English",m:"Righteousness, fairness",p:2,vibe:3,t:3,u:4,e:5,c:"english"},
+{n:"Honor",g:"n",o:"English",m:"Honor, dignity",p:1,vibe:5,t:5,u:3,e:6,c:"english"},
+{n:"Eden",g:"n",o:"Hebrew",m:"Paradise, delight",p:3,vibe:7,t:3,u:5,e:3,c:"hebrew"},
+{n:"Shiloh",g:"n",o:"Hebrew",m:"Tranquil, peaceful",p:2,vibe:7,t:3,u:4,e:4,c:"hebrew"},
+{n:"Ocean",g:"n",o:"English",m:"The ocean",p:2,vibe:6,t:2,u:3,e:1,c:"english"},
+{n:"Harlow",g:"n",o:"English",m:"Rocky hill",p:2,vibe:5,t:2,u:4,e:5,c:"english"},
+{n:"Drew",g:"n",o:"English",m:"Wise",p:2,vibe:4,t:6,u:5,e:5,c:"english"},
+{n:"Lane",g:"n",o:"English",m:"Narrow road",p:2,vibe:5,t:5,u:4,e:4,c:"english"},
+{n:"Robin",g:"n",o:"English",m:"Bright fame, robin bird",p:2,vibe:6,t:6,u:5,e:3,c:"english"},
+{n:"Teagan",g:"n",o:"Irish",m:"Little poet",p:2,vibe:6,t:2,u:4,e:5,c:"irish"},
+{n:"Aubrey",g:"n",o:"Germanic",m:"Elf ruler",p:3,vibe:6,t:3,u:6,e:6,c:"english"},
+{n:"Peyton",g:"n",o:"English",m:"Fighting man's estate",p:3,vibe:5,t:3,u:6,e:5,c:"english"},
+{n:"Dylan",g:"n",o:"Welsh",m:"Son of the sea",p:4,vibe:4,t:4,u:7,e:4,c:"english"},
+{n:"Indigo",g:"n",o:"English",m:"Deep blue dye",p:1,vibe:6,t:1,u:2,e:3,c:"english"},
+{n:"Rory",g:"n",o:"Irish",m:"Red king",p:2,vibe:5,t:4,u:4,e:4,c:"irish"},
+{n:"Frankie",g:"n",o:"English",m:"Free one",p:2,vibe:6,t:4,u:5,e:4,c:"english"},
+{n:"Sage",g:"n",o:"Latin",m:"Wise, herb",p:3,vibe:7,t:2,u:5,e:1,c:"english"},
+{n:"River",g:"n",o:"English",m:"Flowing water",p:3,vibe:6,t:2,u:5,e:1,c:"english"},
+{n:"Phoenix",g:"n",o:"Greek",m:"Mythical bird reborn from fire",p:3,vibe:3,t:1,u:4,e:3,c:"greek"},
+{n:"Rowan",g:"n",o:"Irish",m:"Little red one",p:3,vibe:6,t:2,u:5,e:3,c:"irish"},
+{n:"Wren",g:"n",o:"English",m:"Small songbird",p:3,vibe:7,t:2,u:4,e:2,c:"english"},
+{n:"Atlas",g:"n",o:"Greek",m:"Bearer of the heavens",p:2,vibe:3,t:1,u:3,e:5,c:"greek"},
+{n:"Kai",g:"n",o:"Hawaiian",m:"Sea",p:3,vibe:4,t:1,u:6,e:3,c:"japanese"},
+{n:"Arden",g:"n",o:"English",m:"Valley of the eagle",p:1,vibe:5,t:4,u:2,e:4,c:"english"},
+{n:"Zephyr",g:"n",o:"Greek",m:"West wind",p:1,vibe:7,t:2,u:1,e:3,c:"greek"},
+{n:"Cypress",g:"n",o:"Greek",m:"Cypress tree",p:1,vibe:6,t:2,u:1,e:2,c:"english"},
+{n:"Lake",g:"n",o:"English",m:"Body of water",p:1,vibe:6,t:3,u:2,e:1,c:"english"},
+{n:"Onyx",g:"n",o:"English",m:"Black gemstone",p:1,vibe:3,t:1,u:2,e:4,c:"english"},
+{n:"Sol",g:"n",o:"Spanish",m:"Sun",p:1,vibe:5,t:3,u:2,e:3,c:"spanish"},
+{n:"Haven",g:"n",o:"English",m:"Safe place",p:2,vibe:7,t:2,u:3,e:4,c:"english"},
+{n:"Bryn",g:"n",o:"Welsh",m:"Hill, mound",p:1,vibe:5,t:4,u:2,e:3,c:"english"},
+{n:"Sasha",g:"n",o:"Russian",m:"Defender of mankind",p:2,vibe:6,t:4,u:4,e:5,c:"english"},
+{n:"Milan",g:"n",o:"Slavic",m:"Gracious, dear",p:2,vibe:5,t:3,u:3,e:6,c:"italian"},
+{n:"Noor",g:"n",o:"Arabic",m:"Light",p:2,vibe:7,t:4,u:3,e:5,c:"arabic"},
+{n:"Asa",g:"n",o:"Hebrew",m:"Healer, physician",p:1,vibe:6,t:5,u:2,e:4,c:"hebrew"},
+{n:"Lark",g:"n",o:"English",m:"Songbird",p:1,vibe:7,t:3,u:2,e:2,c:"english"},
+{n:"Sterling",g:"n",o:"English",m:"Of high quality",p:1,vibe:4,t:4,u:3,e:6,c:"english"},
+{n:"Hollis",g:"n",o:"English",m:"Holly trees",p:1,vibe:6,t:5,u:2,e:4,c:"english"},
+{n:"Leighton",g:"n",o:"English",m:"Meadow settlement",p:1,vibe:5,t:3,u:3,e:5,c:"english"},
+{n:"Tatum",g:"n",o:"English",m:"Cheerful",p:2,vibe:5,t:2,u:4,e:5,c:"english"},
+{n:"Sawyer",g:"n",o:"English",m:"Woodcutter",p:3,vibe:4,t:2,u:5,e:3,c:"english"},
+{n:"Monroe",g:"n",o:"Scottish",m:"Mouth of the Roe river",p:1,vibe:5,t:3,u:3,e:6,c:"english"},
+{n:"Juniper",g:"n",o:"Latin",m:"Juniper tree",p:2,vibe:7,t:1,u:3,e:1,c:"english"},
+{n:"Roan",g:"n",o:"Irish",m:"Red-haired",p:1,vibe:4,t:3,u:2,e:3,c:"irish"},
+{n:"Winter",g:"n",o:"English",m:"Winter season",p:2,vibe:6,t:2,u:3,e:2,c:"english"},
+{n:"Amari",g:"n",o:"African",m:"Strength",p:2,vibe:5,t:2,u:4,e:5,c:"african"}
+];
+
+var favorites=JSON.parse(localStorage.getItem('babyNameFavs')||'[]');
+var lastResults=[];
+var selectedGender='any';
+
+function setGender(btn){
+selectedGender=btn.getAttribute('data-val');
+document.querySelectorAll('.gender-btn').forEach(function(b){b.classList.remove('active')});
+btn.classList.add('active');
+}
+
+function scoreName(name){
+var tVal=parseInt(document.getElementById('trendy').value);
+var uVal=parseInt(document.getElementById('unique').value);
+var lVal=parseInt(document.getElementById('length').value);
+var vibeVal=parseInt(document.getElementById('vibe').value);
+var earthyVal=parseInt(document.getElementById('earthy').value);
+var culture=document.getElementById('culture').value;
+var startLetter=document.getElementById('startLetter').value;
+
+// Gender filter
+if(selectedGender!=='any'&&name.g!==selectedGender){return -1}
+
+// Starting letter filter
+if(startLetter!=='any'&&name.n.charAt(0).toUpperCase()!==startLetter){return -1}
+
+// Culture filter
+if(culture!=='any'&&name.c!==culture){return -1}
+
+var score=0;
+
+// Trendy: slider 1=trendy(low t value), 10=classic(high t value)
+score+=10-Math.abs(tVal-name.t);
+
+// Unique: slider 1=unique(low u value), 10=common(high u value)
+score+=10-Math.abs(uVal-name.u);
+
+// Length: slider 1=short, 10=long
+var nameLen=name.n.length;
+var targetLen;
+if(lVal<=2){targetLen=3}
+else if(lVal<=4){targetLen=4}
+else if(lVal<=6){targetLen=5}
+else if(lVal<=8){targetLen=7}
+else{targetLen=9}
+var lenDiff=Math.abs(nameLen-targetLen);
+score+=Math.max(0,10-lenDiff*2);
+
+// Vibe: slider 1=strong(low vibe), 10=soft(high vibe)
+score+=10-Math.abs(vibeVal-name.vibe);
+
+// Earthy: slider 1=earthy(low e value), 10=elegant(high e value)
+score+=10-Math.abs(earthyVal-name.e);
+
+return score;
+}
+
+function popLabel(p){
+if(p<=1){return{text:'Rare',cls:'pop-1'}}
+if(p<=2){return{text:'Uncommon',cls:'pop-2'}}
+if(p<=3){return{text:'Popular',cls:'pop-3'}}
+return{text:'Very Popular',cls:'pop-4'}
+}
+
+function isFav(name){
+return favorites.indexOf(name)!==-1;
+}
+
+function toggleFav(name){
+var idx=favorites.indexOf(name);
+if(idx===-1){favorites.push(name)}
+else{favorites.splice(idx,1)}
+localStorage.setItem('babyNameFavs',JSON.stringify(favorites));
+renderFavs();
+// Update card states
+document.querySelectorAll('.name-card').forEach(function(card){
+var n=card.getAttribute('data-name');
+if(n===name){
+card.classList.toggle('favorited');
+}
+});
+}
+
+function renderCards(names){
+var area=document.getElementById('resultsArea');
+var html='<div class="results">';
+names.forEach(function(entry){
+var pl=popLabel(entry.p);
+var faved=isFav(entry.n)?'favorited':'';
+html+='<div class="name-card '+faved+'" data-name="'+entry.n+'" onclick="toggleFav(\''+entry.n.replace(/'/,"\\'")+'\')">';
+html+='<span class="heart">'+(isFav(entry.n)?'&#9829;':'&#9825;')+'</span>';
+html+='<div class="name-text">'+entry.n+'</div>';
+html+='<div class="origin-text">'+entry.o+' - means "'+entry.m+'"</div>';
+html+='<span class="pop-badge '+pl.cls+'">'+pl.text+'</span>';
+html+='</div>';
+});
+html+='</div>';
+area.innerHTML=html;
+}
+
+function findNames(){
+var scored=[];
+NAMES.forEach(function(name){
+var s=scoreName(name);
+if(s>=0){scored.push({entry:name,score:s})}
+});
+scored.sort(function(a,b){return b.score-a.score});
+// Add randomness within similar scores
+for(var i=0;i<scored.length-1;i++){
+if(Math.abs(scored[i].score-scored[i+1].score)<=2&&Math.random()>0.5){
+var tmp=scored[i];scored[i]=scored[i+1];scored[i+1]=tmp;
+}
+}
+lastResults=scored;
+var top=scored.slice(0,12).map(function(s){return s.entry});
+renderCards(top);
+document.getElementById('moreBtn').style.display=scored.length>12?'block':'none';
+if(top.length===0){
+document.getElementById('resultsArea').innerHTML='<div class="empty-state">No names match your filters. Try adjusting your criteria.</div>';
+document.getElementById('moreBtn').style.display='none';
+}
+}
+
+var moreOffset=12;
+function generateMore(){
+moreOffset+=12;
+var top=lastResults.slice(0,moreOffset).map(function(s){return s.entry});
+renderCards(top);
+if(moreOffset>=lastResults.length){
+document.getElementById('moreBtn').style.display='none';
+}
+}
+
+function renderFavs(){
+var section=document.getElementById('favSection');
+var list=document.getElementById('favList');
+var count=document.getElementById('favCount');
+if(favorites.length===0){
+section.style.display='none';
+return;
+}
+section.style.display='block';
+count.textContent=favorites.length+' name'+(favorites.length===1?'':'s')+' saved';
+var html='';
+favorites.forEach(function(name){
+html+='<span class="fav-chip">'+name+' <span class="remove" onclick="event.stopPropagation();removeFav(\''+name.replace(/'/,"\\'")+'\')">&times;</span></span>';
+});
+list.innerHTML=html;
+}
+
+function removeFav(name){
+var idx=favorites.indexOf(name);
+if(idx!==-1){favorites.splice(idx,1)}
+localStorage.setItem('babyNameFavs',JSON.stringify(favorites));
+renderFavs();
+document.querySelectorAll('.name-card').forEach(function(card){
+if(card.getAttribute('data-name')===name){
+card.classList.remove('favorited');
+card.querySelector('.heart').innerHTML='&#9825;';
+}
+});
+}
+
+function clearFavs(){
+favorites=[];
+localStorage.setItem('babyNameFavs',JSON.stringify(favorites));
+renderFavs();
+document.querySelectorAll('.name-card.favorited').forEach(function(card){
+card.classList.remove('favorited');
+card.querySelector('.heart').innerHTML='&#9825;';
+});
+}
+
+var favsCollapsed=false;
+function toggleFavs(){
+favsCollapsed=!favsCollapsed;
+document.getElementById('favBody').classList.toggle('collapsed',favsCollapsed);
+document.getElementById('favToggle').textContent=favsCollapsed?'Show':'Hide';
+}
+
+function toggleFaq(el){
+el.classList.toggle('open');
+}
+
+// Init favorites display
+renderFavs();
+</script>
+</body>
+</html>
