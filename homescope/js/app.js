@@ -631,87 +631,126 @@
   });
 
   function typeaheadSearch(query) {
-    // Use Photon (Komoot) for typeahead - much better at partial address matching
-    var url = 'https://photon.komoot.io/api/' +
-      '?q=' + encodeURIComponent(query) +
-      '&lat=27.95&lon=-82.46&limit=6&lang=en' +
-      '&bbox=-83.5,27.0,-81.5,28.8';
+    // For street addresses (starts with number), add Tampa context and use Nominatim
+    // For general queries, try Photon first then Nominatim fallback
+    var looksLikeAddress = /^\d/.test(query.trim());
 
-    fetch(url)
-      .then(function (r) { return r.json(); })
-      .then(function (data) {
-        if (!data.features || data.features.length === 0) {
-          // Fallback to Nominatim if Photon returns nothing
+    if (looksLikeAddress) {
+      // Nominatim is better for structured US street addresses
+      typeaheadNominatim(query);
+    } else {
+      // Photon for general place/street name searches (no bbox - just bias)
+      var url = 'https://photon.komoot.io/api/' +
+        '?q=' + encodeURIComponent(query) +
+        '&lat=27.95&lon=-82.46&limit=6&lang=en';
+
+      fetch(url)
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          if (!data.features || data.features.length === 0) {
+            typeaheadNominatim(query);
+            return;
+          }
+
+          // Filter to Florida results only
+          var flResults = data.features.filter(function (f) {
+            var p = f.properties;
+            return p.state === 'Florida' || p.state === 'FL';
+          });
+
+          if (flResults.length === 0) {
+            typeaheadNominatim(query);
+            return;
+          }
+
+          var matches = flResults.map(function (f) {
+            var p = f.properties;
+            var parts = [];
+            if (p.housenumber) { parts.push(p.housenumber); }
+            if (p.street) { parts.push(p.street); }
+            var addrLine = parts.join(' ') || p.name || '';
+            var cityLine = [p.city || p.county, p.state].filter(Boolean).join(', ');
+            return {
+              displayName: [addrLine, cityLine].filter(Boolean).join(', '),
+              addrLine: addrLine,
+              cityLine: cityLine,
+              lat: f.geometry.coordinates[1],
+              lng: f.geometry.coordinates[0]
+            };
+          });
+
+          showAddressResults(matches);
+        })
+        .catch(function () {
           typeaheadNominatim(query);
-          return;
-        }
-
-        var matches = data.features.map(function (f) {
-          var p = f.properties;
-          var parts = [];
-          if (p.housenumber) { parts.push(p.housenumber); }
-          if (p.street) { parts.push(p.street); }
-          var addrLine = parts.join(' ') || p.name || '';
-          var cityLine = [p.city || p.county, p.state].filter(Boolean).join(', ');
-          return {
-            displayName: [addrLine, cityLine].filter(Boolean).join(', '),
-            addrLine: addrLine,
-            cityLine: cityLine,
-            lat: f.geometry.coordinates[1],
-            lng: f.geometry.coordinates[0]
-          };
         });
-
-        showAddressResults(matches);
-      })
-      .catch(function () {
-        typeaheadNominatim(query);
-      });
+    }
   }
 
   function typeaheadNominatim(query) {
-    var url = API.nominatim +
+    // For addresses, try both with and without Tampa context
+    var searchQuery = query;
+    if (/^\d/.test(query.trim()) && !/tampa|st\.?\s*pete|clearwater|florida|fl\b/i.test(query)) {
+      searchQuery = query + ', Tampa Bay FL';
+    }
+
+    // Run two searches in parallel: one with context, one without (bounded to viewbox)
+    var url1 = API.nominatim +
+      '?q=' + encodeURIComponent(searchQuery) +
+      '&format=json&addressdetails=1&limit=5' +
+      '&countrycodes=us';
+
+    var url2 = API.nominatim +
       '?q=' + encodeURIComponent(query) +
       '&format=json&addressdetails=1&limit=5' +
       '&countrycodes=us' +
       '&viewbox=-83.5,28.8,-81.5,27.0&bounded=1';
 
-    fetch(url, { headers: { 'Accept': 'application/json' } })
-      .then(function (r) { return r.json(); })
-      .then(function (results) {
-        if (!results || results.length === 0) {
-          searchResults.innerHTML = '<div class="search-no-results">No results found</div>';
-          searchResults.classList.remove('hidden');
-          return;
+    Promise.all([
+      fetch(url1, { headers: { 'Accept': 'application/json' } }).then(function (r) { return r.json(); }).catch(function () { return []; }),
+      fetch(url2, { headers: { 'Accept': 'application/json' } }).then(function (r) { return r.json(); }).catch(function () { return []; })
+    ]).then(function (results) {
+      // Merge and deduplicate results, preferring bounded results
+      var seen = {};
+      var allResults = [];
+      (results[1] || []).concat(results[0] || []).forEach(function (r) {
+        var key = r.lat + ',' + r.lon;
+        if (!seen[key]) {
+          seen[key] = true;
+          allResults.push(r);
         }
-
-        var matches = results.map(function (r) {
-          var addr = r.address || {};
-          var addrLine = '';
-          if (addr.house_number && addr.road) {
-            addrLine = addr.house_number + ' ' + addr.road;
-          } else if (addr.road) {
-            addrLine = addr.road;
-          } else {
-            addrLine = r.display_name.split(', ').slice(0, 2).join(', ');
-          }
-          var cityParts = [addr.city || addr.town || addr.village, addr.state].filter(Boolean);
-          var cityLine = cityParts.join(', ');
-
-          return {
-            displayName: r.display_name,
-            addrLine: addrLine,
-            cityLine: cityLine,
-            lat: parseFloat(r.lat),
-            lng: parseFloat(r.lon)
-          };
-        });
-
-        showAddressResults(matches);
-      })
-      .catch(function () {
-        searchResults.classList.add('hidden');
       });
+
+      if (allResults.length === 0) {
+        searchResults.innerHTML = '<div class="search-no-results">No results found</div>';
+        searchResults.classList.remove('hidden');
+        return;
+      }
+
+      var matches = allResults.slice(0, 6).map(function (r) {
+        var addr = r.address || {};
+        var addrLine = '';
+        if (addr.house_number && addr.road) {
+          addrLine = addr.house_number + ' ' + addr.road;
+        } else if (addr.road) {
+          addrLine = addr.road;
+        } else {
+          addrLine = r.display_name.split(', ').slice(0, 2).join(', ');
+        }
+        var cityParts = [addr.city || addr.town || addr.village, addr.state].filter(Boolean);
+        var cityLine = cityParts.join(', ');
+
+        return {
+          displayName: r.display_name,
+          addrLine: addrLine,
+          cityLine: cityLine,
+          lat: parseFloat(r.lat),
+          lng: parseFloat(r.lon)
+        };
+      });
+
+      showAddressResults(matches);
+    });
   }
 
   function doSearch() {
