@@ -2,8 +2,8 @@
   'use strict';
 
   // --- Config ---
-  var TAMPA_CENTER = [-82.4572, 27.9506];
-  var DEFAULT_ZOOM = 11;
+  var TAMPA_CENTER = [-82.6367, 27.7676]; // Center between Tampa and St. Pete
+  var DEFAULT_ZOOM = 10;
   var MIN_LAYER_ZOOM = 10;
 
   // API endpoints
@@ -114,7 +114,7 @@
       },
       center: TAMPA_CENTER,
       zoom: DEFAULT_ZOOM,
-      maxBounds: [[-83.5, 27.0], [-81.5, 28.8]]
+      maxBounds: [[-88.0, 24.5], [-79.5, 31.5]] // All of Florida
     });
 
     map.addControl(new maplibregl.NavigationControl(), 'bottom-right');
@@ -642,7 +642,7 @@
       // Photon for general place/street name searches (no bbox - just bias)
       var url = 'https://photon.komoot.io/api/' +
         '?q=' + encodeURIComponent(query) +
-        '&lat=27.95&lon=-82.46&limit=6&lang=en';
+        '&lat=27.77&lon=-82.64&limit=6&lang=en';
 
       fetch(url)
         .then(function (r) { return r.json(); })
@@ -691,7 +691,7 @@
     // For addresses, try both with and without Tampa context
     var searchQuery = query;
     if (/^\d/.test(query.trim()) && !/tampa|st\.?\s*pete|clearwater|florida|fl\b/i.test(query)) {
-      searchQuery = query + ', Tampa Bay FL';
+      searchQuery = query + ', FL';
     }
 
     // Run two searches in parallel: one with context, one without (bounded to viewbox)
@@ -704,7 +704,7 @@
       '?q=' + encodeURIComponent(query) +
       '&format=json&addressdetails=1&limit=5' +
       '&countrycodes=us' +
-      '&viewbox=-83.5,28.8,-81.5,27.0&bounded=1';
+      '&viewbox=-88.0,31.5,-79.5,24.5&bounded=1';
 
     Promise.all([
       fetch(url1, { headers: { 'Accept': 'application/json' } }).then(function (r) { return r.json(); }).catch(function () { return []; }),
@@ -763,15 +763,15 @@
   function geocodeAddress(address) {
     var query = address;
     // Append "Tampa Bay FL" if user didn't include a city/state
-    if (!/tampa|st\.?\s*pete|clearwater|largo|brandon|sarasota|bradenton|florida|fl\b/i.test(query)) {
-      query += ', Tampa Bay FL';
+    if (!/florida|fl\b/i.test(query)) {
+      query += ', FL';
     }
 
     var url = API.nominatim +
       '?q=' + encodeURIComponent(query) +
       '&format=json&addressdetails=1&limit=5' +
       '&countrycodes=us' +
-      '&viewbox=-83.5,28.8,-81.5,27.0&bounded=1';
+      '&viewbox=-88.0,31.5,-79.5,24.5&bounded=1';
 
     showLoading();
 
