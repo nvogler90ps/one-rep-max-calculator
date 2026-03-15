@@ -105,7 +105,7 @@
     <div id="panel" class="panel hidden">
       <button id="panel-close" class="panel-close" type="button">&times;</button>
 
-      <div id="panel-address" class="panel-address">Select an address or click the map</div>
+      <div id="panel-address" class="panel-address">Search an address to view data</div>
 
       <!-- Summary cards -->
       <div id="panel-summary" class="panel-summary hidden">
@@ -188,22 +188,55 @@
       </div>
     </div>
 
-    <!-- Layer controls -->
-    <div id="layer-controls" class="layer-controls">
-      <button class="layer-btn active" data-layer="flood" title="Flood Zones">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z"/></svg>
+    <!-- Layer panel -->
+    <div id="layer-panel" class="layer-panel">
+      <button id="layer-panel-toggle" class="layer-panel-toggle" type="button">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        Layers
+        <svg id="layer-panel-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left: auto;"><polyline points="6 9 12 15 18 9"/></svg>
       </button>
-      <button class="layer-btn" data-layer="evac" title="Evacuation Zones">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-      </button>
-      <button class="layer-btn" data-layer="surge" title="Storm Surge">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h2m4 0h2m4 0h2m4 0h2"/><path d="M3 7c1.5 0 2.5 1 4 1s2.5-1 4-1 2.5 1 4 1 2.5-1 4-1"/><path d="M3 17c1.5 0 2.5 1 4 1s2.5-1 4-1 2.5 1 4 1 2.5-1 4-1"/></svg>
-      </button>
+      <div id="layer-panel-body" class="layer-panel-body">
+        <label class="layer-item" data-layer="flood">
+          <input type="checkbox" checked>
+          <span class="layer-icon">&#x1F4A7;</span>
+          <span>Flood Zones</span>
+          <span class="layer-loading" id="loading-flood"></span>
+        </label>
+        <label class="layer-item" data-layer="evac">
+          <input type="checkbox">
+          <span class="layer-icon">&#x26A0;</span>
+          <span>Evacuation Zones</span>
+          <span class="layer-loading" id="loading-evac"></span>
+        </label>
+        <label class="layer-item" data-layer="hud">
+          <input type="checkbox">
+          <span class="layer-icon">&#x1F3E0;</span>
+          <span>HUD / Section 8</span>
+          <span class="layer-loading" id="loading-hud"></span>
+        </label>
+        <label class="layer-item" data-layer="marinas">
+          <input type="checkbox">
+          <span class="layer-icon">&#x2693;</span>
+          <span>Marinas</span>
+          <span class="layer-loading" id="loading-marinas"></span>
+        </label>
+        <label class="layer-item" data-layer="parks">
+          <input type="checkbox">
+          <span class="layer-icon">&#x1F333;</span>
+          <span>Parks &amp; Nature</span>
+          <span class="layer-loading" id="loading-parks"></span>
+        </label>
+        <label class="layer-item" data-layer="schools">
+          <input type="checkbox">
+          <span class="layer-icon">&#x1F3EB;</span>
+          <span>Schools</span>
+          <span class="layer-loading" id="loading-schools"></span>
+        </label>
+      </div>
     </div>
 
     <!-- Map legend -->
     <div id="legend" class="legend hidden">
-      <div class="legend-title" id="legend-title">Flood Zones</div>
       <div id="legend-items" class="legend-items"></div>
     </div>
   </div>

@@ -94,6 +94,11 @@ find "$SITE" -name "index.html" -print0 | while IFS= read -r -d '' htmlfile; do
     sed -i '' "s|</head>|${INJECT_CSS}\\
 ${INJECT_JS}\\
 </head>|" "$htmlfile"
+    # Insert Ko-fi link before copyright line in footer (skip if already present)
+    if ! grep -q 'kofi-link' "$htmlfile"; then
+        sed -i '' 's|\(&copy; 2026 Automated Insights\)|<div style="margin-bottom:0.75rem"><a href="https://ko-fi.com/automatedinsights" class="kofi-link">Support these free tools on Ko-fi</a></div>\
+\1|' "$htmlfile"
+    fi
 done
 echo "Theme and favicon injection complete."
 

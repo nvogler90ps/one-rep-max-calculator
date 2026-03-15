@@ -275,6 +275,16 @@ footer {
   border-color: var(--border) !important;
 }
 
+footer a.kofi-link {
+  color: var(--accent) !important;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+footer a.kofi-link:hover {
+  text-decoration: underline !important;
+}
+
 /* --- CTA Boxes --- */
 .cta-box, .cta, div[class*="cta"] {
   background: var(--bg-card) !important;

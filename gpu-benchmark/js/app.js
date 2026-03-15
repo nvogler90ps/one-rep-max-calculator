@@ -355,7 +355,7 @@ function renderFilterTable(container, vramMin, priceMax, typeFilter, sortBy) {
   }
 
   var html = '<table class="data-table"><thead><tr>';
-  html += "<th>GPU</th><th>Type</th><th>VRAM</th><th>FP32</th><th>FP16</th><th>BW</th><th>TDP</th><th>Price</th><th>Year</th>";
+  html += "<th>GPU</th><th>Type</th><th>VRAM</th><th>FP32</th><th>FP16</th><th>BW</th><th>TDP</th><th>Price</th><th>Year</th><th>Buy</th>";
   html += "</tr></thead><tbody>";
 
   items.forEach(function (gpu) {
@@ -370,6 +370,11 @@ function renderFilterTable(container, vramMin, priceMax, typeFilter, sortBy) {
     html += "<td>" + gpu.tdp + " W</td>";
     html += "<td>$" + formatNum(gpu.price) + "</td>";
     html += "<td>" + gpu.year + "</td>";
+    if (gpu.affiliateLinks && gpu.affiliateLinks.amazon) {
+      html += '<td><a href="' + gpu.affiliateLinks.amazon + '" target="_blank" rel="noopener sponsored" class="check-price-link">Check Price</a></td>';
+    } else {
+      html += "<td></td>";
+    }
     html += "</tr>";
   });
 

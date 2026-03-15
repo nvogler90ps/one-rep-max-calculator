@@ -281,6 +281,16 @@ input:focus {
   color: var(--text-muted);
 }
 
+.check-price-link {
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+.check-price-link:hover {
+  text-decoration: underline;
+}
+
 /* -------------------------------------------------------
    "Can it run?" badges
    ------------------------------------------------------- */

@@ -4,6 +4,7 @@
   // --- Config ---
   var TAMPA_CENTER = [-82.4572, 27.9506];
   var DEFAULT_ZOOM = 11;
+  var MIN_LAYER_ZOOM = 10;
 
   // API endpoints
   var API = {
@@ -16,7 +17,8 @@
     censusAcs: 'https://api.census.gov/data/2022/acs/acs5',
     hudBuildings: 'https://services.arcgis.com/VTyQ9soqVukalItT/ArcGIS/rest/services/Public_Housing_Buildings/FeatureServer/0/query',
     hudMultifamily: 'https://services.arcgis.com/VTyQ9soqVukalItT/ArcGIS/rest/services/MULTIFAMILY_PROPERTIES_ASSISTED/FeatureServer/0/query',
-    hudLihtc: 'https://services.arcgis.com/VTyQ9soqVukalItT/ArcGIS/rest/services/LIHTC/FeatureServer/0/query'
+    hudLihtc: 'https://services.arcgis.com/VTyQ9soqVukalItT/ArcGIS/rest/services/LIHTC/FeatureServer/0/query',
+    overpass: 'https://overpass-api.de/api/interpreter'
   };
 
   // Flood zone risk classification
@@ -45,11 +47,30 @@
     'N': { label: 'Non-Evac', desc: 'Not in evacuation zone', level: 'low' }
   };
 
+  // Evac zone colors
+  var EVAC_COLORS = {
+    'A': '#ff4444',
+    'B': '#ff8844',
+    'C': '#ffcc44',
+    'D': '#88cc44',
+    'E': '#44aa44'
+  };
+
   // --- State ---
   var map;
   var marker;
   var currentCoords = null;
-  var activeLayers = { flood: true, evac: false, surge: false };
+  var layerPanelOpen = false;
+
+  // Layer state: active flag, loading flag, cached bbox key
+  var layers = {
+    flood: { active: true, loading: false },
+    evac: { active: false, loading: false, cachedBbox: null },
+    hud: { active: false, loading: false, cachedBbox: null },
+    marinas: { active: false, loading: false, cachedBbox: null },
+    parks: { active: false, loading: false, cachedBbox: null },
+    schools: { active: false, loading: false, cachedBbox: null }
+  };
 
   // --- DOM refs ---
   var addressInput = document.getElementById('address-input');
@@ -62,8 +83,10 @@
   var panelDetails = document.getElementById('panel-details');
   var panelLoading = document.getElementById('panel-loading');
   var legend = document.getElementById('legend');
-  var legendTitle = document.getElementById('legend-title');
   var legendItems = document.getElementById('legend-items');
+  var layerPanelToggle = document.getElementById('layer-panel-toggle');
+  var layerPanelBody = document.getElementById('layer-panel-body');
+  var layerPanelChevron = document.getElementById('layer-panel-chevron');
 
   // --- Init map ---
   function initMap() {
@@ -96,17 +119,19 @@
 
     map.addControl(new maplibregl.NavigationControl(), 'bottom-right');
 
-    // Add FEMA flood zone tiles as image overlay
     map.on('load', function () {
       addFemaFloodLayer();
+      initLayerSources();
       updateLegend();
     });
 
-    // Click to query
-    map.on('click', function (e) {
-      var lng = e.lngLat.lng;
-      var lat = e.lngLat.lat;
-      queryLocation(lat, lng, null);
+    // Debounced moveend handler for viewport-based layers
+    var moveEndTimer = null;
+    map.on('moveend', function () {
+      clearTimeout(moveEndTimer);
+      moveEndTimer = setTimeout(function () {
+        refreshViewportLayers();
+      }, 500);
     });
   }
 
@@ -128,49 +153,455 @@
     });
   }
 
-  // --- Layer toggles ---
-  document.querySelectorAll('.layer-btn').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      var layer = btn.dataset.layer;
-      activeLayers[layer] = !activeLayers[layer];
-      btn.classList.toggle('active');
+  // --- Initialize GeoJSON sources and layers for dynamic data ---
+  function initLayerSources() {
+    var emptyGeoJSON = { type: 'FeatureCollection', features: [] };
 
-      if (layer === 'flood') {
-        if (map.getLayer('fema-flood-layer')) {
-          map.setLayoutProperty('fema-flood-layer', 'visibility',
-            activeLayers.flood ? 'visible' : 'none');
+    // Evac zones (polygons)
+    map.addSource('evac-zones', { type: 'geojson', data: emptyGeoJSON });
+    map.addLayer({
+      id: 'evac-zones-fill',
+      type: 'fill',
+      source: 'evac-zones',
+      paint: {
+        'fill-color': [
+          'match', ['get', 'EVAC_ZONE'],
+          'A', '#ff4444',
+          'B', '#ff8844',
+          'C', '#ffcc44',
+          'D', '#88cc44',
+          'E', '#44aa44',
+          '#888888'
+        ],
+        'fill-opacity': 0.3
+      },
+      layout: { visibility: 'none' }
+    });
+    map.addLayer({
+      id: 'evac-zones-outline',
+      type: 'line',
+      source: 'evac-zones',
+      paint: {
+        'line-color': [
+          'match', ['get', 'EVAC_ZONE'],
+          'A', '#ff4444',
+          'B', '#ff8844',
+          'C', '#ffcc44',
+          'D', '#88cc44',
+          'E', '#44aa44',
+          '#888888'
+        ],
+        'line-width': 1,
+        'line-opacity': 0.6
+      },
+      layout: { visibility: 'none' }
+    });
+
+    // HUD housing (points)
+    map.addSource('hud-points', { type: 'geojson', data: emptyGeoJSON });
+    map.addLayer({
+      id: 'hud-points-layer',
+      type: 'circle',
+      source: 'hud-points',
+      paint: {
+        'circle-radius': 6,
+        'circle-color': '#ffa94d',
+        'circle-stroke-width': 1.5,
+        'circle-stroke-color': '#fff',
+        'circle-opacity': 0.85
+      },
+      layout: { visibility: 'none' }
+    });
+
+    // Marinas (points)
+    map.addSource('marina-points', { type: 'geojson', data: emptyGeoJSON });
+    map.addLayer({
+      id: 'marina-points-layer',
+      type: 'circle',
+      source: 'marina-points',
+      paint: {
+        'circle-radius': 6,
+        'circle-color': '#339af0',
+        'circle-stroke-width': 1.5,
+        'circle-stroke-color': '#fff',
+        'circle-opacity': 0.85
+      },
+      layout: { visibility: 'none' }
+    });
+
+    // Parks (points)
+    map.addSource('park-points', { type: 'geojson', data: emptyGeoJSON });
+    map.addLayer({
+      id: 'park-points-layer',
+      type: 'circle',
+      source: 'park-points',
+      paint: {
+        'circle-radius': 6,
+        'circle-color': '#51cf66',
+        'circle-stroke-width': 1.5,
+        'circle-stroke-color': '#fff',
+        'circle-opacity': 0.85
+      },
+      layout: { visibility: 'none' }
+    });
+
+    // Schools (points)
+    map.addSource('school-points', { type: 'geojson', data: emptyGeoJSON });
+    map.addLayer({
+      id: 'school-points-layer',
+      type: 'circle',
+      source: 'school-points',
+      paint: {
+        'circle-radius': 6,
+        'circle-color': '#ffd43b',
+        'circle-stroke-width': 1.5,
+        'circle-stroke-color': '#fff',
+        'circle-opacity': 0.85
+      },
+      layout: { visibility: 'none' }
+    });
+  }
+
+  // --- Get current map bbox as string key for caching ---
+  function getBboxKey() {
+    var bounds = map.getBounds();
+    // Round to 3 decimal places to create cache buckets
+    return [
+      bounds.getWest().toFixed(3),
+      bounds.getSouth().toFixed(3),
+      bounds.getEast().toFixed(3),
+      bounds.getNorth().toFixed(3)
+    ].join(',');
+  }
+
+  function getBboxString() {
+    var bounds = map.getBounds();
+    return bounds.getWest() + ',' + bounds.getSouth() + ',' + bounds.getEast() + ',' + bounds.getNorth();
+  }
+
+  // --- Refresh all active viewport-based layers ---
+  function refreshViewportLayers() {
+    if (map.getZoom() < MIN_LAYER_ZOOM) {
+      return;
+    }
+    var bboxKey = getBboxKey();
+
+    if (layers.evac.active && layers.evac.cachedBbox !== bboxKey) {
+      fetchEvacZones(bboxKey);
+    }
+    if (layers.hud.active && layers.hud.cachedBbox !== bboxKey) {
+      fetchHudPoints(bboxKey);
+    }
+    if (layers.marinas.active && layers.marinas.cachedBbox !== bboxKey) {
+      fetchMarinas(bboxKey);
+    }
+    if (layers.parks.active && layers.parks.cachedBbox !== bboxKey) {
+      fetchParks(bboxKey);
+    }
+    if (layers.schools.active && layers.schools.cachedBbox !== bboxKey) {
+      fetchSchools(bboxKey);
+    }
+  }
+
+  // --- Set loading indicator for a layer ---
+  function setLayerLoading(layerName, isLoading) {
+    layers[layerName].loading = isLoading;
+    var el = document.getElementById('loading-' + layerName);
+    if (el) {
+      el.textContent = isLoading ? '(loading...)' : '';
+    }
+  }
+
+  // --- Fetch evacuation zones as GeoJSON ---
+  function fetchEvacZones(bboxKey) {
+    if (layers.evac.loading) { return; }
+    setLayerLoading('evac', true);
+
+    var bounds = map.getBounds();
+    var bbox = bounds.getWest() + ',' + bounds.getSouth() + ',' + bounds.getEast() + ',' + bounds.getNorth();
+    var url = API.flEvac +
+      '?where=1=1&outFields=EVAC_ZONE' +
+      '&geometryType=esriGeometryEnvelope' +
+      '&geometry=' + encodeURIComponent(bbox) +
+      '&inSR=4326&outSR=4326&returnGeometry=true&f=geojson';
+
+    fetch(url)
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (!layers.evac.active) { return; }
+        if (data && data.type === 'FeatureCollection') {
+          map.getSource('evac-zones').setData(data);
+          layers.evac.cachedBbox = bboxKey;
         }
+      })
+      .catch(function (err) { console.error('Evac zones fetch error:', err); })
+      .finally(function () { setLayerLoading('evac', false); });
+  }
+
+  // --- Fetch HUD housing points ---
+  function fetchHudPoints(bboxKey) {
+    if (layers.hud.loading) { return; }
+    setLayerLoading('hud', true);
+
+    var bounds = map.getBounds();
+    var bbox = bounds.getWest() + ',' + bounds.getSouth() + ',' + bounds.getEast() + ',' + bounds.getNorth();
+    var baseParams =
+      '?where=1=1' +
+      '&geometry=' + encodeURIComponent(bbox) +
+      '&geometryType=esriGeometryEnvelope' +
+      '&inSR=4326&outSR=4326' +
+      '&spatialRel=esriSpatialRelIntersects' +
+      '&returnGeometry=true&f=geojson';
+
+    Promise.all([
+      fetch(API.hudBuildings + baseParams + '&outFields=PROJECT_NAME,TOTAL_UNITS')
+        .then(function (r) { return r.json(); })
+        .catch(function () { return { type: 'FeatureCollection', features: [] }; }),
+      fetch(API.hudMultifamily + baseParams + '&outFields=PROPERTY_NAME_TEXT,TOTAL_UNIT_COUNT')
+        .then(function (r) { return r.json(); })
+        .catch(function () { return { type: 'FeatureCollection', features: [] }; })
+    ]).then(function (results) {
+      if (!layers.hud.active) { return; }
+      var combined = {
+        type: 'FeatureCollection',
+        features: (results[0].features || []).concat(results[1].features || [])
+      };
+      map.getSource('hud-points').setData(combined);
+      layers.hud.cachedBbox = bboxKey;
+    })
+    .catch(function (err) { console.error('HUD fetch error:', err); })
+    .finally(function () { setLayerLoading('hud', false); });
+  }
+
+  // --- Fetch marinas from Overpass ---
+  function fetchMarinas(bboxKey) {
+    if (layers.marinas.loading) { return; }
+    setLayerLoading('marinas', true);
+
+    var bounds = map.getBounds();
+    var bbox = bounds.getSouth() + ',' + bounds.getWest() + ',' + bounds.getNorth() + ',' + bounds.getEast();
+    var query = '[out:json];node["leisure"="marina"](' + bbox + ');out body;';
+
+    fetch(API.overpass, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: 'data=' + encodeURIComponent(query)
+    })
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (!layers.marinas.active) { return; }
+        var geojson = overpassToGeoJSON(data);
+        map.getSource('marina-points').setData(geojson);
+        layers.marinas.cachedBbox = bboxKey;
+      })
+      .catch(function (err) { console.error('Marinas fetch error:', err); })
+      .finally(function () { setLayerLoading('marinas', false); });
+  }
+
+  // --- Fetch parks from Overpass ---
+  function fetchParks(bboxKey) {
+    if (layers.parks.loading) { return; }
+    setLayerLoading('parks', true);
+
+    var bounds = map.getBounds();
+    var bbox = bounds.getSouth() + ',' + bounds.getWest() + ',' + bounds.getNorth() + ',' + bounds.getEast();
+    var query = '[out:json];(node["leisure"="park"](' + bbox + ');node["leisure"="nature_reserve"](' + bbox + '););out body;';
+
+    fetch(API.overpass, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: 'data=' + encodeURIComponent(query)
+    })
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (!layers.parks.active) { return; }
+        var geojson = overpassToGeoJSON(data);
+        map.getSource('park-points').setData(geojson);
+        layers.parks.cachedBbox = bboxKey;
+      })
+      .catch(function (err) { console.error('Parks fetch error:', err); })
+      .finally(function () { setLayerLoading('parks', false); });
+  }
+
+  // --- Fetch schools from Overpass ---
+  function fetchSchools(bboxKey) {
+    if (layers.schools.loading) { return; }
+    setLayerLoading('schools', true);
+
+    var bounds = map.getBounds();
+    var bbox = bounds.getSouth() + ',' + bounds.getWest() + ',' + bounds.getNorth() + ',' + bounds.getEast();
+    var query = '[out:json];node["amenity"="school"](' + bbox + ');out body;';
+
+    fetch(API.overpass, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: 'data=' + encodeURIComponent(query)
+    })
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (!layers.schools.active) { return; }
+        var geojson = overpassToGeoJSON(data);
+        map.getSource('school-points').setData(geojson);
+        layers.schools.cachedBbox = bboxKey;
+      })
+      .catch(function (err) { console.error('Schools fetch error:', err); })
+      .finally(function () { setLayerLoading('schools', false); });
+  }
+
+  // --- Convert Overpass response to GeoJSON ---
+  function overpassToGeoJSON(data) {
+    var features = [];
+    if (data && data.elements) {
+      data.elements.forEach(function (el) {
+        if (el.lat !== undefined && el.lon !== undefined) {
+          features.push({
+            type: 'Feature',
+            geometry: { type: 'Point', coordinates: [el.lon, el.lat] },
+            properties: el.tags || {}
+          });
+        }
+      });
+    }
+    return { type: 'FeatureCollection', features: features };
+  }
+
+  // --- Layer panel toggle ---
+  layerPanelToggle.addEventListener('click', function () {
+    layerPanelOpen = !layerPanelOpen;
+    if (layerPanelOpen) {
+      layerPanelBody.classList.add('open');
+      layerPanelChevron.style.transform = 'rotate(180deg)';
+    } else {
+      layerPanelBody.classList.remove('open');
+      layerPanelChevron.style.transform = '';
+    }
+  });
+
+  // --- Layer checkbox toggles ---
+  var LAYER_MAP_IDS = {
+    flood: ['fema-flood-layer'],
+    evac: ['evac-zones-fill', 'evac-zones-outline'],
+    hud: ['hud-points-layer'],
+    marinas: ['marina-points-layer'],
+    parks: ['park-points-layer'],
+    schools: ['school-points-layer']
+  };
+
+  document.querySelectorAll('.layer-item').forEach(function (item) {
+    var checkbox = item.querySelector('input[type="checkbox"]');
+    var layerName = item.dataset.layer;
+
+    checkbox.addEventListener('change', function () {
+      layers[layerName].active = checkbox.checked;
+
+      // Toggle map layer visibility
+      var mapIds = LAYER_MAP_IDS[layerName] || [];
+      mapIds.forEach(function (id) {
+        if (map.getLayer(id)) {
+          map.setLayoutProperty(id, 'visibility', checkbox.checked ? 'visible' : 'none');
+        }
+      });
+
+      if (checkbox.checked) {
+        // If turning on a viewport layer, fetch data immediately
+        if (layerName !== 'flood' && map.getZoom() >= MIN_LAYER_ZOOM) {
+          var bboxKey = getBboxKey();
+          if (layers[layerName].cachedBbox !== bboxKey) {
+            triggerLayerFetch(layerName, bboxKey);
+          }
+        }
+      } else {
+        // Clear data when turning off
+        clearLayerData(layerName);
       }
 
       updateLegend();
     });
   });
 
+  function triggerLayerFetch(layerName, bboxKey) {
+    switch (layerName) {
+      case 'evac': fetchEvacZones(bboxKey); break;
+      case 'hud': fetchHudPoints(bboxKey); break;
+      case 'marinas': fetchMarinas(bboxKey); break;
+      case 'parks': fetchParks(bboxKey); break;
+      case 'schools': fetchSchools(bboxKey); break;
+    }
+  }
+
+  function clearLayerData(layerName) {
+    var emptyGeoJSON = { type: 'FeatureCollection', features: [] };
+    var sourceMap = {
+      evac: 'evac-zones',
+      hud: 'hud-points',
+      marinas: 'marina-points',
+      parks: 'park-points',
+      schools: 'school-points'
+    };
+    var srcName = sourceMap[layerName];
+    if (srcName && map.getSource(srcName)) {
+      map.getSource(srcName).setData(emptyGeoJSON);
+    }
+    layers[layerName].cachedBbox = null;
+    setLayerLoading(layerName, false);
+  }
+
   // --- Legend ---
   function updateLegend() {
-    if (!activeLayers.flood && !activeLayers.evac && !activeLayers.surge) {
+    var anyActive = false;
+    for (var key in layers) {
+      if (layers[key].active) {
+        anyActive = true;
+        break;
+      }
+    }
+
+    if (!anyActive) {
       legend.classList.add('hidden');
       return;
     }
 
     legend.classList.remove('hidden');
+    var html = '';
 
-    if (activeLayers.flood) {
-      legendTitle.textContent = 'FEMA Flood Zones';
-      legendItems.innerHTML =
-        '<div class="legend-item"><div class="legend-swatch" style="background: rgba(0, 50, 200, 0.5)"></div>V/VE - Coastal High Risk</div>' +
-        '<div class="legend-item"><div class="legend-swatch" style="background: rgba(0, 120, 200, 0.5)"></div>A/AE - High Risk</div>' +
-        '<div class="legend-item"><div class="legend-swatch" style="background: rgba(255, 165, 0, 0.4)"></div>Moderate Risk</div>' +
-        '<div class="legend-item"><div class="legend-swatch" style="background: rgba(200, 200, 200, 0.2)"></div>X - Minimal Risk</div>';
-    } else if (activeLayers.evac) {
-      legendTitle.textContent = 'Evacuation Zones';
-      legendItems.innerHTML =
-        '<div class="legend-item"><div class="legend-swatch" style="background: #ff4444"></div>Zone A - Cat 1+</div>' +
-        '<div class="legend-item"><div class="legend-swatch" style="background: #ff8844"></div>Zone B - Cat 2+</div>' +
-        '<div class="legend-item"><div class="legend-swatch" style="background: #ffcc44"></div>Zone C - Cat 3+</div>' +
-        '<div class="legend-item"><div class="legend-swatch" style="background: #88cc44"></div>Zone D - Cat 4+</div>' +
-        '<div class="legend-item"><div class="legend-swatch" style="background: #44aa44"></div>Zone E - Cat 5</div>';
+    if (layers.flood.active) {
+      html += '<div class="legend-section-title">Flood Zones (FEMA)</div>';
+      html += '<div class="legend-item"><div class="legend-swatch" style="background: rgba(0, 50, 200, 0.5)"></div>V/VE - Coastal High Risk</div>';
+      html += '<div class="legend-item"><div class="legend-swatch" style="background: rgba(0, 120, 200, 0.5)"></div>A/AE - High Risk</div>';
+      html += '<div class="legend-item"><div class="legend-swatch" style="background: rgba(255, 165, 0, 0.4)"></div>Moderate Risk</div>';
+      html += '<div class="legend-item"><div class="legend-swatch" style="background: rgba(200, 200, 200, 0.2)"></div>X - Minimal Risk</div>';
     }
+
+    if (layers.evac.active) {
+      html += '<div class="legend-section-title">Evacuation Zones</div>';
+      html += '<div class="legend-item"><div class="legend-swatch" style="background: #ff4444; opacity: 0.6;"></div>Zone A - Cat 1+</div>';
+      html += '<div class="legend-item"><div class="legend-swatch" style="background: #ff8844; opacity: 0.6;"></div>Zone B - Cat 2+</div>';
+      html += '<div class="legend-item"><div class="legend-swatch" style="background: #ffcc44; opacity: 0.6;"></div>Zone C - Cat 3+</div>';
+      html += '<div class="legend-item"><div class="legend-swatch" style="background: #88cc44; opacity: 0.6;"></div>Zone D - Cat 4+</div>';
+      html += '<div class="legend-item"><div class="legend-swatch" style="background: #44aa44; opacity: 0.6;"></div>Zone E - Cat 5</div>';
+    }
+
+    if (layers.hud.active) {
+      html += '<div class="legend-section-title">HUD / Section 8</div>';
+      html += '<div class="legend-item"><div class="legend-swatch circle" style="background: #ffa94d;"></div>Public / Assisted Housing</div>';
+    }
+
+    if (layers.marinas.active) {
+      html += '<div class="legend-section-title">Marinas</div>';
+      html += '<div class="legend-item"><div class="legend-swatch circle" style="background: #339af0;"></div>Marina</div>';
+    }
+
+    if (layers.parks.active) {
+      html += '<div class="legend-section-title">Parks & Nature</div>';
+      html += '<div class="legend-item"><div class="legend-swatch circle" style="background: #51cf66;"></div>Park / Nature Reserve</div>';
+    }
+
+    if (layers.schools.active) {
+      html += '<div class="legend-section-title">Schools</div>';
+      html += '<div class="legend-item"><div class="legend-swatch circle" style="background: #ffd43b;"></div>School</div>';
+    }
+
+    legendItems.innerHTML = html;
   }
 
   // --- Search / Geocode ---
@@ -184,7 +615,7 @@
     }
   });
 
-  // Typeahead: query as user types (debounced 300ms, min 3 chars)
+  // Typeahead: query as user types (debounced 400ms, min 3 chars)
   addressInput.addEventListener('input', function () {
     clearTimeout(typeaheadTimer);
     var val = addressInput.value.trim();
@@ -194,37 +625,45 @@
     }
     typeaheadTimer = setTimeout(function () {
       typeaheadSearch(val);
-    }, 300);
+    }, 400);
   });
 
   function typeaheadSearch(query) {
-    // Photon geocoder (Komoot) - better for autocomplete than Nominatim
-    var url = 'https://photon.komoot.io/api/' +
+    // Use Nominatim for typeahead with viewbox constraint (bounded)
+    var url = API.nominatim +
       '?q=' + encodeURIComponent(query) +
-      '&lat=27.95&lon=-82.46&limit=5&lang=en' +
-      '&bbox=-83.5,27.0,-81.5,28.8';
+      '&format=json&addressdetails=1&limit=5' +
+      '&countrycodes=us' +
+      '&viewbox=-83.5,28.8,-81.5,27.0&bounded=1';
 
-    fetch(url)
+    fetch(url, { headers: { 'Accept': 'application/json' } })
       .then(function (r) { return r.json(); })
-      .then(function (data) {
-        if (!data.features || data.features.length === 0) {
-          searchResults.classList.add('hidden');
+      .then(function (results) {
+        if (!results || results.length === 0) {
+          searchResults.innerHTML = '<div class="search-no-results">No results found</div>';
+          searchResults.classList.remove('hidden');
           return;
         }
 
-        var matches = data.features.map(function (f) {
-          var p = f.properties;
-          var parts = [];
-          if (p.housenumber) { parts.push(p.housenumber); }
-          if (p.street) { parts.push(p.street); }
-          var addrLine = parts.join(' ') || p.name || '';
-          var cityLine = [p.city, p.state].filter(Boolean).join(', ');
+        var matches = results.map(function (r) {
+          var addr = r.address || {};
+          var addrLine = '';
+          if (addr.house_number && addr.road) {
+            addrLine = addr.house_number + ' ' + addr.road;
+          } else if (addr.road) {
+            addrLine = addr.road;
+          } else {
+            addrLine = r.display_name.split(', ').slice(0, 2).join(', ');
+          }
+          var cityParts = [addr.city || addr.town || addr.village, addr.state].filter(Boolean);
+          var cityLine = cityParts.join(', ');
+
           return {
-            displayName: [addrLine, cityLine].filter(Boolean).join(', '),
+            displayName: r.display_name,
             addrLine: addrLine,
             cityLine: cityLine,
-            lat: f.geometry.coordinates[1],
-            lng: f.geometry.coordinates[0]
+            lat: parseFloat(r.lat),
+            lng: parseFloat(r.lon)
           };
         });
 
@@ -243,18 +682,17 @@
   }
 
   function geocodeAddress(address) {
-    // Nominatim geocoder (CORS-friendly, unlike Census Bureau)
     var query = address;
-    // Append FL context if user didn't include a city
+    // Append "Tampa Bay FL" if user didn't include a city/state
     if (!/tampa|st\.?\s*pete|clearwater|largo|brandon|sarasota|bradenton|florida|fl\b/i.test(query)) {
-      query += ', FL';
+      query += ', Tampa Bay FL';
     }
 
     var url = API.nominatim +
       '?q=' + encodeURIComponent(query) +
       '&format=json&addressdetails=1&limit=5' +
       '&countrycodes=us' +
-      '&viewbox=-83.5,28.8,-81.5,27.0';
+      '&viewbox=-83.5,28.8,-81.5,27.0&bounded=1';
 
     showLoading();
 
@@ -263,12 +701,11 @@
       .then(function (results) {
         if (!results || results.length === 0) {
           hideLoading();
-          panelAddress.textContent = 'Address not found. Try a different search.';
+          panelAddress.textContent = 'No results found. Try a different search.';
           panel.classList.remove('hidden');
           return;
         }
 
-        // Convert Nominatim results to our format
         var matches = results.map(function (r) {
           return {
             displayName: r.display_name,
@@ -300,8 +737,8 @@
       var addr = m.addrLine || m.displayName.split(', ').slice(0, 2).join(', ');
       var city = m.cityLine || m.displayName.split(', ').slice(2, 4).join(', ');
       div.innerHTML =
-        '<div class="match-addr">' + addr + '</div>' +
-        '<div class="match-city">' + city + '</div>';
+        '<div class="match-addr">' + escapeHtml(addr) + '</div>' +
+        '<div class="match-city">' + escapeHtml(city) + '</div>';
       div.addEventListener('click', function () {
         searchResults.classList.add('hidden');
         addressInput.value = m.displayName;
@@ -310,6 +747,12 @@
       searchResults.appendChild(div);
     });
     searchResults.classList.remove('hidden');
+  }
+
+  function escapeHtml(str) {
+    var div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
   }
 
   function selectAddress(match) {
@@ -432,7 +875,6 @@
 
   // --- Census ACS data (income, poverty, education, renter rate) ---
   function queryCensusData(lat, lng) {
-    // Step 1: Get FIPS codes from FCC
     var fccUrl = API.fccArea +
       '?lat=' + lat + '&lon=' + lng + '&format=json';
 
@@ -442,23 +884,9 @@
         if (!fcc.results || fcc.results.length === 0) { return null; }
         var block = fcc.results[0];
         var state = block.state_fips;
-        // county_fips includes state prefix (e.g. "12103"), Census API needs just "103"
         var county = block.county_fips.substring(state.length);
         var tract = block.block_fips.substring(5, 11);
 
-        // Step 2: Query ACS for this census tract
-        // B19013_001E = median household income
-        // B17001_002E = population below poverty
-        // B17001_001E = total population for poverty calc
-        // B25003_001E = total occupied units
-        // B25003_003E = renter occupied units
-        // B15003_001E = total pop 25+ (education)
-        // B15003_022E = bachelor's degree
-        // B15003_023E = master's
-        // B15003_024E = professional
-        // B15003_025E = doctorate
-        // B01003_001E = total population
-        // B25064_001E = median gross rent
         var fields = 'B19013_001E,B17001_002E,B17001_001E,B25003_001E,B25003_003E,' +
           'B15003_001E,B15003_022E,B15003_023E,B15003_024E,B15003_025E,' +
           'B01003_001E,B25064_001E';
@@ -508,15 +936,11 @@
 
   // --- Sex offender query ---
   function querySexOffenders(lat, lng) {
-    // No free, CORS-enabled national or FL-statewide sex offender API exists.
-    // NSOPW and FDLE have no public REST APIs.
-    // Return null to show "check FDLE" link instead of misleading data.
     return Promise.resolve(null);
   }
 
   // --- HUD Subsidized housing (bounding box ~2 miles) ---
   function queryPublicHousing(lat, lng) {
-    // ~0.03 degrees is roughly 2 miles
     var delta = 0.03;
     var bbox = (lng - delta) + ',' + (lat - delta) + ',' + (lng + delta) + ',' + (lat + delta);
     var baseParams = '?where=1%3D1' +
@@ -527,7 +951,6 @@
       '&returnGeometry=false' +
       '&f=json';
 
-    // Query public housing + Section 8 multifamily in parallel
     return Promise.all([
       fetch(API.hudBuildings + baseParams + '&outFields=PROJECT_NAME,TOTAL_UNITS')
         .then(function (r) { return r.json(); })
@@ -579,7 +1002,6 @@
 
   function renderFloodSummary(flood) {
     var valEl = document.getElementById('val-flood');
-    var cardEl = document.getElementById('card-flood');
 
     if (!flood || !flood.FLD_ZONE) {
       valEl.textContent = 'N/A';
@@ -623,10 +1045,8 @@
       return;
     }
 
-    // Try common field names for evac zone
     var zone = evac.EVAC_ZONE || evac.Zone || evac.ZONE || evac.EvacZone || evac.evaczone || null;
 
-    // If we can't find it, show first string attribute
     if (!zone) {
       for (var key in evac) {
         if (evac.hasOwnProperty(key) && typeof evac[key] === 'string' && evac[key].length <= 2) {
@@ -715,7 +1135,6 @@
     var zone = evac.EVAC_ZONE || evac.Zone || evac.ZONE || evac.EvacZone || evac.evaczone || null;
 
     if (!zone) {
-      // Show raw attributes for debugging
       var attrs = [];
       for (var key in evac) {
         if (evac.hasOwnProperty(key)) {
@@ -745,7 +1164,6 @@
       '<div class="detail-item full-width"><div class="d-label">Storm Surge Estimate</div><div class="d-value">' + surgeText + '</div></div>';
   }
 
-  // --- Insurance estimate ---
   function renderInsuranceSummary(flood) {
     var valEl = document.getElementById('val-insurance');
 
@@ -764,7 +1182,6 @@
     }
   }
 
-  // --- Census summary cards ---
   function renderCensusSummary(census) {
     var incomeEl = document.getElementById('val-income');
     var povertyEl = document.getElementById('val-poverty');
@@ -798,7 +1215,6 @@
     }
   }
 
-  // --- Neighborhood details ---
   function renderNeighborhoodDetails(census) {
     var container = document.getElementById('neighborhood-details');
 
@@ -833,7 +1249,6 @@
     container.innerHTML = html;
   }
 
-  // --- Sex offender details ---
   function renderOffenderDetails(offenders) {
     var container = document.getElementById('offender-details');
 
@@ -844,7 +1259,6 @@
       'or <a href="https://www.nsopw.gov/" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: underline;">NSOPW</a> directly.</div></div>';
   }
 
-  // --- Public/Section 8 housing details ---
   function renderHousingDetails(housing) {
     var container = document.getElementById('housing-details');
 
@@ -865,7 +1279,7 @@
     if (housing.properties && housing.properties.length > 0) {
       html += '<div class="detail-item full-width"><div class="d-label">Nearby Properties</div><div class="d-value" style="font-size: 0.78rem; line-height: 1.6;">';
       housing.properties.slice(0, 8).forEach(function (p) {
-        html += (p.name || 'Unknown') + ' (' + p.units + ' units, ' + p.type + ')<br>';
+        html += escapeHtml((p.name || 'Unknown') + ' (' + p.units + ' units, ' + p.type + ')') + '<br>';
       });
       html += '</div></div>';
     }
