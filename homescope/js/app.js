@@ -631,37 +631,39 @@
   });
 
   function typeaheadSearch(query) {
-    // For street addresses (starts with number), add Tampa context and use Nominatim
-    // For general queries, try Photon first then Nominatim fallback
-    var looksLikeAddress = /^\d/.test(query.trim());
+    // Always try Photon first (best at partial address matching), Nominatim fallback
+    var center = map.getCenter();
+    var url = 'https://photon.komoot.io/api/' +
+      '?q=' + encodeURIComponent(query) +
+      '&lat=' + center.lat.toFixed(4) + '&lon=' + center.lng.toFixed(4) +
+      '&limit=8&lang=en';
 
-    if (looksLikeAddress) {
-      // Nominatim is better for structured US street addresses
-      typeaheadNominatim(query);
-    } else {
-      // Photon for general place/street name searches (no bbox - just bias)
-      var url = 'https://photon.komoot.io/api/' +
-        '?q=' + encodeURIComponent(query) +
-        '&lat=27.77&lon=-82.64&limit=6&lang=en';
+    fetch(url)
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (!data.features || data.features.length === 0) {
+          typeaheadNominatim(query);
+          return;
+        }
 
-      fetch(url)
-        .then(function (r) { return r.json(); })
-        .then(function (data) {
-          if (!data.features || data.features.length === 0) {
-            typeaheadNominatim(query);
-            return;
-          }
+        // Filter to Florida results, fall back to US results
+        var flResults = data.features.filter(function (f) {
+          var p = f.properties;
+          return p.state === 'Florida' || p.state === 'FL';
+        });
 
-          // Filter to Florida results only
-          var flResults = data.features.filter(function (f) {
+        if (flResults.length === 0) {
+          // Try US results
+          var usResults = data.features.filter(function (f) {
             var p = f.properties;
-            return p.state === 'Florida' || p.state === 'FL';
+            return p.country === 'United States' || p.countrycode === 'US';
           });
-
-          if (flResults.length === 0) {
+          if (usResults.length === 0) {
             typeaheadNominatim(query);
             return;
           }
+          flResults = usResults;
+        }
 
           var matches = flResults.map(function (f) {
             var p = f.properties;
@@ -761,44 +763,78 @@
   }
 
   function geocodeAddress(address) {
-    var query = address;
-    // Append "Tampa Bay FL" if user didn't include a city/state
-    if (!/florida|fl\b/i.test(query)) {
-      query += ', FL';
-    }
-
-    var url = API.nominatim +
-      '?q=' + encodeURIComponent(query) +
-      '&format=json&addressdetails=1&limit=5' +
-      '&countrycodes=us' +
-      '&viewbox=-88.0,31.5,-79.5,24.5&bounded=1';
-
     showLoading();
 
-    fetch(url, { headers: { 'Accept': 'application/json' } })
+    // Try Photon first (better at partial addresses), then Nominatim
+    var center = map.getCenter();
+    var photonUrl = 'https://photon.komoot.io/api/' +
+      '?q=' + encodeURIComponent(address) +
+      '&lat=' + center.lat.toFixed(4) + '&lon=' + center.lng.toFixed(4) +
+      '&limit=5&lang=en';
+
+    fetch(photonUrl)
       .then(function (r) { return r.json(); })
-      .then(function (results) {
-        if (!results || results.length === 0) {
-          hideLoading();
-          panelAddress.textContent = 'No results found. Try a different search.';
-          panel.classList.remove('hidden');
+      .then(function (data) {
+        var features = (data.features || []).filter(function (f) {
+          var p = f.properties;
+          return p.state === 'Florida' || p.state === 'FL' || p.country === 'United States';
+        });
+
+        if (features.length > 0) {
+          var matches = features.map(function (f) {
+            var p = f.properties;
+            var parts = [];
+            if (p.housenumber) { parts.push(p.housenumber); }
+            if (p.street) { parts.push(p.street); }
+            var addrLine = parts.join(' ') || p.name || '';
+            var cityLine = [p.city || p.county, p.state, p.postcode].filter(Boolean).join(', ');
+            return {
+              displayName: [addrLine, cityLine].filter(Boolean).join(', '),
+              lat: f.geometry.coordinates[1],
+              lng: f.geometry.coordinates[0]
+            };
+          });
+
+          if (matches.length === 1) {
+            selectAddress(matches[0]);
+          } else {
+            showAddressResults(matches);
+            hideLoading();
+          }
           return;
         }
 
-        var matches = results.map(function (r) {
-          return {
-            displayName: r.display_name,
-            lat: parseFloat(r.lat),
-            lng: parseFloat(r.lon)
-          };
-        });
-
-        if (matches.length === 1) {
-          selectAddress(matches[0]);
-        } else {
-          showAddressResults(matches);
-          hideLoading();
+        // Fallback to Nominatim
+        var query = address;
+        if (!/florida|fl\b|st\.?\s*pete|tampa|clearwater|orlando|miami|jacksonville/i.test(query)) {
+          query += ', Florida';
         }
+        return fetch(API.nominatim +
+          '?q=' + encodeURIComponent(query) +
+          '&format=json&addressdetails=1&limit=5&countrycodes=us',
+          { headers: { 'Accept': 'application/json' } })
+          .then(function (r) { return r.json(); })
+          .then(function (results) {
+            if (!results || results.length === 0) {
+              hideLoading();
+              panelAddress.textContent = 'No results found. Try a different search.';
+              panel.classList.remove('hidden');
+              return;
+            }
+            var matches = results.map(function (r) {
+              return {
+                displayName: r.display_name,
+                lat: parseFloat(r.lat),
+                lng: parseFloat(r.lon)
+              };
+            });
+            if (matches.length === 1) {
+              selectAddress(matches[0]);
+            } else {
+              showAddressResults(matches);
+              hideLoading();
+            }
+          });
       })
       .catch(function (err) {
         console.error('Geocode error:', err);
@@ -806,6 +842,7 @@
         panelAddress.textContent = 'Error looking up address. Please try again.';
         panel.classList.remove('hidden');
       });
+
   }
 
   function showAddressResults(matches) {

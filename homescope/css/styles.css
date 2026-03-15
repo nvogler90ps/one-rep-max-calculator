@@ -136,12 +136,12 @@ header {
 #search-btn:hover { background: #7b73ff; }
 
 .search-results {
-  position: absolute;
+  position: fixed;
+  top: 88px; /* header 48px + search bar ~40px */
   left: 50%;
   transform: translateX(-50%);
   width: calc(100% - 2rem);
   max-width: 600px;
-  margin-top: 0.35rem;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 8px;
