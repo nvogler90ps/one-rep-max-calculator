@@ -3,28 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tip Calculator - Free Online Tip &amp; Split Bill Calculator</title>
-    <meta name="description" content="Free online tip calculator. Instantly calculate tip amount, total bill, and per-person split. Supports custom tip percentages and bill splitting for any group size.">
+    <title>Tip Calculator - Free Restaurant Tip &amp; Tax Calculator</title>
+    <meta name="description" content="Free tip calculator for restaurants. Calculate 15%, 18%, 20%, or custom tips on any bill. Split bills between friends, add tax, and see a quick tip chart. Works on mobile.">
     <link rel="canonical" href="https://automated-insights.com/tip-calculator/">
     <meta name="robots" content="index, follow">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    <meta property="og:title" content="Tip Calculator - Free Online Tip &amp; Split Bill Calculator">
-    <meta property="og:description" content="Free online tip calculator. Calculate tip amount, total bill, and per-person split instantly.">
+    <meta property="og:title" content="Tip Calculator - Free Restaurant Tip &amp; Tax Calculator">
+    <meta property="og:description" content="Free tip calculator for restaurants. Calculate 15%, 18%, 20%, or custom tips on any bill. Split bills between friends, add tax, and see a quick tip chart.">
     <meta property="og:url" content="https://automated-insights.com/tip-calculator/">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Automated Insights">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Tip Calculator - Free Online Tip &amp; Split Bill Calculator">
-    <meta name="twitter:description" content="Free online tip calculator. Calculate tip amount, total bill, and per-person split instantly.">
+    <meta name="twitter:title" content="Tip Calculator - Free Restaurant Tip &amp; Tax Calculator">
+    <meta name="twitter:description" content="Free tip calculator for restaurants. Calculate 15%, 18%, 20%, or custom tips on any bill. Split bills between friends, add tax, and see a quick tip chart.">
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebApplication",
       "name": "Tip Calculator",
       "url": "https://automated-insights.com/tip-calculator/",
-      "description": "Free online tip calculator. Instantly calculate tip amount, total bill, and per-person split. Supports custom tip percentages and bill splitting for any group size.",
+      "description": "Free tip calculator for restaurants. Calculate 15%, 18%, 20%, or custom tips on any bill. Split bills between friends, add tax, and see a quick tip chart. Works on mobile.",
       "applicationCategory": "UtilityApplication",
       "operatingSystem": "Any",
       "offers": {
@@ -41,7 +41,7 @@
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "How much should you tip at a restaurant?",
+          "name": "How much should I tip at a restaurant?",
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "In the United States, the standard tip at a restaurant is 15-20% of the pre-tax bill. For excellent service, 20-25% is common. For counter service or takeout, 10-15% is typical. Always tip on the pre-tax amount, not the total after tax."
@@ -49,26 +49,34 @@
         },
         {
           "@type": "Question",
-          "name": "How do you calculate a tip?",
+          "name": "How do you calculate a 20% tip?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "To calculate a tip, multiply the bill amount by the tip percentage as a decimal. For example, a 20% tip on a $50 bill: $50 x 0.20 = $10.00 tip. The total bill would be $50 + $10 = $60. To split, divide the total by the number of people."
+            "text": "To calculate a 20% tip, multiply the bill amount by 0.20. For example, 20% of a $50 bill is $50 x 0.20 = $10.00. A quick shortcut: move the decimal point one place left to get 10%, then double it. So $50 becomes $5.00, doubled to $10.00."
           }
         },
         {
           "@type": "Question",
-          "name": "How do you split a bill with tip?",
+          "name": "What is the formula for calculating a tip?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The tip formula is: Tip = Bill Amount x (Tip Percentage / 100). For example, a 18% tip on a $75 bill: $75 x 0.18 = $13.50. To get the total, add the tip to the bill: $75 + $13.50 = $88.50. To split, divide the total by the number of people."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is 15% still a good tip?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A 15% tip is still acceptable for adequate service at a sit-down restaurant, though 18-20% has become the new standard in most of the US. For excellent service, 20-25% is expected. A 15% tip may be more appropriate for counter service, buffets, or takeout orders."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I split a bill with tip?",
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "To split a bill with tip: first calculate the tip on the full bill amount, add it to the bill to get the total, then divide the total by the number of people. For example, a $100 bill with 20% tip ($20) totals $120 -- split 4 ways, each person pays $30."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Do you tip on tax?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Etiquette experts recommend tipping on the pre-tax subtotal, not the after-tax total. The tax goes to the government, not the server. However, tipping on the full total including tax is also acceptable and makes the math simpler -- either approach is fine."
           }
         }
       ]
@@ -426,7 +434,7 @@
     <div class="container">
         <header>
             <h1>Tip Calculator</h1>
-            <p class="subtitle">Calculate tip amount, total bill, and per-person split instantly</p>
+            <p class="subtitle">Free online tip calculator for restaurants -- calculate tip, tax, total, and split the bill</p>
         </header>
 
         <div class="card">
@@ -524,23 +532,52 @@
             </div>
         </div>
 
+        <div class="card">
+            <h2>Quick Tip Chart</h2>
+            <table class="quick-table">
+                <thead>
+                    <tr>
+                        <th>Bill Amount</th>
+                        <th>15% Tip</th>
+                        <th>18% Tip</th>
+                        <th>20% Tip</th>
+                        <th>25% Tip</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>$20</td><td class="tip-col">$3.00</td><td class="tip-col">$3.60</td><td class="tip-col">$4.00</td><td class="tip-col">$5.00</td></tr>
+                    <tr><td>$30</td><td class="tip-col">$4.50</td><td class="tip-col">$5.40</td><td class="tip-col">$6.00</td><td class="tip-col">$7.50</td></tr>
+                    <tr><td>$40</td><td class="tip-col">$6.00</td><td class="tip-col">$7.20</td><td class="tip-col">$8.00</td><td class="tip-col">$10.00</td></tr>
+                    <tr><td>$50</td><td class="tip-col">$7.50</td><td class="tip-col">$9.00</td><td class="tip-col">$10.00</td><td class="tip-col">$12.50</td></tr>
+                    <tr><td>$75</td><td class="tip-col">$11.25</td><td class="tip-col">$13.50</td><td class="tip-col">$15.00</td><td class="tip-col">$18.75</td></tr>
+                    <tr><td>$100</td><td class="tip-col">$15.00</td><td class="tip-col">$18.00</td><td class="tip-col">$20.00</td><td class="tip-col">$25.00</td></tr>
+                    <tr><td>$150</td><td class="tip-col">$22.50</td><td class="tip-col">$27.00</td><td class="tip-col">$30.00</td><td class="tip-col">$37.50</td></tr>
+                    <tr><td>$200</td><td class="tip-col">$30.00</td><td class="tip-col">$36.00</td><td class="tip-col">$40.00</td><td class="tip-col">$50.00</td></tr>
+                </tbody>
+            </table>
+        </div>
+
         <div class="faq-section">
             <h2>Tipping FAQs</h2>
             <div class="faq-item">
-                <h3>How much should you tip at a restaurant?</h3>
+                <h3>How much should I tip at a restaurant?</h3>
                 <p>In the United States, the standard tip at a restaurant is 15-20% of the pre-tax bill. For excellent service, 20-25% is common. For counter service or takeout, 10-15% is typical. Always tip on the pre-tax amount, not the total after tax.</p>
             </div>
             <div class="faq-item">
-                <h3>How do you calculate a tip?</h3>
-                <p>To calculate a tip, multiply the bill amount by the tip percentage as a decimal. For example, a 20% tip on a $50 bill: $50 x 0.20 = $10.00 tip. The total bill would be $50 + $10 = $60. To split, divide the total by the number of people.</p>
+                <h3>How do you calculate a 20% tip?</h3>
+                <p>To calculate a 20% tip, multiply the bill amount by 0.20. For example, 20% of a $50 bill is $50 x 0.20 = $10.00. A quick shortcut: move the decimal point one place left to get 10%, then double it. So $50 becomes $5.00, doubled to $10.00.</p>
             </div>
             <div class="faq-item">
-                <h3>How do you split a bill with tip?</h3>
+                <h3>What is the formula for calculating a tip?</h3>
+                <p>The tip formula is: Tip = Bill Amount x (Tip Percentage / 100). For example, an 18% tip on a $75 bill: $75 x 0.18 = $13.50. To get the total, add the tip to the bill: $75 + $13.50 = $88.50. To split, divide the total by the number of people.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Is 15% still a good tip?</h3>
+                <p>A 15% tip is still acceptable for adequate service at a sit-down restaurant, though 18-20% has become the new standard in most of the US. For excellent service, 20-25% is expected. A 15% tip may be more appropriate for counter service, buffets, or takeout orders.</p>
+            </div>
+            <div class="faq-item">
+                <h3>How do I split a bill with tip?</h3>
                 <p>To split a bill with tip: first calculate the tip on the full bill amount, add it to the bill to get the total, then divide the total by the number of people. For example, a $100 bill with 20% tip ($20) totals $120 -- split 4 ways, each person pays $30.</p>
-            </div>
-            <div class="faq-item">
-                <h3>Do you tip on tax?</h3>
-                <p>Etiquette experts recommend tipping on the pre-tax subtotal, not the after-tax total. The tax goes to the government, not the server. However, tipping on the full total including tax is also acceptable and makes the math simpler -- either approach is fine.</p>
             </div>
         </div>
 

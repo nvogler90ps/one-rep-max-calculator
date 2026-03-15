@@ -3,8 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E85 &amp; E15 Fuel Finder - Ethanol Station Locator &amp; Blend Calculator</title>
-    <meta name="description" content="Find nearby E85 and E15 gas stations on a live map. Calculate ethanol blend ratios and octane ratings for performance driving. Free tool with real-time station data.">
+    <title>E85 Gas Stations Near Me - Ethanol Fuel Finder &amp; Flex Fuel Locator</title>
+    <meta name="description" content="Find E85 gas stations near you with our free locator map. Compare flex fuel stations, check blender pump availability, and calculate ethanol blend ratios for performance tuning.">
+    <meta property="og:title" content="E85 Gas Stations Near Me - Ethanol Fuel Finder & Flex Fuel Locator">
+    <meta property="og:description" content="Find E85 gas stations near you with our free locator map. Compare flex fuel stations, check blender pump availability, and calculate ethanol blend ratios for performance tuning.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://automated-insights.com/ethanol-finder/">
     <link rel="canonical" href="https://automated-insights.com/ethanol-finder/">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -13,8 +17,8 @@
     {
         "@context": "https://schema.org",
         "@type": "WebApplication",
-        "name": "E85 & E15 Fuel Finder",
-        "description": "Find nearby E85 and E15 gas stations and calculate ethanol blend ratios for performance driving.",
+        "name": "E85 Gas Station Finder - Ethanol Fuel Locator",
+        "description": "Find E85 gas stations near you with a free locator map. Compare flex fuel stations, check blender pump availability, and calculate ethanol blend ratios.",
         "url": "https://automated-insights.com/ethanol-finder/",
         "applicationCategory": "UtilityApplication",
         "operatingSystem": "Any",
@@ -36,42 +40,42 @@
         "mainEntity": [
             {
                 "@type": "Question",
-                "name": "What is E85?",
+                "name": "Where can I find E85 gas near me?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "E85 is a fuel blend containing 51-83% ethanol mixed with gasoline. The exact ethanol percentage varies by season and region. In summer, E85 typically contains around 70-83% ethanol, while winter blends may drop to 51-70% to aid cold starting. E85 is sold at specially labeled pumps at participating gas stations and is significantly cheaper per gallon than regular gasoline, though it contains less energy per gallon."
+                    "text": "Use this free E85 station locator to find E85 gas stations near your current location. Enter your city, zip code, or address, or tap 'Use My Location' to see all nearby E85 and E15 stations on an interactive map. Station data is provided by the U.S. Department of Energy Alternative Fuels Station Locator."
                 }
             },
             {
                 "@type": "Question",
-                "name": "Can I run E85 in my car?",
+                "name": "What is an E85 locator app?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Only flex-fuel vehicles (FFVs) can safely run pure E85 without modifications. FFVs have sensors and engine calibrations that automatically adjust for any ethanol blend from E0 to E85. Non-flex-fuel vehicles can potentially run lower ethanol blends (E15-E30) with a proper ECU tune from a qualified tuner. Running high ethanol content on a stock tune in a non-flex vehicle can cause lean conditions, misfires, and potential engine damage. Always consult your tuner before changing ethanol content."
+                    "text": "An E85 locator app or tool helps drivers find gas stations that sell E85 (flex fuel) near their location. This free web-based E85 finder works on any device -- no app download required. It shows station locations on a map, lets you adjust search radius, and provides driving directions to each station."
                 }
             },
             {
                 "@type": "Question",
-                "name": "What octane is E85?",
+                "name": "How do I find flex fuel stations near me?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "E85 has an effective octane rating of approximately 100-105, depending on the actual ethanol content. This high octane rating is one of the primary reasons performance enthusiasts use E85 -- it allows for more aggressive ignition timing and higher boost pressures on turbocharged vehicles without detonation. Even partial E85 blends significantly raise the octane of pump gas."
+                    "text": "To find flex fuel stations near you, enter your location in the search bar above or allow the tool to use your GPS. The map will display all nearby stations offering E85 and E15 ethanol blends. You can adjust the search radius from 5 to 50 miles and click any station marker for details including the address and available fuel types."
                 }
             },
             {
                 "@type": "Question",
-                "name": "Does E85 make more power?",
+                "name": "What is the price of E85 vs regular gas?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "E85 itself does not magically create power, but its high octane rating (100-105) and cooling effect allow engines to be tuned more aggressively. With a proper tune, turbocharged vehicles commonly see 5-15% power gains on E85 compared to 93 octane due to more ignition advance and higher boost. Naturally aspirated engines see smaller gains, typically 2-5%. However, E85 has about 27% less energy per gallon than gasoline, so fuel consumption increases roughly 25-30%."
+                    "text": "E85 is typically 15-30% cheaper per gallon than regular gasoline, but it contains about 27% less energy per gallon. This means your fuel economy will drop by roughly 25-30% on E85, so the net cost per mile may be similar. E85 prices vary significantly by region and season. Use this locator to find stations near you, then call ahead for current pricing."
                 }
             },
             {
                 "@type": "Question",
-                "name": "How do I know the ethanol content of E85 at the pump?",
+                "name": "What does E85 gas station mean?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "The only reliable way to know the exact ethanol content is to use an ethanol content tester (fuel composition sensor). These devices cost $30-100 and measure the percentage directly from a fuel sample. The pump label saying E85 only guarantees the fuel contains between 51-83% ethanol. Many performance drivers test every fill-up and log the results, since ethanol content directly affects the tune. Some stations post the current ethanol percentage, but this is not universal."
+                    "text": "An E85 gas station is a fuel station that sells E85 ethanol fuel -- a blend of 51-83% ethanol and gasoline. E85 is dispensed from specially labeled pumps, often called blender pumps if they offer multiple ethanol blends. E85 stations are found across the United States, with the highest concentration in the Midwest. Only flex-fuel vehicles (FFVs) should use E85 without modifications."
                 }
             }
         ]
@@ -299,8 +303,8 @@
     </nav>
 
     <div class="container">
-        <h1>E85 / E15 Fuel Finder</h1>
-        <p class="subtitle">Locate ethanol fuel stations near you and calculate blend ratios for performance driving.</p>
+        <h1>E85 Gas Near Me - E85 Station Locator</h1>
+        <p class="subtitle">Find E85 and flex fuel stations near you. Compare blender pump availability and calculate ethanol blend ratios for performance tuning.</p>
 
         <div class="tabs">
             <button class="tab active" data-tab="finder" onclick="switchTab('finder')">Station Finder</button>
@@ -473,66 +477,72 @@
             </div>
         </div>
 
+        <!-- Pricing Tip -->
+        <div class="card" style="border-left: 3px solid #6c63ff; margin-top: 1.5rem;">
+            <h3>Tip: E85 Prices</h3>
+            <p style="color: #9aa0b0; font-size: 0.95rem;">Looking for E85 prices? Prices vary by location and season. Use this locator to find stations, then call ahead for current pricing. E85 is typically 15-30% cheaper per gallon than regular gasoline, but fuel economy drops roughly 25-30% due to lower energy content per gallon.</p>
+        </div>
+
         <!-- FAQ Section -->
         <div class="faq-section">
             <h2>Frequently Asked Questions</h2>
 
             <div class="faq-item">
                 <button class="faq-question" onclick="toggleFaq(this)">
-                    What is E85?
+                    Where can I find E85 gas near me?
                     <span class="faq-arrow">&#9660;</span>
                 </button>
                 <div class="faq-answer">
                     <div class="faq-answer-inner">
-                        E85 is a fuel blend containing 51-83% ethanol mixed with gasoline. The exact ethanol percentage varies by season and region. In summer, E85 typically contains around 70-83% ethanol, while winter blends may drop to 51-70% to help with cold starting. E85 is sold at specially labeled pumps at participating gas stations and is generally cheaper per gallon than regular gasoline, though it contains about 27% less energy per gallon.
+                        Use this free E85 station locator to find E85 gas stations near your current location. Enter your city, zip code, or address, or tap "Use My Location" to see all nearby E85 and E15 stations on an interactive map. Station data is provided by the U.S. Department of Energy Alternative Fuels Station Locator.
                     </div>
                 </div>
             </div>
 
             <div class="faq-item">
                 <button class="faq-question" onclick="toggleFaq(this)">
-                    Can I run E85 in my car?
+                    What is an E85 locator app?
                     <span class="faq-arrow">&#9660;</span>
                 </button>
                 <div class="faq-answer">
                     <div class="faq-answer-inner">
-                        Only flex-fuel vehicles (FFVs) can safely run pure E85 without modifications. FFVs have ethanol sensors and engine calibrations that automatically adjust for any ethanol blend from E0 to E85. Non-flex-fuel vehicles can potentially run lower ethanol blends (such as E15-E30) with a proper ECU tune from a qualified tuner. Running high ethanol content on a stock tune in a non-flex vehicle risks dangerously lean air/fuel ratios, misfires, and potential engine damage. Always consult a professional tuner before increasing your ethanol content.
+                        An E85 locator app or tool helps drivers find gas stations that sell E85 (flex fuel) near their location. This free web-based E85 finder works on any device -- no app download required. It shows station locations on a map, lets you adjust search radius, and provides driving directions to each station.
                     </div>
                 </div>
             </div>
 
             <div class="faq-item">
                 <button class="faq-question" onclick="toggleFaq(this)">
-                    What octane is E85?
+                    How do I find flex fuel stations near me?
                     <span class="faq-arrow">&#9660;</span>
                 </button>
                 <div class="faq-answer">
                     <div class="faq-answer-inner">
-                        E85 has an effective octane rating of approximately 100-105, depending on the actual ethanol content in the blend. This high octane rating is one of the main reasons performance enthusiasts use E85 -- it allows for more aggressive ignition timing and higher boost pressures on turbocharged engines without risking detonation (knock). Even partial E85 blends, such as E30 or E40, significantly raise the octane rating above what premium pump gas offers.
+                        To find flex fuel stations near you, enter your location in the search bar above or allow the tool to use your GPS. The map will display all nearby stations offering E85 and E15 ethanol blends. You can adjust the search radius from 5 to 50 miles and click any station marker for details including the address and available fuel types.
                     </div>
                 </div>
             </div>
 
             <div class="faq-item">
                 <button class="faq-question" onclick="toggleFaq(this)">
-                    Does E85 make more power?
+                    What is the price of E85 vs regular gas?
                     <span class="faq-arrow">&#9660;</span>
                 </button>
                 <div class="faq-answer">
                     <div class="faq-answer-inner">
-                        E85 itself does not inherently produce more power, but its high octane rating (100-105) and charge-cooling effect allow engines to be tuned more aggressively. With a proper ethanol tune, turbocharged vehicles commonly see 5-15% power gains compared to a 93 octane tune, thanks to more ignition advance and the ability to run higher boost safely. Naturally aspirated engines typically see smaller gains of 2-5%. The trade-off is that E85 has about 27% less energy per gallon than gasoline, so fuel consumption increases by roughly 25-30%.
+                        E85 is typically 15-30% cheaper per gallon than regular gasoline, but it contains about 27% less energy per gallon. This means your fuel economy will drop by roughly 25-30% on E85, so the net cost per mile may be similar. E85 prices vary significantly by region and season. Use this locator to find stations near you, then call ahead for current pricing.
                     </div>
                 </div>
             </div>
 
             <div class="faq-item">
                 <button class="faq-question" onclick="toggleFaq(this)">
-                    How do I know the ethanol content of E85 at the pump?
+                    What does E85 gas station mean?
                     <span class="faq-arrow">&#9660;</span>
                 </button>
                 <div class="faq-answer">
                     <div class="faq-answer-inner">
-                        The only reliable way to know the exact ethanol content is to use an ethanol content tester (also called a fuel composition sensor). These devices cost around $30-100 and measure the ethanol percentage directly from a small fuel sample. The pump label "E85" only guarantees the fuel contains between 51-83% ethanol per ASTM D5798 specifications. Many performance drivers test every fill-up and log the results, since ethanol content directly affects their tune's air/fuel ratio targets. Some stations display the current ethanol percentage on the pump, but this is not universal and may not always be current.
+                        An E85 gas station is a fuel station that sells E85 ethanol fuel -- a blend of 51-83% ethanol and gasoline. E85 is dispensed from specially labeled pumps, often called blender pumps if they offer multiple ethanol blends. E85 stations are found across the United States, with the highest concentration in the Midwest. Only flex-fuel vehicles (FFVs) should use E85 without modifications.
                     </div>
                 </div>
             </div>

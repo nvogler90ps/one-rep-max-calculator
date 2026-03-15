@@ -1477,6 +1477,80 @@ PYEOF
     generate_sitemap "$tool" "$outdir"
 }
 
+# ---------- boat-name-gen (Python-based, names in data.json) ----------
+generate_boat_name_gen() {
+    local tool="boat-name-gen"
+    local dir="$ROOT/$tool/pseo"
+    local outdir="$dir/pages"
+    local template="$dir/template.html"
+    local data="$dir/data.json"
+
+    [ -f "$data" ] || return 0
+    [ -f "$template" ] || return 0
+
+    rm -rf "$outdir"
+    mkdir -p "$outdir"
+
+    local count
+    count=$(DATA_FILE="$data" TEMPLATE_FILE="$template" OUT_DIR="$outdir" TOOL="$tool" DOMAIN="$DOMAIN" YEAR="$YEAR" python3 << 'PYEOF'
+import json, os
+
+tool = os.environ["TOOL"]
+domain = os.environ["DOMAIN"]
+year = os.environ["YEAR"]
+data = json.load(open(os.environ["DATA_FILE"]))
+template = open(os.environ["TEMPLATE_FILE"]).read()
+outdir = os.environ["OUT_DIR"]
+count = 0
+
+for item in data:
+    slug = item["slug"]
+    title = item["title"]
+    desc = item.get("description", "")
+    category = item.get("category", "")
+    names = item.get("names", [])
+    name_count = len(names)
+
+    canonical = f"{domain}/{tool}/{slug}/"
+
+    # Build name grid HTML
+    name_grid = ""
+    for name in names:
+        name_grid += f'<div class="name-card" onclick="copyName(this)">{name}</div>\n'
+
+    # Related links (other categories)
+    links = []
+    for other in data:
+        if other["slug"] != slug and len(links) < 8:
+            links.append(f'<a href="/{tool}/{other["slug"]}/" class="related-link">{other["title"]} ({len(other.get("names", []))}+)</a>')
+    related = "\n".join(links)
+
+    html = template
+    html = html.replace("{{TITLE}}", title)
+    html = html.replace("{{DESCRIPTION}}", desc)
+    html = html.replace("{{CANONICAL}}", canonical)
+    html = html.replace("{{SLUG}}", slug)
+    html = html.replace("{{COUNT}}", str(name_count))
+    html = html.replace("{{YEAR}}", year)
+    html = html.replace("{{NAME_GRID}}", name_grid)
+    html = html.replace("{{RELATED_LINKS}}", related)
+    html = html.replace("{{CATEGORY}}", category)
+
+    pagedir = os.path.join(outdir, slug)
+    os.makedirs(pagedir, exist_ok=True)
+    with open(os.path.join(pagedir, "index.html"), "w") as f:
+        f.write(html)
+    count += 1
+
+print(count)
+PYEOF
+)
+
+    echo "  $tool: generated $count pages"
+    TOTAL_PAGES=$((TOTAL_PAGES + count))
+    generate_sitemap "$tool" "$outdir"
+}
+
 # ---------- run generators ----------
 echo "Generating pSEO pages..."
 
@@ -1497,6 +1571,7 @@ for tool in "${PSEO_TOOLS[@]}"; do
         auto-loan-calc) generate_auto_loan_calc ;;
         interest-calculator) generate_interest_calculator ;;
         home-affordability) generate_home_affordability ;;
+        boat-name-gen) generate_boat_name_gen ;;
         *) echo "  $tool: no generator configured, skipping" ;;
     esac
 done
